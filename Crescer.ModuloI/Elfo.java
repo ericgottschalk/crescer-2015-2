@@ -19,6 +19,27 @@ public class Elfo
         this.exp = 0;
     }
     
+        public String getNome()
+    {
+        return this.nome;
+    }
+    
+    public int getFlechas()
+    {
+        return this.flechas;
+    }
+    
+    public int getExp()
+    {
+        return this.exp;
+    }
+    
+    /*public void setFleach(int num)
+    {
+        if (num > this.flechas)
+            this.flechas = num;
+    }*/
+    
     public void atirarFlechas()
     {
         if (this.flechas > 0)
@@ -32,25 +53,19 @@ public class Elfo
         
     }
     
-    public String getNome()
+    public void atacarDwarves(Dwarf dwarf)
     {
-        return this.nome;
+        if (this.flechas > 0)
+        {
+            this.flechas--;
+            dwarf.sofrerDano();
+            this.exp++;
+            return;
+        }
+        
+        System.out.println("Sem flechas");
     }
     
-    public void setNome(String novoNome)
-    {
-        this.nome = novoNome;
-    }
-    
-    public int getFlechas()
-    {
-        return this.flechas;
-    }
-    
-    /*public void setFleach(int num)
-    {
-        if (num > this.flechas)
-            this.flechas = num;
-    }*/
+
     
 }
