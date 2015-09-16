@@ -1,3 +1,6 @@
+/**
+ * Representa objetos do tipo Elfo.
+ */
 public class Elfo {
     private String nome;
     private int flechas, experiencia;
