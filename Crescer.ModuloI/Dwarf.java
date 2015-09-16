@@ -11,4 +11,9 @@ public class Dwarf
     {
         this.hp -= 10;
     }
+    
+    public int getHp()
+    {
+        return this.hp;
+    }
 }
