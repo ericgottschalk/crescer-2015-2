@@ -31,4 +31,26 @@ public class Elfo
         System.out.println("Sem flechas");
         
     }
+    
+    public String getNome()
+    {
+        return this.nome;
+    }
+    
+    public void setNome(String novoNome)
+    {
+        this.nome = novoNome;
+    }
+    
+    public int getFlechas()
+    {
+        return this.flechas;
+    }
+    
+    /*public void setFleach(int num)
+    {
+        if (num > this.flechas)
+            this.flechas = num;
+    }*/
+    
 }
