@@ -40,25 +40,12 @@ public class Elfo
             this.flechas = num;
     }*/
     
-    public void atirarFlechas()
+    public void atirarFlechas(Dwarf dwarf)
     {
         if (this.flechas > 0)
         {
             this.flechas--;
-            this.exp++;
-            return;
-        }
-        
-        System.out.println("Sem flechas");
-        
-    }
-    
-    public void atacarDwarves(Dwarf dwarf)
-    {
-        if (this.flechas > 0)
-        {
-            this.flechas--;
-            dwarf.sofrerDano();
+            dwarf.receberFlechada();
             this.exp++;
             return;
         }

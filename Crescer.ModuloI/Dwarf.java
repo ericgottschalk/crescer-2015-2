@@ -1,17 +1,13 @@
 public class Dwarf
 {
-    private String nome;
-    private int hp;
-    private int exp;
+    private int hp;  
     
-    public Dwarf(String n)
+    public Dwarf()
     {
-        this.nome = n;
         this.hp = 110;
-        this.exp = 0;
     }
     
-    public void sofrerDano()
+    public void receberFlechada()
     {
         this.hp -= 10;
     }
