@@ -23,15 +23,29 @@ public class ElfoTest
     }
     
     @Test
+    public void elfoComNomeNull()
+    {
+        Elfo elf = new Elfo(null);
+        assertNull(elf.getNome());
+    }
+   
+    @Test
+    public void elfoComNomeVazio()
+    {
+        Elfo elf = new Elfo("");
+        assertTrue(elf.getNome().isEmpty());
+    }
+    @Test
     public void testeAtirarFlechas()
     {
         Elfo elfo = new Elfo("Test atirar");
-        int exp = elfo.getExp();
-        int flechas = elfo.getFlechas();
+        int exp = elfo.getExp() + 1;
+        int flechas = elfo.getFlechas() - 1;
+        
         elfo.atirarFlechas(new Dwarf());
         
-        assertEquals((flechas - 1), elfo.getFlechas());
-        assertEquals((exp + 1), elfo.getExp());
+        assertEquals(flechas, elfo.getFlechas());
+        assertEquals(exp, elfo.getExp());
         
     }
     
