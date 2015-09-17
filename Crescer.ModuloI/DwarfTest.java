@@ -11,4 +11,12 @@ public class DwarfTest
         Dwarf d = new Dwarf();
         assertEquals(110, d.getHp());
     }
+    
+    @Test
+    public void sofrer10DeDano()
+    {
+        Dwarf d = new Dwarf();
+        d.receberFlechada();
+        assertEquals(100, d.getHp());
+    }
 }
