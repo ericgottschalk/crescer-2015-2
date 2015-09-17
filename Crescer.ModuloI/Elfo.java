@@ -1,3 +1,4 @@
+import java.util.Formatter;
 
 public class Elfo
 {
@@ -59,10 +60,11 @@ public class Elfo
         boolean ehPluralFlechas = this.flechas != 1;
         boolean ehPluralNiveis = this.exp != 1;
         
-        String txtFlechas = ehPluralFlechas ? " flechas" : " flecha";
-        String txtNiveis = ehPluralNiveis ? " níveis" : " nível";
+        String txtFlechas = ehPluralFlechas ? "flechas" : "flecha";
+        String txtNiveis = ehPluralNiveis ? "níveis" : "nível";
             
-        return this.nome + " possui " + this.flechas + txtFlechas + " e " + this.exp + txtNiveis + " de experiência.";
+        String result = String.format("%s possui %d %s e %d %s de experiência.", this.nome, this.flechas, txtFlechas, this.exp, txtNiveis);
+        return result;
     }
     
 
