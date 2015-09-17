@@ -11,9 +11,4 @@ public class DataTerceiraEra
         this.mes = mes;
         this.ano = ano;
     }
-    
-    public boolean ehBissexto()
-    {
-        return true;
-    }
 }
