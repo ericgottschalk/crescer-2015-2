@@ -53,6 +53,11 @@ public class Elfo
         System.out.println("Sem flechas");
     }
     
+    public String toString()
+    {
+        return this.nome + " possui " + this.flechas + " flechas e " + this.exp + " níveis de experiência.";
+    }
+    
 
     
 }
