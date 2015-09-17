@@ -23,6 +23,13 @@ public class ElfoTest
     }
     
     @Test
+    public void elfoNasceVivo()
+    {
+        Elfo elfo = new Elfo("");
+        assertEquals(Status.VIVO, elfo.getStatus());
+    }
+    
+    @Test
     public void elfoComNomeNull()
     {
         Elfo elf = new Elfo(null);
