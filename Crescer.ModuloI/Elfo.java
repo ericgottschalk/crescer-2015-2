@@ -55,13 +55,14 @@ public class Elfo
     
     public String toString()
     {
-        String flechas = " flecha";
-        boolean ehPlural = this.flechas != 1;
+      
+        boolean ehPluralFlechas = this.flechas != 1;
+        boolean ehPluralNiveis = this.exp != 1;
         
-        if (ehPlural)
-            flechas += "s";
+        String txtFlechas = ehPluralFlechas ? " flechas" : " flecha";
+        String txtNiveis = ehPluralNiveis ? " níveis" : " nível";
             
-        return this.nome + " possui " + this.flechas + flechas + " e " + this.exp + " níveis de experiência.";
+        return this.nome + " possui " + this.flechas + txtFlechas + " e " + this.exp + txtNiveis + " de experiência.";
     }
     
 
