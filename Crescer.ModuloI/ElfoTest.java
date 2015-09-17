@@ -97,4 +97,12 @@ public class ElfoTest
         Elfo elfo = new Elfo("Legolas");
         assertEquals("Legolas possui 42 flechas e 0 níveis de experiência.", elfo.toString());
     }
+    
+    @Test 
+    public void toStringCom1Flecha()
+    {
+        
+        Elfo elfo = new Elfo("Legolas", 1);
+        assertEquals("Legolas possui 1 flecha e 0 níveis de experiência.", elfo.toString());
+    }
 }
