@@ -19,4 +19,28 @@ public class DwarfTest
         d.receberFlechada();
         assertEquals(100, d.getHp());
     }
+    
+    @Test
+    public void receber11FlechadasEZerarHp()
+    {
+        Dwarf d = new Dwarf();
+        int vidaEsperada = 0;
+        
+        for(int i = 0; i < 11; i++)
+            d.receberFlechada();
+            
+        assertEquals(vidaEsperada, d.getHp());
+    }
+    
+    @Test
+    public void receber7Flechadas()
+    {
+        Dwarf d = new Dwarf();
+        int vidaEsperada = 40;
+        
+        for(int i = 0; i < 7; i++)
+            d.receberFlechada();
+            
+        assertEquals(vidaEsperada, d.getHp());
+    }
 }
