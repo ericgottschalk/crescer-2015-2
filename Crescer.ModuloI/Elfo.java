@@ -55,7 +55,13 @@ public class Elfo
     
     public String toString()
     {
-        return this.nome + " possui " + this.flechas + " flechas e " + this.exp + " níveis de experiência.";
+        String flechas = " flecha";
+        boolean ehPlural = this.flechas != 1;
+        
+        if (ehPlural)
+            flechas += "s";
+            
+        return this.nome + " possui " + this.flechas + flechas + " e " + this.exp + " níveis de experiência.";
     }
     
 
