@@ -4,6 +4,7 @@ public class Dwarf
     private int hp;  
     private int exp;
     private Status status;
+    private DataTerceiraEra dataNascimento;
     
     public Dwarf(String n)
     {
