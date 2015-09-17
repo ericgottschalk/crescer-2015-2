@@ -49,7 +49,7 @@ public class ElfoTest
         int exp = elfo.getExp() + 1;
         int flechas = elfo.getFlechas() - 1;
         
-        elfo.atirarFlechas(new Dwarf());
+        elfo.atirarFlechas(new Dwarf(""));
         
         assertEquals(flechas, elfo.getFlechas());
         assertEquals(exp, elfo.getExp());
@@ -60,7 +60,7 @@ public class ElfoTest
     public void atirarFlechasEmDwarf()
     {
         Elfo elfo = new Elfo("Elfo");
-        Dwarf dwarf = new Dwarf();
+        Dwarf dwarf = new Dwarf("");
         int flechasElfoEsperadas = 41;
         int expElfoEsperada = 1;
         int hpDwarfEsperada = 100;
@@ -77,8 +77,8 @@ public class ElfoTest
     {
         Elfo elfo1 = new Elfo("1");
         Elfo elfo2 = new Elfo("2");
-        Dwarf dwarf1 = new Dwarf();
-        Dwarf dwarf2 = new Dwarf();
+        Dwarf dwarf1 = new Dwarf("");
+        Dwarf dwarf2 = new Dwarf("");
         int flechas = 40;
         int exp = 2;
         int hp = 90;
@@ -117,7 +117,7 @@ public class ElfoTest
     public void toStringElfoComUmDeExp()
     {
         Elfo elfo = new Elfo("Legolas");
-        elfo.atirarFlechas(new Dwarf());
+        elfo.atirarFlechas(new Dwarf(""));
         assertEquals("Legolas possui 41 flechas e 1 nível de experiência.", elfo.toString());
     }
 }
