@@ -66,6 +66,32 @@ public class ElfoTest
     }
     
     @Test
+    public void doisElfosAtiramEmDoisDwarves()
+    {
+        Elfo elfo1 = new Elfo("1");
+        Elfo elfo2 = new Elfo("2");
+        Dwarf dwarf1 = new Dwarf();
+        Dwarf dwarf2 = new Dwarf();
+        int flechas = 40;
+        int exp = 2;
+        int hp = 90;
+        
+        elfo1.atirarFlechas(dwarf1);
+        elfo1.atirarFlechas(dwarf2);
+        elfo2.atirarFlechas(dwarf1);
+        elfo2.atirarFlechas(dwarf2);
+        
+        assertEquals(flechas, elfo1.getFlechas());
+        assertEquals(exp, elfo1.getExp());
+        assertEquals(flechas, elfo2.getFlechas());
+        assertEquals(exp, elfo2.getExp());
+        
+        assertEquals(hp, dwarf1.getHp());
+        assertEquals(hp, dwarf2.getHp());
+        
+    }
+    
+    @Test
     public void metodoToString()
     {
         Elfo elfo = new Elfo("Legolas");
