@@ -5,12 +5,14 @@ public class Elfo
     private String nome;
     private int flechas;
     private int exp;
+    private Status status;
     
     public Elfo(String n)
     {
         this.nome = n;
         this.flechas = 42;
         this.exp = 0;
+        this.status = Status.VIVO;
     }
     
     public Elfo(String n, int flecha)
@@ -18,6 +20,7 @@ public class Elfo
         this.nome = n;
         this.flechas = flecha;
         this.exp = 0;
+        this.status = Status.VIVO;
     }
     
         public String getNome()
@@ -35,6 +38,10 @@ public class Elfo
         return this.exp;
     }
     
+    public Status getStatus()
+    {
+        return this.status;
+    }
     /*public void setFleach(int num)
     {
         if (num > this.flechas)
