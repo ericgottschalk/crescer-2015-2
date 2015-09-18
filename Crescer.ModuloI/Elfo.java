@@ -1,4 +1,5 @@
 import java.util.Formatter;
+import java.util.ArrayList;
 
 public class Elfo
 {
@@ -17,10 +18,8 @@ public class Elfo
     
     public Elfo(String n, int flecha)
     {
-        this.nome = n;
+        this(n);
         this.flechas = flecha;
-        this.exp = 0;
-        this.status = Status.VIVO;
     }
     
         public String getNome()
