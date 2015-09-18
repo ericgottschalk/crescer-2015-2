@@ -120,4 +120,13 @@ public class DwarfTest
         assertEquals(0, d.getHp());
     }
     
+    @Test 
+    public void nasceComDataInformada()
+    {
+        DataTerceiraEra data = new DataTerceiraEra(2, 2, 2);
+        Dwarf d = new Dwarf("", data);
+        
+        assertEquals(data, d.getDataNascimento());
+    }
+    
 }

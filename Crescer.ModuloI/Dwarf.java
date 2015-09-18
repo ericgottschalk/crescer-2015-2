@@ -36,7 +36,7 @@ public class Dwarf
                 return;
             }
             
-            if (num >= 0 && num <= 100)
+            if (num <= 100)
                 return;
                 
             this.hp -= 10;
@@ -44,7 +44,6 @@ public class Dwarf
         
         if (this.hp == 0)
             this.status = Status.MORTO;
-        
     }
     
     public String getNome()
@@ -66,14 +65,19 @@ public class Dwarf
         return this.status;
     }
     
+    public DataTerceiraEra getDataNascimento()
+    {
+        return  this.dataNascimento;
+    }
+    
     public double getNumeroSorte()
     {
         double numeroSorte = 101.0;
         
         if ((this.dataNascimento.ehBissexto()) && (this.hp >= 80 && this.hp <= 90))
-             return numeroSorte * -33;
+            return numeroSorte * -33;
              
-        if ((!this.dataNascimento.ehBissexto()) && (this.nome.equals("Seixas") || this.nome.equals("Meireles")))
+        if ((!this.dataNascimento.ehBissexto()) && (this.nome != null && (this.nome.equals("Seixas") || this.nome.equals("Meireles"))))
             return (numeroSorte * 33) % 100;
         
         return numeroSorte;
