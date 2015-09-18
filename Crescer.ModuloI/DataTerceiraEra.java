@@ -35,4 +35,11 @@ public class DataTerceiraEra
     {
          return ((this.ano % 400 == 0) || ((this.ano % 4 == 0) && (this.ano % 100 != 0)));
     }
+    
+    public boolean equals(Object obj)
+    {
+        DataTerceiraEra data = (DataTerceiraEra)obj;
+        
+        return ((this.dia ==  data.getDia()) && (this.mes == data.getMes()) && (this.ano == data.getAno()));
+    }
 }
