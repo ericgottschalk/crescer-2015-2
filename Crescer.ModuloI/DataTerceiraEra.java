@@ -12,6 +12,21 @@ public class DataTerceiraEra
         this.ano = ano;
     }
     
+    public int getDia()
+    {
+        return this.dia;
+    }
+    
+    public int getMes()
+    {
+        return this.mes;
+    }
+    
+    public int getAno()
+    {
+        return this.ano;
+    }
+    
     public String getData()
     {
         return String.format("%d/%d/%d", dia, mes, ano);
