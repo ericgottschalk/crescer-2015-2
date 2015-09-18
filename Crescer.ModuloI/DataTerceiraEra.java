@@ -11,4 +11,13 @@ public class DataTerceiraEra
         this.mes = mes;
         this.ano = ano;
     }
+    
+    public String getData()
+    {
+        return String.format("%d/%d/%d", dia, mes, ano);
+    }
+    public boolean ehBissexto()
+    {
+         return ((this.ano % 400 == 0) || ((this.ano % 4 == 0) && (this.ano % 100 != 0)));
+    }
 }
