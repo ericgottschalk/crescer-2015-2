@@ -5,6 +5,7 @@ public class Dwarf
     private int exp;
     private Status status;
     private DataTerceiraEra dataNascimento;
+    private Inventario inventario;
     
     public Dwarf(String n)
     {
@@ -17,10 +18,7 @@ public class Dwarf
     
     public Dwarf(String n, DataTerceiraEra data)
     {
-        this.nome = n;
-        this.hp = 110;
-        this.status = Status.VIVO;
-        this.exp = 0;
+        this(n);
         this.dataNascimento = data;
     }
     
