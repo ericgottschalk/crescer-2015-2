@@ -145,4 +145,20 @@ public class InventarioTest
         assertEquals(itm7.getQuantidade(), ivt.getItem(8).getQuantidade());
         assertEquals(itm8.getQuantidade(), ivt.getItem(9).getQuantidade());
     }
+    
+     @Test 
+    public void ordenarInventario100Itens()
+    {
+        Inventario ivt = new Inventario();
+        for (int i = 100; i >= 0; i--)
+        {
+            Item itm = new Item("Test", i);
+            ivt.adicionarItem(itm);
+        }
+        
+        ivt.ordenarInventario();
+        
+        for (int i = 0; i <= 100; i++)
+            assertTrue(i == ivt.getItem(i).getQuantidade());
+    }
 }

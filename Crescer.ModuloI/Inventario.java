@@ -16,7 +16,8 @@ public class Inventario
     
     public void perderItem(Item item)
     {
-        this.itens.remove(item);
+        if (this.itens.contains(item))
+            this.itens.remove(item);
     }
     
     public ArrayList<Item> getItens()
@@ -65,5 +66,4 @@ public class Inventario
                 }
             }
     }
-   
 }
