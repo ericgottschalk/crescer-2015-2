@@ -18,4 +18,52 @@ public class Inventario
     {
         this.itens.remove(item);
     }
+    
+    public ArrayList<Item> getItens()
+    {
+        return this.itens;
+    }
+    
+    public Item getItem(int index)
+    {
+        return this.itens.get(index);
+    }
+    
+    public String getDescricoesItens()
+    {   
+        String descricao = new String();
+        
+        for (Item item : itens)
+            descricao += item.getDescricao() + ",";
+            
+        return descricao;
+    }
+    
+    public Item getItemComMaiorQuantidade()
+    {
+        Item itm = new Item("", 0);
+        
+        for (Item item : this.itens)
+            if (item.getQuantidade() > itm.getQuantidade())
+                itm = item;
+                
+        return itm;
+    }
+    
+    public void ordenarInventario()
+    {
+        Item temp = null;
+        
+        for (int i = 0; i < this.itens.size(); i++)
+            for (int j = 0; j < this.itens.size(); j++)
+            {
+                if (this.getItem(i).getQuantidade() < this.getItem(j).getQuantidade())
+                {
+                    temp = this.getItem(i);
+                    this.itens.set(i, this.getItem(j));
+                    this.itens.set(j, temp);
+                }
+            }
+    }
+   
 }
