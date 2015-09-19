@@ -31,15 +31,16 @@ public class DataTerceiraEra
     {
         return String.format("%d/%d/%d", dia, mes, ano);
     }
+    
     public boolean ehBissexto()
     {
          return ((this.ano % 400 == 0) || ((this.ano % 4 == 0) && (this.ano % 100 != 0)));
     }
     
+    @Override
     public boolean equals(Object obj)
     {
-        DataTerceiraEra data = (DataTerceiraEra)obj;
-        
+        DataTerceiraEra data = (DataTerceiraEra) obj;       
         return ((this.dia ==  data.getDia()) && (this.mes == data.getMes()) && (this.ano == data.getAno()));
     }
 }
