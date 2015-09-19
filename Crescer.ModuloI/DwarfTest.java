@@ -129,4 +129,30 @@ public class DwarfTest
         assertEquals(data, d.getDataNascimento());
     }
     
+    @Test
+    public void tentarSorteTerSorte()
+    {
+        Dwarf d = new Dwarf("Anao", new DataTerceiraEra(1, 1, 1996));
+        Item item = new Item("Test", 10);
+        d.getInventario().adicionarItem(item);
+        for(int i = 0; i < 2; i++)
+            d.receberFlechada();
+            
+        d.tentarSorte();
+        
+        assertEquals(1010, item.getQuantidade());
+    }
+    
+    @Test
+    public void tentarSorteNaoTerSorte()
+    {
+        Dwarf d = new Dwarf("Anao", new DataTerceiraEra(1, 1, 1996));
+        Item item = new Item("Test", 10);
+        d.getInventario().adicionarItem(item);
+            
+        d.tentarSorte();
+        
+        assertEquals(10, item.getQuantidade());
+    }
+    
 }

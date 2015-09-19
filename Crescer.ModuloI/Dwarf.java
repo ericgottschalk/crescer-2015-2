@@ -13,6 +13,7 @@ public class Dwarf
         this.hp = 110;
         this.status = Status.VIVO;
         this.exp = 0;
+        this.inventario = new Inventario();
         this.dataNascimento = new DataTerceiraEra(1, 1, 1);
     }
     
@@ -66,6 +67,11 @@ public class Dwarf
     public DataTerceiraEra getDataNascimento()
     {
         return  this.dataNascimento;
+    }
+    
+    public Inventario getInventario()
+    {
+        return this.inventario;
     }
     
     public double getNumeroSorte()
