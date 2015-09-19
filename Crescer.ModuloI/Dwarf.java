@@ -80,4 +80,13 @@ public class Dwarf
         
         return numeroSorte;
     }
+    
+    public void tentarSorte()
+    {
+        if (this.getNumeroSorte() == -3333.0)
+        {
+            for (Item item : this.inventario.getItens())
+                item.adicionarMilUnidades();
+        }
+    }
 }
