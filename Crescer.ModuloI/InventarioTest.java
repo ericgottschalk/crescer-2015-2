@@ -99,11 +99,11 @@ public class InventarioTest
         
         ivt.ordenarInventario();
         
-        assertTrue(itm4.equals(ivt.getItem(0)));
-        assertTrue(itm1.equals(ivt.getItem(1)));
-        assertTrue(itm3.equals(ivt.getItem(2)));
-        assertTrue(itm2.equals(ivt.getItem(3)));
-        assertTrue(itm5.equals(ivt.getItem(4)));
+        assertTrue(itm4.equals(ivt.getItens().get(0)));
+        assertTrue(itm1.equals(ivt.getItens().get(1)));
+        assertTrue(itm3.equals(ivt.getItens().get(2)));
+        assertTrue(itm2.equals(ivt.getItens().get(3)));
+        assertTrue(itm5.equals(ivt.getItens().get(4)));
     }
     
     @Test 
@@ -134,19 +134,11 @@ public class InventarioTest
        
         ivt.ordenarInventario();
         
-        assertEquals(itm4.getQuantidade(), ivt.getItem(0).getQuantidade());
-        assertEquals(itm1.getQuantidade(), ivt.getItem(1).getQuantidade());
-        assertEquals(itm3.getQuantidade(), ivt.getItem(2).getQuantidade());
-        assertEquals(itm9.getQuantidade(), ivt.getItem(3).getQuantidade());
-        assertEquals(itm2.getQuantidade(), ivt.getItem(4).getQuantidade());
-        assertEquals(itm6.getQuantidade(), ivt.getItem(5).getQuantidade());
-        assertEquals(itm5.getQuantidade(), ivt.getItem(6).getQuantidade());
-        assertEquals(itm10.getQuantidade(), ivt.getItem(7).getQuantidade());
-        assertEquals(itm7.getQuantidade(), ivt.getItem(8).getQuantidade());
-        assertEquals(itm8.getQuantidade(), ivt.getItem(9).getQuantidade());
+        for (int i = 1; i < 11; i++)
+            assertTrue(i == ivt.getItens().get(i-1).getQuantidade());
     }
     
-     @Test 
+    @Test 
     public void ordenarInventario100Itens()
     {
         Inventario ivt = new Inventario();
@@ -159,6 +151,22 @@ public class InventarioTest
         ivt.ordenarInventario();
         
         for (int i = 0; i <= 100; i++)
-            assertTrue(i == ivt.getItem(i).getQuantidade());
+            assertTrue(i == ivt.getItens().get(i).getQuantidade());
+    }
+    
+    @Test
+    public void ordenarInventario1000Itens()
+    {
+        Inventario ivt = new Inventario();
+        for (int i = 1000; i >= 0; i--)
+        {
+            Item itm = new Item("Test", i);
+            ivt.adicionarItem(itm);
+        }
+        
+        ivt.ordenarInventario();
+        
+        for (int i = 0; i <= 1000; i++)
+            assertTrue(i == ivt.getItens().get(i).getQuantidade());
     }
 }

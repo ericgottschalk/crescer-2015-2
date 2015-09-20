@@ -25,11 +25,6 @@ public class Inventario
         return this.itens;
     }
     
-    public Item getItem(int index)
-    {
-        return this.itens.get(index);
-    }
-    
     public String getDescricoesItens()
     {   
         String descricao = new String();
@@ -58,10 +53,10 @@ public class Inventario
         for (int i = 0; i < this.itens.size(); i++)
             for (int j = 0; j < this.itens.size(); j++)
             {
-                if (this.getItem(i).getQuantidade() < this.getItem(j).getQuantidade())
+                if (this.itens.get(i).getQuantidade() < this.itens.get(j).getQuantidade())
                 {
-                    temp = this.getItem(i);
-                    this.itens.set(i, this.getItem(j));
+                    temp = this.itens.get(i);
+                    this.itens.set(i, this.itens.get(j));
                     this.itens.set(j, temp);
                 }
             }
