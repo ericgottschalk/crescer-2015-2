@@ -41,11 +41,6 @@ public class Elfo
     {
         return this.status;
     }
-    /*public void setFleach(int num)
-    {
-        if (num > this.flechas)
-            this.flechas = num;
-    }*/
     
     public void atirarFlechas(Dwarf dwarf)
     {
@@ -60,17 +55,13 @@ public class Elfo
         System.out.println("Sem flechas");
     }
     
+    @Override
     public String toString()
     {
-      
-        boolean ehPluralFlechas = this.flechas != 1;
-        boolean ehPluralNiveis = this.exp != 1;
-        
-        String txtFlechas = ehPluralFlechas ? "flechas" : "flecha";
-        String txtNiveis = ehPluralNiveis ? "níveis" : "nível";
+        String txtFlechas = this.flechas != 1 ? "flechas" : "flecha";
+        String txtNiveis = this.exp != 1 ? "níveis" : "nível";
             
-        String result = String.format("%s possui %d %s e %d %s de experiência.", this.nome, this.flechas, txtFlechas, this.exp, txtNiveis);
-        return result;
+        return String.format("%s possui %d %s e %d %s de experiência.", this.nome, this.flechas, txtFlechas, this.exp, txtNiveis);
     }
     
 

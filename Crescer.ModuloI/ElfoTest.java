@@ -42,6 +42,7 @@ public class ElfoTest
         Elfo elf = new Elfo("");
         assertTrue(elf.getNome().isEmpty());
     }
+    
     @Test
     public void atirarFlechas()
     {
