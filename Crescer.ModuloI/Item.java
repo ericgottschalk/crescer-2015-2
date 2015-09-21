@@ -27,12 +27,8 @@ public class Item
     
     public void adicionarUnidadesLikeABoss()
     { 
-        int num = 0;
-        
-        for (int i = 1; i <= this.quantidade; i++)
-            num += i;
-            
-        this.quantidade += 1000 * num;
+        int pa = (this.quantidade * (this.quantidade + 1)) / 2;
+        this.quantidade += 1000 * pa;
     }
     
     @Override
