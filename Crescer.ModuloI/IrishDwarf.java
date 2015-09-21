@@ -99,7 +99,7 @@ public class IrishDwarf
         if (this.getNumeroSorte() == -3333.0)
         {
             for (Item item : this.inventario.getItens())
-                item.adicionarMilUnidadesLikeABoss();
+                item.adicionarUnidadesLikeABoss();
         }
     }
 }

@@ -48,7 +48,7 @@ public class IrishDwarfTest
 
         d.tentarSorte();
         
-        assertEquals(20010, item.getQuantidade());
+        assertEquals(55010, item.getQuantidade());
     }
     
     @Test
