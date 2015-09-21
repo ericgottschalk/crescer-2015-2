@@ -25,6 +25,11 @@ public class Item
         this.quantidade += 1000;
     }
     
+    public void adicionarMilUnidadesLikeABoss()
+    { 
+        this.quantidade += 1000 * (this.quantidade * 2);
+    }
+    
     @Override
     public boolean equals(Object obj)
     {
