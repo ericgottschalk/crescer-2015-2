@@ -25,6 +25,11 @@ public class Item
         this.quantidade += 1000;
     }
     
+    /*public void shimbalaie() 
+    {
+        int pa = this.quantidade * ++this.quantidade / 2;
+        this.quantidade = (1000 + this.quantidade * pa);
+    }*/
     public void adicionarUnidadesLikeABoss()
     { 
         int pa = (this.quantidade * (this.quantidade + 1)) / 2;
