@@ -32,7 +32,7 @@ public class Inventario
         for (Item item : itens)
             descricao += item.getDescricao() + ",";
             
-        return descricao;
+        return descricao.substring(0, descricao.length() - 1);
     }
     
     public Item getItemComMaiorQuantidade()
@@ -49,9 +49,11 @@ public class Inventario
     public void ordenarInventario()
     {
         Item temp = null;
+        int j;
         
         for (int i = 0; i < this.itens.size(); i++)
-            for (int j = 0; j < this.itens.size(); j++)
+        {
+            for (j = 0; j < this.itens.size(); j++)
             {
                 if (this.itens.get(i).getQuantidade() < this.itens.get(j).getQuantidade())
                 {
@@ -60,5 +62,8 @@ public class Inventario
                     this.itens.set(j, temp);
                 }
             }
+            
+            j = i;
+        }
     }
 }
