@@ -1,11 +1,11 @@
 public class Dwarf
 {
-    private String nome;
-    private int hp;  
-    private int exp;
-    private Status status;
-    private DataTerceiraEra dataNascimento;
-    private Inventario inventario;
+    protected String nome;
+    protected int hp;  
+    protected int exp;
+    protected Status status;
+    protected DataTerceiraEra dataNascimento;
+    protected Inventario inventario;
     
     public Dwarf(String n)
     {
