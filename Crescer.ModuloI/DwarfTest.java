@@ -134,7 +134,7 @@ public class DwarfTest
     {
         Dwarf d = new Dwarf("Anao", new DataTerceiraEra(1, 1, 1996));
         Item item = new Item("Test", 10);
-        d.getInventario().adicionarItem(item);
+        d.adicionarItem(item);
         for(int i = 0; i < 2; i++)
             d.receberFlechada();
             
@@ -148,7 +148,7 @@ public class DwarfTest
     {
         Dwarf d = new Dwarf("Anao", new DataTerceiraEra(1, 1, 1996));
         Item item = new Item("Test", 10);
-        d.getInventario().adicionarItem(item);
+        d.adicionarItem(item);
             
         d.tentarSorte();
         

@@ -54,6 +54,7 @@ public class Dwarf
     {
         return this.exp;
     }
+    
     public int getHp()
     {
         return this.hp;
@@ -72,6 +73,11 @@ public class Dwarf
     public Inventario getInventario()
     {
         return this.inventario;
+    }
+    
+    public void adicionarItem(Item item)
+    {
+        this.inventario.adicionarItem(item);
     }
     
     public double getNumeroSorte()
