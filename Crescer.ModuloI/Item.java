@@ -25,9 +25,14 @@ public class Item
         this.quantidade += 1000;
     }
     
-    public void adicionarMilUnidadesLikeABoss()
+    public void adicionarUnidadesLikeABoss()
     { 
-        this.quantidade += 1000 * (this.quantidade * 2);
+        int num = 0;
+        
+        for (int i = 1; i <= this.quantidade; i++)
+            num += i;
+            
+        this.quantidade += 1000 * num;
     }
     
     @Override
