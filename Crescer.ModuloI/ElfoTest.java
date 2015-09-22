@@ -185,4 +185,47 @@ public class ElfoTest
         
         assertEquals(Status.MORTO, elfo.getStatus());
     }
+    
+    @Test
+    public void elfoNasceComInventario()
+    {
+        Elfo elfo = new Elfo("");
+        
+        assertNotNull(elfo.getInventario());
+    }
+    
+    @Test
+    public void elfoGanhaUmItem()
+    {
+        Elfo elfo = new Elfo("");
+        Item item = new Item("Test", 1);
+        
+        elfo.adicionarItem(item);
+        
+        assertTrue(elfo.getInventario().getItens().contains(item));
+        
+    }
+    
+    @Test
+    public void elfoGanha100Itens()
+    {
+        Elfo elfo = new Elfo("");
+        
+        for (int i = 0; i < 100; i++)
+            elfo.adicionarItem(new Item("Test", i));
+            
+        assertEquals(100, elfo.getInventario().getItens().size());
+    }
+    
+    @Test
+    public void elfoPerdeItem()
+    {
+        Elfo elfo = new Elfo("");
+        Item item = new Item("Test", 1);
+        elfo.adicionarItem(item);
+        
+        elfo.perderItem(item);
+        
+        assertFalse(elfo.getInventario().getItens().contains(item));
+    }
 }

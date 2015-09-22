@@ -1,39 +1,12 @@
 
 
-public class Orc
+public class Orc extends Personagem
 {
-    // variáveis de instância - substitua o exemplo abaixo pelo seu próprio
-    protected String nome;
-    protected int hp;
-    protected Inventario inventario;
-    protected Status status;
-
     public Orc(String nome, int hp)
     {
-        this.nome = nome;
-        this.hp = hp;
+        super(nome, hp);
         this.inventario = new Inventario();
         this.status = Status.VIVO;
-    }
-    
-    public int getHp()
-    {
-        return this.hp;
-    }
-    
-    public Status getStatus()
-    {
-        return this.status;
-    }
-    
-    public Inventario getInventario()
-    {
-        return this.inventario;
-    }
-   
-    public void adicionarItem(Item itm) 
-    {
-        this.inventario.adicionarItem(itm);
     }
     
     private void perderFlecha(Item item)
@@ -93,7 +66,7 @@ public class Orc
     
     public void realizarAtaque(Dwarf dwarf) 
     {
-    int danoEspada = 12, danoArco = 8;
+        int danoEspada = 12, danoArco = 8;
         
         if (this.inventario.pesquisarItem("Espada") != null)
         {
@@ -113,6 +86,5 @@ public class Orc
         }
         
         this.status = Status.FUGINDO;
-    }
-    
+    }    
 }
