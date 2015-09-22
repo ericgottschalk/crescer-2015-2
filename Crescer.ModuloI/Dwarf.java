@@ -10,7 +10,7 @@ public class Dwarf extends Personagem
     
     public Dwarf(String n, DataTerceiraEra data)
     {
-        this(n);
+        super(n, 110);
         this.dataNascimento = data;
     }
     
