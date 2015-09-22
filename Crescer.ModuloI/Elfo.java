@@ -6,6 +6,7 @@ public class Elfo
     private String nome;
     private int flechas;
     private int exp;
+    private int hp;
     private Status status;
     
     public Elfo(String n)
@@ -13,6 +14,7 @@ public class Elfo
         this.nome = n;
         this.flechas = 42;
         this.exp = 0;
+        this.hp = 80;
         this.status = Status.VIVO;
     }
     
@@ -37,6 +39,11 @@ public class Elfo
         return this.exp;
     }
     
+    public int getHp()
+    {
+        return this.hp;
+    }
+    
     public Status getStatus()
     {
         return this.status;
@@ -51,8 +58,30 @@ public class Elfo
             this.exp++;
             return;
         }
+
+    }
+    
+    public void atirarFlechas(Orc orc)
+    {
+        if (this.flechas > 0)
+        {
+            this.flechas--;
+            orc.receberAtaqueDeElfo();
+            this.exp++;
+            return;
+        }
+    }
+    
+    public void receberAtaqueOrc(int dano)
+    {
+        if (this.hp > 0)
+        {
+            if (dano == 12 || dano == 8)
+                this.hp -= dano;
+        }
         
-        System.out.println("Sem flechas");
+        if (this.hp <= 0)
+            this.status = Status.MORTO;
     }
     
     @Override

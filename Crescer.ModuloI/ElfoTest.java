@@ -121,4 +121,68 @@ public class ElfoTest
         elfo.atirarFlechas(new Dwarf(""));
         assertEquals("Legolas possui 41 flechas e 1 nível de experiência.", elfo.toString());
     }
+    
+    @Test
+    public void atacarOrcUrukHai()
+    {
+        Elfo elfo = new Elfo("Elfinho");
+        Orc orc = new UrukHaiOrc();
+        
+        elfo.atirarFlechas(orc);
+        
+        assertEquals(142, orc.getHp());
+    }
+    
+    @Test
+    public void atacarOrcSnaga()
+    {
+        Elfo elfo = new Elfo("Elfinho");
+        Orc orc = new SnagaOrc();
+        
+        elfo.atirarFlechas(orc);
+        
+        assertEquals(62, orc.getHp());
+    }
+    
+    @Test
+    public void receberAtqueOrcTipoEspada()
+    {
+        Elfo elfo = new Elfo("Test");
+        
+        elfo.receberAtaqueOrc(12);
+        
+        assertEquals(68, elfo.getHp());
+    }
+    
+    @Test
+    public void receberAtqueOrcTipoEspadaAteMorte()
+    {
+        Elfo elfo = new Elfo("Test");
+        
+        for (int i = 0; i < 7; i++)
+            elfo.receberAtaqueOrc(12);
+        
+        assertEquals(Status.MORTO, elfo.getStatus());
+    }
+    
+    @Test
+    public void receberAtqueOrcTipoArco()
+    {
+        Elfo elfo = new Elfo("Test");
+        
+        elfo.receberAtaqueOrc(8);
+        
+        assertEquals(72, elfo.getHp());
+    }
+    
+    @Test
+    public void receberAtqueOrcTipoArcoAteMorte()
+    {
+        Elfo elfo = new Elfo("Test");
+        
+        for(int i = 0; i < 10; i++)
+            elfo.receberAtaqueOrc(8);
+        
+        assertEquals(Status.MORTO, elfo.getStatus());
+    }
 }
