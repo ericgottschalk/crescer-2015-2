@@ -1,4 +1,4 @@
-import java.util.Random;
+
 
 public class Orc
 {
@@ -34,6 +34,12 @@ public class Orc
     public void adicionarItem(Item itm) 
     {
         this.inventario.adicionarItem(itm);
+    }
+    
+    private void perderFlecha(Item item)
+    {
+        int temp = this.inventario.getItens().indexOf(item);
+        this.inventario.getItens().set(temp, new Item("Flecha", item.getQuantidade() - 1));
     }
     
     public void receberAtaqueDeElfo()
@@ -73,8 +79,13 @@ public class Orc
             
         if (this.inventario.pesquisarItem("Arco") != null)
         {
-            if (this.inventario.pesquisarItem("Flecha").getQuantidade() > 0)
+            Item flechas = this.inventario.pesquisarItem("Flecha");
+            if (flechas.getQuantidade() > 0)
+            {
                 elfo.receberAtaqueOrc(danoArco);
+                this.perderFlecha(flechas);
+                return;
+            }
         }
         
         this.status = Status.FUGINDO;
@@ -92,8 +103,13 @@ public class Orc
             
         if (this.inventario.pesquisarItem("Arco") != null)
         {
-            if (this.inventario.pesquisarItem("Flecha").getQuantidade() > 0)
+            Item flechas = this.inventario.pesquisarItem("Flecha");
+            if (flechas.getQuantidade() > 0)
+            {
                 dwarf.receberAtaqueOrc(danoArco);
+                this.perderFlecha(flechas);
+                return;
+            }
         }
         
         this.status = Status.FUGINDO;
