@@ -46,6 +46,15 @@ public class Inventario
         return itm;
     }
     
+    public Item pesquisarItem(String name)
+    {
+        for (Item item : this.itens)
+            if (name.equals(item.getDescricao()))
+                return item;
+        
+        return null;
+    }
+    
     public void ordenarInventario()
     {
         Item temp = null;
