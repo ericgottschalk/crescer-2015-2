@@ -16,7 +16,9 @@ public class SnagaOrcOrcTest
          
          orc.realizarAtaque(elfo);
          
+         Item flecha = orc.getInventario().pesquisarItem("Flecha");
          assertEquals(72, elfo.getHp());
+         assertEquals(4, flecha.getQuantidade());
     }
     
     @Test
@@ -28,19 +30,24 @@ public class SnagaOrcOrcTest
          orc.realizarAtaque(elfo);
          orc.realizarAtaque(elfo);
          
+         Item flecha = orc.getInventario().pesquisarItem("Flecha");
          assertEquals(64, elfo.getHp());
+         assertEquals(3, flecha.getQuantidade());
     }
     
     @Test
-    public void atacarElfoArcoAteMatar()
+    public void atacarElfoArcoAcabarFlechasEFugir()
     {
          Orc orc = new SnagaOrc();
          Elfo elfo = new Elfo("Elfinho");
          
-         for (int i = 0; i < 12; i++)
+         for (int i = 0; i < 6; i++)
             orc.realizarAtaque(elfo);
          
-         assertEquals(Status.MORTO, elfo.getStatus());
+         Item flecha = orc.getInventario().pesquisarItem("Flecha");
+         assertEquals(40, elfo.getHp());
+         assertEquals(0, flecha.getQuantidade());
+         assertEquals(Status.FUGINDO, orc.getStatus());
     }
     
     @Test
@@ -51,7 +58,9 @@ public class SnagaOrcOrcTest
          
          orc.realizarAtaque(d);
          
+         Item flecha = orc.getInventario().pesquisarItem("Flecha");
          assertEquals(102, d.getHp());
+         assertEquals(4, flecha.getQuantidade());
     }
     
     @Test
@@ -63,11 +72,13 @@ public class SnagaOrcOrcTest
          orc.realizarAtaque(d);
          orc.realizarAtaque(d);
          
+         Item flecha = orc.getInventario().pesquisarItem("Flecha");
          assertEquals(94, d.getHp());
+         assertEquals(3, flecha.getQuantidade());
     }
     
     @Test
-    public void atacarDwarfArcoAteMatar()
+    public void atacarDwarfArcoAteAcabarFlechas()
     {
          Orc orc = new SnagaOrc();
          Dwarf d = new Dwarf("");
@@ -75,7 +86,10 @@ public class SnagaOrcOrcTest
          for (int i = 0; i < 120; i++)
             orc.realizarAtaque(d);
          
-         assertEquals(Status.MORTO, d.getStatus());
+         Item flecha = orc.getInventario().pesquisarItem("Flecha");
+         assertEquals(70, d.getHp());
+         assertEquals(0, flecha.getQuantidade());
+         assertEquals(Status.FUGINDO, orc.getStatus());
     }
     
     @Test
