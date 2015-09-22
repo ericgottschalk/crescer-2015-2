@@ -1,12 +1,43 @@
 
 
-public class Orc extends Personagem
+public class Orc 
 {
-    public Orc(String nome, int hp)
+    protected int hp;
+    protected Status status;
+    protected Inventario inventario;
+    protected TipoOrc tipo;
+    
+    public Orc(TipoOrc tipo, int hp)
     {
-        super(nome, hp);
+        this.tipo = tipo;
+        this.hp = hp;
         this.inventario = new Inventario();
         this.status = Status.VIVO;
+    }
+    
+    public int getHp()
+    {
+        return this.hp;
+    }
+    
+    public Status getStatus()
+    {
+        return this.status;
+    }
+    
+    public Inventario getInventario()
+    {
+        return this.inventario;
+    }
+    
+    public void adicionarItem(Item item)
+    {
+        this.inventario.adicionarItem(item);
+    }
+    
+    public void perderItem(Item item)
+    {
+        this.inventario.perderItem(item);
     }
     
     private void perderFlecha(Item item)
