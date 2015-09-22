@@ -45,7 +45,7 @@ public class InventarioTest
          ivt.adicionarItem(itm2);
          ivt.adicionarItem(itm3);
          
-         assertEquals("Adaga,Escudo,Bracelete,", ivt.getDescricoesItens());
+         assertEquals("Adaga,Escudo,Bracelete", ivt.getDescricoesItens());
     }
     
     @Test

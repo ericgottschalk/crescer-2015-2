@@ -1,11 +1,11 @@
 public class Dwarf
 {
-    private String nome;
-    private int hp;  
-    private int exp;
-    private Status status;
-    private DataTerceiraEra dataNascimento;
-    private Inventario inventario;
+    protected String nome;
+    protected int hp;  
+    protected int exp;
+    protected Status status;
+    protected DataTerceiraEra dataNascimento;
+    protected Inventario inventario;
     
     public Dwarf(String n)
     {
@@ -54,6 +54,7 @@ public class Dwarf
     {
         return this.exp;
     }
+    
     public int getHp()
     {
         return this.hp;
@@ -72,6 +73,11 @@ public class Dwarf
     public Inventario getInventario()
     {
         return this.inventario;
+    }
+    
+    public void adicionarItem(Item item)
+    {
+        this.inventario.adicionarItem(item);
     }
     
     public double getNumeroSorte()
