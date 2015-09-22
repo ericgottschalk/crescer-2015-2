@@ -23,6 +23,23 @@ public class Dwarf
         this.dataNascimento = data;
     }
     
+    public void realizarAtaque(Orc orc)
+    {
+        orc.receberAtaqueDeDwarf(); 
+    }
+    
+    public void receberAtaqueOrc(int dano)
+    {
+        if (this.hp > 0)
+        {
+            if (dano == 12 || dano == 8)
+                this.hp -= dano;
+        }
+        
+        if (this.hp <= 0)
+            this.status = Status.MORTO;
+    }
+    
     public void receberFlechada()
     {
         if ((this.hp > 0))

@@ -155,4 +155,59 @@ public class DwarfTest
         assertEquals(10, item.getQuantidade());
     }
     
+    @Test
+    public void receberAtaqueOrcComEspada()
+    {
+        Dwarf d = new Dwarf("");
+        
+        d.receberAtaqueOrc(12);
+        
+        assertEquals(98, d.getHp());
+        
+    }
+    
+    @Test
+    public void receberAtaqueOrcComArco()
+    {
+        Dwarf d = new Dwarf("");
+        
+        d.receberAtaqueOrc(8);
+        
+        assertEquals(102, d.getHp());
+        
+    }
+    
+    @Test
+    public void receberAtaqueComDanoForaDoEsperado()
+    {
+        Dwarf d = new Dwarf("");
+        
+        d.receberAtaqueOrc(0);
+        
+        assertEquals(110, d.getHp());
+        
+    }
+    
+    @Test
+    public void atacarOrcComEscudo()
+    {
+        Dwarf d = new Dwarf("");
+        UrukHaiOrc orc = new UrukHaiOrc();
+        
+        d.realizarAtaque(orc);
+        
+        assertEquals(145, orc.getHp());
+    }
+    
+    @Test
+    public void atacarOrcSemEscudo()
+    {
+        Dwarf d = new Dwarf("");
+        SnagaOrc orc = new SnagaOrc();
+        
+        d.realizarAtaque(orc);
+        
+        assertEquals(60, orc.getHp());
+    }
+    
 }
