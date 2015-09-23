@@ -7,7 +7,7 @@ public class Elfo extends Personagem
     
     public Elfo(String n)
     {
-        super(n, 80);
+        super(n, 100);
         this.flechas = 42;
     }
     
@@ -29,7 +29,6 @@ public class Elfo extends Personagem
             this.flechas--;
             dwarf.receberFlechada();
             this.exp++;
-            return;
         }
 
     }
@@ -41,7 +40,6 @@ public class Elfo extends Personagem
             this.flechas--;
             orc.receberAtaque();
             this.exp++;
-            return;
         }
     }
     

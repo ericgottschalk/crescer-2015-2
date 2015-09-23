@@ -2,11 +2,11 @@
 
 public class Personagem
 {
-    protected String nome;
+    protected final String nome;
     protected int exp;
     protected int hp;
     protected Status status;
-    protected Inventario inventario;
+    protected final Inventario inventario;
     
     public Personagem(String nome, int hp)
     {
@@ -50,6 +50,12 @@ public class Personagem
     public void perderItem(Item item)
     {
         this.inventario.perderItem(item);
+    }
+    
+    public void verificarVida()
+    {
+        if (this.hp <= 0)
+            this.status = Status.MORTO;
     }
     
     public void receberAtaqueOrc(Orc orc)

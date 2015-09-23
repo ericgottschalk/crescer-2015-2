@@ -15,7 +15,7 @@ public class UrukHaiOrcTest
          
          orc.realizarAtaque(elfo);
          
-         assertEquals(68, elfo.getHp());
+         assertEquals(88, elfo.getHp());
     }
     
     @Test
@@ -27,7 +27,7 @@ public class UrukHaiOrcTest
          orc.realizarAtaque(elfo);
          orc.realizarAtaque(elfo);
          
-         assertEquals(56, elfo.getHp());
+         assertEquals(76, elfo.getHp());
     }
     
     @Test

@@ -17,7 +17,7 @@ public class SnagaOrcOrcTest
          orc.realizarAtaque(elfo);
          
          Item flecha = orc.getInventario().pesquisarItem("Flecha");
-         assertEquals(72, elfo.getHp());
+         assertEquals(92, elfo.getHp());
          assertEquals(4, flecha.getQuantidade());
     }
     
@@ -31,7 +31,7 @@ public class SnagaOrcOrcTest
          orc.realizarAtaque(elfo);
          
          Item flecha = orc.getInventario().pesquisarItem("Flecha");
-         assertEquals(64, elfo.getHp());
+         assertEquals(84, elfo.getHp());
          assertEquals(3, flecha.getQuantidade());
     }
     
