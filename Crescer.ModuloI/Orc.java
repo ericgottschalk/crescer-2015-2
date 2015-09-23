@@ -5,7 +5,6 @@ public class Orc extends Personagem
     public Orc(String nome, int hp)
     {
         super(nome, hp);
-        this.inventario = new Inventario();
         this.status = Status.VIVO;
     }
     
@@ -49,19 +48,20 @@ public class Orc extends Personagem
     
     public void realizarAtaque(Personagem p)
     {
-       if (this.getDanoAtaque() == 0)
+       int dano = this.getDanoAtaque();
+       if (dano == 0)
        {
            this.status = Status.FUGINDO;
            return;
        }
        
-       if(this.getDanoAtaque() == 8)
+       p.receberAtaqueOrc(this);
+       
+       if(dano == 8)
        {
            Item itm = this.inventario.pesquisarItem("Flecha");
            itm.perderUmaUnidade();
        }
-           
-       p.receberAtaqueOrc(this);
     }    
     
     @Override

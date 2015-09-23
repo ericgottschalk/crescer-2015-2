@@ -91,6 +91,7 @@ public class SnagaOrcOrcTest
          orc.realizarAtaque(d);
          
          Item flecha = orc.getInventario().pesquisarItem("Flecha");
+         assertEquals(70, d.getHp());
          assertEquals(0, flecha.getQuantidade());
          assertEquals(Status.FUGINDO, orc.getStatus());
     }
