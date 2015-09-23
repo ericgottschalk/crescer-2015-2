@@ -38,13 +38,13 @@ public class Orc extends Personagem
     }
     
     
-    public void realizarAtaque(Elfo elfo)
+    public void realizarAtaque(Personagem p)
     {
         int danoEspada = 12, danoArco = 8;
         
         if (this.inventario.pesquisarItem("Espada") != null)
         {
-            elfo.receberAtaqueOrc(danoEspada);
+            p.receberAtaqueOrc(danoEspada);
             return;
         } 
             
@@ -53,31 +53,7 @@ public class Orc extends Personagem
             Item flechas = this.inventario.pesquisarItem("Flecha");
             if (flechas.getQuantidade() > 0)
             {
-                elfo.receberAtaqueOrc(danoArco);
-                this.perderFlecha(flechas);
-                return;
-            }
-        }
-        
-        this.status = Status.FUGINDO;
-    }
-    
-    public void realizarAtaque(Dwarf dwarf) 
-    {
-        int danoEspada = 12, danoArco = 8;
-        
-        if (this.inventario.pesquisarItem("Espada") != null)
-        {
-            dwarf.receberAtaqueOrc(danoEspada);
-            return;
-        } 
-            
-        if (this.inventario.pesquisarItem("Arco") != null)
-        {
-            Item flechas = this.inventario.pesquisarItem("Flecha");
-            if (flechas.getQuantidade() > 0)
-            {
-                dwarf.receberAtaqueOrc(danoArco);
+                p.receberAtaqueOrc(danoArco);
                 this.perderFlecha(flechas);
                 return;
             }
