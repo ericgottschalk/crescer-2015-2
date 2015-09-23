@@ -8,12 +8,6 @@ public class Orc extends Personagem
         this.status = Status.VIVO;
     }
     
-    private void verificarVida()
-    {
-        if (this.hp <= 0)
-            this.status = Status.MORTO;
-    }
-    
     public boolean podeAtacarEspada()
     {
         return (this.inventario.pesquisarItem("Espada") != null) ? true : false;
