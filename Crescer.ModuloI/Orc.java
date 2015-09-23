@@ -1,43 +1,18 @@
 
 
-public class Orc 
+public class Orc extends Personagem
 {
-    protected int hp;
-    protected Status status;
-    protected Inventario inventario;
-    protected TipoOrc tipo;
-    
-    public Orc(TipoOrc tipo, int hp)
+    public Orc(String nome, int hp)
     {
-        this.tipo = tipo;
-        this.hp = hp;
+        super(nome, hp);
         this.inventario = new Inventario();
         this.status = Status.VIVO;
     }
     
-    public int getHp()
+    private void verificarVida()
     {
-        return this.hp;
-    }
-    
-    public Status getStatus()
-    {
-        return this.status;
-    }
-    
-    public Inventario getInventario()
-    {
-        return this.inventario;
-    }
-    
-    public void adicionarItem(Item item)
-    {
-        this.inventario.adicionarItem(item);
-    }
-    
-    public void perderItem(Item item)
-    {
-        this.inventario.perderItem(item);
+        if (this.hp <= 0)
+            this.status = Status.MORTO;
     }
     
     private void perderFlecha(Item item)
@@ -46,30 +21,22 @@ public class Orc
         this.inventario.getItens().set(temp, new Item("Flecha", item.getQuantidade() - 1));
     }
     
-    public void receberAtaqueDeElfo()
+    public void receberAtaque()
     {
         if (this.status == Status.MORTO)
              return;
         
-        this.hp -= 8;   
-          
-        if (this.hp <= 0)
-            this.status = Status.MORTO;
+        if (this.inventario.pesquisarItem("Escudo Uruk-Hai") != null)
+        {
+            this.hp -= 6;
+            this.verificarVida();
+            return;
+        }
+        
+        this.hp -= 10;
+        this.verificarVida();
     }
     
-    public void receberAtaqueDeDwarf() 
-    {
-        if (this.status == Status.MORTO)
-            return;
-            
-        if (this.inventario.pesquisarItem("Escudo Uruk-Hai") != null)
-            this.hp -= 5;
-        else
-            this.hp -= 10;
-            
-        if (this.hp <= 0)
-            this.status = Status.MORTO;
-    }
     
     public void realizarAtaque(Elfo elfo)
     {

@@ -2,9 +2,9 @@
 
 public class SnagaOrc extends Orc
 {
-    public SnagaOrc()
+    public SnagaOrc(String n)
     {
-        super(TipoOrc.Snaga, 70);
+        super(n, 70);
         this.adicionarItem(new Item("Arco", 1));
         this.adicionarItem(new Item("Flecha", 5));
     }

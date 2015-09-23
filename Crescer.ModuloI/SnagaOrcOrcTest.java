@@ -11,7 +11,7 @@ public class SnagaOrcOrcTest
     @Test
     public void atacarElfoArco()
     {
-         Orc orc = new SnagaOrc();
+         Orc orc = new SnagaOrc("");
          Elfo elfo = new Elfo("Elfinho");
          
          orc.realizarAtaque(elfo);
@@ -24,7 +24,7 @@ public class SnagaOrcOrcTest
     @Test
     public void atacarElfoArcoDuasVezes()
     {
-         Orc orc = new SnagaOrc();
+         Orc orc = new SnagaOrc("");
          Elfo elfo = new Elfo("Elfinho");
          
          orc.realizarAtaque(elfo);
@@ -38,7 +38,7 @@ public class SnagaOrcOrcTest
     @Test
     public void atacarElfoArcoAcabarFlechasEFugir()
     {
-         Orc orc = new SnagaOrc();
+         Orc orc = new SnagaOrc("");
          Elfo elfo = new Elfo("Elfinho");
          
          for (int i = 0; i < 6; i++)
@@ -53,7 +53,7 @@ public class SnagaOrcOrcTest
     @Test
     public void atacarDwarfArco()
     {
-         Orc orc = new SnagaOrc();
+         Orc orc = new SnagaOrc("");
          Dwarf d = new Dwarf("");
          
          orc.realizarAtaque(d);
@@ -66,7 +66,7 @@ public class SnagaOrcOrcTest
     @Test
     public void atacarDwarfArcoDuasVezes()
     {
-         Orc orc = new SnagaOrc();
+         Orc orc = new SnagaOrc("");
          Dwarf d = new Dwarf("");
          
          orc.realizarAtaque(d);
@@ -80,7 +80,7 @@ public class SnagaOrcOrcTest
     @Test
     public void atacarDwarfArcoAteAcabarFlechas()
     {
-         Orc orc = new SnagaOrc();
+         Orc orc = new SnagaOrc("");
          Dwarf d = new Dwarf("");
          
          for (int i = 0; i < 120; i++)
@@ -96,18 +96,18 @@ public class SnagaOrcOrcTest
     public void receberAtaqueElfo()
     {
         Elfo elfo = new Elfo("Elfinho");
-        Orc orc = new SnagaOrc();
+        Orc orc = new SnagaOrc("");
         
         elfo.atirarFlechas(orc);
         
-        assertEquals(62, orc.getHp());
+        assertEquals(60, orc.getHp());
     }
     
     @Test
     public void receberAtaqueElfoAteMorrer()
     {
         Elfo elfo = new Elfo("Elfinho");
-        Orc orc = new SnagaOrc();
+        Orc orc = new SnagaOrc("");
         
         for (int i = 0; i < 20; i++)
             elfo.atirarFlechas(orc);
@@ -119,7 +119,7 @@ public class SnagaOrcOrcTest
     public void receberAtaqueDwarf()
     {
         Dwarf d = new Dwarf("");
-        Orc orc = new SnagaOrc();
+        Orc orc = new SnagaOrc("");
         
         d.realizarAtaque(orc);
         
@@ -130,7 +130,7 @@ public class SnagaOrcOrcTest
     public void receberAtaqueDwarfDuasVezes()
     {
         Dwarf d = new Dwarf("");
-        Orc orc = new SnagaOrc();
+        Orc orc = new SnagaOrc("");
         
         d.realizarAtaque(orc);
         d.realizarAtaque(orc);
@@ -142,7 +142,7 @@ public class SnagaOrcOrcTest
     public void receberAtaqueDwarfAteMorrer()
     {
         Dwarf d = new Dwarf("");
-        Orc orc = new SnagaOrc();
+        Orc orc = new SnagaOrc("");
         
         for(int i = 0; i < 30; i++)
             d.realizarAtaque(orc);

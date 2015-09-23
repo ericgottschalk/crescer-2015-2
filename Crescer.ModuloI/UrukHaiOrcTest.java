@@ -10,7 +10,7 @@ public class UrukHaiOrcTest
     @Test
     public void atacarElfoEspada()
     {
-         Orc orc = new UrukHaiOrc();
+         Orc orc = new UrukHaiOrc("");
          Elfo elfo = new Elfo("Elfinho");
          
          orc.realizarAtaque(elfo);
@@ -21,7 +21,7 @@ public class UrukHaiOrcTest
     @Test
     public void atacarElfoEspadaDuasVezes()
     {
-         Orc orc = new UrukHaiOrc();
+         Orc orc = new UrukHaiOrc("");
          Elfo elfo = new Elfo("Elfinho");
          
          orc.realizarAtaque(elfo);
@@ -33,7 +33,7 @@ public class UrukHaiOrcTest
     @Test
     public void atacarElfoEspadaAteMatar()
     {
-         Orc orc = new UrukHaiOrc();
+         Orc orc = new UrukHaiOrc("");
          Elfo elfo = new Elfo("Elfinho");
          
          for (int i = 0; i < 12; i++)
@@ -45,7 +45,7 @@ public class UrukHaiOrcTest
     @Test
     public void atacarDwarfEspada()
     {
-         Orc orc = new UrukHaiOrc();
+         Orc orc = new UrukHaiOrc("");
          Dwarf d = new Dwarf("");
          
          orc.realizarAtaque(d);
@@ -56,7 +56,7 @@ public class UrukHaiOrcTest
     @Test
     public void atacarDwarfEspadaDuasVezes()
     {
-         Orc orc = new UrukHaiOrc();
+         Orc orc = new UrukHaiOrc("");
          Dwarf d = new Dwarf("");
          
          orc.realizarAtaque(d);
@@ -68,7 +68,7 @@ public class UrukHaiOrcTest
     @Test
     public void atacarDwarfEspadaAteMatar()
     {
-         Orc orc = new UrukHaiOrc();
+         Orc orc = new UrukHaiOrc("");
          Dwarf d = new Dwarf("");
          
          for (int i = 0; i < 12; i++)
@@ -81,20 +81,20 @@ public class UrukHaiOrcTest
     public void receberAtaqueElfo()
     {
         Elfo elfo = new Elfo("Elfinho");
-        Orc orc = new UrukHaiOrc();
+        Orc orc = new UrukHaiOrc("");
         
         elfo.atirarFlechas(orc);
         
-        assertEquals(142, orc.getHp());
+        assertEquals(144, orc.getHp());
     }
     
     @Test
     public void receberAtaqueElfoAteMorrer()
     {
         Elfo elfo = new Elfo("Elfinho");
-        Orc orc = new UrukHaiOrc();
+        Orc orc = new UrukHaiOrc("");
         
-        for (int i = 0; i < 20; i++)
+        for (int i = 0; i < 31; i++)
             elfo.atirarFlechas(orc);
         
         assertEquals(Status.MORTO, orc.getStatus());
@@ -104,32 +104,32 @@ public class UrukHaiOrcTest
     public void receberAtaqueDwarf()
     {
         Dwarf d = new Dwarf("");
-        Orc orc = new UrukHaiOrc();
+        Orc orc = new UrukHaiOrc("");
         
         d.realizarAtaque(orc);
         
-        assertEquals(145, orc.getHp());
+        assertEquals(144, orc.getHp());
     }
     
     @Test
     public void receberAtaqueDwarfDuasVezes()
     {
         Dwarf d = new Dwarf("");
-        Orc orc = new UrukHaiOrc();
+        Orc orc = new UrukHaiOrc("");
         
         d.realizarAtaque(orc);
         d.realizarAtaque(orc);
         
-        assertEquals(140, orc.getHp());
+        assertEquals(138, orc.getHp());
     }
     
     @Test
     public void receberAtaqueDwarfAteMorrer()
     {
         Dwarf d = new Dwarf("");
-        Orc orc = new UrukHaiOrc();
+        Orc orc = new UrukHaiOrc("");
         
-        for(int i = 0; i < 30; i++)
+        for(int i = 0; i < 40; i++)
             d.realizarAtaque(orc);
         
         assertEquals(Status.MORTO, orc.getStatus());
