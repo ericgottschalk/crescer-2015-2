@@ -16,7 +16,7 @@ public class Dwarf extends Personagem
     
     public void realizarAtaque(Orc orc)
     {
-        orc.receberAtaqueDeDwarf(); 
+        orc.receberAtaque(); 
     }
     
     public void receberFlechada()

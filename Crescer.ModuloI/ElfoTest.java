@@ -126,22 +126,22 @@ public class ElfoTest
     public void atacarOrcUrukHai()
     {
         Elfo elfo = new Elfo("Elfinho");
-        Orc orc = new UrukHaiOrc();
+        Orc orc = new UrukHaiOrc("");
         
         elfo.atirarFlechas(orc);
         
-        assertEquals(142, orc.getHp());
+        assertEquals(144, orc.getHp());
     }
     
     @Test
     public void atacarOrcSnaga()
     {
         Elfo elfo = new Elfo("Elfinho");
-        Orc orc = new SnagaOrc();
+        Orc orc = new SnagaOrc("");
         
         elfo.atirarFlechas(orc);
         
-        assertEquals(62, orc.getHp());
+        assertEquals(60, orc.getHp());
     }
     
     @Test

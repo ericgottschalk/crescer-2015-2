@@ -36,7 +36,7 @@ public class ElfoVerde extends Elfo
        if (this.flechas > 0)
        {
            this.flechas--;
-           orc.receberAtaqueDeElfo();
+           orc.receberAtaque();
            this.exp += 2;
            return;
        }

@@ -39,7 +39,7 @@ public class Elfo extends Personagem
         if (this.flechas > 0)
         {
             this.flechas--;
-            orc.receberAtaqueDeElfo();
+            orc.receberAtaque();
             this.exp++;
             return;
         }

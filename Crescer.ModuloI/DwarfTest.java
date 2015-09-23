@@ -192,18 +192,18 @@ public class DwarfTest
     public void atacarOrcComEscudo()
     {
         Dwarf d = new Dwarf("");
-        UrukHaiOrc orc = new UrukHaiOrc();
+        UrukHaiOrc orc = new UrukHaiOrc("");
         
         d.realizarAtaque(orc);
         
-        assertEquals(145, orc.getHp());
+        assertEquals(144, orc.getHp());
     }
     
     @Test
     public void atacarOrcSemEscudo()
     {
         Dwarf d = new Dwarf("");
-        SnagaOrc orc = new SnagaOrc();
+        SnagaOrc orc = new SnagaOrc("");
         
         d.realizarAtaque(orc);
         
