@@ -15,10 +15,26 @@ public class Orc extends Personagem
             this.status = Status.MORTO;
     }
     
-    private void perderFlecha(Item item)
+    public boolean podeAtacarEspada()
     {
-        int temp = this.inventario.getItens().indexOf(item);
-        this.inventario.getItens().set(temp, new Item("Flecha", item.getQuantidade() - 1));
+        return (this.inventario.pesquisarItem("Espada") != null) ? true : false;
+    }
+    
+    public boolean podeAtacarArco()
+    {
+        return (this.inventario.pesquisarItem("Arco") != null && this.inventario.pesquisarItem("Flecha").getQuantidade() > 0) 
+                ? true : false; 
+    }
+    
+    public int getDanoAtaque()
+    {
+        if (this.podeAtacarEspada())
+            return 12;         
+            
+        if (this.podeAtacarArco())
+            return 8;
+            
+        return 0;
     }
     
     public void receberAtaque()
@@ -26,39 +42,31 @@ public class Orc extends Personagem
         if (this.status == Status.MORTO)
              return;
         
-        if (this.inventario.pesquisarItem("Escudo Uruk-Hai") != null)
-        {
-            this.hp -= 6;
-            this.verificarVida();
-            return;
-        }
-        
-        this.hp -= 10;
+        this.hp -= this.inventario.pesquisarItem("Escudo Uruk-Hai") == null ? 10 : 6;
         this.verificarVida();
     }
     
     
     public void realizarAtaque(Personagem p)
     {
-        int danoEspada = 12, danoArco = 8;
-        
-        if (this.inventario.pesquisarItem("Espada") != null)
-        {
-            p.receberAtaqueOrc(danoEspada);
-            return;
-        } 
-            
-        if (this.inventario.pesquisarItem("Arco") != null)
-        {
-            Item flechas = this.inventario.pesquisarItem("Flecha");
-            if (flechas.getQuantidade() > 0)
-            {
-                p.receberAtaqueOrc(danoArco);
-                this.perderFlecha(flechas);
-                return;
-            }
-        }
-        
-        this.status = Status.FUGINDO;
+       if (this.getDanoAtaque() == 0)
+       {
+           this.status = Status.FUGINDO;
+           return;
+       }
+       
+       if(this.getDanoAtaque() == 8)
+       {
+           Item itm = this.inventario.pesquisarItem("Flecha");
+           itm.perderUmaUnidade();
+       }
+           
+       p.receberAtaqueOrc(this);
     }    
+    
+    @Override
+    public void receberAtaqueOrc(Orc or)
+    {
+        this.receberAtaque();
+    }
 }

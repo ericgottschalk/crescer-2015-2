@@ -160,7 +160,7 @@ public class DwarfTest
     {
         Dwarf d = new Dwarf("");
         
-        d.receberAtaqueOrc(12);
+        d.receberAtaqueOrc(new UrukHaiOrc(""));
         
         assertEquals(98, d.getHp());
         
@@ -171,20 +171,9 @@ public class DwarfTest
     {
         Dwarf d = new Dwarf("");
         
-        d.receberAtaqueOrc(8);
+        d.receberAtaqueOrc(new SnagaOrc(""));
         
         assertEquals(102, d.getHp());
-        
-    }
-    
-    @Test
-    public void receberAtaqueComDanoForaDoEsperado()
-    {
-        Dwarf d = new Dwarf("");
-        
-        d.receberAtaqueOrc(0);
-        
-        assertEquals(110, d.getHp());
         
     }
     

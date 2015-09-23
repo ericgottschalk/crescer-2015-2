@@ -52,12 +52,11 @@ public class Personagem
         this.inventario.perderItem(item);
     }
     
-    public void receberAtaqueOrc(int dano)
+    public void receberAtaqueOrc(Orc orc)
     {
         if (this.hp > 0)
         {
-            if (dano == 12 || dano == 8)
-                this.hp -= dano;
+            this.hp -= orc.getDanoAtaque();
         }
         
         if (this.hp <= 0)

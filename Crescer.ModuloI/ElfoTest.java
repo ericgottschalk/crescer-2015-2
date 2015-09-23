@@ -149,7 +149,7 @@ public class ElfoTest
     {
         Elfo elfo = new Elfo("Test");
         
-        elfo.receberAtaqueOrc(12);
+        elfo.receberAtaqueOrc(new UrukHaiOrc(""));
         
         assertEquals(68, elfo.getHp());
     }
@@ -160,7 +160,7 @@ public class ElfoTest
         Elfo elfo = new Elfo("Test");
         
         for (int i = 0; i < 7; i++)
-            elfo.receberAtaqueOrc(12);
+            elfo.receberAtaqueOrc(new UrukHaiOrc(""));
         
         assertEquals(Status.MORTO, elfo.getStatus());
     }
@@ -170,20 +170,9 @@ public class ElfoTest
     {
         Elfo elfo = new Elfo("Test");
         
-        elfo.receberAtaqueOrc(8);
+        elfo.receberAtaqueOrc(new SnagaOrc(""));
         
         assertEquals(72, elfo.getHp());
-    }
-    
-    @Test
-    public void receberAtqueOrcTipoArcoAteMorte()
-    {
-        Elfo elfo = new Elfo("Test");
-        
-        for(int i = 0; i < 10; i++)
-            elfo.receberAtaqueOrc(8);
-        
-        assertEquals(Status.MORTO, elfo.getStatus());
     }
     
     @Test

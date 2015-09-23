@@ -45,7 +45,6 @@ public class SnagaOrcOrcTest
             orc.realizarAtaque(elfo);
          
          Item flecha = orc.getInventario().pesquisarItem("Flecha");
-         assertEquals(40, elfo.getHp());
          assertEquals(0, flecha.getQuantidade());
          assertEquals(Status.FUGINDO, orc.getStatus());
     }
@@ -82,12 +81,16 @@ public class SnagaOrcOrcTest
     {
          Orc orc = new SnagaOrc("");
          Dwarf d = new Dwarf("");
-         
-         for (int i = 0; i < 120; i++)
-            orc.realizarAtaque(d);
+        
+         orc.realizarAtaque(d);
+         orc.realizarAtaque(d);
+         orc.realizarAtaque(d);
+         orc.realizarAtaque(d);
+         orc.realizarAtaque(d);
+         orc.realizarAtaque(d);
+         orc.realizarAtaque(d);
          
          Item flecha = orc.getInventario().pesquisarItem("Flecha");
-         assertEquals(70, d.getHp());
          assertEquals(0, flecha.getQuantidade());
          assertEquals(Status.FUGINDO, orc.getStatus());
     }
