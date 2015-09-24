@@ -217,4 +217,37 @@ public class ElfoTest
         
         assertFalse(elfo.getInventario().getItens().contains(item));
     }
+    
+    @Test
+    public void contadorElfosUElfo()
+    {
+        Elfo elfo = new Elfo("");
+        
+        assertEquals(1, Elfo.getContador());
+    }
+    
+    @Test
+    public void contadorElfosCemElfos()
+    {
+        for (int i = 0; i < 100; i++)
+            new Elfo("Elfo " + i);
+            
+        assertEquals(100, Elfo.getContador());
+    }
+    
+    @Test
+    public void contadorElfosTrezentosElfos()
+    {
+        for (int i = 0; i < 300; i++)
+            new Elfo("Elfo " + i);
+            
+        assertEquals(300, Elfo.getContador());
+    }
+    
+    @Before
+    public void serUp()
+    {
+        Elfo.zerarContador();
+    }
 }
+

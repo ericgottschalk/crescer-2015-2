@@ -4,11 +4,13 @@ import java.util.ArrayList;
 public class Elfo extends Personagem
 {
     protected int flechas;
-    
+    private static int contador = 0;
+
     public Elfo(String n)
     {
         super(n, 100);
         this.flechas = 42;
+		this.contador++;
     }
     
     public Elfo(String n, int flecha)
@@ -17,6 +19,16 @@ public class Elfo extends Personagem
         this.flechas = flecha;
     }
     
+	public static int getContador()
+	{
+		return contador;
+	}
+
+	public static void zerarContador()
+	{
+		contador = 0;
+	}
+
     public int getFlechas()
     {
         return this.flechas;
