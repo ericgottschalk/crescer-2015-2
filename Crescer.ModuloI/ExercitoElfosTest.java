@@ -11,10 +11,12 @@ public class ExercitoElfosTest
     public void alistarUmElfoVerde()
     {
         ExercitoElfos exercito = new ExercitoElfos();
-        
-        exercito.alistarElfo(new ElfoVerde("John"));
-        
-        assertNotNull(exercito.buscarPorNome("John"));
+        Elfo john = new ElfoVerde("John");
+
+        exercito.alistarElfo(john);
+        Elfo e = exercito.buscarPorNome("John");
+
+        assertEquals(john, e);
     }
     
     @Test
@@ -33,10 +35,12 @@ public class ExercitoElfosTest
     public void alistarUmElfoNoturno()
     {
         ExercitoElfos exercito = new ExercitoElfos();
-        
-        exercito.alistarElfo(new ElfoNoturno("James"));
-        
-        assertNotNull(exercito.buscarPorNome("James"));
+        Elfo james = new ElfoNoturno("James");
+
+        exercito.alistarElfo(james);
+        Elfo e = exercito.buscarPorNome("James");
+
+        assertEquals(james, e);
     }
     
     @Test
