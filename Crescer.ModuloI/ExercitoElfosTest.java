@@ -138,4 +138,63 @@ public class ExercitoElfosTest
         assertEquals(10, v);
         assertEquals(10, m);
     }
+    
+    @Test
+    public void agruparElfosETerCertezaQueSaoOsAListados()
+    {
+        ExercitoElfos exercito = new ExercitoElfos();
+        Orc orc = new UrukHaiOrc("Matador de Elfos");
+        ArrayList<Elfo> vivosAlistados = new ArrayList<Elfo>();
+        ArrayList<Elfo> mortosAlistados = new ArrayList<Elfo>();
+        int v = 0;
+        int m = 0;
+        
+        for (int i = 0; i < 5; i++)
+        {
+            Elfo eV = new ElfoVerde("Elfo Verde Vivo" + i);
+            Elfo eN = new ElfoNoturno("Elfo Noturno vivo" + i);
+            exercito.alistarElfo(eV);
+            exercito.alistarElfo(eN);
+            vivosAlistados.add(eV);
+            vivosAlistados.add(eN);
+        }
+        
+        for (int i = 0; i < 5; i++)
+        {
+            Elfo eV = new ElfoVerde("Elfo Verde Morto" + i);
+            Elfo eN = new ElfoNoturno("Elfo Noturno Morto" + i);
+            for (int j = 0; j < 10; j++)
+            {
+                orc.realizarAtaque(eV);
+                orc.realizarAtaque(eN);
+            }
+            
+            exercito.alistarElfo(eV);
+            exercito.alistarElfo(eN);
+            mortosAlistados.add(eV);
+            mortosAlistados.add(eN);
+        }
+        
+        exercito.agruparPorStatus();
+        ArrayList<Elfo> vivos = exercito.buscarPorStatus(Status.VIVO);
+        ArrayList<Elfo> mortos = exercito.buscarPorStatus(Status.MORTO);
+        
+        for(Elfo elfo : vivos)
+        {
+            assertEquals(Status.VIVO, elfo.getStatus());
+            assertTrue(vivos.contains(vivosAlistados.get(v)));
+            v++;
+        }
+        
+        for(Elfo elfo : mortos)
+        {
+            assertEquals(Status.MORTO, elfo.getStatus());
+            assertTrue(mortos.contains(mortosAlistados.get(m)));
+            m++;
+        }
+        
+        assertEquals(10, v);
+        assertEquals(10, m);
+    }
 }
+
