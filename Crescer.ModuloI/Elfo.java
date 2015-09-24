@@ -44,6 +44,18 @@ public class Elfo extends Personagem
     }
     
     @Override
+    public int hashCode()
+    {
+        return this.nome.hashCode() + this.inventario.hashCode();
+    }
+    
+    @Override
+    public boolean equals(Object obj)
+    {
+        return ((Elfo) obj).getNome().equals(this.nome);
+    }
+    
+    @Override
     public String toString()
     {
         String txtFlechas = this.flechas != 1 ? "flechas" : "flecha";
