@@ -1,6 +1,6 @@
 
 
-public class Personagem
+public abstract class Personagem
 {
     protected final String nome;
     protected int exp;
