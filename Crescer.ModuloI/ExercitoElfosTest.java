@@ -277,5 +277,29 @@ public class ExercitoElfosTest
         for (Dwarf d : alvo)
             assertEquals(10 , d.getHp());
     }
+    
+    @Test
+    public void atacarHordaDuasVezesDezDwarfs()
+    {
+        ExercitoElfos e = new ExercitoElfos();
+        ArrayList<Dwarf> alvo = new ArrayList<Dwarf>();
+        ArrayList<Elfo> atacantes = new ArrayList<Elfo>();
+        
+        for (int i = 0; i < 10; i++)
+            e.alistarElfo(new ElfoVerde("Elfo " + i));
+        
+        for (int i = 0; i < 10; i++)
+            alvo.add(new Dwarf("Alvo" + i));
+            
+        atacantes = e.buscarPorStatus(Status.VIVO);
+        e.atacarHordaDwarves(alvo);
+        e.atacarHordaDwarves(alvo);
+        
+        for (Dwarf d : alvo)
+            assertEquals(Status.MORTO, d.getStatus());
+            
+        for (Elfo elfo: atacantes)
+            assertTrue(e.getOrdemDoUltimoAtaque().contains(elfo));
+    }
 }
 
