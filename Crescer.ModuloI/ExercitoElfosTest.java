@@ -204,6 +204,7 @@ public class ExercitoElfosTest
     @Test
     public void getOrdemDoUltimoAtaqueTresAtacantes()
     {
+       
         ExercitoElfos e = new ExercitoElfos();
         ArrayList<Dwarf> alvo = new ArrayList<Dwarf>();
         ArrayList<Elfo> atacantes = new ArrayList<Elfo>();

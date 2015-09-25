@@ -5,14 +5,12 @@ public class ExercitoElfos
     private HashMap<String, Elfo> exercito;
     private HashMap<Status, ArrayList<Elfo>> orderByStatus;
     private EstrategiaDeAtaque estrategia;
-    private ArrayList<Elfo> ultimosAtacantes;
     
     public ExercitoElfos()
     {
         this.estrategia = new EstrategiaNormal();
         this.exercito = new HashMap<>();
         this.orderByStatus = new HashMap<>();
-        this.ultimosAtacantes = new ArrayList<Elfo>();
     }
     
     public Elfo buscarPorNome(String nome)
@@ -55,11 +53,10 @@ public class ExercitoElfos
              return;
             
         this.estrategia.atacar(atacantes, dwarves);
-        this.ultimosAtacantes = atacantes;
     }
     
     public ArrayList<Elfo> getOrdemDoUltimoAtaque()
     {
-        return this.ultimosAtacantes;
+        return this.estrategia.getOrdemDoUltimoAtaque();
     }
 }

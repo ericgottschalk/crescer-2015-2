@@ -2,8 +2,11 @@ import java.util.ArrayList;
 
 public class EstrategiaNormal implements EstrategiaDeAtaque
 {
+    private ArrayList<Elfo> ultimosAtacantes = new ArrayList<Elfo>();
+    
     public void atacar(ArrayList<Elfo> elfos, ArrayList<Dwarf> dwarves)
     {
+        this.ultimosAtacantes = elfos;
         int intencoesAtaque = elfos.size() * dwarves.size();
         int porcentagemLimite = (int)(intencoesAtaque * 0.3);
         int ataques = 0;
@@ -17,6 +20,11 @@ public class EstrategiaNormal implements EstrategiaDeAtaque
                 elfo.atirarFlechas(dwarf);
                 ataques++;
             }
+    }
+    
+    public ArrayList<Elfo> getOrdemDoUltimoAtaque()
+    {
+        return this.ultimosAtacantes;
     }
 }
 
