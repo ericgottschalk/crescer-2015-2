@@ -30,6 +30,11 @@ public class ExercitoElfos
             this.exercito.put(elfo.getNome(), elfo);
     }
     
+    public void trocarDeEstrategia(EstrategiaDeAtaque estrategia)
+    {
+        this.estrategia = estrategia;
+    }
+    
     public void agruparPorStatus()
     {    
         this.orderByStatus.clear();
