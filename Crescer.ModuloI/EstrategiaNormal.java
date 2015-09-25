@@ -4,8 +4,9 @@ public class EstrategiaNormal implements EstrategiaDeAtaque
 {
     private ArrayList<Elfo> ultimosAtacantes = new ArrayList<Elfo>();
 
-    public void atacar(ArrayList<Elfo> elfos, ArrayList<Dwarf> dwarves) 
+    public void atacar(ExercitoElfos e, ArrayList<Dwarf> dwarves) 
     {        
+        ArrayList<Elfo> elfos = e.buscarPorStatus(Status.VIVO);
         this.ultimosAtacantes.clear();
         
         for (Elfo elfo : elfos) 

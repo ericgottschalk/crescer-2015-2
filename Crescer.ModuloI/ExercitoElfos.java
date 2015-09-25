@@ -52,12 +52,8 @@ public class ExercitoElfos
     }
     
     public void atacarHordaDwarves(ArrayList<Dwarf> dwarves)
-    {
-        ArrayList<Elfo> atacantes = this.buscarPorStatus(Status.VIVO);
-        if (atacantes == null)
-             return;
-            
-        this.estrategia.atacar(atacantes, dwarves);
+    {       
+        this.estrategia.atacar(this, dwarves);
     }
     
     public ArrayList<Elfo> getOrdemDoUltimoAtaque()
