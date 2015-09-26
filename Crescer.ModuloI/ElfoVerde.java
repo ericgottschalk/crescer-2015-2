@@ -41,4 +41,10 @@ public class ElfoVerde extends Elfo
            return;
        }
    }
+   
+   @Override
+   public boolean equals(Object obj)
+   {
+       return ((Elfo) obj).getNome().equals(this.nome) && (obj instanceof ElfoVerde);
+   }
 }

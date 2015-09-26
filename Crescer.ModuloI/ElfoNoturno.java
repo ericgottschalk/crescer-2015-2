@@ -43,4 +43,10 @@ public class ElfoNoturno extends Elfo
             dano = 1;
         this.hp -= dano;
     }
+    
+    @Override
+    public boolean equals(Object obj)
+    {
+        return ((Elfo) obj).getNome().equals(this.nome) && (obj instanceof ElfoNoturno);
+    }
 }
