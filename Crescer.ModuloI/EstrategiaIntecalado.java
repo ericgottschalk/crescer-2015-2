@@ -57,12 +57,21 @@ public class EstrategiaIntecalado implements EstrategiaDeAtaque
        int v = 0, n = 0;
        for (int i = 1; i <= elfos.size(); i++)
        {
-           if (i % 2 == 0)
-               intercalados.add(verdes.get(v++));
+           if (verdes.get(0) instanceof ElfoVerde)
+           {
+               if (i % 2 == 0)
+                   intercalados.add(verdes.get(v++));
+               else
+                   intercalados.add(noturnos.get(n++));
+           }
            else
-               intercalados.add(noturnos.get(n++));
-       }
-       
+           {
+               if (i % 2 == 0)
+                   intercalados.add(noturnos.get(v++));
+               else
+                   intercalados.add(verdes.get(n++));
+           }
+        }
        elfos = intercalados;
     }
 }
