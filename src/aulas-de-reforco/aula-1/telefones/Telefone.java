@@ -21,6 +21,10 @@ public abstract class Telefone
         System.out.println("Estou ligando para " + numero);
     }
     
+    public void enviarMensagem(String numero, String mensagem)
+    {
+    }
+    
     public void desligar() {
         System.out.println("Telefone desligado.");
     }

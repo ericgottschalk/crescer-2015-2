@@ -5,7 +5,7 @@
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Nokia2280 extends Telefone
+public class Nokia2280 extends TelefoneVelho
 {
     public Nokia2280() {
         super("Nokia 2280");
