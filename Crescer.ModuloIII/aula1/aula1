@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang = "pt-bt">
+   <head>
+      <meta charset = "utf-8" />
+      <title>Aula 1</title>
+   </head>
+   <body>
+      <header>
+         <h1>Meu primeiro site na CWI</h1>
+      </header>
+
+      <nav>
+         <ul>
+           <li>
+             <a href="http://google.com">Google</a>
+           </li>
+
+           <li>
+             <a href="#">Home</a>
+           </li>
+
+           <li>
+             <a href="#">Produtos</a>
+           </li>
+
+           <li>
+             <a href="#">Serviços</a>
+           </li>
+         </ul>
+      </nav>
+
+      <section>
+        <div class="inline-block">
+          <article>
+            <h2>Minha postagem</h2>
+          </article>
+
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum quam nibh, posuere nec semper id, volutpat sit amet sem. Suspendisse auctor nisi a nisl ullamcorper interdum. Proin suscipit, dui et molestie porttitor, lorem enim commodo eros, eu rhoncus mi sapien et risus. Sed laoreet, risus quis viverra auctor, sapien risus ultrices dolor, in hendrerit elit lectus ac nunc. Morbi eu erat congue, feugiat orci eu, iaculis orci. Morbi odio libero, elementum et justo id, sodales maximus turpis. Donec dapibus varius risus sed egestas. Vivamus elit lorem, aliquet vel tortor nec, dapibus fermentum tellus. Mauris pharetra commodo justo, tincidunt suscipit justo fringilla nec. Maecenas vulputate eget turpis at convallis. Nullam quis neque feugiat, viverra ligula vel, rhoncus velit. Aenean laoreet, nisi eget pellentesque porta, massa nisl elementum mauris, id aliquam est eros a urna.
+          </p>
+
+          <article>
+            <h2>Minha postagem</h2>
+          </article>
+
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum quam nibh, posuere nec semper id, volutpat sit amet sem. Suspendisse auctor nisi a nisl ullamcorper interdum. Proin suscipit, dui et molestie porttitor, lorem enim commodo eros, eu rhoncus mi sapien et risus. Sed laoreet, risus quis viverra auctor, sapien risus ultrices dolor, in hendrerit elit lectus ac nunc. Morbi eu erat congue, feugiat orci eu, iaculis orci. Morbi odio libero, elementum et justo id, sodales maximus turpis. Donec dapibus varius risus sed egestas. Vivamus elit lorem, aliquet vel tortor nec, dapibus fermentum tellus. Mauris pharetra commodo justo, tincidunt suscipit justo fringilla nec. Maecenas vulputate eget turpis at convallis. Nullam quis neque feugiat, viverra ligula vel, rhoncus velit. Aenean laoreet, nisi eget pellentesque porta, massa nisl elementum mauris, id aliquam est eros a urna.
+          </p>
+        </div>
+
+        <aside class="block">
+          <article>
+            <h3>Outra postagem</h3>
+
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut volutpat rutrum sagittis. Maecenas elit risus, tempor eu pretium at, faucibus non quam. Nullam ultrices nisi eu lacus tincidunt, eget luctus nulla tristique. Nunc eget dui sit amet tellus tincidunt sodales quis sed nisl. Nunc massa neque, volutpat vitae ante vitae, sodales hendrerit elit. Cras quis diam quam. Sed sit amet purus vitae tortor tempor vulputate nec pretium libero.
+            </p>
+          </article>
+
+          <article>
+            <h3>Outra postagem</h3>
+
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut volutpat rutrum sagittis. Maecenas elit risus, tempor eu pretium at, faucibus non quam. Nullam ultrices nisi eu lacus tincidunt, eget luctus nulla tristique. Nunc eget dui sit amet tellus tincidunt sodales quis sed nisl. Nunc massa neque, volutpat vitae ante vitae, sodales hendrerit elit. Cras quis diam quam. Sed sit amet purus vitae tortor tempor vulputate nec pretium libero.
+            </p>
+          </article>
+        </aside>
+      </section>
+
+      <footer>
+        <nav>
+           <ul>
+             <li>
+               <a href="http://google.com">Google</a>
+             </li>
+
+             <li>
+               <a href="#">Home</a>
+             </li>
+
+             <li>
+               <a href="#">Produtos</a>
+             </li>
+
+             <li>
+               <a href="#">Serviços</a>
+             </li>
+           </ul>
+        </nav>
+
+        <p>
+          &copy; Copyright 2015 - Alguns direitos reservados.
+        </p>
+      </footer>
+   </body>
+</html>
