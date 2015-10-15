@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang = "pt-br">
+  <head>
+    <link href="cor.css" rel = "stylesheet"/>
+    .verde{
+      color: pink
+    }
+    <meta charset="utf-8">
+    <title>Exemplo seletores</title>
+  </head>
+  <body>
+
+    <h1>Exemplo de seletroes</h1>
+
+    <p>Vermelho</p>
+    <p class = "verde">Verde</p>
+    <p id = "azul">Azul</p>
+  </body>
+</html>

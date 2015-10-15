@@ -1,0 +1,29 @@
+/* ==========================================
+    Banner
+===========================================*/
+
+.banner{
+  padding: 80px 20px;
+  color: #fff;
+  text-shadow: -1px -1px 0 #000;
+
+  background: -moz-linear-gradient(top,  #494949 0%, #000000 100%); /* FF3.6+ */
+  background: -webkit-linear-gradient(top,  #494949 0%,#000000 100%); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(top,  #494949 0%,#000000 100%); /* Opera 11.10+ */
+  background: -ms-linear-gradient(top,  #494949 0%,#000000 100%); /* IE10+ */
+  background: linear-gradient(to bottom,  #494949 0%,#000000 100%); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#494949', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
+}
+
+.banner-title{
+  margin: 0 0 15px;
+  font-size: 62px;
+  line-height: 66px;
+}
+
+.banner-text{
+  margin: 0;
+  font-family: Georgia, "Times New Roman", Times;
+  font-size: 24px;
+  line-height: 26px;
+}
