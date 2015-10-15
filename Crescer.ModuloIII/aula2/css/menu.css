@@ -16,3 +16,72 @@
   margin: 5px 0 0;
   background: url("../img/logo.png") no-repeat;
 }
+
+.nav-link{
+  padding: 10px 20px;
+}
+
+.header input,
+.mobile-menu{
+  display: none;
+}
+
+@media(max-width: 590px){
+  body{
+    padding-top: 78px;
+  }
+
+  .mobile-menu{
+    display: block;
+    padding: 10px;
+    margin-top: -6px;
+    border: 1px solid #666;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+
+  input:checked + .mobile-menu{
+    background: #222;
+
+  }
+
+  .mobile-menu svg{
+    display: block;
+    width: 22px;
+    height: 22px
+  }
+
+  .mobile-menu path{
+    fill: #666;
+  }
+
+  .header{
+    padding-bottom: 0;
+    left: 0;
+    top: 0;
+    position: fixed;
+  }
+
+  .header nav{
+    height: 0;
+    padding-top: 20px;
+    margin: 0 -15px;
+    float: none;
+    clear: both;
+    overflow: hidden;
+    transition: heigth 3s ease-in-out 0s;
+  }
+
+  input:checked + .mobile-menu + nav{
+    height: 185px;
+  }
+
+  .header li,
+  .header.nav-link{
+    display: block;
+  }
+
+  .header li{
+    border-top:  1px solid #efefef;
+  }
+}

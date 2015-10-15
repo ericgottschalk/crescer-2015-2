@@ -43,23 +43,3 @@
 .block{
   display: block;
 }
-
-.nav-link{
-  padding: 10px 20px;
-}
-
-.div-right{
-  width: 640px;
-  margin: 0 auto;
-  padding: 0 15px 0;
-}
-
-.div-left{
-  width: 345px;
-  margin: 0 auto;
-  padding: 0 15px 0;
-}
-
-.justify{
-  text-align: justify;
-}
