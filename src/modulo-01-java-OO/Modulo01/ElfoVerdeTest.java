@@ -1,3 +1,5 @@
+
+
 import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Before;
@@ -6,59 +8,55 @@ import org.junit.Test;
 public class ElfoVerdeTest
 {
     @Test
-    public void elfoVerdeAtacaUmDwarf() {
-        ElfoVerde green = new ElfoVerde("Fandango");
-        green.atirarFlecha(new Dwarf());
-
-        assertEquals(2, green.getExperiencia());
-    }
-
-    @Test
-    public void elfoVerdeAtacaUmDwarfEIrishDwarf() {
-        ElfoVerde green = new ElfoVerde("Green Elf");
-        Dwarf common = new Dwarf("Common Dwarf");
-        IrishDwarf irish = new IrishDwarf();
-        green.atirarFlecha(irish);
-        green.atirarFlecha(common);
-        assertEquals(4, green.getExperiencia());
-    }
-
-    @Test
-    public void elfoVerdeAdicionaEspadaValiriana() {
-        ElfoVerde sortudo = new ElfoVerde("Sortudo");
-        sortudo.adicionarItem(new Item(1, "Espada de aço valiriano"));
-        Inventario esperado = new Inventario();
-        esperado.adicionarItem(new Item(1, "Espada de aço valiriano"));
-        assertEquals(esperado, sortudo.getInventario());
-    }
-
-    @Test
-    public void elfoVerdeAdicionaItemComDescricaoInvalida() {
-        ElfoVerde sortudo = new ElfoVerde("Sortudo");
-        sortudo.adicionarItem(new Item(1, "Molejão"));
-        Inventario esperado = new Inventario();
-        assertEquals(esperado, sortudo.getInventario());
-    }
-
-    @Test
-    public void elfoVerdeAdicionaArcoEFlechaVidroENulo() {
-        ElfoVerde sortudo = new ElfoVerde("Celeborn");
-        sortudo.adicionarItem(new Item(1, "Arco e Flecha de Vidro"));
-        sortudo.adicionarItem(null);
-        Inventario esperado = new Inventario();
-        esperado.adicionarItem(new Item(1, "Arco e Flecha de Vidro"));
-        assertEquals(esperado, sortudo.getInventario());
+    public void adicionarItemValido()
+    {
+        Elfo elfo = new ElfoVerde("");
+        
+        elfo.adicionarItem(new Item("Espada de aço valiriano", 1));
+        
+        assertNotNull(elfo.getInventario().pesquisarItem("Espada de aço valiriano"));
     }
     
     @Test
-    public void elfoVerdeAdicionaArcoEFlechaVidroEDescricaoNula() {
-        ElfoVerde sortudo = new ElfoVerde("Celeborn");
-        sortudo.adicionarItem(new Item(1, "Arco e Flecha de Vidro"));
-        sortudo.adicionarItem(new Item(1, null));
-        Inventario esperado = new Inventario();
-        esperado.adicionarItem(new Item(1, "Arco e Flecha de Vidro"));
-        assertEquals(esperado, sortudo.getInventario());
+    public void adicionarItemValidoAgain()
+    {
+        Elfo elfo = new ElfoVerde("");
+        
+        elfo.adicionarItem(new Item("Arco e Flecha de Vidro", 1));
+        
+        assertNotNull(elfo.getInventario().pesquisarItem("Arco e Flecha de Vidro"));
     }
-
     
+    @Test
+    public void adicionarItemInvalido()
+    {
+        Elfo elfo = new ElfoVerde("");
+        
+        elfo.adicionarItem(new Item("Item invalido test", 10));
+        
+        assertNull(elfo.getInventario().pesquisarItem("Item invalido test"));
+    }
+    
+    @Test
+    public void atacarUmaVezEGanharExpDobrada()
+    {
+        Elfo elfo = new ElfoVerde("");
+        
+        elfo.atirarFlechas(new Dwarf(""));
+        
+        assertEquals(2, elfo.getExp());
+    }
+    
+    @Test
+    public void atacarDezVezEGanharExpDobrada()
+    {
+        Elfo elfo = new ElfoVerde("");
+        
+        for (int i = 0; i < 10; i++)
+            elfo.atirarFlechas(new Dwarf(""));
+        
+        assertEquals(20, elfo.getExp());
+    }
 }
+
+

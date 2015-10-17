@@ -1,25 +1,52 @@
 public class ElfoNoturno extends Elfo
-{   
-    public ElfoNoturno(String nome) {
-        super(nome);
+{
+    public ElfoNoturno(String name)
+    {
+        super(name);
     }
     
-    /**
-     * Atira a flecha em um orc, ganhando o triplo de experiência e perdendo 5% da vida atual.
-     * 
-     * @param Orc orc que receberá a flechada.
-     */
-    public void atirarFlecha(Dwarf dwarf) {
-        super.atirarFlecha(dwarf);
-        this.experiencia += 2;
-        double qtdVidaAPerder = this.vida * 0.05;
-        //double qtdVidaAPerder = this.vida * 5/100;
-        this.vida -= qtdVidaAPerder;
-        this.status = (int)this.vida == 0 ? Status.MORTO : this.status;
-    }   
+    public ElfoNoturno(String name, int hp)
+    {
+        super(name, hp);
+    }
     
     @Override
-    public String toString() {
-        return "Elfo Noturno: " + super.toString();
+    public void atirarFlechas(Dwarf dwarf)
+    {
+        if (this.flechas > 0 && this.status != Status.MORTO)
+        {
+            this.flechas--;
+            dwarf.receberFlechada();
+            this.exp += 3;
+            this.perderVidaAtacando();
+            this.verificarVida();
+        }
+
+    }
+    
+    public void atirarFlechas(Orc orc)
+    {
+        if (this.flechas > 0 && this.status != Status.MORTO)
+        {
+            this.flechas--;
+            orc.receberAtaque();
+            this.exp += 3;
+            this.perderVidaAtacando();
+            this.verificarVida();
+        }
+    }
+    
+    private void perderVidaAtacando()
+    {
+        double dano = this.hp * 0.05;
+        if (dano <= 0.15)
+            dano = 1;
+        this.hp -= dano;
+    }
+    
+    @Override
+    public boolean equals(Object obj)
+    {
+        return ((Elfo) obj).getNome().equals(this.nome) && (obj instanceof ElfoNoturno);
     }
 }

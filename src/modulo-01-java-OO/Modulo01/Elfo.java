@@ -1,117 +1,78 @@
-/**
- * Representa objetos do tipo Elfo.
- */
-public class Elfo extends Personagem {
-    private int flechas;
-    private static int qtdElfosCriados;   
+import java.util.Formatter;
+import java.util.ArrayList;
 
-    /* Type initializer
-     * Executa antes de cada construtor
+public class Elfo extends Personagem
+{
+    protected int flechas;
+    private static int contador = 0;
+
+    public Elfo(String n)
     {
-    flechas = 42;
+        super(n, 100);
+        this.flechas = 42;
+		this.contador++;
     }
-     */
-    public Elfo(String nome, int flechas) {
-        this.nome = nome;
-        this.flechas = flechas;
-        this.status = Status.VIVO;
-        this.vida = 100;
-        this.qtdElfosCriados++;
+    
+    public Elfo(String n, int flecha)
+    {
+        this(n);
+        this.flechas = flecha;
     }
+    
+	public static int getContador()
+	{
+		return contador;
+	}
 
-    /* Apenas para elucidar as diferenças entre int X Integer, esta duplicação não faz sentido.
-    public Elfo(String nome, Integer flechas) {
-    this(nome);
-    if (flechas != null) {
-    this.flechas = flechas;
-    }
-    }
-     */
+	public static void zerarContador()
+	{
+		contador = 0;
+	}
 
-    public Elfo(String nome) {
-        this(nome, 42);
-    }
-
-    /* PascalCase (C#, VB.NET)
-     *      public void AtirarFlechaDeFogo
-     * camelCase (Java, JavaScript)
-     *      public void atirarFlechaDeFogo
-     */
-
-    public void atirarFlecha(Dwarf dwarf) {
-        flechas--;
-        experiencia++;
-        dwarf.receberFlechada();
-        //experiencia += 1;
-        //experiencia = experiencia + 1;
-    }
-
-    public void atacarOrc(Orc orc){
-        orc.levarAtaque();
-    }
-
-    /*
-     * ANTES:
-     * public atirarFlechaRefactory(this.flechas, this.experiencia){
-     *     if(boolean acertar == true){
-     *         flechas--;
-     *         experiencia++;
-     *      }else{
-     *          flechas--;
-     *      }
-     *  }
-
-     *  DEPOIS:
-
-    public void atirarFlechaRefactory(){
-    boolean acertar = true;
-    if (acertar) {
-    experiencia++;
-    }
-    flechas--;
-    }
-
-     */
-
-    public int getFlechas() {
+    public int getFlechas()
+    {
         return this.flechas;
     }
     
-    public static int getQtdElfosCriados() {
-        // return Elfo.qtdElfosCriados;
-        return qtdElfosCriados;
+    public void atirarFlechas(Dwarf dwarf)
+    {
+        if (this.flechas > 0)
+        {
+            this.flechas--;
+            dwarf.receberFlechada();
+            this.exp++;
+        }
+
     }
     
-    public static void resetaContador() {
-        qtdElfosCriados = 0;
-    }
-
-    /* 
-    public void setFlechas(int flechas) {
-    if (flechas > this.flechas)
-    this.flechas = flechas;
-    }
-     */
-
-    public String toString() {
-
-        boolean flechaNoSingular = Math.abs(this.flechas) == 1;
-        boolean nivelNoSingular = Math.abs(this.experiencia) == 1;
-
-        // Ruby ou CoffeeScript:
-        //"#{nome} possui #{flechas} #{textoFlechas} e #{experiencia} #{textoNiveis} de experiência."
-
-        // C# 6:
-        //"\{nome} possui \{flechas} \{textoFlechas} e \{experiencia} \{textoNiveis} de experiência."
-
-        return String.format("%s possui %d %s e %d %s de experiência.",
-            this.nome,
-            this.flechas,
-            flechaNoSingular ? "flecha" : "flechas",
-            this.experiencia,
-            nivelNoSingular ? "nível" : "níveis");
+    public void atirarFlechas(Orc orc)
+    {
+        if (this.flechas > 0)
+        {
+            this.flechas--;
+            orc.receberAtaque();
+            this.exp++;
+        }
     }
     
-    public void tentarSorte() {
+    @Override
+    public int hashCode()
+    {
+        return this.nome.hashCode() + this.inventario.hashCode();
+    }
+    
+    @Override
+    public boolean equals(Object obj)
+    {
+        return ((Elfo) obj).getNome().equals(this.nome) && (obj instanceof Elfo);
+    }
+    
+    @Override
+    public String toString()
+    {
+        String txtFlechas = this.flechas != 1 ? "flechas" : "flecha";
+        String txtNiveis = this.exp != 1 ? "níveis" : "nível";
+            
+        return String.format("%s possui %d %s e %d %s de experiência.", this.nome, this.flechas, txtFlechas, this.exp, txtNiveis);
     }
 }

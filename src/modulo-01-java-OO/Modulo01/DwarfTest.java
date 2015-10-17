@@ -6,290 +6,197 @@ import org.junit.Test;
 public class DwarfTest
 {
     @Test
-    public void dwarfNasceCom110DeVida() {
-        Dwarf gimli = new Dwarf();
-        assertEquals(110, gimli.getVida(), 0.0);
-    }
-
-    @Test
-    public void dwarfNasceVivo() {
-        Dwarf balin = new Dwarf();
-        assertEquals(Status.VIVO, balin.getStatus());
-    }
-
-    @Test
-    public void dwarfNasceCom0DeExperiencia() {
-        Dwarf balin = new Dwarf();
-        assertEquals(0, balin.getExperiencia());
-    }
-
-    @Test
-    public void dwarfNasceComDataNascimentoPadrão() {
-        Dwarf bofur = new Dwarf();
-        DataTerceiraEra esperada = new DataTerceiraEra(1,1,1);
-        DataTerceiraEra obtida = bofur.getDataNascimento();
-        assertEquals(esperada, obtida);
-    }
-
-    @Test
-    public void dwarfNasceComNomeEDataDeNascimento() {
-        DataTerceiraEra esperada = new DataTerceiraEra(12,11,1987);
-        Dwarf bernardin = new Dwarf("Bernardin", new DataTerceiraEra(12, 11, 1987));
-        assertEquals(esperada, bernardin.getDataNascimento());
-        assertEquals("Bernardin", bernardin.getNome());
-    }
-
-    @Test
-    public void dwarfNasceComNome() {
-        Dwarf oin = new Dwarf("Oin II");
-        assertEquals("Oin II", oin.getNome());
-    }
-
-    @Test
-    public void dwarfRecebeFlechaEPerde10Vida() {
-        // AAA
-        // Arrange
-        Dwarf gimli = new Dwarf();
-        double vidaEsperada = 100;
-        // Act
-        gimli.receberFlechada();
-        // Assert
-        assertEquals(vidaEsperada, gimli.getVida(), 0.0);
-    }
-
-    @Test
-    public void dwarfRecebeFlecha11VezesEVidaÉ0() {
-        Dwarf gimli = new Dwarf();
-        double vidaEsperada = 0;
-        // Act
-        gimli.receberFlechada();
-        gimli.receberFlechada();
-        gimli.receberFlechada();
-        gimli.receberFlechada();
-        gimli.receberFlechada();
-        gimli.receberFlechada();
-        gimli.receberFlechada();
-        gimli.receberFlechada();
-        gimli.receberFlechada();
-        gimli.receberFlechada();
-        gimli.receberFlechada();
-        // Assert
-        assertEquals(vidaEsperada, gimli.getVida(), 0.0);
-    }
-
-    @Test
-    public void dwarfRecebeFlecha7VezesEVidaÉ40() {
-        Dwarf gimli = new Dwarf();
-        double vidaEsperada = 40;
-        // Act
-        gimli.receberFlechada();
-        gimli.receberFlechada();
-        gimli.receberFlechada();
-        gimli.receberFlechada();
-        gimli.receberFlechada();
-        gimli.receberFlechada();
-        gimli.receberFlechada();
-        // Assert
-        assertEquals(vidaEsperada, gimli.getVida(), 0.0);
-    }
-
-    @Test
-    public void dwarfRecebeFlecha5VezesESobrevive() {
-        Dwarf gimli = new Dwarf();
-        // Act
-        gimli.receberFlechada();
-        gimli.receberFlechada();
-        gimli.receberFlechada();
-        gimli.receberFlechada();
-        gimli.receberFlechada();
-        // Assert
-        assertEquals(Status.VIVO, gimli.getStatus());
-    }
-
-    @Test
-    public void dwarfRecebeFlecha12VezesEMorre() {
-        Dwarf gimli = new Dwarf();
-        // Act
-        gimli.receberFlechada();
-        gimli.receberFlechada();
-        gimli.receberFlechada();
-        gimli.receberFlechada();
-        gimli.receberFlechada();
-        gimli.receberFlechada();
-        gimli.receberFlechada();
-        gimli.receberFlechada();
-        gimli.receberFlechada();
-        gimli.receberFlechada();
-        gimli.receberFlechada();
-        gimli.receberFlechada();
-        // Assert
-        assertEquals(Status.MORTO, gimli.getStatus());
-    }
-
-    @Test
-    public void dwarfRecebeFlecha13VezesEVidaFicaZerada() {
-        Dwarf gimli = new Dwarf();
-        // Act
-        gimli.receberFlechada();
-        gimli.receberFlechada();
-        gimli.receberFlechada();
-        gimli.receberFlechada();
-        gimli.receberFlechada();
-        gimli.receberFlechada();
-        gimli.receberFlechada();
-        gimli.receberFlechada();
-        gimli.receberFlechada();
-        gimli.receberFlechada();
-        gimli.receberFlechada();
-        gimli.receberFlechada();
-        gimli.receberFlechada();
-        // Assert
-        assertEquals(0, gimli.getVida(), 0.0);
-    }
-
-    @Test
-    public void gerarNumeroAnoBissextoVidaEntre80e90() {
-        // Arrange
-        Dwarf uru = new Dwarf("Uru", new DataTerceiraEra(01, 01, 2016));
-        uru.receberFlechada();
-        uru.receberFlechada();
-        uru.receberFlechada();
-        // Act
-        double resultado = uru.gerarNumero();
-        // Assert
-        assertEquals(-3333.0, resultado, 0.00001);
-    }
-
-    @Test
-    public void gerarNumeroAnoNaoBissextoNomeSeixas() {
-        // Arrange
-        Dwarf seixas = new Dwarf("Seixas", new DataTerceiraEra(01, 01, 2015));
-        // Act
-        double resultado = seixas.gerarNumero();
-        // Assert
-        assertEquals(33.0, resultado, 0.00001);
-    }
-
-    @Test
-    public void gerarNumeroSemEntrarNasCondicoes() {
-        // Arrange
-        Dwarf balin = new Dwarf();
-        // Act
-        double resultado = balin.gerarNumero();
-        // Assert
-        assertEquals(101.0, resultado, 0.00001);
-    }
-
-    @Test
-    public void dwarfRecebeFlechaComNumeroSorteNegativo() {
-        // Arrange
-        Dwarf dwarf = new Dwarf("Gimli", new DataTerceiraEra(1,1,2000));
-        dwarf.receberFlechada();
-        dwarf.receberFlechada();
-        // Act
-        dwarf.receberFlechada();
-        // Assert
-        assertEquals(2, dwarf.getExperiencia());
-        assertEquals(90, dwarf.getVida(), 0.0);   
-    }
-
-    @Test
-    public void dwarfReceberFlechadaComAnoNormalMeireles() {
-        Dwarf meireles = new Dwarf("Meireles", new DataTerceiraEra(2, 3, 2015));
-        meireles.receberFlechada();
-        assertEquals(0, meireles.getExperiencia());
-        assertEquals(110, meireles.getVida(), 0.0);
-    }
-
-    @Test
-    public void dwarfReceberFlechadaNormal(){
-        Dwarf dwarf = new Dwarf();
-        dwarf.receberFlechada();
-        assertEquals(100, dwarf.getVida(), 0.0);
-        assertEquals(0, dwarf.getExperiencia());
-    }
-
-    @Test
-    public void dwarfTentarSorteComSorte() {
-        Dwarf dwarf = new Dwarf("Leprechaun sortudo", new DataTerceiraEra(1, 1, 2000));
-        dwarf.receberFlechada();
-        dwarf.receberFlechada();
-        dwarf.adicionarItem(new Item(5, "Lança"));
-        dwarf.adicionarItem(new Item(25, "Poção"));
-        
-        Inventario esperado = new Inventario();
-        esperado.adicionarItem(new Item(1005, "Lança"));
-        esperado.adicionarItem(new Item(1025, "Poção"));
-        
-        dwarf.tentarSorte();
-        
-        assertEquals(esperado, dwarf.getInventario());
-    }
-
-    @Test
-    public void dwarfTentarSorteSemSorte() {
-        Dwarf dwarf = new Dwarf();
-        dwarf.adicionarItem(new Item(5, "Lança"));
-        dwarf.adicionarItem(new Item(25, "Poção"));
-        
-        Inventario esperado = new Inventario();
-        esperado.adicionarItem(new Item(5, "Lança"));
-        esperado.adicionarItem(new Item(25, "Poção"));
-        
-        dwarf.tentarSorte();
-        
-        assertEquals(esperado, dwarf.getInventario());
+    public void dwarfNasceComNome()
+    {
+        Dwarf d = new Dwarf("Anao");
+        assertEquals("Anao", d.getNome());
     }
     
     @Test
-    public void dwarfRecebeEspadadaDoOrcUrukHai(){
-        Orc orc = new UrukHai();
-        Dwarf dwarf = new Dwarf();
-        
-        orc.atacar(dwarf);
-        
-        assertEquals(98, dwarf.getVida(), 0.0);
+    public void dwarfNasceCom110DeHp()
+    {
+        Dwarf d = new Dwarf("");
+        assertEquals(110, d.getHp());
     }
     
     @Test
-    public void dwarfRecebeFlechadaDoOrcSnaga(){
-        Orc orc = new Snaga();
-        Dwarf dwarf = new Dwarf();
-        
-        orc.atacar(dwarf);
-        
-        assertEquals(102, dwarf.getVida(), 0.0);
+    public void sofrer10DeDano()
+    {
+        Dwarf d = new Dwarf("");
+        d.receberFlechada();
+        assertEquals(100, d.getHp());
     }
     
     @Test
-    public void dwarfMataOrcUrukHai(){
-        Orc orc = new UrukHai();
-        Dwarf dwarf = new Dwarf();
+    public void receber11FlechadasEZerarHp()
+    {
+        Dwarf d = new Dwarf("");
+        int vidaEsperada = 0;
         
-        int golpesAteMatarOrc = 24;
-        
-        for(int i = 0; i < golpesAteMatarOrc; i++){
-            dwarf.atacarOrc(orc);
-            assertEquals(Status.FERIDO, orc.getStatus());
-        }
-        dwarf.atacarOrc(orc);
-        assertEquals(Status.MORTO, orc.getStatus());
+        for(int i = 0; i < 11; i++)
+            d.receberFlechada();
+            
+        assertEquals(vidaEsperada, d.getHp());
     }
     
     @Test
-    public void dwarfMataOrcSnaga(){
-        Orc orc = new Snaga();
-        Dwarf dwarf = new Dwarf();
+    public void receber7Flechadas()
+    {
+        Dwarf d = new Dwarf("");
+        int vidaEsperada = 40;
         
-        int golpesAteMatarOrc = 6;
-        
-        for(int i = 0; i < golpesAteMatarOrc; i++){
-            dwarf.atacarOrc(orc);
-            assertEquals(Status.FERIDO, orc.getStatus());
-        }
-        
-        dwarf.atacarOrc(orc);
-        assertEquals(Status.MORTO, orc.getStatus());
+        for(int i = 0; i < 7; i++)
+            d.receberFlechada();
+            
+        assertEquals(vidaEsperada, d.getHp());
     }
-
+    
+    @Test
+    public void naoRecebeFlechaEGanhaDoisExp()
+    {
+        Dwarf d = new Dwarf("Anao", new DataTerceiraEra(1, 1, 1996));
+        
+        for(int i = 0; i < 2; i++)
+            d.receberFlechada();
+            
+        d.receberFlechada();
+        
+        assertEquals(90, d.getHp());
+        assertEquals(2, d.getExp());
+    }
+    
+    @Test
+    public void naoRecebeFlechaNemExpNomeSeixas()
+    {
+        Dwarf d = new Dwarf("Seixas", new DataTerceiraEra(1, 1, 1995));
+            
+        d.receberFlechada();
+        
+        assertEquals(110, d.getHp());
+        assertEquals(0, d.getExp());
+    }
+    
+    @Test
+    public void naoRecebeFlechaNemExpNomeMeireles()
+    {
+        Dwarf d = new Dwarf("Meireles", new DataTerceiraEra(1, 1, 1995));
+            
+        d.receberFlechada();
+        
+        assertEquals(110, d.getHp());
+        assertEquals(0, d.getExp());
+    }
+    
+    @Test
+    public void dwarfMorre()
+    {
+        Dwarf d = new Dwarf("");
+        
+        for(int i = 0; i < 11; i++)
+            d.receberFlechada();
+            
+        assertEquals(Status.MORTO, d.getStatus());
+    }
+    
+    @Test
+    public void hpNaoFicaNegatiivo12Flechadas()
+    {
+        Dwarf d = new Dwarf("");
+        
+        for(int i = 0; i < 12; i++)
+            d.receberFlechada();
+            
+        assertEquals(0, d.getHp());
+    }
+    
+    @Test
+    public void hpNaoFicaNegatiivo100Flechadas()
+    {
+        Dwarf d = new Dwarf("");
+        
+        for(int i = 0; i < 100; i++)
+            d.receberFlechada();
+            
+        assertEquals(0, d.getHp());
+    }
+    
+    @Test 
+    public void nasceComDataInformada()
+    {
+        DataTerceiraEra data = new DataTerceiraEra(2, 2, 2);
+        Dwarf d = new Dwarf("", data);
+        
+        assertEquals(data, d.getDataNascimento());
+    }
+    
+    @Test
+    public void tentarSorteTerSorte()
+    {
+        Dwarf d = new Dwarf("Anao", new DataTerceiraEra(1, 1, 1996));
+        Item item = new Item("Test", 10);
+        d.adicionarItem(item);
+        for(int i = 0; i < 2; i++)
+            d.receberFlechada();
+            
+        d.tentarSorte();
+        
+        assertEquals(1010, item.getQuantidade());
+    }
+    
+    @Test
+    public void tentarSorteNaoTerSorte()
+    {
+        Dwarf d = new Dwarf("Anao", new DataTerceiraEra(1, 1, 1996));
+        Item item = new Item("Test", 10);
+        d.adicionarItem(item);
+            
+        d.tentarSorte();
+        
+        assertEquals(10, item.getQuantidade());
+    }
+    
+    @Test
+    public void receberAtaqueOrcComEspada()
+    {
+        Dwarf d = new Dwarf("");
+        
+        d.receberAtaqueOrc(new UrukHaiOrc(""));
+        
+        assertEquals(98, d.getHp());
+        
+    }
+    
+    @Test
+    public void receberAtaqueOrcComArco()
+    {
+        Dwarf d = new Dwarf("");
+        
+        d.receberAtaqueOrc(new SnagaOrc(""));
+        
+        assertEquals(102, d.getHp());
+        
+    }
+    
+    @Test
+    public void atacarOrcComEscudo()
+    {
+        Dwarf d = new Dwarf("");
+        UrukHaiOrc orc = new UrukHaiOrc("");
+        
+        d.realizarAtaque(orc);
+        
+        assertEquals(144, orc.getHp());
+    }
+    
+    @Test
+    public void atacarOrcSemEscudo()
+    {
+        Dwarf d = new Dwarf("");
+        SnagaOrc orc = new SnagaOrc("");
+        
+        d.realizarAtaque(orc);
+        
+        assertEquals(60, orc.getHp());
+    }
+    
 }

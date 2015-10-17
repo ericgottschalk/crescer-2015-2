@@ -1,201 +1,253 @@
+
+
 import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+
 public class ElfoTest
 {
     @Test
-    public void elfoCriadoComNomeNasceCom42Flechas() {
-        Elfo celeborn = new Elfo("Celeborn");
-        assertEquals(42, celeborn.getFlechas());
-    }
-
-    @Test
-    public void elfoCriadoComNomeNull() {
-        Elfo elrond = new Elfo(null);
-        assertNull(elrond.getNome());
-    }
-
-    @Test
-    public void elfoNasceVivo() {
-        Elfo legolas = new Elfo("Legolas");
-        assertEquals(Status.VIVO, legolas.getStatus());
-    }
-
-    @Test
-    public void elfoNasceCom100DeVida() {
-        assertEquals(100.0, new Elfo("Legolas").getVida(), 0.0);
-    }
-
-    @Test
-    public void elfoNasceComInventarioVazio() {
-        Elfo legolas = new Elfo("Legolas");
-        assertEquals(new Inventario(), legolas.getInventario());
-    }
-
-    @Test
-    public void elfoCriadoNasceCom0DeExperiencia() {
-        Elfo legolas = new Elfo("Legolas II");
-        assertEquals(0, legolas.getExperiencia());
-    }
-
-    @Test
-    public void elfoCriadoComNomeVazio() {
-        Elfo elrond = new Elfo("");
-        assertEquals("", elrond.getNome());
-    }
-
-    @Test
-    public void elfoCriadoComNomeEPoucasFlechas() {
-        Elfo elfoHumilde = new Elfo("Elfo Humilde", 2);
-        assertEquals("Elfo Humilde", elfoHumilde.getNome());
-        assertEquals(2, elfoHumilde.getFlechas());
-    }
-
-    @Test
-    public void elfoCriadoComNomeEComMuitasFlechas() {
-        Elfo elfoHumilde = new Elfo("Elfo Bacana", 349857);
-        assertEquals("Elfo Bacana", elfoHumilde.getNome());
-        assertEquals(349857, elfoHumilde.getFlechas());
-    }
-
-    @Test
-    public void elfoCriadoComNomeEDevendoFlechas() {
-        Elfo elfoHumilde = new Elfo("Elfo Devedor", -349857);
-        assertEquals("Elfo Devedor", elfoHumilde.getNome());
-        assertEquals(-349857, elfoHumilde.getFlechas());
-    }
-
-    @Test
-    public void elfoAtiraFlechaEmDwarf() {
-        // Arrange
-        Elfo elfo = new Elfo("Elfo caçador");
-        Dwarf balin = new Dwarf();
-        int qtdFlechasEsperada = 41;
-        int experienciaEsperada = 1;
-        double vidaEsperada = 100;
-        // Act
-        elfo.atirarFlecha(balin);
-        // Assert
-        assertEquals(qtdFlechasEsperada, elfo.getFlechas());
-        assertEquals(experienciaEsperada, elfo.getExperiencia());
-        assertEquals(vidaEsperada, balin.getVida(), 0.0);
-    }
-
-    @Test
-    public void elfoAtiraEmDoisAnoes() {
-        // Arrange
-        Elfo elfo = new Elfo("Elfo caçador");
-        Dwarf balin = new Dwarf();
-        Dwarf filhoDeBalin = new Dwarf();
-        int qtdFlechasEsperada = 40;
-        int experienciaEsperada = 2;
-        double vidaEsperada = 100;
-        // Act
-        elfo.atirarFlecha(balin);
-        elfo.atirarFlecha(filhoDeBalin);
-        // Assert
-        assertEquals(qtdFlechasEsperada, elfo.getFlechas());
-        assertEquals(experienciaEsperada, elfo.getExperiencia());
-        assertEquals(vidaEsperada, balin.getVida(), 0.0);
-        assertEquals(vidaEsperada, filhoDeBalin.getVida(), 0.0);
-    }
-
-    @Test
-    public void doisElfosAtiramEmDoisDwarves() {
-        // Arrange
-        Elfo elfo1 = new Elfo("Elfo caçador");
-        Elfo elfo2 = new Elfo("Segundo elfo");
-        Dwarf balin = new Dwarf();
-        Dwarf filhoDeBalin = new Dwarf();
-        int qtdFlechasEsperada = 40;
-        int experienciaEsperada = 2;
-        double vidaEsperada = 90;
-        // Act
-        elfo1.atirarFlecha(balin);
-        elfo1.atirarFlecha(filhoDeBalin);
-        elfo2.atirarFlecha(balin);
-        elfo2.atirarFlecha(filhoDeBalin);
-        // Assert
-        assertEquals(qtdFlechasEsperada, elfo1.getFlechas());
-        assertEquals(experienciaEsperada, elfo1.getExperiencia());
-        assertEquals(qtdFlechasEsperada, elfo2.getFlechas());
-        assertEquals(experienciaEsperada, elfo2.getExperiencia());
-        assertEquals(vidaEsperada, balin.getVida(), 0.0);
-        assertEquals(vidaEsperada, filhoDeBalin.getVida(), 0.0);
-    }
-
-    @Test
-    public void elfoComNomeEFlechasInformadasToString() {
-        Elfo elfo1 = new Elfo("Acabaram os nomes", 1000);
-        String textoEsperado = "Acabaram os nomes possui 1000 flechas e 0 níveis de experiência.";
-
-        assertEquals(textoEsperado, elfo1.toString());
-    }
-
-    @Test
-    public void elfoComUmaFlechaInformadaToString() {
-        Elfo elfo1 = new Elfo("Monoflecha", 1);
-        String textoEsperado = "Monoflecha possui 1 flecha e 0 níveis de experiência.";
-        assertEquals(textoEsperado, elfo1.toString());
-    }
-
-    @Test
-    public void elfoComUmDeExperienciaToString() {
-        Elfo elfo1 = new Elfo(null);
-        elfo1.atirarFlecha(new Dwarf());
-        String textoEsperado = "null possui 41 flechas e 1 nível de experiência.";
-        assertEquals(textoEsperado, elfo1.toString());
-    }
-
-    @Test
-    public void elfoRecebeEspadadaDoOrcUrukHai(){
-        Orc orc = new UrukHai();
-        Elfo elfo = new Elfo(null);
-
-        orc.atacar(elfo);
-
-        assertEquals(88, elfo.getVida(), 0.0);
-    }
-
-    @Test
-    public void elfoRecebeFlechadaDoOrcSnaga(){
-        Orc orc = new Snaga();
-        Elfo elfo = new Elfo(null);
-
-        orc.atacar(elfo);
-
-        assertEquals(92, elfo.getVida(), 0.0);
-    }
-
-    @Test
-    public void quandoCriaUmElfoIncrementaQuantidadeDeCriados() {
-        int esperado = 1;
-        new Elfo("Qualquer");
-        assertEquals(esperado, Elfo.getQtdElfosCriados());
-    }
-
-    @Test
-    public void quandoCriaMuitosElfos() {
-        // ArrayList<Elfo> fixture = MontadorDeCenario.meVeAi5ElfosVerdes();
+    public void craicaoElfo()
+    {
+        Elfo elf = new Elfo("Test sem flechas");
+        assertEquals(42, elf.getFlechas());
+        assertEquals("Test sem flechas", elf.getNome());
+        assertEquals(0, elf.getExp());
         
-        int esperado = 100;
-        for (int i = 0; i < 100; i++) {
-            new Elfo("Qualquer: " + i);
-        }
-        assertEquals(esperado, Elfo.getQtdElfosCriados());
+        Elfo elfo = new Elfo("Test com flechas", 10);
+        assertEquals(10, elfo.getFlechas());
+        assertEquals("Test com flechas", elfo.getNome());
+        assertEquals(0, elfo.getExp());
+    }
+    
+    @Test
+    public void elfoNasceVivo()
+    {
+        Elfo elfo = new Elfo("");
+        assertEquals(Status.VIVO, elfo.getStatus());
+    }
+    
+    @Test
+    public void elfoComNomeNull()
+    {
+        Elfo elf = new Elfo(null);
+        assertNull(elf.getNome());
+    }
+   
+    @Test
+    public void elfoComNomeVazio()
+    {
+        Elfo elf = new Elfo("");
+        assertTrue(elf.getNome().isEmpty());
+    }
+    
+    @Test
+    public void atirarFlechas()
+    {
+        Elfo elfo = new Elfo("Test atirar");
+        int exp = elfo.getExp() + 1;
+        int flechas = elfo.getFlechas() - 1;
+        
+        elfo.atirarFlechas(new Dwarf(""));
+        
+        assertEquals(flechas, elfo.getFlechas());
+        assertEquals(exp, elfo.getExp());
+        
+    }
+    
+    @Test
+    public void atirarFlechasEmDwarf()
+    {
+        Elfo elfo = new Elfo("Elfo");
+        Dwarf dwarf = new Dwarf("");
+        int flechasElfoEsperadas = 41;
+        int expElfoEsperada = 1;
+        int hpDwarfEsperada = 100;
+        
+        elfo.atirarFlechas(dwarf);
+        
+        assertEquals(flechasElfoEsperadas, elfo.getFlechas());
+        assertEquals(expElfoEsperada, elfo.getExp());
+        assertEquals(hpDwarfEsperada, dwarf.getHp());
+    }
+    
+    @Test
+    public void doisElfosAtiramEmDoisDwarves()
+    {
+        Elfo elfo1 = new Elfo("1");
+        Elfo elfo2 = new Elfo("2");
+        Dwarf dwarf1 = new Dwarf("");
+        Dwarf dwarf2 = new Dwarf("");
+        int flechas = 40;
+        int exp = 2;
+        int hp = 90;
+        
+        elfo1.atirarFlechas(dwarf1);
+        elfo1.atirarFlechas(dwarf2);
+        elfo2.atirarFlechas(dwarf1);
+        elfo2.atirarFlechas(dwarf2);
+        
+        assertEquals(flechas, elfo1.getFlechas());
+        assertEquals(exp, elfo1.getExp());
+        assertEquals(flechas, elfo2.getFlechas());
+        assertEquals(exp, elfo2.getExp());
+        
+        assertEquals(hp, dwarf1.getHp());
+        assertEquals(hp, dwarf2.getHp());
+        
+    }
+    
+    @Test
+    public void metodoToString()
+    {
+        Elfo elfo = new Elfo("Legolas");
+        assertEquals("Legolas possui 42 flechas e 0 níveis de experiência.", elfo.toString());
+    }
+    
+    @Test 
+    public void toStringCom1Flecha()
+    {
+        
+        Elfo elfo = new Elfo("Legolas", 1);
+        assertEquals("Legolas possui 1 flecha e 0 níveis de experiência.", elfo.toString());
+    }
+    
+    @Test
+    public void toStringElfoComUmDeExp()
+    {
+        Elfo elfo = new Elfo("Legolas");
+        elfo.atirarFlechas(new Dwarf(""));
+        assertEquals("Legolas possui 41 flechas e 1 nível de experiência.", elfo.toString());
+    }
+    
+    @Test
+    public void atacarOrcUrukHai()
+    {
+        Elfo elfo = new Elfo("Elfinho");
+        Orc orc = new UrukHaiOrc("");
+        
+        elfo.atirarFlechas(orc);
+        
+        assertEquals(144, orc.getHp());
+    }
+    
+    @Test
+    public void atacarOrcSnaga()
+    {
+        Elfo elfo = new Elfo("Elfinho");
+        Orc orc = new SnagaOrc("");
+        
+        elfo.atirarFlechas(orc);
+        
+        assertEquals(60, orc.getHp());
+    }
+    
+    @Test
+    public void receberAtqueOrcTipoEspada()
+    {
+        Elfo elfo = new Elfo("Test");
+        
+        elfo.receberAtaqueOrc(new UrukHaiOrc(""));
+        
+        assertEquals(88, elfo.getHp());
+    }
+    
+    @Test
+    public void receberAtqueOrcTipoEspadaAteMorte()
+    {
+        Elfo elfo = new Elfo("Test");
+        
+        for (int i = 0; i < 10; i++)
+            elfo.receberAtaqueOrc(new UrukHaiOrc(""));
+        
+        assertEquals(Status.MORTO, elfo.getStatus());
+    }
+    
+    @Test
+    public void receberAtqueOrcTipoArco()
+    {
+        Elfo elfo = new Elfo("Test");
+        
+        elfo.receberAtaqueOrc(new SnagaOrc(""));
+        
+        assertEquals(92, elfo.getHp());
+    }
+    
+    @Test
+    public void elfoNasceComInventario()
+    {
+        Elfo elfo = new Elfo("");
+        
+        assertNotNull(elfo.getInventario());
+    }
+    
+    @Test
+    public void elfoGanhaUmItem()
+    {
+        Elfo elfo = new Elfo("");
+        Item item = new Item("Test", 1);
+        
+        elfo.adicionarItem(item);
+        
+        assertTrue(elfo.getInventario().getItens().contains(item));
+        
+    }
+    
+    @Test
+    public void elfoGanha100Itens()
+    {
+        Elfo elfo = new Elfo("");
+        
+        for (int i = 0; i < 100; i++)
+            elfo.adicionarItem(new Item("Test", i));
+            
+        assertEquals(100, elfo.getInventario().getItens().size());
+    }
+    
+    @Test
+    public void elfoPerdeItem()
+    {
+        Elfo elfo = new Elfo("");
+        Item item = new Item("Test", 1);
+        elfo.adicionarItem(item);
+        
+        elfo.perderItem(item);
+        
+        assertFalse(elfo.getInventario().getItens().contains(item));
+    }
+    
+    @Test
+    public void contadorElfosUElfo()
+    {
+        Elfo elfo = new Elfo("");
+        
+        assertEquals(1, Elfo.getContador());
+    }
+    
+    @Test
+    public void contadorElfosCemElfos()
+    {
+        for (int i = 0; i < 100; i++)
+            new Elfo("Elfo " + i);
+            
+        assertEquals(100, Elfo.getContador());
+    }
+    
+    @Test
+    public void contadorElfosTrezentosElfos()
+    {
+        for (int i = 0; i < 300; i++)
+            new Elfo("Elfo " + i);
+            
+        assertEquals(300, Elfo.getContador());
     }
     
     @Before
-    public void setUp() {
-        Elfo.resetaContador();
+    public void serUp()
+    {
+        Elfo.zerarContador();
     }
-    
-    /*
-    @After
-    public void tearDown() {
-        Elfo.resetaContador();
-    }
-    */
 }
+

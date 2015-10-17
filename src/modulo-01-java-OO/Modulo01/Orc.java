@@ -1,86 +1,66 @@
+
+
 public class Orc extends Personagem
 {
-
-    public Orc(){
+    public Orc(String nome, int hp)
+    {
+        super(nome, hp);
+        this.status = Status.VIVO;
     }
     
-    public void levarAtaque() {
-        
-        int dano = getItem("Escudo Uruk-Hai") == null ? 10 : 6;
-        perderVida(dano);
+    public boolean podeAtacarEspada()
+    {
+        return (this.inventario.pesquisarItem("Espada") != null) ? true : false;
     }
     
-    public void atacar(Personagem personagem){
-        
-        boolean podeAtacarComEspada = podeAtacarComEspada();
-        boolean podeAtacarComArco = podeAtacarComArco();
-        
-        if(podeAtacarComEspada || podeAtacarComArco){
-            personagem.receberAtaqueDoOrc(this);
+    public boolean podeAtacarArco()
+    {
+        return (this.inventario.pesquisarItem("Arco") != null && this.inventario.pesquisarItem("Flecha").getQuantidade() > 0) 
+                ? true : false; 
+    }
+    
+    public int getDanoAtaque()
+    {
+        if (this.podeAtacarEspada())
+            return 12;         
             
-            if(!podeAtacarComEspada) {
-                debitarFlecha();
-            }
-        }
-        else {
-            status = Status.FUGINDO;
-        }
-    }
-    
-    public void receberAtaqueDoOrc(Orc orc) {
-        this.levarAtaque();
-    }
-    
-    public int getDanoDeAtaque(){
-        if(podeAtacarComEspada()){
-            return 12;
-        }
-        
-        if(podeAtacarComArco()){
+        if (this.podeAtacarArco())
             return 8;
-        }
-        
+            
         return 0;
     }
     
-    private void debitarFlecha() {
-        Item flecha = getItem("Flecha");
+    public void receberAtaque()
+    {
+        if (this.status == Status.MORTO)
+             return;
         
-        if(flecha.getQuantidade() == 1){
-            perderItem(flecha);
-        }
-        else {
-            flecha.debitarUmaUnidade();
-        }
+        this.hp -= this.inventario.pesquisarItem("Escudo Uruk-Hai") == null ? 10 : 6;
+        this.verificarVida();
     }
     
-    private boolean podeAtacarComEspada() {
-        return getItem("Espada") != null;
-    }
     
-    private boolean podeAtacarComArco(){
-        boolean temArco = getItem("Arco") != null;
-        Item flecha = getItem("Flecha");
-        boolean temFlechaProArco = flecha != null && flecha.getQuantidade() > 0;
-        
-        return temArco && temFlechaProArco;
-    }
+    public void realizarAtaque(Personagem p)
+    {
+       int dano = this.getDanoAtaque();
+       if (dano == 0)
+       {
+           this.status = Status.FUGINDO;
+           return;
+       }
+       
+       p.receberAtaqueOrc(this);
+       
+       if(dano == 8)
+       {
+           Item itm = this.inventario.pesquisarItem("Flecha");
+           itm.perderUmaUnidade();
+       }
+    }    
     
-    private void perderVida(int qtdVidaPerdida) {
-        vida -= qtdVidaPerdida;
-        definirStatusComBaseNaVida();
+    @Override
+    public void receberAtaqueOrc(Orc or)
+    {
+        this.receberAtaque();
     }
-    
-    private void definirStatusComBaseNaVida(){
-        
-        super.status = vida <= 0 ? Status.MORTO : Status.FERIDO;
-    }
-    
-    private Item getItem(String descricao){
-        return this.inventario.getItemPorDescricao(descricao);
-    }
-    
-    public void tentarSorte() {
-    }
-    
 }

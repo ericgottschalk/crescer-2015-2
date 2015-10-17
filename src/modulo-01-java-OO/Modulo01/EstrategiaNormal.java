@@ -1,24 +1,25 @@
 import java.util.ArrayList;
 
-// C#
-// public class EstrategiaNormal : IEstrategiaDeAtaque, IOutroContrato
-public class EstrategiaNormal implements EstrategiaDeAtaque {
-    
-    private ArrayList<Elfo> ordemDoUltimoAtaque = new ArrayList<Elfo>();
-    
-    public void atacar(ArrayList<Elfo> pelotao, ArrayList<Dwarf> dwarves) {        
+public class EstrategiaNormal implements EstrategiaDeAtaque
+{
+    private ArrayList<Elfo> ultimosAtacantes = new ArrayList<Elfo>();
+
+    public void atacar(ExercitoElfos e, ArrayList<Dwarf> dwarves) 
+    {        
+        ArrayList<Elfo> elfos = e.buscarPorStatus(Status.VIVO);
+        this.ultimosAtacantes.clear();
         
-        ordemDoUltimoAtaque.clear();
-        
-        for (Elfo elfo : pelotao) {
-            ordemDoUltimoAtaque.add(elfo);
-            for (Dwarf dwarf : dwarves) {
-                elfo.atirarFlecha(dwarf);
-            }
+        for (Elfo elfo : elfos) 
+        {
+           ultimosAtacantes.add(elfo);
+           
+            for (Dwarf dwarf : dwarves)          
+                elfo.atirarFlechas(dwarf);
         }
     }
     
-    public ArrayList<Elfo> getOrdemDoUltimoAtaque() {
-        return this.ordemDoUltimoAtaque;
+    public ArrayList<Elfo> getOrdemDoUltimoAtaque() 
+    {
+        return this.ultimosAtacantes;
     }
 }

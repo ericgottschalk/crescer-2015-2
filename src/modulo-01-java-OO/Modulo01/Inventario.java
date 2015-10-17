@@ -1,105 +1,78 @@
 import java.util.ArrayList;
 
-public class Inventario {
-    private final ArrayList<Item> itens = new ArrayList<>();
+public class Inventario
+{
+    private ArrayList<Item> itens;
     
-    public void adicionarItem(Item item) {
+    public Inventario()
+    {
+        this.itens = new ArrayList<Item>();
+    }
+    
+    public void adicionarItem(Item item)
+    {
         this.itens.add(item);
     }
     
-    public void perderItem(Item item) {
-        this.itens.remove(item);
+    public void perderItem(Item item)
+    {
+        if (this.itens.contains(item))
+            this.itens.remove(item);
     }
     
-    public ArrayList<Item> getItens() {
+    public ArrayList<Item> getItens()
+    {
         return this.itens;
     }
     
-    public Item getItemPorDescricao(String descricao){
-        for(Item item : this.itens){
-            if(item.getDescricao().equals(descricao)) {
+    public String getDescricoesItens()
+    {   
+        String descricao = new String();
+        
+        for (Item item : itens)
+            descricao += item.getDescricao() + ",";
+            
+        return descricao.substring(0, descricao.length() - 1);
+    }
+    
+    public Item getItemComMaiorQuantidade()
+    {
+        Item itm = new Item("", 0);
+        
+        for (Item item : this.itens)
+            if (item.getQuantidade() > itm.getQuantidade())
+                itm = item;
+                
+        return itm;
+    }
+    
+    public Item pesquisarItem(String name)
+    {
+        for (Item item : this.itens)
+            if (name.equals(item.getDescricao()))
                 return item;
-            }
-        }
         
         return null;
     }
     
-    public String getDescricoesItens() {
-        String descricoes = "";
+    public void ordenarInventario()
+    {
+        Item temp = null;
+        int j;
         
-        for (Item item : this.itens) {
-            descricoes += item.getDescricao() + ",";
-        }
-        
-        return descricoes.substring(0, descricoes.length() - 1);
-    }
-    
-    public void aumentar1000UnidadesEmCadaItem() {
-        for (Item item : this.itens) {
-            item.aumentar1000Unidades();
-        }
-    }
-    
-    public Item getItemComMaiorQuantidade() {
-        int indice = 0, maiorQtd = 0;
-        
-        for (Item item : this.itens) {
-            int qtdAtual = item.getQuantidade();
-            if (qtdAtual > maiorQtd) {
-                indice = this.itens.indexOf(item);
-                maiorQtd = qtdAtual;
-            }
-        }
-        
-        // C#6
-        // return this.itens.Max(x => x.Quantidade);
-        
-        return this.itens.get(indice);
-    }
-    
-    public void ordenarItens() {        
-        // Versão mais simples porém mais instável do BubbleSort - sempre O(n^2)
-        int numeroItens = this.itens.size();
-        
-        for (int i = 0; i < numeroItens; i++) {
-            for (int j = 0; j < numeroItens - 1; j++) {
-                Item itemAtual = this.itens.get(j);
-                Item proximo = this.itens.get(j + 1);
-                
-                boolean precisaTrocar = 
-                    itemAtual.getQuantidade() > proximo.getQuantidade();
-                
-                if (precisaTrocar) {
-                    this.itens.set(j, proximo);
-                    this.itens.set(j + 1, itemAtual);
+        for (int i = 0; i < this.itens.size(); i++)
+        {
+            for (j = 0; j < this.itens.size(); j++)
+            {
+                if (this.itens.get(i).getQuantidade() < this.itens.get(j).getQuantidade())
+                {
+                    temp = this.itens.get(i);
+                    this.itens.set(i, this.itens.get(j));
+                    this.itens.set(j, temp);
                 }
             }
-        }        
-        
-        // Java - MergeSort - O(n logn)
-        /*Collections.sort(this.itens, new Comparator<Item>() {
-            public int compare(Item item, Item outroItem) {
-                return Integer.compare(item.getQuantidade(), outroItem.getQuantidade());
-            }
-        });*/
-        
-        
-        // C# - MergeSort - O(n logn)
-        // return this.itens.OrderBy(x => x.Quantidade);
-        
-        // Ruby - QuickSort - O (n logn) em média, porém pior caso O(n^2)
-        // itens.sort_by { |x| x.quantidade }
-    }
-    
-    public void aumentarUnidadesComSomatorio() {
-        for (Item item : this.itens) {
-            item.aumentarQuantidadesComSomatorio();
+            
+            j = i;
         }
-    }
-    
-    public boolean equals(Object obj) {
-        Inventario outroInventario = (Inventario)obj;
-        return this.itens.equals(outroInventario.getItens());
     }
 }
