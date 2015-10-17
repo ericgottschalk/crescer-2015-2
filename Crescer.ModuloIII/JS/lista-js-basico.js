@@ -42,7 +42,7 @@ function maiorTexto(strArray)
 
 function escreveNome(nome)
 {
-	console.log('Olá querido instrutor: ' nome);
+	console.log('Olá querido instrutor: ', nome);
 } 
 
 
@@ -56,4 +56,30 @@ function imprime(array, f)
  		if (typeof array[prop] === 'string')
  			f(array[prop])
     }
+}
+
+
+/*
+ * Faça uma função fiboSum que calcule a soma da sequência de Fibonacci para n números informados.
+ */
+
+function fibo(n)
+{
+	if (n == 0 || n == 1)
+			return n;
+
+    return fibo(n - 1) + fibo(n - 2);
+}
+
+function fiboSum(n)
+{
+	var sum = 0;
+
+	if (typeof n !== 'number')
+		return NaN;
+
+	for (var i = 0; i < n; i++)
+		sum += fibo(i);
+
+	return sum;
 }
