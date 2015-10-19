@@ -66,7 +66,7 @@ function imprime(array, f)
 function fibo(n)
 {
 	if (n == 0 || n == 1)
-			return n;
+		return n;
 
     return fibo(n - 1) + fibo(n - 2);
 }
@@ -82,4 +82,24 @@ function fiboSum(n)
 		sum += fibo(i);
 
 	return sum;
+}
+
+/*
+ * Faça uma função excelis que receba uma string que seja uma referência válida para uma coluna Excel e retorne o valor que representa aquela coluna. 
+ */
+
+function excelis(str)
+{
+	if (typeof str !== 'string')
+		return 'Not a string';
+
+	var value = 0;
+	var strUpper = str.toUpperCase();
+	for (var i = 0; i < strUpper.length; i++)
+	{
+		var chrNum = strUpper.charCodeAt(i) - 64;
+		value += chrNum * Math.pow(26, strUpper.length - (i + 1));
+	}
+
+	return value;
 }
