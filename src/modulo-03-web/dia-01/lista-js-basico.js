@@ -94,11 +94,11 @@ function excelis(str)
 		return 'Not a string';
 
 	var value = 0;
-	var strUpper = str.toUpperCase();
-	for (var i = 0; i < strUpper.length; i++)
+	str = str.toUpperCase();
+	for (var i = 0; i < str.length; i++)
 	{
-		var chrNum = strUpper.charCodeAt(i) - 64;
-		value += chrNum * Math.pow(26, strUpper.length - (i + 1));
+		var chrNum = str.charCodeAt(i) - 64;
+		value = chrNum + 26 * value;
 	}
 
 	return value;
