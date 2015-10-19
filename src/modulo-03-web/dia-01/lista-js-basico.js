@@ -4,13 +4,8 @@
 
 function daisyGame(n)
 {
-	if (typeof n === 'number')
-	{
-		if (n % 2 == 0)
-			return 'Love me not';
-
-		return 'Love me';
-	}
+ 	if (typeof n === 'number')
+ 			return 'Love me' + (n % 2 == 0 ? ' not' : '');
 
 	return NaN;
 }
@@ -52,10 +47,8 @@ function imprime(array, f)
 		return 'JABULANI: TypeError: ' + typeof f + ' is not a function';
 
 	for (var prop in array)
- 	{
  		if (typeof array[prop] === 'string')
- 			f(array[prop])
-    }
+ 			f(array[prop]);
 }
 
 
@@ -65,8 +58,8 @@ function imprime(array, f)
 
 function fibo(n)
 {
-	if (n == 0 || n == 1)
-		return n;
+	if (n == 1 || n == 2)
+		return 1;
 
   return fibo(n - 1) + fibo(n - 2);
 }
@@ -103,3 +96,21 @@ function excelis(str)
 
 	return value;
 }
+
+
+/*
+ * Escreva uma função queroCafe que recebe dois parâmetros:
+ *   mascada: Valor numérico
+ *   precos: Lista de preços de café
+ * A sua implementação deve retornar uma string com todos os preços que estão abaixo
+   ou igual ao valor mascada ordenados de forma ascendente e separados por ,
+ */
+
+ function queroCafe(mascada, precos)
+ {
+	  var strPrecos = '';
+		precos = precos.filter(function(x) { if (typeof x === 'number') return x <= mascada;
+								 }).sort(function(x, y) { return x > y; } );
+								 
+		return strPrecos += precos;
+ }
