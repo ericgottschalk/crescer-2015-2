@@ -95,7 +95,10 @@ function somarPorContinentais(array){
 
 function somarPorTodosTitulos(array){
   var sum = 0;
-  array.forEach(t => sum += t.titulos[2].qtd);
+  array.forEach(t => 
+      sum += t.titulos[0].qtd
+           + t.titulos[1].qtd
+           + t.titulos[2].qtd);
   return sum;
 };
 
