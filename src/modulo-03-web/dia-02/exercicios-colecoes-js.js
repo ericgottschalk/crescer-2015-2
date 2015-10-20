@@ -128,10 +128,13 @@ function apenasOsMelhores(array){
  */
 
 function calcularIdadeMedia(array){
-  var sum = 0;
-  array.forEach(function (t){
-                  sum += new Date(new Date() - t.fundacao).getFullYear() - 1970;
-               });
+  var sum = array.map(function(t){
+                        return new Date().getFullYear()
+                                 - t.fundacao.getFullYear();
+                 })
+                 .reduce(function (sum, atual){
+                           return sum + atual;
+                 }, 0);
 
   return sum / array.length;
 };
