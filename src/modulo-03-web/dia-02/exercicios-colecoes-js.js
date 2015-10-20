@@ -1,6 +1,7 @@
 var clubes = [
   {
     nome: 'Arsenal',
+    fundacao: new Date(1886, 0, 1),
     titulos: [
       { desc: 'Nacionais', qtd: 13 },
       { desc: 'Continentais', qtd: 0 },
@@ -9,6 +10,7 @@ var clubes = [
   },
   {
     nome: 'Manchester United',
+    fundacao: new Date(1878, 0, 1),
     titulos: [
       { desc: 'Nacionais', qtd: 20 },
       { desc: 'Continentais', qtd: 3 },
@@ -17,6 +19,7 @@ var clubes = [
   },
   {
     nome: 'Liverpool',
+    fundacao: new Date(1892, 2, 15),
     titulos: [
       { desc: 'Nacionais', qtd: 18 },
       { desc: 'Continentais', qtd: 5 },
@@ -25,6 +28,7 @@ var clubes = [
   },
   {
     nome: 'Chelsea Football Club',
+    fundacao: new Date(1905, 2, 10),
     titulos: [
       { desc: 'Nacionais', qtd: 5 },
       { desc: 'Continentais', qtd: 1 },
@@ -116,4 +120,18 @@ function apenasOsMelhores(array){
   return array.filter(function(t){
                         return t.titulos[0].qtd > 18;
                       });
+};
+
+
+/* 4
+ * Faça uma função calcularIdadeMedia(Array) que retorna a média de idade dos clubes.
+ */
+
+function calcularIdadeMedia(array){
+  var sum = 0;
+  array.forEach(function (t){
+                  sum += new Date(new Date() - t.fundacao).getFullYear() - 1970;
+               });
+
+  return sum / array.length;
 };
