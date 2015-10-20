@@ -1,16 +1,11 @@
 /*
- * Faça uma função chamada daisyGame que receba por argumento o número de pétalas da margarida e retorne 'Love me' ou 'Love me not' 
+ * Faça uma função chamada daisyGame que receba por argumento o número de pétalas da margarida e retorne 'Love me' ou 'Love me not'
  */
 
 function daisyGame(n)
 {
-	if (typeof n === 'number')
-	{
-		if (n % 2 == 0)
-			return 'Love me not';
-
-		return 'Love me';
-	}
+ 	if (typeof n === 'number')
+ 			return 'Love me' + (n % 2 == 0 ? ' not' : '');
 
 	return NaN;
 }
@@ -37,25 +32,23 @@ function maiorTexto(strArray)
 /*
  *	Faça uma função chamada imprime que receba dois parâmetros:
  *		*Um array de strings e uma função.
- *	Dentro da função imprime chame a função do segundo parâmetro para cada elemento do array. 
+ *	Dentro da função imprime chame a função do segundo parâmetro para cada elemento do array.
  */
 
 function escreveNome(nome)
 {
 	console.log('Olá querido instrutor: ', nome);
-} 
+}
 
 
 function imprime(array, f)
 {
 	if (typeof f !== 'function')
 		return 'JABULANI: TypeError: ' + typeof f + ' is not a function';
-	
+
 	for (var prop in array)
- 	{
  		if (typeof array[prop] === 'string')
- 			f(array[prop])
-    }
+ 			f(array[prop]);
 }
 
 
@@ -65,10 +58,10 @@ function imprime(array, f)
 
 function fibo(n)
 {
-	if (n == 0 || n == 1)
-		return n;
+	if (n == 1 || n == 2)
+		return 1;
 
-    return fibo(n - 1) + fibo(n - 2);
+  return fibo(n - 1) + fibo(n - 2);
 }
 
 function fiboSum(n)
@@ -78,14 +71,14 @@ function fiboSum(n)
 	if (typeof n !== 'number')
 		return NaN;
 
-	for (var i = 0; i < n; i++)
+	for (var i = 1; i <= n; i++)
 		sum += fibo(i);
 
 	return sum;
 }
 
 /*
- * Faça uma função excelis que receba uma string que seja uma referência válida para uma coluna Excel e retorne o valor que representa aquela coluna. 
+ * Faça uma função excelis que receba uma string que seja uma referência válida para uma coluna Excel e retorne o valor que representa aquela coluna.
  */
 
 function excelis(str)
@@ -94,12 +87,30 @@ function excelis(str)
 		return 'Not a string';
 
 	var value = 0;
-	var strUpper = str.toUpperCase();
-	for (var i = 0; i < strUpper.length; i++)
+	str = str.toUpperCase();
+	for (var i = 0; i < str.length; i++)
 	{
-		var chrNum = strUpper.charCodeAt(i) - 64;
-		value += chrNum * Math.pow(26, strUpper.length - (i + 1));
+		var chrNum = str.charCodeAt(i) - 64;
+		value = chrNum + 26 * value;
 	}
 
 	return value;
 }
+
+
+/*
+ * Escreva uma função queroCafe que recebe dois parâmetros:
+ *   mascada: Valor numérico
+ *   precos: Lista de preços de café
+ * A sua implementação deve retornar uma string com todos os preços que estão abaixo
+   ou igual ao valor mascada ordenados de forma ascendente e separados por ,
+ */
+
+ function queroCafe(mascada, precos)
+ {
+	  var strPrecos = '';
+		precos = precos.filter(function(x) { if (typeof x === 'number') return x <= mascada;
+								 }).sort(function(x, y) { return x > y; } );
+								 
+		return strPrecos += precos;
+ }
