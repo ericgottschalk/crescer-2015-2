@@ -39,10 +39,9 @@ var clubes = [
    e retorna o array ordenado pela quantidade de títulos Nacionais descendente (Z->A).
  */
 
-function ordenaPorNacionais(array)
-{
+function ordenaPorNacionais(array){
     return array.sort((t, k) => t.titulos[0].qtd < k.titulos[0].qtd);
-}
+};
 
 
 /* 1.2
@@ -50,10 +49,9 @@ function ordenaPorNacionais(array)
    e retorna o array ordenado pela quantidade de títulos Continentais descendente (Z->A).
  */
 
-function ordenaPorContinentais(array)
-{
+function ordenaPorContinentais(array){
    return array.sort((t, k) => t.titulos[1].qtd < k.titulos[1].qtd);
-}
+};
 
 
 /* 1.3
@@ -61,10 +59,9 @@ function ordenaPorContinentais(array)
    e retorna o array ordenado pela quantidade de títulos Mundiais descendente (Z->A).
  */
 
-function ordenaPorMundiais(array)
-{
+function ordenaPorMundiais(array){
    return array.sort((t, k) => t.titulos[2].qtd < k.titulos[2].qtd);
-}
+};
 
 
 /* 2.1
@@ -72,12 +69,11 @@ function ordenaPorMundiais(array)
    e retorna o somatório de todas quantidades de títulos nacionais entre os clubes do array.
  */
 
-function somarPorNacionais(array)
-{
+function somarPorNacionais(array){
   var sum = 0;
   array.forEach(t => sum += t.titulos[0].qtd);
   return sum;
-}
+};
 
 
 /* 2.2
@@ -85,12 +81,11 @@ function somarPorNacionais(array)
    e retorna o somatório de todas quantidades de títulos continentais entre os clubes do array.
  */
 
-function somarPorContinentais(array)
-{
+function somarPorContinentais(array){
   var sum = 0;
   array.forEach(t => sum += t.titulos[1].qtd);
   return sum;
-}
+};
 
 
 /* 2.3
@@ -98,12 +93,11 @@ function somarPorContinentais(array)
    e retorna o somatório de todas quantidades de todos os títulos entre os clubes do array.
  */
 
-function somarPorTodosTitulos(array)
-{
+function somarPorTodosTitulos(array){
   var sum = 0;
   array.forEach(t => sum += t.titulos[2].qtd);
   return sum;
-}
+};
 
 
 /* 3
@@ -111,7 +105,6 @@ function somarPorTodosTitulos(array)
    e retorna apenas os clubes que têm mais de 18 títulos ingleses.
  */
 
-function apenasOsMelhores(array)
-{
+function apenasOsMelhores(array){
   return array.filter(t => t.titulos[0].qtd > 18);
-}
+};
