@@ -98,9 +98,9 @@ function excelis(str){
  */
 
 function queroCafe(mascada, precos){
-    var strPrecos = '';
+  var strPrecos = '';
 	precos = precos.filter(function(x) { if (typeof x === 'number') return x <= mascada;
 							 }).sort(function(x, y) { return x > y; } );
-								 
+
 	return strPrecos += precos;
 };
