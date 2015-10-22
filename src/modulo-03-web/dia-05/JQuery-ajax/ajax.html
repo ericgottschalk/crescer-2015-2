@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+  <head>
+    <title></title>
+    <meta charset="utf-8">
+    <style type="text/css">
+      h2 {
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <h2>Olá ajax!</h2>
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript">
+      $(function() {
+        $.get('https://api.spotify.com/v1/search?query=megadeth&offset=0&limit=20&type=artist')
+          .done(function(data) {
+            var images = data.artists.items[0].images;
+            images.forEach(function(elem) {
+              $('h2').append(
+                $('<img>')
+                  .attr('src', elem.url)
+                  .attr('alt', 'Megadéti')
+              )
+            });
+          });
+      });
+    </script>
+  </body>
+</html>
