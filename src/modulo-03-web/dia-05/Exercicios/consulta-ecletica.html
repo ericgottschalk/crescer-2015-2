@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Consulta Ecletica</title>
+	<link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+	<style type="text/css">
+		body{
+			background: black;
+		}
+
+		h1{
+			text-align: center;
+		}
+
+		.jumbotron{
+			background: black;
+			width: 400px;
+			text-align: center;
+			margin: auto;
+			margin-top: 20px;
+		} 
+
+		.btn{
+			margin-top: 10px;
+		}
+	</style>
+</head>
+<body>
+	
+	<div class="form-group jumbotron">
+		<input type="text" class="form-control" id="minText" placeholder="Red Hot Chili Peppers">
+		<button id="btnConsultar" class="btn btn-primary btn-lg btn btn-success">Search</button>
+	</div>	
+    <h1></h1>
+
+    <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript">
+    	var text;
+    	
+    	$.ajaxSetup({ error: function(xhr, status, error) {
+		       alert('Caro usuário, devido a um erro ' + xhr.status + ', não foi possível pesquisar por ' + text);
+		    }   
+		});
+
+    	function consultarSpotify() {	
+	        $.get("https://api.spotify.com/v1/search?q="+text+"&type=artist").done(function(artists) {
+	            var artistId = artists.artists.items[0].id;
+	 			
+	 			if(text === "Justin Bieber"){
+	 				if (Math.random() < 0.2){
+	 					artistId = 'douchebag';
+	 				}
+    			}
+
+	            $.get("https://api.spotify.com/v1/artists/"+artistId+"/albums?limit=50").done(function(data){
+	             	var images = data.items;
+	              	images.forEach(function(img) {
+		                $('h1').append(
+		                $('<img>').attr('width', 300).attr('heigth', 300)
+		                .attr('src', img.images[1].url).attr('alt', img.name));
+	        		});
+	        	});
+	        });
+        };
+
+        $('#btnConsultar').click(function() {
+        	$('h1').empty();
+    		text = $("#minText").val();
+    		consultarSpotify();
+    	});
+    	
+    </script>
+</body>
+</html>

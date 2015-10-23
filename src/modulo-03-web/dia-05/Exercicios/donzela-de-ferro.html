@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Donzela de Ferro</title>
+	<style type="text/css">
+		body{
+			background: black;
+		}
+
+		div{
+			text-align: center;
+		}
+
+		.meuJumbotron {
+		  	padding: 30px;
+		  	margin-bottom: 30px;
+		  	color: red;
+		  	background-color: #222;
+		  	font-family: Impact, Charcoal, sans-serif;
+		  	font-size: 100px;
+		  	text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<h2 class="meuJumbotron">Donzela de Ferro</h2>
+	<button id="btnConsultar" type="submit">Consultar</button>
+	<div></div>
+
+	<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript">
+      $(function() {
+        var urlApi = 'https://api.spotify.com/v1/artists/6mdiAmATAx73kdxrNrnlao/albums?limit=50';
+        function consultarSpotify() {
+          $.get(urlApi)
+          .done(function(data) {
+            var images = data.items;
+            images.forEach(function(elem) {
+              $('div').append(
+                $('<img>')
+                  .attr('width', 300)
+                  .attr('heigth', 300)
+                  .attr('src', elem.images[0].url)
+                  .attr('alt', elem.name)
+              )
+            });
+          });
+        };
+       
+        $('#btnConsultar').click(consultarSpotify);      
+      });
+    </script>
+</body>
+</html>
