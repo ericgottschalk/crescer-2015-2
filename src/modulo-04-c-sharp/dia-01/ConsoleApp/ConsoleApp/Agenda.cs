@@ -63,9 +63,8 @@ namespace ConsoleApp
             {
                 for (int j = 0; j < this.Count; j++)
                 {
-                    //this.contatos[i].Nome.CompareTo(this.contatos[j].Nome);
-                    if (this.contatos[i].Nome[0] < this.contatos[j].Nome[0])
-                    {
+                    if (this.contatos[i].Nome.CompareTo(this.contatos[j].Nome) < 0)
+                    { 
                         var temp = this.contatos[i];
                         this.contatos[i] = this.contatos[j];
                         this.contatos[j] = temp;
