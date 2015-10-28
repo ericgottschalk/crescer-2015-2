@@ -8,7 +8,7 @@ namespace DbTest
     public class UnitTest1
     {
         [TestMethod]
-        public void OrdernarPorNome()
+        public void BuscarPorNome()
         {
             var dbContext = new BaseDeDados();
 
@@ -36,7 +36,7 @@ namespace DbTest
 
             var porCargo = dbContext.BuscarPorCargo(new Cargo("Desenvolvedor", 190));
 
-            //Deve haver todos funcionarios
+            //Deve haver 8 funcionarios Desenvolvedor
             Assert.IsTrue(porCargo.Count == 8);
         }
 
