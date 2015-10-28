@@ -16,6 +16,5 @@ namespace DbFuncionarios
             this.Titulo = titulo;
             this.Salario = salario;
         }
-
     }
 }

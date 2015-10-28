@@ -20,6 +20,5 @@ namespace DbFuncionarios
             this.Nome = nome;
             this.DataNascimento = dataNascimento;
         }
-
     }
 }
