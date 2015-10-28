@@ -19,17 +19,6 @@ namespace DbTest
         }
 
         [TestMethod]
-        public void BuscaRapida()
-        {
-            var dbContext = new BaseDeDados();
-
-            var carlos = dbContext.BuscaRapida("Carlos Henrique");
-
-            //Deve haver 1 retorno
-            Assert.IsTrue(carlos.Count == 1);
-        }
-
-        [TestMethod]
         public void BuscarPorTurno()
         {
             var dbContext = new BaseDeDados();
@@ -38,6 +27,50 @@ namespace DbTest
 
             //Deve haver todos funcionarios
             Assert.IsTrue(porTurno.Count == 11);
+        }
+
+        [TestMethod]
+        public void BuscarPorCargo()
+        {
+            var dbContext = new BaseDeDados();
+
+            var porCargo = dbContext.BuscarPorCargo(new Cargo("Desenvolvedor", 190));
+
+            //Deve haver todos funcionarios
+            Assert.IsTrue(porCargo.Count == 8);
+        }
+
+        [TestMethod]
+        public void FiltrarPorIdadeAproximada25()
+        {
+            var dbContext = new BaseDeDados();
+
+            var idadeAproximadamente = dbContext.FiltrarPorIdadeAproximada(25);
+
+            //Deve haver 7 nascidos de 1985 a 1995, pois o ano da idade informada é 1990
+            Assert.IsTrue(idadeAproximadamente.Count == 7);
+        }
+
+        [TestMethod]
+        public void FiltrarPorIdadeAproximada35()
+        {
+            var dbContext = new BaseDeDados();
+
+            var idadeAproximadamente = dbContext.FiltrarPorIdadeAproximada(35);
+
+            //Deve haver 1 nascido entre 1975 a 1990, pois o ano da idade informada é 1980
+            Assert.IsTrue(idadeAproximadamente.Count == 1);
+        }
+
+        [TestMethod]
+        public void AniversariantesDoMes()
+        {
+            var dbContext = new BaseDeDados();
+
+            var aniverDoMes = dbContext.AniversariantesDoMes();
+
+            //Deve haver 1 aniversariante do mes 10
+            Assert.IsTrue(aniverDoMes.Count == 1);
         }
     }
 }

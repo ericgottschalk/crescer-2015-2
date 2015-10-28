@@ -81,37 +81,82 @@ namespace DbFuncionarios
 
         delegate bool expression(Funcionario item);
 
+        //a
         public IList<Funcionario> OrdenadosPorCargo()
         {
             return this.Funcionarios.OrderBy(t => t.Cargo.Titulo).ToList();
         }
 
+        //b
         public IList<Funcionario> BuscarPorNome(string nome)
         {
             return this.Funcionarios.FindAll(t => t.Nome.Contains(nome)).OrderBy(t => t.Nome).ToList();
         }
 
-        public IList<dynamic> BuscaRapida(string nome)
+        //c
+        public IList<dynamic> BuscaRapida()
         {
-            IEnumerable<dynamic> query = from f in Funcionarios
-                                         where f.Nome == nome
-                                         select new
-                                         {
-                                             Nome = f.Nome,
-                                             TituloCargo = f.Cargo.Titulo
-                                         };
-
-            return query.ToList();
+            return this.Funcionarios.Select(t => (new { Nome = t.Nome, TituloCargo = t.Cargo.Titulo})).ToList<dynamic>();
         }
 
+        //d
         public IList<Funcionario> BuscarPorTurno(params TurnoTrabalho[] turnos)
         {
             var query = (from turno in turnos
-                        join f in Funcionarios
+                        join f in this.Funcionarios
                         on turno equals f.TurnoTrabalho
                         select f).ToList();
 
             return query;
         }
+
+        //e
+        public IList<dynamic> QtdFuncionariosPorTurno()
+        {
+            IEnumerable<dynamic> query = from f in this.Funcionarios
+                                         group f by f.TurnoTrabalho into f
+                                         select new
+                                         {
+                                             Turno = f.Key,
+                                             Quantidade = f.Count()
+                                         };
+            return query.ToList();
+        }
+
+        //f
+        public IList<Funcionario> BuscarPorCargo(Cargo cargo)
+        {
+            return this.Funcionarios.FindAll(t => t.Cargo.Titulo == cargo.Titulo);
+        }
+
+        //g
+        public IList<Funcionario> FiltrarPorIdadeAproximada(int idade)
+        {
+            expression exp = t => DateTime.Now.Year - t.DataNascimento.Year >= idade - 5 && 
+                                  DateTime.Now.Year - t.DataNascimento.Year <= idade + 5;
+
+            return this.Funcionarios.FindAll(t => exp(t));
+        }
+
+        //h
+        public double SalarioMedio()
+        {
+            return Convert.ToDouble((from f in Funcionarios
+                                     group f by f.Cargo.Salario into f
+                                     select f.Average(t => t.Cargo.Salario)));
+        }
+
+        //i
+        public IList<Funcionario> AniversariantesDoMes()
+        {
+            expression exp = t => t.DataNascimento.Month == DateTime.Now.Month;
+            return this.Funcionarios.FindAll(t => exp(t));
+        }
+
+        //h
+        //public dynamic FuncionarioMaisComplexo()
+        //{
+
+        //}
     }
 }
