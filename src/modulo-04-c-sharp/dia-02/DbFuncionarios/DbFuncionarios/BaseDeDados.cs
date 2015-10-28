@@ -8,14 +8,11 @@ namespace DbFuncionarios
 {
     public class BaseDeDados
     {
-        public List<Funcionario> Funcionarios
-        {
-            get; private set;
-        }
+        public List<Funcionario> Funcionarios{ get; private set; }
 
         public BaseDeDados()
         {
-            CriarBase();
+            this.CriarBase();
         }
 
         private void CriarBase()
@@ -81,5 +78,41 @@ namespace DbFuncionarios
             margareteRicardo.TurnoTrabalho = TurnoTrabalho.Manha;
             Funcionarios.Add(margareteRicardo);
         }
+
+        delegate bool expression(Funcionario item);
+
+        public IList<Funcionario> OrdenadosPorCargo()
+        {
+            return this.Funcionarios.OrderBy(t => t.Cargo.Titulo).ToList();
+        }
+
+        public IList<Funcionario> BuscarPorNome(string nome)
+        {
+            return this.Funcionarios.FindAll(t => t.Nome.Contains(nome)).OrderBy(t => t.Nome).ToList();
+        }
+
+        public IList<dynamic> BuscaRapida(string nome)
+        {
+            IEnumerable<dynamic> query = from f in Funcionarios
+                                         where f.Nome == nome
+                                         select new
+                                         {
+                                             Nome = f.Nome,
+                                             TituloCargo = f.Cargo.Titulo
+                                         };
+
+            return query.ToList();
+        }
+
+        public IList<Funcionario> BuscarPorTurno(params TurnoTrabalho[] turnos)
+        {
+            var query = (from turno in turnos
+                        join f in Funcionarios
+                        on turno equals f.TurnoTrabalho
+                        select f).ToList();
+
+            return query;
+        }
+
     }
 }
