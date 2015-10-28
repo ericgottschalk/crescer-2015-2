@@ -8,8 +8,8 @@ namespace DbFuncionarios
 {
     public enum TurnoTrabalho
     {
-        Manha = 0,
-        Tarde = 1,
-        Noite = 2
+        Manha,
+        Tarde,
+        Noite
     }
 }
