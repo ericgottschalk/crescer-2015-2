@@ -14,5 +14,11 @@ namespace LocadoraNunesGames.Domain.GameModule
         public double Price { get; set; }
 
         public string Category { get; set; }
+
+        public override string ToString()
+        {
+            return String.Format("Id: {0} - Nome: {1} - Preço: {2:C} - Categoria: {3}", 
+                                     this.Id, this.Name, this.Price, this.Category);
+        }
     }
 }
