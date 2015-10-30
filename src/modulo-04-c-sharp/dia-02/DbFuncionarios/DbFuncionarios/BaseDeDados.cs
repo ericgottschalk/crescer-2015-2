@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -139,9 +140,11 @@ namespace DbFuncionarios
         }
 
         //h
-        public double SalarioMedio()
+        public double SalarioMedio(TurnoTrabalho? turno)
         {
-            return Convert.ToDouble((from f in Funcionarios
+            var list = turno.HasValue ? BuscarPorTurno(turno.Value) : this.Funcionarios;
+
+            return Convert.ToDouble((from f in list
                                      group f by f.Cargo.Salario into f
                                      select f.Average(t => t.Cargo.Salario)));
         }
@@ -156,7 +159,14 @@ namespace DbFuncionarios
         //j
         //public dynamic FuncionarioMaisComplexo()
         //{
-
+        //    Funcionario funcionario = null;
+           
+        //    return new
+        //    {
+        //        Nome = funcionario.Nome,
+        //        SalarioRS = String.Format("{0:C}", funcionario.Cargo.Salario),
+        //        SalarioUS = String.Format((funcionario.Cargo.Salario * 5).ToString("C", CultureInfo.CreateSpecificCulture("en-US")))
+        //    };
         //}
     }
 }
