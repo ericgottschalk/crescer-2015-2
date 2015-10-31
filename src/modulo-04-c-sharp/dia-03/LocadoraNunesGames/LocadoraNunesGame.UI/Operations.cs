@@ -90,7 +90,8 @@ namespace LocadoraNunesGame.UI
                 Console.WriteLine("Digite o nome >");
                 string name = Console.ReadLine();
                 Console.WriteLine("Diite o preco >");
-                double price = Convert.ToDouble(Console.ReadLine());
+                double price = Convert.ToDouble(Console.ReadLine(), 
+                                                System.Globalization.CultureInfo.InvariantCulture);
 
                 var game = new Game()
                 {
@@ -165,7 +166,8 @@ namespace LocadoraNunesGame.UI
                 Console.WriteLine("Digite o nome >");
                 game.Name = Console.ReadLine();
                 Console.WriteLine("Diite o preco >");
-                game.Price = Convert.ToDouble(Console.ReadLine());
+                game.Price = Convert.ToDouble(Console.ReadLine(), 
+                                              System.Globalization.CultureInfo.InvariantCulture);
                 game.Category = Category();
                 game.Available = Availabe();
 

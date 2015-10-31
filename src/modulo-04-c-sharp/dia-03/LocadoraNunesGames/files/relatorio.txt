@@ -1,39 +1,36 @@
-----------------------------------------------------------------------------------
-                             LOCADORA NUNES GAMES
-                              31/10/2015 02:53:59
-                               Relatório de jogos
-==================================================================================
-----------------------------------------------------------------------------------
-ID        Categoria         Nome                          Preço         Disponivel
-1        RPG              Chrono Trigger                R$ 60,00             SIM
-2        CORRIDA          Top Gear                      R$ 20,00             SIM
-3        AVENTURA         Megaman X                     R$ 40,00             SIM
-4        AVENTURA         Super Metroid                 R$ 35,00             SIM
-5        AVENTURA         Donkey Kong Country           R$ 25,00             SIM
-6        CORRIDA          Super Mario Kart              R$ 40,00             SIM
-7        LUTA             Super Street Fighter          R$ 25,00             SIM
-8        LUTA             Mortal Kombat 2               R$ 37,00             SIM
-9        LUTA             Killer Instinct               R$ 18,00             SIM
-10       AVENTURA         Final Fight                   R$ 12,00             SIM
-11       RPG              Super Mario RPG               R$ 70,00             SIM
-12       AVENTURA         Aladdin                       R$ 16,00             SIM
-13       CORRIDA          Rock 'n Roll Racing           R$ 22,00             SIM
-14       AVENTURA         Zelda: A link to the past     R$ 110,00            SIM
-15       RPG              Final Fantasy VI              R$ 305,00            SIM
-16       ESPORTE          International Super Star Soccer DeluxeR$ 45,00             SIM
-17       AVENTURA         Contra III                    R$ 28,00             SIM
-18       AVENTURA         Sunset Riders                 R$ 379,00            SIM
-19       AVENTURA         Goof Troop                    R$ 419,00            SIM
-20       AVENTURA         Mickey to Donald: Magical Adventure 3R$ 329,00            SIM
-21       AVENTURA         Resident Evil 2               R$ 100,00            SIM
-22       RPG              Test                          R$ 9.999,00          SIM
-23       RPG              Test                          R$ 9.999,00          SIM
-24       RPG              Delete                        R$ 9.999,00          SIM
-25       RPG              Test                          R$ 9.999,00          SIM
-26       RPG              Test                          R$ 9.999,00          SIM
+----------------------------------------------------------------------------------------
+                                   LOCADORA NUNES GAMES
+                                    31/10/2015 03:27:47
+                                     Relatório de jogos
+========================================================================================
+----------------------------------------------------------------------------------------
+ID       Categoria        Nome                              Preço             Disponivel
+1        RPG              CHRONO TRIGGER                     R$ 60,00             SIM
+2        CORRIDA          TOP GEAR                           R$ 20,00             SIM
+3        AVENTURA         MEGAMAN X                          R$ 40,00             SIM
+4        AVENTURA         SUPER METROID                      R$ 35,00             SIM
+5        AVENTURA         DONKEY KONG COUNTRY                R$ 25,00             SIM
+6        CORRIDA          SUPER MARIO KART                   R$ 40,00             SIM
+7        LUTA             SUPER STREET FIGHTER               R$ 25,00             SIM
+8        LUTA             MORTAL KOMBAT 2                    R$ 37,00             SIM
+9        LUTA             KILLER INSTINCT                    R$ 18,00             SIM
+10       AVENTURA         FINAL FIGHT                        R$ 12,00             SIM
+11       RPG              SUPER MARIO RPG                    R$ 70,00             SIM
+12       AVENTURA         ALADDIN                            R$ 16,00             SIM
+13       CORRIDA          ROCK 'N ROLL RACING                R$ 22,00             SIM
+14       AVENTURA         ZELDA: A LINK TO THE PAST          R$ 110,00            SIM
+15       RPG              FINAL FANTASY VI                   R$ 305,00            SIM
+16       ESPORTE          INTERNATIONAL SUPER STAR SOCCE     R$ 45,00             SIM
+17       AVENTURA         CONTRA III                         R$ 28,00             SIM
+18       AVENTURA         SUNSET RIDERS                      R$ 379,00            SIM
+19       AVENTURA         GOOF TROOP                         R$ 419,00            SIM
+20       AVENTURA         MICKEY TO DONALD: MAGICAL ADVE     R$ 329,00            SIM
+21       RPG              MODFIED                            R$ 100,00            NÃO
+22       AVENTURA         RESIDENT EVIL 2                    R$ 17.999,00         SIM
 -----------------------------------------------------------------------------------
-Quantidade total de jogos > 26
-Quantidade de jogos disponíveis > 26
-Valor médio por jogo > R$ 2.005,00
-Jogo mais caro > Test
+
+Quantidade total de jogos > 22
+Quantidade de jogos disponíveis > 21
+Valor médio por jogo > R$ 915,18
+Jogo mais caro > Resident Evil 2
 Jogo mais barato > Final Fight

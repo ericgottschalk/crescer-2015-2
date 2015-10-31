@@ -120,10 +120,4 @@
     <categoria>AVENTURA</categoria>
     <disponivel>SIM</disponivel>
   </jogo>
-  <jogo id="21">
-    <nome>Resident Evil 2</nome>
-    <preco>100</preco>
-    <categoria>AVENTURA</categoria>
-    <disponivel>SIM</disponivel>
-  </jogo>
 </jogos>

@@ -18,7 +18,7 @@ namespace LocadoraNunesGames.Test
                 var game = new Game()
                 {
                     Name = "Test",
-                    Price = 99.99,
+                    Price = 100,
                     Category = GameCategory.RPG
                 };
 
@@ -40,7 +40,7 @@ namespace LocadoraNunesGames.Test
                 var game = new Game()
                 {
                     Name = "Test",
-                    Price = 99.99,
+                    Price = 100,
                     Category = GameCategory.RPG
                 };
 
@@ -66,7 +66,7 @@ namespace LocadoraNunesGames.Test
                 var game = new Game()
                 {
                     Name = "Delete",
-                    Price = 99.99,
+                    Price = 100,
                     Category = GameCategory.RPG
                 };
 
@@ -81,16 +81,6 @@ namespace LocadoraNunesGames.Test
 
                 //Nao deve haver registros
                 Assert.IsTrue(service.FindByName("Delet").Count == 0);
-            }
-        }
-
-        [TestMethod]
-        public void txt()
-        {
-            using (var unitOfWork = new GameUnitOfWork())
-            {
-                var service = new GameDomainService(unitOfWork);
-                service.SaveTxt();
             }
         }
     }

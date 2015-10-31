@@ -20,7 +20,7 @@ namespace LocadoraNunesGames.Domain.GameModule
         public override string ToString()
         {
             return String.Format("Id: {0} - Nome: {1} - Preço: {2:C} - Categoria: {3}", 
-                                     this.Id, this.Name, this.Price, this.Category);
+                                     this.Id, this.Name.Truncate(25).ToUpper(), this.Price, this.Category);
         }
     }
 }

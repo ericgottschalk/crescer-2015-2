@@ -50,6 +50,7 @@ namespace LocadoraNunesGames.Domain.DataBaseAccess
         public void Add(Game game)
         {
             this.Load();
+            game.Id = this.Identity();
 
             XElement srcTree = new XElement("jogo",
                 new XElement("nome", game.Name),
@@ -57,7 +58,7 @@ namespace LocadoraNunesGames.Domain.DataBaseAccess
                 new XElement("categoria", game.Category),
                 new XElement("disponivel", "SIM"));
 
-            srcTree.SetAttributeValue("id", this.Identity());
+            srcTree.SetAttributeValue("id", game.Id);
 
             this.xmlGames.Add(srcTree);
         }
@@ -69,15 +70,16 @@ namespace LocadoraNunesGames.Domain.DataBaseAccess
 
         public void Remove(Game game)
         {
-            XElement element = this.xmlGames.Elements("jogo")
-                        .First(t => Convert.ToInt32(t.Attribute("id").Value) == game.Id);
+            XElement element = this.xmlGames.Elements("jogo").ToList()
+                                            .Find(t => Convert.ToInt32(t.Attribute("id").Value) == game.Id);
             element.Remove();
         }
 
         public void Update(Game game)
         {
-            XElement element = this.xmlGames.Elements("jogo")
-                        .First(t => (int)t.Attribute("id") == game.Id);
+            XElement element = this.xmlGames.Elements("jogo").ToList()
+                                            .Find(t => Convert.ToInt32(t.Attribute("id").Value) == game.Id);
+                        
 
             element.Element("nome").Value = game.Name;
             element.Element("preco").Value = game.Price.ToString();
@@ -88,7 +90,7 @@ namespace LocadoraNunesGames.Domain.DataBaseAccess
         public List<Game> FindByName(string name)
         {
             var list = this.Get().ToList();
-            return list.FindAll(t => t.Name.StartsWith(name));
+            return list.FindAll(t => t.Name.ToUpper().StartsWith(name.ToUpper()));
         }
 
         public Game FindById(int id)
@@ -105,22 +107,23 @@ namespace LocadoraNunesGames.Domain.DataBaseAccess
             using (var writer = new StreamWriter(path))
             {
                 writer.Flush();
-                writer.WriteLine("----------------------------------------------------------------------------------");
-                writer.WriteLine("                             LOCADORA NUNES GAMES");
-                writer.WriteLine("                              "+ DateTime.Now);
-                writer.WriteLine("                               Relatório de jogos");
-                writer.WriteLine("==================================================================================");
-                writer.WriteLine("----------------------------------------------------------------------------------");
-                writer.WriteLine("ID        Categoria         Nome                          Preço         Disponivel");
+                writer.WriteLine("----------------------------------------------------------------------------------------");
+                writer.WriteLine("                                   LOCADORA NUNES GAMES");
+                writer.WriteLine("                                    "+ DateTime.Now);
+                writer.WriteLine("                                     Relatório de jogos");
+                writer.WriteLine("========================================================================================");
+                writer.WriteLine("----------------------------------------------------------------------------------------");
+                writer.WriteLine("ID       Categoria        Nome                              Preço             Disponivel");
 
                 foreach (var game in list)
                 {
-                    writer.WriteLine(String.Format("{0,-9}{1,-17}{2,-30}{3,-14}{4,10}",                     
-                              game.Id, game.Category, game.Name, game.Price.ToString("C"), 
+                    writer.WriteLine(String.Format("{0,-9}{1,-17}{2,-35}{3,-14}{4,10}",                     
+                              game.Id, game.Category, game.Name.Truncate(30).ToUpper(), game.Price.ToString("C"), 
                               game.Available ? "SIM" : "NÃO"));
                 }
 
                 writer.WriteLine("-----------------------------------------------------------------------------------");
+                writer.WriteLine();
                 writer.WriteLine("Quantidade total de jogos > " + list.Count);
                 writer.WriteLine("Quantidade de jogos disponíveis > " + list.Count(t => t.Available));
                 writer.WriteLine(String.Format("Valor médio por jogo > {0:C}", list.Average(t => t.Price)));

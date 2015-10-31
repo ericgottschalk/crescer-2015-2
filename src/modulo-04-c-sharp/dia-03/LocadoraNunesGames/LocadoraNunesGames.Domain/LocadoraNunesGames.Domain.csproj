@@ -45,6 +45,7 @@
     <Compile Include="Commom\IUnitOfWork.cs" />
     <Compile Include="DataBaseAccess\GameDataBaseContext.cs" />
     <Compile Include="DataBaseAccess\GameUnitOfWork.cs" />
+    <Compile Include="Extensions\StringExtensions.cs" />
     <Compile Include="GameModule\Game.cs" />
     <Compile Include="GameModule\GameCategory.cs" />
     <Compile Include="GameModule\GameDomainService.cs" />
