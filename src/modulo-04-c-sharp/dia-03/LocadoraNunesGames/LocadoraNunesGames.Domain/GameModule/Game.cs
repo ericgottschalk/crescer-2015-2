@@ -13,7 +13,9 @@ namespace LocadoraNunesGames.Domain.GameModule
 
         public double Price { get; set; }
 
-        public string Category { get; set; }
+        public GameCategory Category { get; set; }
+
+        public bool Available { get; set; }
 
         public override string ToString()
         {

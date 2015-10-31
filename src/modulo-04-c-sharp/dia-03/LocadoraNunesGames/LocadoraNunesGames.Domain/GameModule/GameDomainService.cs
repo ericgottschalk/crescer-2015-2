@@ -31,6 +31,11 @@ namespace LocadoraNunesGames.Domain.GameModule
             this.unitOfWork.Remove(game);
         }
 
+        public List<Game> Get()
+        {
+            return this.unitOfWork.Get().ToList();
+        }
+
         public List<Game> FindByName(string name)
         {
             return this.unitOfWork.FindByName(name);
@@ -39,6 +44,11 @@ namespace LocadoraNunesGames.Domain.GameModule
         public Game FindById(int id)
         {
             return this.unitOfWork.FindById(id);
+        }
+
+        public void SaveTxt()
+        {
+            this.unitOfWork.SaveTxt();
         }
     }
 }

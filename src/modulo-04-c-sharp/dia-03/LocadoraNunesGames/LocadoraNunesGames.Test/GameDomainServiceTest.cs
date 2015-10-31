@@ -17,10 +17,9 @@ namespace LocadoraNunesGames.Test
 
                 var game = new Game()
                 {
-                    Id = 21,
                     Name = "Test",
                     Price = 99.99,
-                    Category = "RPG"
+                    Category = GameCategory.RPG
                 };
 
                 service.Insert(game);
@@ -40,10 +39,9 @@ namespace LocadoraNunesGames.Test
 
                 var game = new Game()
                 {
-                    Id = 21,
                     Name = "Test",
                     Price = 99.99,
-                    Category = "RPG"
+                    Category = GameCategory.RPG
                 };
 
                 service.Insert(game);
@@ -67,10 +65,9 @@ namespace LocadoraNunesGames.Test
 
                 var game = new Game()
                 {
-                    Id = 21,
                     Name = "Delete",
                     Price = 99.99,
-                    Category = "RPG"
+                    Category = GameCategory.RPG
                 };
 
                 service.Insert(game);
@@ -84,6 +81,16 @@ namespace LocadoraNunesGames.Test
 
                 //Nao deve haver registros
                 Assert.IsTrue(service.FindByName("Delet").Count == 0);
+            }
+        }
+
+        [TestMethod]
+        public void txt()
+        {
+            using (var unitOfWork = new GameUnitOfWork())
+            {
+                var service = new GameDomainService(unitOfWork);
+                service.SaveTxt();
             }
         }
     }

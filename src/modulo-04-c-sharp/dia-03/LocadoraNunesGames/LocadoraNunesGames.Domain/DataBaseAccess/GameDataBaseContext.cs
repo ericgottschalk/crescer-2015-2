@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using LocadoraNunesGames.Domain.GameModule;
+using System.IO;
 
 namespace LocadoraNunesGames.Domain.DataBaseAccess
 {
     public class GameDataBaseContext : IDisposable
     {
-        //private readonly string path = @"C:\Users\eric.gottschalk\Desktop\Arquivos\game-store.xml";
-        private readonly string path = @"C:\Users\bujil_000\Desktop\dia-02\games-store.xml";
+        private readonly string path = Environment.CurrentDirectory + @"..\..\..\..\files\game-store.xml";
         private bool disposed = false;
         private XElement xmlGames;
 
@@ -26,17 +26,19 @@ namespace LocadoraNunesGames.Domain.DataBaseAccess
 
             foreach (XElement jogo in this.xmlGames.Elements("jogo"))
             {
+                string id = jogo.Attribute("id").Value;
                 string name = jogo.Element("nome").Value;
-                int id = (int)jogo.Attribute("id");
-                double price = Convert.ToDouble(jogo.Element("preco").Value);
-                string category = (string)jogo.Attribute("categoria");
+                string price = jogo.Element("preco").Value;
+                string category = jogo.Element("categoria").Value;
+                string available = jogo.Element("disponivel").Value;
 
                 var game = new Game()
                 {
-                    Id = id,
+                    Id = Convert.ToInt32(id),
                     Name = name,
-                    Price = price,
-                    Category = category
+                    Price = Convert.ToDouble(price),
+                    Category = (GameCategory)Enum.Parse(typeof(GameCategory), category),
+                    Available = available == "SIM"
                 };
 
                 list.Add(game);
@@ -52,11 +54,17 @@ namespace LocadoraNunesGames.Domain.DataBaseAccess
             XElement srcTree = new XElement("jogo",
                 new XElement("nome", game.Name),
                 new XElement("preco", game.Price),
-                new XElement("categoria", game.Category));
+                new XElement("categoria", game.Category),
+                new XElement("disponivel", "SIM"));
 
-            srcTree.SetAttributeValue("id", game.Id);
+            srcTree.SetAttributeValue("id", this.Identity());
 
             this.xmlGames.Add(srcTree);
+        }
+
+        private int Identity()
+        {
+            return this.Get().Max(t => t.Id) + 1;
         }
 
         public void Remove(Game game)
@@ -69,11 +77,12 @@ namespace LocadoraNunesGames.Domain.DataBaseAccess
         public void Update(Game game)
         {
             XElement element = this.xmlGames.Elements("jogo")
-                        .First(t => Convert.ToInt32(t.Attribute("id").Value) == game.Id);
+                        .First(t => (int)t.Attribute("id") == game.Id);
 
             element.Element("nome").Value = game.Name;
             element.Element("preco").Value = game.Price.ToString();
-            element.Element("categoria").Value = game.Category;
+            element.Element("categoria").Value = game.Category.ToString();
+            element.Element("disponivel").Value = game.Available ? "SIM" : "NÂO";
         }
 
         public List<Game> FindByName(string name)
@@ -88,6 +97,38 @@ namespace LocadoraNunesGames.Domain.DataBaseAccess
             return list.Find(t => t.Id == id);
         }
 
+        public void SaveTxt()
+        {
+            var list = this.Get();
+            string path = Environment.CurrentDirectory + @"..\..\..\..\files\relatorio.txt";
+            //File.Delete(path);
+            using (var writer = new StreamWriter(path))
+            {
+                writer.Flush();
+                writer.WriteLine("----------------------------------------------------------------------------------");
+                writer.WriteLine("                             LOCADORA NUNES GAMES");
+                writer.WriteLine("                              "+ DateTime.Now);
+                writer.WriteLine("                               Relatório de jogos");
+                writer.WriteLine("==================================================================================");
+                writer.WriteLine("----------------------------------------------------------------------------------");
+                writer.WriteLine("ID        Categoria         Nome                          Preço         Disponivel");
+
+                foreach (var game in list)
+                {
+                    writer.WriteLine(String.Format("{0,-9}{1,-17}{2,-30}{3,-14}{4,10}",                     
+                              game.Id, game.Category, game.Name, game.Price.ToString("C"), 
+                              game.Available ? "SIM" : "NÃO"));
+                }
+
+                writer.WriteLine("-----------------------------------------------------------------------------------");
+                writer.WriteLine("Quantidade total de jogos > " + list.Count);
+                writer.WriteLine("Quantidade de jogos disponíveis > " + list.Count(t => t.Available));
+                writer.WriteLine(String.Format("Valor médio por jogo > {0:C}", list.Average(t => t.Price)));
+                writer.WriteLine("Jogo mais caro > " + list.First(t => t.Price == list.Max(k => k.Price)).Name);
+                writer.WriteLine("Jogo mais barato > " + list.First(t => t.Price == list.Min(k => k.Price)).Name);
+            }
+        }
+
         private void Load()
         {
             this.xmlGames = XElement.Load(path);
@@ -95,7 +136,7 @@ namespace LocadoraNunesGames.Domain.DataBaseAccess
 
         protected void SaveChanges()
         {
-            xmlGames.Save(path);
+            this.xmlGames.Save(path);
         }
 
         public void Dispose()
@@ -106,7 +147,7 @@ namespace LocadoraNunesGames.Domain.DataBaseAccess
 
         protected virtual void Dispose(bool disposing)
         {
-            if (!disposed)
+            if (!this.disposed)
             {
                 if (disposing)
                 {
@@ -114,7 +155,7 @@ namespace LocadoraNunesGames.Domain.DataBaseAccess
 
                 }
                 
-                disposed = true;
+                this.disposed = true;
             }
         }
     }

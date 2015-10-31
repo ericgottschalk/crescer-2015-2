@@ -12,6 +12,7 @@ namespace LocadoraNunesGames.Domain.GameModule
         CORRIDA = 1,
         AVENTURA = 2,
         LUTA = 3,
-        ESPORTE = 4
+        ESPORTE = 4,
+        INDEFINIDO = 5
     }
 }
