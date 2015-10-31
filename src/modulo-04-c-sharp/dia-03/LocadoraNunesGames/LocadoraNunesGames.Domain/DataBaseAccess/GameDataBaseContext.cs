@@ -68,8 +68,10 @@ namespace LocadoraNunesGames.Domain.DataBaseAccess
             return this.Get().Max(t => t.Id) + 1;
         }
 
+
         public void Remove(Game game)
         {
+            this.Load();
             XElement element = this.xmlGames.Elements("jogo").ToList()
                                             .Find(t => Convert.ToInt32(t.Attribute("id").Value) == game.Id);
             element.Remove();
@@ -77,8 +79,8 @@ namespace LocadoraNunesGames.Domain.DataBaseAccess
 
         public void Update(Game game)
         {
-            XElement element = this.xmlGames.Elements("jogo").ToList()
-                                            .Find(t => Convert.ToInt32(t.Attribute("id").Value) == game.Id);
+            this.Load();
+            XElement element = this.xmlGames.Elements("jogo").FirstOrDefault(t => (int)t.Attribute("id") == game.Id);
                         
 
             element.Element("nome").Value = game.Name;
@@ -103,7 +105,6 @@ namespace LocadoraNunesGames.Domain.DataBaseAccess
         {
             var list = this.Get();
             string path = Environment.CurrentDirectory + @"..\..\..\..\files\relatorio.txt";
-            //File.Delete(path);
             using (var writer = new StreamWriter(path))
             {
                 writer.Flush();

@@ -1,6 +1,6 @@
 ----------------------------------------------------------------------------------------
                                    LOCADORA NUNES GAMES
-                                    31/10/2015 03:27:47
+                                    31/10/2015 13:15:12
                                      Relatório de jogos
 ========================================================================================
 ----------------------------------------------------------------------------------------
@@ -25,12 +25,10 @@ ID       Categoria        Nome                              Preço             D
 18       AVENTURA         SUNSET RIDERS                      R$ 379,00            SIM
 19       AVENTURA         GOOF TROOP                         R$ 419,00            SIM
 20       AVENTURA         MICKEY TO DONALD: MAGICAL ADVE     R$ 329,00            SIM
-21       RPG              MODFIED                            R$ 100,00            NÃO
-22       AVENTURA         RESIDENT EVIL 2                    R$ 17.999,00         SIM
 -----------------------------------------------------------------------------------
 
-Quantidade total de jogos > 22
-Quantidade de jogos disponíveis > 21
-Valor médio por jogo > R$ 915,18
-Jogo mais caro > Resident Evil 2
+Quantidade total de jogos > 20
+Quantidade de jogos disponíveis > 20
+Valor médio por jogo > R$ 101,75
+Jogo mais caro > Goof Troop
 Jogo mais barato > Final Fight

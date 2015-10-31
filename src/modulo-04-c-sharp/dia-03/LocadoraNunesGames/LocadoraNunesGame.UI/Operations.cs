@@ -28,6 +28,7 @@ namespace LocadoraNunesGame.UI
                     return false;
 
                 default:
+                    Console.WriteLine("Opção inválida! Disponibilidade foi definida como 'NÂO', para alterar vá em editar!");
                     return false;
             }
         }
@@ -62,6 +63,7 @@ namespace LocadoraNunesGame.UI
                      return GameCategory.ESPORTE;
 
                 default:
+                     Console.WriteLine("Opcão invialida. Categoria foi definida como 'INDEFINIDO', para alterar vá em editar!");
                      return GameCategory.INDEFINIDO;
             } 
         }
@@ -73,7 +75,17 @@ namespace LocadoraNunesGame.UI
                 var service = new GameDomainService(unitOfWork);
 
                 Console.WriteLine("Digite o id a ser pesquisado:");
-                int id = Convert.ToInt32(Console.ReadLine());
+                int id;
+                try
+                { 
+                    id = Convert.ToInt32(Console.ReadLine());     
+                }
+                catch(Exception e)
+                { 
+                    Console.WriteLine("Este campo só aceita numeros! Tente novamente. >>> " + e.Message);
+                    return null;
+                }
+                
 
                 return service.FindById(id);
             }
@@ -89,9 +101,18 @@ namespace LocadoraNunesGame.UI
 
                 Console.WriteLine("Digite o nome >");
                 string name = Console.ReadLine();
-                Console.WriteLine("Diite o preco >");
-                double price = Convert.ToDouble(Console.ReadLine(), 
-                                                System.Globalization.CultureInfo.InvariantCulture);
+                double price;
+                try
+                {
+                    Console.WriteLine("Diite o preco >");
+                    price = Convert.ToDouble(Console.ReadLine(),
+                                                    System.Globalization.CultureInfo.InvariantCulture);                  
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine("O campo preço aceita somente numeros. Operação abortada, tente novamente! >>>" + e.Message);
+                    return;
+                }
 
                 var game = new Game()
                 {
@@ -165,9 +186,18 @@ namespace LocadoraNunesGame.UI
 
                 Console.WriteLine("Digite o nome >");
                 game.Name = Console.ReadLine();
-                Console.WriteLine("Diite o preco >");
-                game.Price = Convert.ToDouble(Console.ReadLine(), 
-                                              System.Globalization.CultureInfo.InvariantCulture);
+                try
+                {
+                    Console.WriteLine("Diite o preco >");
+                    game.Price = Convert.ToDouble(Console.ReadLine(),
+                                                  System.Globalization.CultureInfo.InvariantCulture);                  
+                }
+                catch(Exception e)
+                {
+                    Console.WriteLine("O campo preço aceita somente numeros. Operação abortada, tente novamente! >>> " + e.Message);
+                    return;
+                }
+
                 game.Category = Category();
                 game.Available = Availabe();
 

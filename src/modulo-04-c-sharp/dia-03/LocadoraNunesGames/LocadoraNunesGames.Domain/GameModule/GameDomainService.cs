@@ -18,12 +18,19 @@ namespace LocadoraNunesGames.Domain.GameModule
 
         public void Insert(Game game)
         {
-            this.unitOfWork.Add(game);
+            try
+            {
+                this.unitOfWork.Add(game);
+            }
+            catch(Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
 
         public void Update(Game game)
         {
-            this.unitOfWork.Update(game);
+            this.unitOfWork.Update(game);  
         }
 
         public void Delete(Game game)
