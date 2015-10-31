@@ -68,7 +68,6 @@ namespace LocadoraNunesGames.Domain.DataBaseAccess
             return this.Get().Max(t => t.Id) + 1;
         }
 
-
         public void Remove(Game game)
         {
             this.Load();
@@ -80,8 +79,8 @@ namespace LocadoraNunesGames.Domain.DataBaseAccess
         public void Update(Game game)
         {
             this.Load();
-            XElement element = this.xmlGames.Elements("jogo").FirstOrDefault(t => (int)t.Attribute("id") == game.Id);
-                        
+            XElement element = this.xmlGames.Elements("jogo").ToList()
+                                            .Find(t => (int)t.Attribute("id") == game.Id);                     
 
             element.Element("nome").Value = game.Name;
             element.Element("preco").Value = game.Price.ToString();
