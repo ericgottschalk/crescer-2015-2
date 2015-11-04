@@ -15,7 +15,7 @@ namespace Locadora.Web.Models
             var unitOfWork = new GameUnitOfWork(path);
             var domain = new GameDomainService(unitOfWork);
 
-            return domain.FindByName("");
+            return domain.Get().ToList();
         }
     }
 }

@@ -71,16 +71,14 @@ namespace Locadora.Domain.DataBaseAccess
         public void Remove(Game game)
         {
             this.Load();
-            XElement element = this.xmlGames.Elements("jogo").ToList()
-                                            .Find(t => Convert.ToInt32(t.Attribute("id").Value) == game.Id);
+            XElement element = this.XElementById(game.Id);
             element.Remove();
         }
 
         public void Update(Game game)
         {
             this.Load();
-            XElement element = this.xmlGames.Elements("jogo").ToList()
-                                            .Find(t => (int)t.Attribute("id") == game.Id);                     
+            XElement element = this.XElementById(game.Id);                    
 
             element.Element("nome").Value = game.Name;
             element.Element("preco").Value = game.Price.ToString();
@@ -88,16 +86,20 @@ namespace Locadora.Domain.DataBaseAccess
             element.Element("disponivel").Value = game.Available ? "SIM" : "NÂO";
         }
 
+        private XElement XElementById(int id)
+        {
+            this.Load();
+            return this.xmlGames.Elements("jogo").First(t => (int)t.Attribute("id") == id);
+        }
+
         public List<Game> FindByName(string name)
         {
-            var list = this.Get().ToList();
-            return list.FindAll(t => t.Name.ToUpper().StartsWith(name.ToUpper()));
+            return this.Get().Where(t => t.Name.ToUpper().StartsWith(name.ToUpper())).ToList();
         }
 
         public Game FindById(int id)
         {
-            var list = this.Get().ToList();
-            return list.Find(t => t.Id == id);
+            return this.Get().FirstOrDefault(t => t.Id == id);
         }
 
         public void SaveTxt()
