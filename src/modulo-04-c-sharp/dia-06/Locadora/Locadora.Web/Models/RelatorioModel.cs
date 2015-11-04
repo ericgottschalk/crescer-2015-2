@@ -8,14 +8,24 @@ using System.Web;
 namespace Locadora.Web.Models
 {
     public class RelatorioModel
-    { 
-        public List<Game> ObterJogos()
-        {
-            string path = @"C:\Users\bujil_000\Documents\CWICrescer\crescer-2015-2\src\modulo-04-c-sharp\dia-06\Locadora\Locadora.Web\files\game-store.xml";
-            var unitOfWork = new GameUnitOfWork(path);
-            var domain = new GameDomainService(unitOfWork);
+    {
+        public int QuantidadeJogos { get; private set; }
 
-            return domain.Get().ToList();
+        public double MediaValor { get; private set; }
+
+        public string NomeJogoMaisCaro { get; private set; }
+
+        public string NomeJogoMaisBarato { get; private set; }
+
+        public List<JogoModel> ListaJogos { get; private set; }
+
+        public RelatorioModel(List<JogoModel> list)
+        {
+            this.ListaJogos = list;
+            this.QuantidadeJogos = list.Count;
+            this.MediaValor = list.Average(t => t.Price);
+            this.NomeJogoMaisCaro = list.First(t => t.Price == list.Max(k => k.Price)).Name;
+            this.NomeJogoMaisBarato = list.First(t => t.Price == list.Min(k => k.Price)).Name;
         }
     }
 }

@@ -34,9 +34,6 @@
     </style>
 </head>
 <body>
-    @{
-        var list = Model.ObterJogos();
-    }
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">Lista de Jogos</h3>
@@ -52,7 +49,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var jogo in list)
+                    @foreach (var jogo in Model.ListaJogos)
                     {
                         <tr>
                             <th scope="row">@jogo.Id</th>
@@ -70,17 +67,10 @@
             <h3 class="panel-title">Informações</h3>
         </div>
         <div class="panel-body">
-            @{
-                var count = list.Count;
-                var average = list.Average(t => t.Price);
-                var max = list.First(t => t.Price == list.Max(k => k.Price)).Name;
-                var min = list.First(t => t.Price == list.Min(k => k.Price)).Name;
-            }
-
-            <h3>Quantidade de jogos: @count</h3>
-            <h3>Valor médio por jogo: R$@average</h3>
-            <h3>Jogo mais caro: @max</h3>
-            <h3>Jogo mais barato: @min</h3>
+            <h3>Quantidade de jogos: @Model.QuantidadeJogos</h3>
+            <h3>Valor médio por jogo: R$@Model.MediaValor</h3>
+            <h3>Jogo mais caro: @Model.NomeJogoMaisCaro</h3>
+            <h3>Jogo mais barato: @Model.NomeJogoMaisBarato</h3>
         </div>
     </div>
 </body>
