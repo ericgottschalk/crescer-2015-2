@@ -9,6 +9,10 @@ namespace Locadora.Domain.DataBaseAccess
 {
     public class GameUnitOfWork : GameDataBaseContext, IUnitOfWork
     {
+        public GameUnitOfWork()
+        {
+        }
+        
         public GameUnitOfWork(string path)
             : base(path)
         {

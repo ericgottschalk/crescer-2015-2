@@ -11,8 +11,12 @@ namespace Locadora.Domain.DataBaseAccess
 {
     public class GameDataBaseContext
     {
-        private string path;
+        private string path = @"C:\Users\bujil_000\Documents\CWICrescer\crescer-2015-2\src\modulo-04-c-sharp\dia-06\Locadora\files\game-store.xml";
         private XElement xmlGames;
+
+        public GameDataBaseContext()
+        {
+        }
 
         public GameDataBaseContext(string path)
         {
