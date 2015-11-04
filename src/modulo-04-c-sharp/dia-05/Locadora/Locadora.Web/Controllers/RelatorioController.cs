@@ -15,7 +15,7 @@ namespace Locadora.Web.Controllers
         {
             var listJogoModel = new List<JogoModel>();
 
-            string path = @"C:\Users\bujil_000\Documents\CWICrescer\crescer-2015-2\src\modulo-04-c-sharp\dia-06\Locadora\Locadora.Web\files\game-store.xml";
+            string path = @"C:\Users\eric.gottschalk\Documents\CWICrescer2015-2\crescer-2015-2\src\modulo-04-c-sharp\dia-05\Locadora\Locadora.Web\files\game-store.xml";
             var unit = new GameUnitOfWork(path);
             var service = new GameDomainService(unit);
             var list = service.Get().ToList();
