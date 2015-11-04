@@ -1,8 +1,46 @@
 ﻿@{
-    ViewBag.Title = "Página Inicial";
+    ViewBag.Title = "World Games";
 }
 
-<h2>Locadora CWI Crescer</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        h3 {
+            font: bold 25px arial;
+            color: lime;
+        }
 
-<a href="/Relatorio/JogosDisponiveis">Jogos Disponíveis</a>
+        body {
+            background-color: #444;
+        }
 
+        .panel {
+            margin-top: 20px;
+            text-align: center;
+            background-color: black;
+        }
+
+        .btn {
+            margin-top: 50px;
+            background-color: lime
+        }
+    </style>
+</head>
+<body>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Locadora World Games</h3>
+        </div>
+        <div class="panel-body">
+            <img src="~/Content/banner.jpg" />
+        </div>
+    </div>
+
+    <div style="text-align: center">
+        <p><a class="btn btn-success btn-lg" href="~/Relatorio/JogosDisponiveis" role="button">Mostrar Jogos</a></p>
+    </div>
+</body>
+</html>

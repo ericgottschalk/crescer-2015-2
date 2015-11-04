@@ -11,12 +11,29 @@ namespace Locadora.Web.MVC.Controllers
     {
         public ActionResult JogosDisponiveis()
         {
-            var model = new List<JogoModel>()
+            var db = new Locadora.Repositorio.ADO.JogoRepositorio();
+            var list = db.BuscarTodos();
+            var model = new RelatorioModel();
+
+            foreach (var jogo in list)
             {
-                new JogoModel() { Id = 1, Nome = "Teste", Preco = 9.9m, Categoria="RPG" },
-                new JogoModel() { Id = 1, Nome = "dasd", Preco = 5m, Categoria="Aventura" },
-                new JogoModel() { Id = 1, Nome = "dasda", Preco = 10m, Categoria="RPG" }
-            };
+                var jogoModel = new JogoModel()
+                {
+                    Id = jogo.Id,
+                    Nome = jogo.Nome,
+                    Categoria = jogo.Categoria.ToString(),
+                    Preco = jogo.Preco,
+                };
+
+                model.ListaJogos.Add(jogoModel);
+            }
+
+            model.ListaJogos = model.ListaJogos.OrderBy(t => t.Nome).ToList();
+            var lista = model.ListaJogos;
+            model.MediaValor = lista.Average(t => t.Preco);
+            model.QuantidadeJogos = lista.Count;
+            model.NomeJogoMaisCaro = lista.First(t => t.Preco == list.Max(x => x.Preco)).Nome;
+            model.NomeJogoMaisBarato = lista.First(t => t.Preco == list.Min(x => x.Preco)).Nome;
 
             return View(model);
         }
