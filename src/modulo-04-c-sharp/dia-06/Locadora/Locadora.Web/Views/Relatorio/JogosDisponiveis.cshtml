@@ -1,0 +1,87 @@
+﻿@model Locadora.Web.Models.RelatorioModel
+
+@{
+    ViewBag.Title = "Jogos Disponiveis";
+}
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <style>
+        body{
+            background-color: #444;
+        }
+        h3{
+            font: bold 25px arial;
+            color: orange;
+        }
+        h4{
+            color: orange;
+            text-align: center;
+        }
+        th{
+            font: bold 20px arial;
+            color: orange;
+        }
+        td{
+            font: bold 20px arial;
+        }
+        .panel{    
+            margin-top: 20px;
+            background-color: black;
+        }
+    </style>
+</head>
+<body>
+    @{
+        var list = Model.ObterJogos();
+    }
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Lista de Jogos</h3>
+        </div>
+        <div class="panel-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Id</th>
+                        <th>Nome</th>
+                        <th>Categoria</th>
+                        <th>Preço</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var jogo in list)
+                    {
+                        <tr>
+                            <th scope="row">@jogo.Id</th>
+                            <td>@jogo.Name</td>
+                            <td>@jogo.Category</td>
+                            <td>R$@jogo.Price</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Informações</h3>
+        </div>
+        <div class="panel-body">
+            @{
+                var count = list.Count;
+                var average = list.Average(t => t.Price);
+                var max = list.First(t => t.Price == list.Max(k => k.Price)).Name;
+                var min = list.First(t => t.Price == list.Min(k => k.Price)).Name;
+            }
+
+            <h3>Quantidade de jogos: @count</h3>
+            <h3>Valor médio por jogo: R$@average</h3>
+            <h3>Jogo mais caro: @max</h3>
+            <h3>Jogo mais barato: @min</h3>
+        </div>
+    </div>
+</body>
+</html>
