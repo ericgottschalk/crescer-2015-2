@@ -38,5 +38,30 @@ namespace Locadora.Web.MVC.Controllers
 
             return View(model);
         }
+
+        public ActionResult DetalhesJogo(int id)
+        {
+            var db = new Locadora.Repositorio.ADO.JogoRepositorio();
+            var jogo = db.BuscarPorId(id);
+
+            if (jogo == null)
+            {
+                return RedirectToAction("JogosDisponiveis");
+            }
+
+            var jogoModel = new JogoModel()
+            {
+                Id = jogo.Id,
+                Nome = jogo.Nome,
+                Categoria = jogo.Categoria.ToString(),
+                Preco = jogo.Preco,
+                Selo = jogo.Selo.ToString(),
+                Descricao = jogo.Descricao,
+                Imagem = jogo.Imagem,
+                Video = jogo.Video
+            };
+
+            return View(jogoModel);
+        }
     }
 }

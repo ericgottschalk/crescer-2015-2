@@ -1,0 +1,43 @@
+﻿@model JogoModel
+@{
+    ViewBag.Title = "DetalhesJogo";
+}
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style>
+        body {
+            background-color: #444;
+        }
+
+        h4{
+            font-size: 50px;
+            text-align: center;
+            color: lime;
+        }
+
+        .panel{
+            margin-top: 20px;
+            text-align: center;
+            background-color: black;
+            color: lime;
+        }
+    </style>
+</head>
+<body>
+    <h4>@Model.Nome</h4>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Informações</h3>
+        </div>
+        <div class="panel-body">
+            <h3>Categoria: @Model.Categoria</h3>
+            <h3>Selo: @Model.Selo</h3>
+            <h3>Preço: R$@Model.Preco</h3>
+            <h3>Descrição: @Model.Descricao</h3>
+        </div>
+    </div>
+</body>
+</html>
+

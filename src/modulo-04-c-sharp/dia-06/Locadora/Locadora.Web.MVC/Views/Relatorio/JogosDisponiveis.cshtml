@@ -52,6 +52,7 @@
                         <th>Categoria</th>
                         <th>Selo</th>
                         <th>Preço</th>
+                        <th>Detalhes</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -64,6 +65,7 @@
                             <td>@jogo.Categoria</td>
                             <td>@jogo.Selo</td>
                             <td>R$@jogo.Preco</td>
+                            <td>@Html.ActionLink("Details", "DetalhesJogo", "Relatorio", jogo, new { @class = "btn btn-success" } )</td>
                         </tr>
 
                         i++;
