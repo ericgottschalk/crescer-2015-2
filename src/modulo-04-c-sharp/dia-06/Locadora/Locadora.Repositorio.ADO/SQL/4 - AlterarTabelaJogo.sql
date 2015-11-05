@@ -1,7 +1,7 @@
 ALTER TABLE Jogo
 ADD
 	[IdSelo] INT NULL,
-	[Desscricao] VARCHAR(MAX) NULL,
+	[Descricao] VARCHAR(MAX) NULL,
 	[Imagem] VARCHAR(500) NULL,
 	[Video] VARCHAR(500) NULL
 
