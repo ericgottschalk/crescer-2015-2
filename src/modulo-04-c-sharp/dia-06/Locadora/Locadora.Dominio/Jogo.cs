@@ -8,9 +8,17 @@ namespace Locadora.Dominio
     {
         public string Nome { get; set; }
 
+        public string Descricao { get; set; }
+
         public decimal Preco { get; set; }
 
         public Categoria Categoria { get; set; }
+
+        public Selo Selo { get; set; }
+
+        public string Imagem { get; set; }
+
+        public string Video { get; set; }
 
         public int? IdClienteLocacao { get; private set; }
         
@@ -37,6 +45,7 @@ namespace Locadora.Dominio
             builder.AppendLine("Nome: " + this.Nome);
             builder.AppendLine("Preço: " + this.Preco.ToString("C", CultureInfo.GetCultureInfo("pt-BR")));
             builder.AppendLine("Categoria: " + this.Categoria);
+            builder.AppendLine("Selo: " + this.Selo);
 
             return builder.ToString();
         }
@@ -56,7 +65,8 @@ namespace Locadora.Dominio
                     && this.Nome == jogoComp.Nome
                     && this.Preco == jogoComp.Preco
                     && this.Categoria == jogoComp.Categoria
-                    && this.IdClienteLocacao == jogoComp.IdClienteLocacao;
+                    && this.IdClienteLocacao == jogoComp.IdClienteLocacao
+                    && this.Selo == jogoComp.Selo;
             }
 
             return false;
