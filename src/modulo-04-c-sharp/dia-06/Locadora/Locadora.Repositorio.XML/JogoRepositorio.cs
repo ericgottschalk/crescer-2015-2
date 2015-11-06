@@ -30,6 +30,10 @@ namespace Locadora.Repositorio.XML
             jogoSalvo.SetElementValue("preco", entidade.Preco);
             jogoSalvo.SetElementValue("categoria", entidade.Categoria.ToString());
             jogoSalvo.SetElementValue("id_cliente_locacao", entidade.IdClienteLocacao.HasValue ? entidade.IdClienteLocacao.Value.ToString() : "");
+            jogoSalvo.SetAttributeValue("selo", (int)entidade.Selo);
+            jogoSalvo.SetAttributeValue("descricao", entidade.Descricao);
+            jogoSalvo.SetAttributeValue("imagem", entidade.Imagem);
+            jogoSalvo.SetAttributeValue("video", entidade.Video);
 
             SalvarDbXml(db);
             return 1;
@@ -97,7 +101,6 @@ namespace Locadora.Repositorio.XML
                 yield return ConverterXmlEmJogo(j);
             }
         }
-
         
         private XElement ConverterJogoEmXml(Jogo jogo)
         {
@@ -107,6 +110,10 @@ namespace Locadora.Repositorio.XML
             jogoXml.SetElementValue("preco", jogo.Preco);
             jogoXml.SetElementValue("categoria", jogo.Categoria.ToString());
             jogoXml.SetElementValue("id_cliente_locacao", jogo.IdClienteLocacao.HasValue ? jogo.IdClienteLocacao.Value.ToString() : "");
+            jogoXml.SetAttributeValue("selo", jogo.Selo.ToString());
+            jogoXml.SetAttributeValue("descricao", jogo.Descricao);
+            jogoXml.SetAttributeValue("imagem", jogo.Imagem);
+            jogoXml.SetAttributeValue("video", jogo.Video);
 
             return jogoXml;
         }
@@ -126,6 +133,10 @@ namespace Locadora.Repositorio.XML
             jogo.Nome = jogoXml.Element("nome").Value;
             jogo.Preco = Convert.ToDecimal(jogoXml.Element("preco").Value);
             jogo.Categoria = ConverterXmlCategoriaEmEnum(jogoXml.Element("categoria"));
+            jogo.Selo = ConverterXmlSeloEmEnum(jogoXml.Element("selo"));
+            jogo.Descricao = jogoXml.Element("descricao").Value;
+            jogo.Imagem = jogoXml.Element("imagem").Value;
+            jogo.Video = jogoXml.Element("video").Value;
             
             return jogo;
         }
@@ -134,6 +145,12 @@ namespace Locadora.Repositorio.XML
         {
             string valorXml = categoriaXml.Value;
             return (Categoria)Enum.Parse(typeof(Categoria), valorXml);
+        }
+
+        private Selo ConverterXmlSeloEmEnum(XElement categoriaXml)
+        {
+            string valorXml = categoriaXml.Value;
+            return (Selo)Enum.Parse(typeof(Selo), valorXml);
         }
     }
 }
