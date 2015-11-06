@@ -1,4 +1,5 @@
-﻿@{
+﻿@model string
+@{
     ViewBag.Title = "World Games";
 }
 
@@ -24,8 +25,17 @@
         }
 
         .btn {
+            margin: 5px;
             margin-top: 50px;
             background-color: lime
+        }
+
+        .jumbotron{
+            background-color: #444;
+            width: 400px;
+			text-align: center;
+			margin: auto;
+			margin-top: 50px;
         }
     </style>
 </head>
@@ -39,8 +49,14 @@
         </div>
     </div>
 
-    <div style="text-align: center">
-        @Html.ActionLink("Mostrar Jogos", "JogosDisponiveis", "Relatorio", new { area = "" }, new { @class="btn btn-success btn-lg" })
+    <div class="jumbotron">
+        @using (Html.BeginForm("JogosDisponiveis", "Relatorio", new { @class = "form-control" }))
+        {
+            string nome = null;
+            @Html.TextBoxFor(m => nome, new { @type = "text", @class = "form-control", @placeholder = "Nome" })
+            <button class="btn btn-success btn-lg" type="submit">Buscar por nome</button>
+            @Html.ActionLink("Mostrar Todos", "JogosDisponiveis", "Relatorio", new { area = "" }, new { @class = "btn btn-success btn-lg" })
+        }
     </div>
 </body>
 </html>

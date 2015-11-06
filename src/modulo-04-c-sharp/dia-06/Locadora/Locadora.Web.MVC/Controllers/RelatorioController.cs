@@ -9,10 +9,16 @@ namespace Locadora.Web.MVC.Controllers
 {
     public class RelatorioController : Controller
     {
-        public ActionResult JogosDisponiveis()
+        public ActionResult JogosDisponiveis(string nome)
         {
             var db = new Locadora.Repositorio.ADO.JogoRepositorio();
-            var list = db.BuscarTodos();
+            var list = db.BuscarTodos().ToList();
+
+            if (!String.IsNullOrWhiteSpace(nome))
+            {
+                list = list.FindAll(t => t.Nome.ToUpper().StartsWith(nome.ToUpper()));
+            }
+            
             var model = new RelatorioModel();
 
             foreach (var jogo in list)
