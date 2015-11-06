@@ -28,9 +28,9 @@ namespace Locadora.Web.MVC.Controllers
             {
                 Id = jogo.Id,
                 Nome = jogo.Nome,
-                Categoria = jogo.Categoria.ToString(),
+                Categoria = jogo.Categoria,
                 Preco = jogo.Preco,
-                Selo = jogo.Selo.ToString(),
+                Selo = jogo.Selo,
                 Descricao = jogo.Descricao,
                 Imagem = jogo.Imagem,
                 Video = jogo.Video
@@ -39,9 +39,23 @@ namespace Locadora.Web.MVC.Controllers
             return View(jogoModel);
         }
 
-        public ActionResult Manter()
+        public ActionResult ManterJogo()
         {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Salvar(JogoModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                TempData["Mensagem"] = "Jogo salvo com sucesso!";
+
+                return RedirectToAction("JogosDisponiveis", "RelatorioJogo");
+            }
+
+            TempData["Mensagem"] = "Ocorreu um erro!";
+            return View("ManterJogo");
         }
     }
 }

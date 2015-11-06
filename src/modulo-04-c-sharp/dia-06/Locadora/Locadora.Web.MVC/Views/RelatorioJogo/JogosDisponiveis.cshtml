@@ -37,11 +37,17 @@
             background-color: black;
         }
     </style>
+
+    @if (TempData["Mensagem"] != null)
+    {
+        <h2>@TempData["Mensagem"]</h2>
+    }
 </head>
 <body>
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title">Lista de Jogos</h3>
+            @Html.ActionLink("Cadastrar Jogo", "ManterJogo", "Jogo", new { area = "" }, new { @class = "btn btn-success btn-lg" })
         </div>
         <div class="panel-body">
             <table class="table table-hover">
@@ -65,7 +71,7 @@
                             <td>@jogo.Categoria</td>
                             <td>@jogo.Selo</td>
                             <td>R$@jogo.Preco</td>
-                            <td>@Html.ActionLink("Details", "DetalhesJogo", "Jogo", jogo, new { @class = "btn btn-success" } )</td>
+                            <td>@Html.ActionLink("Details", "DetalhesJogo", "Jogo", jogo, new { @class = "btn btn-success" })</td>
                         </tr>
 
                         i++;

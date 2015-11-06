@@ -135,6 +135,7 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\Jogo\DetalhesJogo.cshtml" />
     <Content Include="Views\Shared\NenhumRegistroEncontrado.cshtml" />
+    <Content Include="Views\Jogo\ManterJogo.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
