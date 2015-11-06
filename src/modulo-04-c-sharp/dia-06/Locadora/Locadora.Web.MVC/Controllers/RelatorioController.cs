@@ -1,4 +1,5 @@
-﻿using Locadora.Web.MVC.Models;
+﻿using Locadora.Dominio;
+using Locadora.Web.MVC.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +13,20 @@ namespace Locadora.Web.MVC.Controllers
         public ActionResult JogosDisponiveis(string nome)
         {
             var db = new Locadora.Repositorio.ADO.JogoRepositorio();
-            var list = db.BuscarTodos().ToList();
+            IList<Jogo> list;
 
             if (!String.IsNullOrWhiteSpace(nome))
             {
-                list = list.FindAll(t => t.Nome.ToUpper().StartsWith(nome.ToUpper()));
+                list = db.BuscarPorNome(nome);
+            }
+            else
+            {
+                list = db.BuscarTodos();
+            }
+
+            if (list.Count == 0)
+            {
+                return RedirectToAction("JogosDisponiveis");
             }
             
             var model = new RelatorioModel();
@@ -55,7 +65,7 @@ namespace Locadora.Web.MVC.Controllers
                 return RedirectToAction("JogosDisponiveis");
             }
 
-            var jogoModel = new JogoModel()
+            var jogoModel = new DetalheModel()
             {
                 Id = jogo.Id,
                 Nome = jogo.Nome,
