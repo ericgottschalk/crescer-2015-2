@@ -8,11 +8,12 @@ using System.Web.Mvc;
 
 namespace Locadora.Web.MVC.Controllers
 {
-    public class RelatorioController : Controller
+    public class RelatorioJogoController : Controller
     {
         public ActionResult JogosDisponiveis(string nome)
         {
             var db = new Locadora.Repositorio.ADO.JogoRepositorio();
+            var model = new RelatorioJogoModel();
             IList<Jogo> list;
 
             if (!String.IsNullOrWhiteSpace(nome))
@@ -26,14 +27,12 @@ namespace Locadora.Web.MVC.Controllers
 
             if (list.Count == 0)
             {
-                return RedirectToAction("JogosDisponiveis");
+                return View("NenhumRegistroEncontrado");
             }
-            
-            var model = new RelatorioModel();
-
+    
             foreach (var jogo in list)
             {
-                var jogoModel = new JogoModel()
+                var jogoDisponivel = new JogoDisponivelModdel()
                 {
                     Id = jogo.Id,
                     Nome = jogo.Nome,
@@ -42,7 +41,7 @@ namespace Locadora.Web.MVC.Controllers
                     Selo = jogo.Selo.ToString()
                 };
 
-                model.ListaJogos.Add(jogoModel);
+                model.ListaJogos.Add(jogoDisponivel);
             }
 
             model.ListaJogos = model.ListaJogos.OrderBy(t => t.Nome).ToList();
@@ -53,31 +52,6 @@ namespace Locadora.Web.MVC.Controllers
             model.NomeJogoMaisBarato = lista.First(t => t.Preco == list.Min(x => x.Preco)).Nome;
 
             return View(model);
-        }
-
-        public ActionResult DetalhesJogo(int id)
-        {
-            var db = new Locadora.Repositorio.ADO.JogoRepositorio();
-            var jogo = db.BuscarPorId(id);
-
-            if (jogo == null)
-            {
-                return RedirectToAction("JogosDisponiveis");
-            }
-
-            var jogoModel = new DetalheModel()
-            {
-                Id = jogo.Id,
-                Nome = jogo.Nome,
-                Categoria = jogo.Categoria.ToString(),
-                Preco = jogo.Preco,
-                Selo = jogo.Selo.ToString(),
-                Descricao = jogo.Descricao,
-                Imagem = jogo.Imagem,
-                Video = jogo.Video
-            };
-
-            return View(jogoModel);
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model RelatorioModel
+﻿@model RelatorioJogoModel
 
 @{
     ViewBag.Title = "Jogos Disponiveis";
@@ -65,7 +65,7 @@
                             <td>@jogo.Categoria</td>
                             <td>@jogo.Selo</td>
                             <td>R$@jogo.Preco</td>
-                            <td>@Html.ActionLink("Details", "DetalhesJogo", "Relatorio", jogo, new { @class = "btn btn-success" } )</td>
+                            <td>@Html.ActionLink("Details", "DetalhesJogo", "Jogo", jogo, new { @class = "btn btn-success" } )</td>
                         </tr>
 
                         i++;

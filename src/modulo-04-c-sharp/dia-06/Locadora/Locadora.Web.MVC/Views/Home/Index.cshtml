@@ -50,12 +50,12 @@
     </div>
 
     <div class="jumbotron">
-        @using (Html.BeginForm("JogosDisponiveis", "Relatorio", new { @class = "form-control" }))
+        @using (Html.BeginForm("JogosDisponiveis", "RelatorioJogo", new { @class = "form-control" }))
         {
             string nome = null;
             @Html.TextBoxFor(m => nome, new { @type = "text", @class = "form-control", @placeholder = "Nome" })
             <button class="btn btn-success btn-lg" type="submit">Buscar por nome</button>
-            @Html.ActionLink("Mostrar Todos", "JogosDisponiveis", "Relatorio", new { area = "" }, new { @class = "btn btn-success btn-lg" })
+            @Html.ActionLink("Mostrar Todos", "JogosDisponiveis", "RelatorioJogo", new { area = "" }, new { @class = "btn btn-success btn-lg" })
         }
     </div>
 </body>
