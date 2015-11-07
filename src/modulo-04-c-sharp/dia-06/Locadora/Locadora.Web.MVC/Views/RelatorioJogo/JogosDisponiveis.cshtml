@@ -9,12 +9,12 @@
     <title></title>
     @Styles.Render("~/bundles/jogosdisponiveis")
     @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
     @if (TempData["Mensagem"] != null)
     {
         <h2>@TempData["Mensagem"]</h2>
     }
-</head>
-<body>
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title"></h3>
