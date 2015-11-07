@@ -10,6 +10,7 @@ namespace Locadora.Web.MVC.Controllers
 {
     public class RelatorioJogoController : Controller
     {
+        [HttpGet]
         public ActionResult JogosDisponiveis(string nome)
         {
             var db = new Locadora.Repositorio.ADO.JogoRepositorio();

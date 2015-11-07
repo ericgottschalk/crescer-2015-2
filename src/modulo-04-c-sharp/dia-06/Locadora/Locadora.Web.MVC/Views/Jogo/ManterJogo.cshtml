@@ -3,33 +3,8 @@
     ViewBag.Title = "Controle de Jogos";
 }
 
-<style>
-    h2 {
-        color: lime;
-        text-align: center;
-    }
-
-    body {
-        background-color: #444;
-    }
-
-    label {
-        color: lime;
-    }
-
-    .panel {
-        background-color: black;
-    }
-</style>
-
-@if (Model == null || Model.Id == null)
-{
-    <h2>Cadatro de Jogo</h2>
-}
-else
-{
-    <h2>Edição Jogo</h2>
-}
+<link href="~/Content/ManterJogo.css" rel="stylesheet" />
+<link href="~/Content/StyleSheet.css" rel="stylesheet" />
 
 @if (TempData["Mensagem"] != null)
 {
@@ -38,56 +13,73 @@ else
 
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title">Locadora World Games</h3>
+        <h3 class="panel-title">@TempData["TipoManter"]</h3>
     </div>
     <div class="panel-body">
-        @using (Html.BeginForm("Salvar", "Jogo", new { @class = "form-control form-horizontal" }))
+        @using (Html.BeginForm("Salvar", "Jogo", FormMethod.Post, new { @class = "form-control form-horizontal" }))
         {
             @Html.AntiForgeryToken();
             @Html.ValidationSummary(false);
+            //@Html.HiddenFor(m => Model.Id)
 
             <div class="form-group">
                 @Html.LabelFor(m => m.Nome, new { @class = "col-sm-2 control-label" })
-                @Html.TextBoxFor(m => m.Nome, new { @type = "text", @class = "form-control", @placeholder = "Nome" })
-                @Html.ValidationMessageFor(m => m.Nome)
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => m.Nome, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Nome)
+                </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(m => m.Descricao, new { @class = "col-sm-2 control-label" })
-                @Html.TextAreaFor(m => m.Descricao, new { @type = "text", @class = "form-control", @placeholder = "Descrição" })
-                @Html.ValidationMessageFor(m => m.Descricao)
+                @Html.LabelFor(m => Model.Descricao, new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextAreaFor(m => m.Descricao, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => m.Descricao)
+                </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(m => m.Preco, new { @class = "col-sm-2 control-label" })
-                @Html.TextBoxFor(m => m.Preco, new { @type = "text", @class = "form-control", @placeholder = "Preço" })
-                @Html.ValidationMessageFor(m => m.Preco)
+                @Html.LabelFor(m => Model.Preco, new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => Model.Preco, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => Model.Preco)
+                </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(m => m.Categoria, new { @class = "col-sm-2 control-label" })
-                @Html.EnumDropDownListFor(m => m.Categoria, new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.Categoria)
+                @Html.LabelFor(m => Model.Categoria, new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.EnumDropDownListFor(m => Model.Categoria, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => Model.Categoria)
+                </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(m => m.Selo, new { @class = "col-sm-2 control-label" })
-                @Html.EnumDropDownListFor(m => m.Selo, new { @class = "form-control" })
-                @Html.ValidationMessageFor(m => m.Selo)
+                @Html.LabelFor(m => Model.Selo, new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.EnumDropDownListFor(m => Model.Selo, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(m => Model.Selo)
+                </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(m => m.Imagem, new { @class = "col-sm-2 control-label" })
-                @Html.TextBoxFor(m => m.Imagem, new { @type = "text", @class = "form-control", @placeholder = "URL Imagem" })
+                @Html.LabelFor(m => Model.Imagem, new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => Model.Imagem, new { @class = "form-control" })
+                </div>
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(m => m.Video, new { @class = "col-sm-2 control-label" })
-                @Html.TextBoxFor(m => m.Video, new { @type = "text", @class = "form-control", @placeholder = "URL Vídeo" })
+                @Html.LabelFor(m => Model.Video, new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.TextBoxFor(m => Model.Video, new { @class = "form-control" })
+                </div>
             </div>
 
             <div class="form-group">
-                <button class="btn btn-success btn-lg" type="submit">Salvar</button>
+                <div class="col-sm-offset-2 col-sm-10">
+                    <button type="submit" class="btn btn-default btn-lg">Salvar</button>
+                </div>
             </div>
         }
     </div>

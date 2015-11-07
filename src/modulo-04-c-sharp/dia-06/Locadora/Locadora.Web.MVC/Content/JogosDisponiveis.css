@@ -1,0 +1,23 @@
+﻿h3 {
+    font: bold 25px arial;
+    color: orange;
+}
+
+h4 {
+    color: orange;
+    text-align: center;
+}
+
+th {
+    font: bold 20px arial;
+    color: orange;
+}
+
+td {
+    font: bold 20px arial;
+}
+
+.panel {
+    margin-top: 20px;
+    background-color: black;
+}

@@ -9,7 +9,7 @@ namespace Locadora.Web.MVC.Models
 {
     public class JogoModel
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         [Required]
         public string Nome { get; set; }
@@ -28,6 +28,22 @@ namespace Locadora.Web.MVC.Models
 
         public string Imagem { get; set; }
 
-        public string Video { get; set; }
+        public string Video { get; set; }    
+
+        public JogoModel()
+        {
+        }
+
+        public JogoModel(Jogo jogo)
+        {
+            this.Id = jogo.Id;
+            this.Nome = jogo.Nome;
+            this.Categoria = jogo.Categoria;
+            this.Preco = jogo.Preco;
+            this.Selo = jogo.Selo;
+            this.Descricao = jogo.Descricao;
+            this.Imagem = jogo.Imagem;
+            this.Video = jogo.Video;
+        }
     }
 }

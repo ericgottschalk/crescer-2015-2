@@ -8,6 +8,7 @@ namespace Locadora.Web.MVC.Controllers
 {
     public class HomeController : Controller
     {
+        [HttpGet]
         public ActionResult Index()
         {
             return View();

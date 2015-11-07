@@ -8,36 +8,8 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
-    <style>
-        body {
-            background-color: #444;
-        }
-
-        h3 {
-            font: bold 25px arial;
-            color: lime;
-        }
-
-        h4 {
-            color: orange;
-            text-align: center;
-        }
-
-        th {
-            font: bold 20px arial;
-            color: lime;
-        }
-
-        td {
-            font: bold 20px arial;
-        }
-
-        .panel {
-            margin-top: 20px;
-            background-color: black;
-        }
-    </style>
-
+    <link href="~/Content/JogosDisponiveis.css" rel="stylesheet" />
+    <link href="~/Content/StyleSheet.css" rel="stylesheet" />
     @if (TempData["Mensagem"] != null)
     {
         <h2>@TempData["Mensagem"]</h2>
@@ -46,8 +18,8 @@
 <body>
     <div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">Lista de Jogos</h3>
-            @Html.ActionLink("Cadastrar Jogo", "ManterJogo", "Jogo", new { area = "" }, new { @class = "btn btn-success btn-lg" })
+            <h3 class="panel-title"></h3>
+            @Html.ActionLink("Cadastrar Jogo", "ManterJogo", "Jogo", new { area = "" }, new { @class = "btn btn-default btn-lg" })
         </div>
         <div class="panel-body">
             <table class="table table-hover">
@@ -71,7 +43,7 @@
                             <td>@jogo.Categoria</td>
                             <td>@jogo.Selo</td>
                             <td>R$@jogo.Preco</td>
-                            <td>@Html.ActionLink("Details", "DetalhesJogo", "Jogo", jogo, new { @class = "btn btn-success" })</td>
+                            <td>@Html.ActionLink("Details", "DetalhesJogo", "Jogo", jogo, new { @class = "btn btn-default" })</td>
                         </tr>
 
                         i++;

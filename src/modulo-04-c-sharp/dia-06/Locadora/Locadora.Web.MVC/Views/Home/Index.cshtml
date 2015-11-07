@@ -8,36 +8,8 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
-    <style>
-        h3 {
-            font: bold 25px arial;
-            color: lime;
-        }
-
-        body {
-            background-color: #444;
-        }
-
-        .panel {
-            margin-top: 20px;
-            text-align: center;
-            background-color: black;
-        }
-
-        .btn {
-            margin: 5px;
-            margin-top: 50px;
-            background-color: lime
-        }
-
-        .jumbotron{
-            background-color: #444;
-            width: 400px;
-			text-align: center;
-			margin: auto;
-			margin-top: 50px;
-        }
-    </style>
+    <link href="~/Content/Index.css" rel="stylesheet" />
+    <link href="~/Content/StyleSheet.css" rel="stylesheet" />
 </head>
 <body>
     <div class="panel panel-default">
@@ -54,8 +26,8 @@
         {
             string nome = null;
             @Html.TextBoxFor(m => nome, new { @type = "text", @class = "form-control", @placeholder = "Nome" })
-            <button class="btn btn-success btn-lg" type="submit">Buscar por nome</button>
-            @Html.ActionLink("Mostrar Todos", "JogosDisponiveis", "RelatorioJogo", new { area = "" }, new { @class = "btn btn-success btn-lg" })
+            <button class="btn btn-default btn-lg" type="submit">Buscar por nome</button>
+            @Html.ActionLink("Mostrar Todos", "JogosDisponiveis", "RelatorioJogo", new { area = "" }, new { @class = "btn btn-default btn-lg" })
         }
     </div>
 </body>

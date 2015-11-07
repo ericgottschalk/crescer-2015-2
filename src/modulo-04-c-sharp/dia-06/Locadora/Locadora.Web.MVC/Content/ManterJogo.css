@@ -1,0 +1,14 @@
+﻿h2 {
+    color: orange;
+    text-align: center;
+}
+
+label {
+    color: orange;
+}
+
+.panel {
+    margin: 20px;
+    background-color: black;
+    color: orange;
+}

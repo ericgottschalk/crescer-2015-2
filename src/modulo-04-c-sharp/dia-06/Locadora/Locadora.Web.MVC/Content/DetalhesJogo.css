@@ -1,0 +1,17 @@
+﻿h4 {
+    font-size: 50px;
+    text-align: center;
+    color: orange;
+}
+
+img {
+    width: 450px;
+    height: 450px;
+}
+
+.panel {
+    margin-top: 20px;
+    text-align: center;
+    background-color: black;
+    color: orange;
+}
