@@ -1,5 +1,4 @@
 ﻿@model RelatorioJogoModel
-
 @{
     ViewBag.Title = "Jogos Disponiveis";
 }
@@ -8,8 +7,8 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
-    <link href="~/Content/JogosDisponiveis.css" rel="stylesheet" />
-    <link href="~/Content/StyleSheet.css" rel="stylesheet" />
+    @Styles.Render("~/bundles/jogosdisponiveis")
+    @Scripts.Render("~/bundles/modernizr")
     @if (TempData["Mensagem"] != null)
     {
         <h2>@TempData["Mensagem"]</h2>

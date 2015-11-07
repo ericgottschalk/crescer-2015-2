@@ -3,8 +3,8 @@
     ViewBag.Title = "Controle de Jogos";
 }
 
-<link href="~/Content/ManterJogo.css" rel="stylesheet" />
-<link href="~/Content/StyleSheet.css" rel="stylesheet" />
+@Styles.Render("~/bundles/manterjogo")
+@Scripts.Render("~/bundles/modernizr")
 
 @if (TempData["Mensagem"] != null)
 {

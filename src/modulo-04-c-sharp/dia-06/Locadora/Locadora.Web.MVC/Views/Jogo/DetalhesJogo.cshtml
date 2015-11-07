@@ -6,8 +6,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <title></title>
-    <link href="~/Content/DetalhesJogo.css" rel="stylesheet" />
-    <link href="~/Content/StyleSheet.css" rel="stylesheet" />
+    @Styles.Render("~/bundles/detalhesjogo")
+    @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
     <h4>@Model.Nome</h4>
