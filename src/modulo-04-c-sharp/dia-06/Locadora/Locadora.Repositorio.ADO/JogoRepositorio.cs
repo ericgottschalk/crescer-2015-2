@@ -35,7 +35,7 @@ namespace Locadora.Repositorio.ADO
                 comando.AddParam("paramNome", entidade.Nome);
                 comando.AddParam("paramPreco", entidade.Preco);
                 comando.AddParam("paramIdCategoria", (int)entidade.Categoria);
-                comando.AddParam("paramIdClienteLocacao", entidade.IdClienteLocacao);
+                comando.AddParam("paramIdClienteLocacao", entidade.ClienteLocacao);
                 comando.AddParam("paramIdSelo", (int)entidade.Selo);
                 comando.AddParam("paramDescricao", entidade.Descricao);
                 comando.AddParam("paramImagem", entidade.Imagem);
@@ -105,7 +105,7 @@ namespace Locadora.Repositorio.ADO
                 comando.AddParam("paramNome", entidade.Nome);
                 comando.AddParam("paramPreco", entidade.Preco);
                 comando.AddParam("paramIdCategoria", (int)entidade.Categoria);
-                comando.AddParam("paramIdClienteLocacao", entidade.IdClienteLocacao);
+                comando.AddParam("paramIdClienteLocacao", entidade.ClienteLocacao);
                 comando.AddParam("paramIdSelo", (int)entidade.Selo);
                 comando.AddParam("paramDescricao", entidade.Descricao);
                 comando.AddParam("paramImagem", entidade.Imagem);
@@ -143,21 +143,23 @@ namespace Locadora.Repositorio.ADO
 
         private Jogo ConverterDataReaderEmJogo(IDataReader reader)
         {
-            var jogo = new Jogo(
-                // você pode nomear os parâmetros no construtor =), facilita a leitura.
-                id: Convert.ToInt32(reader["Id"]),
-                idClienteLocacao: reader["IdClienteLocacao"].ToString().ToNullable<int>()
-                );
+            //var jogo = new Jogo(
+            //    // você pode nomear os parâmetros no construtor =), facilita a leitura.
+            //    id: Convert.ToInt32(reader["Id"]),
+            //    idClienteLocacao: reader["IdClienteLocacao"].ToString().ToNullable<int>()
+            //    );
 
-            jogo.Nome = reader["Nome"].ToString();
-            jogo.Preco = Convert.ToDecimal(reader["Preco"]);
-            jogo.Categoria = (Categoria)Convert.ToInt32(reader["IdCategoria"]);
-            jogo.Selo = (Selo)Convert.ToInt32(reader["IdSelo"]);
-            jogo.Descricao = reader["Descricao"].ToString();
-            jogo.Imagem = reader["Imagem"].ToString();
-            jogo.Video = reader["Video"].ToString();
+            //jogo.Nome = reader["Nome"].ToString();
+            //jogo.Preco = Convert.ToDecimal(reader["Preco"]);
+            //jogo.Categoria = (Categoria)Convert.ToInt32(reader["IdCategoria"]);
+            //jogo.Selo = (Selo)Convert.ToInt32(reader["IdSelo"]);
+            //jogo.Descricao = reader["Descricao"].ToString();
+            //jogo.Imagem = reader["Imagem"].ToString();
+            //jogo.Video = reader["Video"].ToString();
 
-            return jogo;
+            //return jogo;
+
+            return null;
         }
 
     }

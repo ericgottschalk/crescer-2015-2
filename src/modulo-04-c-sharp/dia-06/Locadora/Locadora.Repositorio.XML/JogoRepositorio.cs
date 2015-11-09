@@ -29,7 +29,7 @@ namespace Locadora.Repositorio.XML
             jogoSalvo.SetElementValue("nome", entidade.Nome);
             jogoSalvo.SetElementValue("preco", entidade.Preco);
             jogoSalvo.SetElementValue("categoria", entidade.Categoria.ToString());
-            jogoSalvo.SetElementValue("id_cliente_locacao", entidade.IdClienteLocacao.HasValue ? entidade.IdClienteLocacao.Value.ToString() : "");
+            jogoSalvo.SetElementValue("id_cliente_locacao", entidade.ClienteLocacao.HasValue ? entidade.ClienteLocacao.Value.ToString() : "");
             jogoSalvo.SetAttributeValue("selo", (int)entidade.Selo);
             jogoSalvo.SetAttributeValue("descricao", entidade.Descricao);
             jogoSalvo.SetAttributeValue("imagem", entidade.Imagem);
@@ -109,7 +109,7 @@ namespace Locadora.Repositorio.XML
             jogoXml.SetElementValue("nome", jogo.Nome);
             jogoXml.SetElementValue("preco", jogo.Preco);
             jogoXml.SetElementValue("categoria", jogo.Categoria.ToString());
-            jogoXml.SetElementValue("id_cliente_locacao", jogo.IdClienteLocacao.HasValue ? jogo.IdClienteLocacao.Value.ToString() : "");
+            jogoXml.SetElementValue("id_cliente_locacao", jogo.ClienteLocacao.HasValue ? jogo.ClienteLocacao.Value.ToString() : "");
             jogoXml.SetAttributeValue("selo", jogo.Selo.ToString());
             jogoXml.SetAttributeValue("descricao", jogo.Descricao);
             jogoXml.SetAttributeValue("imagem", jogo.Imagem);
