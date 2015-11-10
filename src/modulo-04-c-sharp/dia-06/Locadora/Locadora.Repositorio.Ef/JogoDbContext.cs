@@ -8,11 +8,16 @@ using System.Threading.Tasks;
 
 namespace Locadora.Repositorio.Ef
 {
-    public class JogoDbContext : DbContext
+    public class JogoDbContext : DbContext, IDisposable
     {
         public JogoDbContext()
             : base("LOCADORA")
         {
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
         }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

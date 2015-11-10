@@ -49,6 +49,12 @@
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="EntityFramework">
+      <HintPath>..\..\..\..\..\..\..\Visual Studio 2013\Projects\PhoneBook\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\..\..\..\..\..\..\Visual Studio 2013\Projects\PhoneBook\packages\EntityFramework.6.1.1\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.0\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
       <Private>True</Private>
@@ -135,7 +141,6 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JogoController.cs" />
     <Compile Include="Controllers\RelatorioJogoController.cs" />
@@ -184,6 +189,10 @@
     <ProjectReference Include="..\Locadora.Repositorio.ADO\Locadora.Repositorio.ADO.csproj">
       <Project>{14105bc9-3336-43bc-b394-6e0aa2a29751}</Project>
       <Name>Locadora.Repositorio.ADO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Locadora.Repositorio.Ef\Locadora.Repositorio.Ef.csproj">
+      <Project>{3dd70baa-56bd-45ca-8cac-7ab6ea449f7e}</Project>
+      <Name>Locadora.Repositorio.Ef</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

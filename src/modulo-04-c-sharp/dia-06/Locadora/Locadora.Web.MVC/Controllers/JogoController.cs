@@ -1,4 +1,5 @@
 ﻿using Locadora.Dominio;
+using Locadora.Repositorio.Ef;
 using Locadora.Web.MVC.Models;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Web.Mvc;
 
 namespace Locadora.Web.MVC.Controllers
 {
-    public class JogoController : BaseController
+    public class JogoController : Controller
     {
         [HttpGet]
         public ActionResult Index()
@@ -19,16 +20,20 @@ namespace Locadora.Web.MVC.Controllers
         [HttpGet]
         public ActionResult DetalhesJogo(int id)
         {
-            var db = this.CriarJogoRepositorio();
-            var jogo = db.BuscarPorId(id);
-
-            if (jogo == null)
+            using (var dbContext = new JogoDbContext())
             {
-                return View("NenhumRegistroEncontrado");
-            }
+                var repositorio = new JogoRepositorio(dbContext);
 
-            var jogoModel = new JogoModel(jogo);
-            return View(jogoModel);
+                var jogo = repositorio.BuscarPorId(id);
+
+                if (jogo == null)
+                {
+                    return View("NenhumRegistroEncontrado");
+                }
+
+                var jogoModel = new JogoModel(jogo);
+                return View(jogoModel);
+            }      
         }
 
         [HttpGet]
@@ -36,18 +41,21 @@ namespace Locadora.Web.MVC.Controllers
         {
             if (id.HasValue)
             {
-                var db = this.CriarJogoRepositorio();
-                var jogo = db.BuscarPorId(id.Value);
-
-                if (jogo == null)
+                using (var dbContext = new JogoDbContext())
                 {
-                    TempData["Mensagem"] = "Id não encontrado!";
-                    return View();
-                }
+                    var repositorio = new JogoRepositorio(dbContext);
+                    var jogo = repositorio.BuscarPorId(id.Value);
 
-                TempData["TipoManter"] = "Atualizar Jogo";
-                var jogoModel = new JogoModel(jogo);
-                return View(jogoModel);
+                    if (jogo == null)
+                    {
+                        TempData["Mensagem"] = "Id não encontrado!";
+                        return View();
+                    }
+
+                    TempData["TipoManter"] = "Atualizar Jogo";
+                    var jogoModel = new JogoModel(jogo);
+                    return View(jogoModel);
+                }
             }
 
             TempData["TipoManter"] = "Cadastrar Jogo";
@@ -62,41 +70,47 @@ namespace Locadora.Web.MVC.Controllers
             {
                 if (model.Id.HasValue)
                 {
-                    var db = this.CriarJogoRepositorio();
-
-                    var jogo = new Jogo(id: model.Id.Value)
+                    using (var dbContext = new JogoDbContext())
                     {
-                        Nome = model.Nome,
-                        Descricao = model.Descricao,
-                        Categoria = model.Categoria,
-                        Selo = model.Selo,
-                        Preco = model.Preco,
-                        Imagem = model.Imagem,
-                        Video = model.Video
-                    };
+                        var repositorio = new JogoRepositorio(dbContext);
 
-                    db.Atualizar(jogo);
+                        var jogo = new Jogo(id: model.Id.Value)
+                        {
+                            Nome = model.Nome,
+                            Descricao = model.Descricao,
+                            Categoria = model.Categoria,
+                            Selo = model.Selo,
+                            Preco = model.Preco,
+                            Imagem = model.Imagem,
+                            Video = model.Video
+                        };
 
-                    TempData["Mensagem"] = "Jogo atualizado com sucesso!";
+                        repositorio.Atualizar(jogo);
+
+                        TempData["Mensagem"] = "Jogo atualizado com sucesso!";
+                    }
                 }
                 else
                 {
-                    var db = this.CriarJogoRepositorio();
-
-                    var jogo = new Jogo()
+                    using (var dbContext = new JogoDbContext())
                     {
-                        Nome = model.Nome,
-                        Descricao = model.Descricao,
-                        Categoria = model.Categoria,
-                        Selo = model.Selo,
-                        Preco = model.Preco,
-                        Imagem = model.Imagem,
-                        Video = model.Video
-                    };
+                        var repositorio = new JogoRepositorio(dbContext);
 
-                    db.Criar(jogo);
+                        var jogo = new Jogo()
+                        {
+                            Nome = model.Nome,
+                            Descricao = model.Descricao,
+                            Categoria = model.Categoria,
+                            Selo = model.Selo,
+                            Preco = model.Preco,
+                            Imagem = model.Imagem,
+                            Video = model.Video
+                        };
 
-                    TempData["Mensagem"] = "Jogo salvo com sucesso!";
+                        repositorio.Criar(jogo);
+
+                        TempData["Mensagem"] = "Jogo salvo com sucesso!";
+                    }
                 }
 
                 return RedirectToAction("JogosDisponiveis", "RelatorioJogo");

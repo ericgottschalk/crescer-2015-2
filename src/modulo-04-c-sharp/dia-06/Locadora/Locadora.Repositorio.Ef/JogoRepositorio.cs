@@ -20,35 +20,53 @@ namespace Locadora.Repositorio.Ef
 
         public int Atualizar(Jogo jogo)
         {
-            throw new NotImplementedException();
+            var jogoDb = this.BuscarPorId(jogo.Id);
+            var entry = this.jogoDbContext.Entry(jogoDb);
+            entry.CurrentValues.SetValues(jogo);
+            entry.State = EntityState.Modified;
+
+            return this.Commit();
         }
 
         public Jogo BuscarPorId(int id)
         {
-            throw new NotImplementedException();
+            return this.DbContext.Find(id);
         }
 
         public IList<Jogo> BuscarPorNome(string nome)
         {
-            throw new NotImplementedException();
+            IQueryable<Jogo> query = this.DbContext;
+
+            var jogos = query.Where(t => t.Nome.StartsWith(nome)).ToList();
+
+            return jogos;
         }
 
         public IList<Jogo> BuscarTodos()
         {
-            throw new NotImplementedException();
+            return this.DbContext.ToList();
         }
 
         public int Criar(Jogo jogo)
         {
-            throw new NotImplementedException();
+            this.DbContext.Add(jogo);
+            return this.Commit();
         }
 
         public int Excluir(int id)
         {
-            throw new NotImplementedException();
+            var jogo = this.BuscarPorId(id);
+            this.DbContext.Remove(jogo);
+
+            return this.Commit();
         }
 
-        private DbSet<Jogo> dbContext
+        private int Commit()
+        {
+            return this.jogoDbContext.SaveChanges();
+        }
+
+        private DbSet<Jogo> DbContext
         {
             get
             {
