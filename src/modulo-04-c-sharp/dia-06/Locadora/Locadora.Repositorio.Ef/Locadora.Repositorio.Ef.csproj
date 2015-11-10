@@ -50,15 +50,20 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ClienteDbContext.cs" />
     <Compile Include="ClienteRepositorio.cs" />
-    <Compile Include="JogoDbContext.cs" />
+    <Compile Include="BaseDbContext.cs" />
     <Compile Include="JogoRepositorio.cs" />
     <Compile Include="Mapeamentos\MapeamentoCliente.cs" />
     <Compile Include="Mapeamentos\MapeamentoJogo.cs" />
+    <Compile Include="Mapeamentos\MapeamentoPermissao.cs" />
+    <Compile Include="Mapeamentos\MapeamentoUsuario.cs" />
     <Compile Include="Migrations\201511091914577_Initial.cs" />
     <Compile Include="Migrations\201511091914577_Initial.Designer.cs">
       <DependentUpon>201511091914577_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511101749371_UsuarioPermissao.cs" />
+    <Compile Include="Migrations\201511101749371_UsuarioPermissao.Designer.cs">
+      <DependentUpon>201511101749371_UsuarioPermissao.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -76,6 +81,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201511091914577_Initial.resx">
       <DependentUpon>201511091914577_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511101749371_UsuarioPermissao.resx">
+      <DependentUpon>201511101749371_UsuarioPermissao.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

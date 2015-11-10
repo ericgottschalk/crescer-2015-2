@@ -13,7 +13,7 @@ namespace Locadora.Repositorio.Ef
     {
         public int Atualizar(Jogo jogo)
         {
-            using (var dbContext = new JogoDbContext())
+            using (var dbContext = new BaseDbContext())
             {
                 dbContext.Entry(jogo).State = EntityState.Modified;
                 return dbContext.SaveChanges();
@@ -22,7 +22,7 @@ namespace Locadora.Repositorio.Ef
 
         public Jogo BuscarPorId(int id)
         {
-            using(var dbContext = new JogoDbContext())
+            using(var dbContext = new BaseDbContext())
             {
                 return dbContext.DbSetJogo.Find(id);
             }   
@@ -30,7 +30,7 @@ namespace Locadora.Repositorio.Ef
 
         public IList<Jogo> BuscarPorNome(string nome)
         {
-            using (var dbContext = new JogoDbContext())
+            using (var dbContext = new BaseDbContext())
             {
                 IQueryable<Jogo> query = dbContext.DbSetJogo;
 
@@ -42,7 +42,7 @@ namespace Locadora.Repositorio.Ef
 
         public IList<Jogo> BuscarTodos()
         {
-            using (var dbContext = new JogoDbContext())
+            using (var dbContext = new BaseDbContext())
             {
                 return dbContext.DbSetJogo.ToList();
             }
@@ -50,7 +50,7 @@ namespace Locadora.Repositorio.Ef
 
         public int Criar(Jogo jogo)
         {
-            using (var dbContext = new JogoDbContext())
+            using (var dbContext = new BaseDbContext())
             {
                 dbContext.DbSetJogo.Add(jogo);
                 return dbContext.SaveChanges();
@@ -59,7 +59,7 @@ namespace Locadora.Repositorio.Ef
 
         public int Excluir(int id)
         {
-            using (var dbContext = new JogoDbContext())
+            using (var dbContext = new BaseDbContext())
             {
                 var jogo = this.BuscarPorId(id);
                 dbContext.DbSetJogo.Remove(jogo);

@@ -5,14 +5,14 @@ namespace Locadora.Repositorio.Ef.Migrations
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<Locadora.Repositorio.Ef.JogoDbContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<Locadora.Repositorio.Ef.BaseDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
         }
 
-        protected override void Seed(Locadora.Repositorio.Ef.JogoDbContext context)
+        protected override void Seed(Locadora.Repositorio.Ef.BaseDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

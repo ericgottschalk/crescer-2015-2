@@ -1,4 +1,4 @@
-﻿@model string
+﻿@model String
 @{
     ViewBag.Title = "World Games";
 }
@@ -22,13 +22,17 @@
     </div>
 
     <div class="jumbotron">
-        @using (Html.BeginForm("JogosDisponiveis", "RelatorioJogo", new { @class = "form-control" }))
+        @using (Html.BeginForm("JogosDisponiveis", "RelatorioJogo", FormMethod.Post, new { @class = "form-control" }))
         {
-            string nome = null;
-            @Html.TextBoxFor(m => nome, new { @type = "text", @class = "form-control", @placeholder = "Nome" })
-            <button class="btn btn-default btn-lg" type="submit">Buscar por nome</button>
+            <div class="form-group">
+                <input type="text" class="form-control" name="nome" value="" />
+            </div>
+
+            <input class="btn btn-default btn-lg" type="submit" name="enviar" value="Buscar" />
             @Html.ActionLink("Mostrar Todos", "JogosDisponiveis", "RelatorioJogo", new { area = "" }, new { @class = "btn btn-default btn-lg" })
         }
     </div>
 </body>
 </html>
+
+

@@ -1,5 +1,6 @@
 ﻿using Locadora.Dominio;
 using Locadora.Repositorio.Ef;
+using Locadora.Web.MVC.Authentictions;
 using Locadora.Web.MVC.Models;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,7 @@ using System.Web.Mvc;
 
 namespace Locadora.Web.MVC.Controllers
 {
+    [Autorizador]
     public class RelatorioJogoController : Controller
     {
         [HttpGet]

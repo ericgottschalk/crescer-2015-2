@@ -12,7 +12,7 @@ namespace Locadora.Repositorio.Ef
     {
         public IList<Cliente> BuscarPorNome(string nome)
         {
-            using (var dbContext = new ClienteDbContext())
+            using (var dbContext = new BaseDbContext())
             {
                 IQueryable<Cliente> query = dbContext.DbSetCliente;
 
