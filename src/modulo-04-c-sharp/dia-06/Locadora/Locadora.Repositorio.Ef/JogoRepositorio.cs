@@ -11,66 +11,60 @@ namespace Locadora.Repositorio.Ef
 {
     public class JogoRepositorio : IJogoRepositorio
     {
-        private JogoDbContext jogoDbContext;
-
-        public JogoRepositorio(JogoDbContext dbContext)
-        {
-            this.jogoDbContext = dbContext;
-        }
-
         public int Atualizar(Jogo jogo)
         {
-            var jogoDb = this.BuscarPorId(jogo.Id);
-            var entry = this.jogoDbContext.Entry(jogoDb);
-            entry.CurrentValues.SetValues(jogo);
-            entry.State = EntityState.Modified;
-
-            return this.Commit();
+            using (var dbContext = new JogoDbContext())
+            {
+                dbContext.Entry(jogo).State = EntityState.Modified;
+                return dbContext.SaveChanges();
+            }   
         }
 
         public Jogo BuscarPorId(int id)
         {
-            return this.DbContext.Find(id);
+            using(var dbContext = new JogoDbContext())
+            {
+                return dbContext.Set<Jogo>().Find(id);
+            }   
         }
 
         public IList<Jogo> BuscarPorNome(string nome)
         {
-            IQueryable<Jogo> query = this.DbContext;
+            using (var dbContext = new JogoDbContext())
+            {
+                IQueryable<Jogo> query = dbContext.Set<Jogo>();
 
-            var jogos = query.Where(t => t.Nome.StartsWith(nome)).ToList();
+                var jogos = query.Where(t => t.Nome.StartsWith(nome)).ToList();
 
-            return jogos;
+                return jogos;
+            }     
         }
 
         public IList<Jogo> BuscarTodos()
         {
-            return this.DbContext.ToList();
+            using (var dbContext = new JogoDbContext())
+            {
+                return dbContext.Set<Jogo>().ToList();
+            }
         }
 
         public int Criar(Jogo jogo)
         {
-            this.DbContext.Add(jogo);
-            return this.Commit();
+            using (var dbContext = new JogoDbContext())
+            {
+                dbContext.Set<Jogo>().Add(jogo);
+                return dbContext.SaveChanges();
+            }
         }
 
         public int Excluir(int id)
         {
-            var jogo = this.BuscarPorId(id);
-            this.DbContext.Remove(jogo);
-
-            return this.Commit();
-        }
-
-        private int Commit()
-        {
-            return this.jogoDbContext.SaveChanges();
-        }
-
-        private DbSet<Jogo> DbContext
-        {
-            get
+            using (var dbContext = new JogoDbContext())
             {
-                return this.jogoDbContext.Set<Jogo>();
+                var jogo = this.BuscarPorId(id);
+                dbContext.Set<Jogo>().Remove(jogo);
+
+                return dbContext.SaveChanges();
             }
         }
     }
