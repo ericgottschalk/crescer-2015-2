@@ -51,6 +51,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ClienteDbContext.cs" />
+    <Compile Include="ClienteRepositorio.cs" />
     <Compile Include="JogoDbContext.cs" />
     <Compile Include="JogoRepositorio.cs" />
     <Compile Include="Mapeamentos\MapeamentoCliente.cs" />

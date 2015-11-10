@@ -15,6 +15,14 @@ namespace Locadora.Repositorio.Ef
         {
         }
 
+        public DbSet<Jogo> DbSetJogo
+        {
+            get
+            {
+                return this.Set<Jogo>();
+            }
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new Mapeamentos.MapeamentoJogo());

@@ -15,6 +15,14 @@ namespace Locadora.Repositorio.Ef
         {
         }
 
+        public DbSet<Cliente> DbSetCliente
+        {
+            get
+            {
+                return this.Set<Cliente>();
+            }
+        }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new Mapeamentos.MapeamentoCliente());

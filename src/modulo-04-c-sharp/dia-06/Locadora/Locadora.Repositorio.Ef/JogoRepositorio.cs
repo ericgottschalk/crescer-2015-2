@@ -24,7 +24,7 @@ namespace Locadora.Repositorio.Ef
         {
             using(var dbContext = new JogoDbContext())
             {
-                return dbContext.Set<Jogo>().Find(id);
+                return dbContext.DbSetJogo.Find(id);
             }   
         }
 
@@ -32,7 +32,7 @@ namespace Locadora.Repositorio.Ef
         {
             using (var dbContext = new JogoDbContext())
             {
-                IQueryable<Jogo> query = dbContext.Set<Jogo>();
+                IQueryable<Jogo> query = dbContext.DbSetJogo;
 
                 var jogos = query.Where(t => t.Nome.StartsWith(nome)).ToList();
 
@@ -44,7 +44,7 @@ namespace Locadora.Repositorio.Ef
         {
             using (var dbContext = new JogoDbContext())
             {
-                return dbContext.Set<Jogo>().ToList();
+                return dbContext.DbSetJogo.ToList();
             }
         }
 
@@ -52,7 +52,7 @@ namespace Locadora.Repositorio.Ef
         {
             using (var dbContext = new JogoDbContext())
             {
-                dbContext.Set<Jogo>().Add(jogo);
+                dbContext.DbSetJogo.Add(jogo);
                 return dbContext.SaveChanges();
             }
         }
@@ -62,7 +62,7 @@ namespace Locadora.Repositorio.Ef
             using (var dbContext = new JogoDbContext())
             {
                 var jogo = this.BuscarPorId(id);
-                dbContext.Set<Jogo>().Remove(jogo);
+                dbContext.DbSetJogo.Remove(jogo);
 
                 return dbContext.SaveChanges();
             }
