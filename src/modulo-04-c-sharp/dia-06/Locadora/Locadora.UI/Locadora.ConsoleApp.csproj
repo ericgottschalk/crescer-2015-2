@@ -66,10 +66,6 @@
       <Project>{14105bc9-3336-43bc-b394-6e0aa2a29751}</Project>
       <Name>Locadora.Repositorio.ADO</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Locadora.Repositorio.XML\Locadora.Repositorio.XML.csproj">
-      <Project>{94e11ed9-d5fd-4339-9fcd-dd1d3ff1badd}</Project>
-      <Name>Locadora.Repositorio.XML</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
