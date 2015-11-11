@@ -15,6 +15,8 @@ namespace Locadora.Repositorio.Ef.Migrations
                         Texto = c.String(nullable: false, maxLength: 250),
                     })
                 .PrimaryKey(t => t.Id);
+
+            this.CriarPermissoes();
             
             CreateTable(
                 "dbo.Usuarios",
@@ -50,6 +52,12 @@ namespace Locadora.Repositorio.Ef.Migrations
             DropTable("dbo.UsuarioPermissao");
             DropTable("dbo.Usuarios");
             DropTable("dbo.Permissao");
+        }
+
+        private void CriarPermissoes()
+        {
+            Sql("INSERT INTO Permissao (Texto) VALUES ('ADMIN')");
+            Sql("INSERT INTO Permissao (Texto) VALUES ('ATENDENTE')");
         }
     }
 }

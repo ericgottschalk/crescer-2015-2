@@ -47,6 +47,8 @@ namespace Locadora.Repositorio.Ef.Migrations
                 })
                 .PrimaryKey(t => t.Id);
 
+            this.CriarSelos();
+
             CreateTable(
                 "dbo.Categoria",
                 c => new
@@ -55,7 +57,8 @@ namespace Locadora.Repositorio.Ef.Migrations
                     Nome = c.String(nullable: false, maxLength: 250),
                 })
                 .PrimaryKey(t => t.Id);
-            
+
+            this.CriarCategorias();   
         }
         
         public override void Down()
@@ -70,6 +73,22 @@ namespace Locadora.Repositorio.Ef.Migrations
             DropTable("dbo.Selo");
             DropTable("dbo.Categoria");
             DropTable("dbo.Jogo");
+        }
+
+        private void CriarSelos()
+        {
+            Sql("INSERT INTO Selo (Id, Nome) VALUES (1, 'Bronze')");
+            Sql("INSERT INTO Selo (Id, Nome) VALUES (2, 'Prata')");
+            Sql("INSERT INTO Selo (Id, Nome) VALUES (3, 'Ouro')");
+        }
+
+        private void CriarCategorias()
+        {
+            Sql("INSERT INTO Categoria (Id, Nome) VALUES (1, 'RPG')");
+            Sql("INSERT INTO Categoria (Id, Nome) VALUES (2, 'Corrida')");
+            Sql("INSERT INTO Categoria (Id, Nome) VALUES (3, 'Aventura')");
+            Sql("INSERT INTO Categoria (Id, Nome) VALUES (4, 'Luta')");
+            Sql("INSERT INTO Categoria (Id, Nome) VALUES (5, 'Esporte')");
         }
     }
 }

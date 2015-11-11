@@ -1,4 +1,7 @@
-﻿using Locadora.Web.MVC.Models;
+﻿using Locadora.Dominio.Servicos;
+using Locadora.Infraestrutura.Services;
+using Locadora.Repositorio.Ef.Repositorios;
+using Locadora.Web.MVC.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,16 +21,24 @@ namespace Locadora.Web.MVC.Controllers
 
         public ActionResult Login(UsuarioModel usuario)
         {
-            if (usuario.Email == "test@email.com" && usuario.Senha == "test")
+            if (ModelState.IsValid)
             {
-                var logado = new UsuarioLogado(usuario.Email, new string[] { "ADMIN" });
+                var repositorio = new UsuarioRepositorio();
+                var criptografia = new Criptografia();
+                var servico = new AutenticacaoServicoDominio(repositorio, criptografia);
 
-                FormsAuthentication.SetAuthCookie(logado.Email, true);
+                var logado = servico.AutenticacarUsuario(usuario.Email, usuario.Senha);
 
-                Session["USUARIO_LOGADO"] = logado;
+                if (logado != null)
+                {
+                    FormsAuthentication.SetAuthCookie(logado.Email, true);
+                    Session["USUARIO_LOGADO"] = logado;
+                    return RedirectToAction("Index", "Home");
+                }
             }
 
-            return RedirectToAction("Index", "Home");
+            ModelState.AddModelError("INVALID_LOGIN", "Usuário ou senha inválidos.");
+            return View("Index", usuario);
         }
     }
 }

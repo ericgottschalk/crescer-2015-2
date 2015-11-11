@@ -15,6 +15,11 @@ namespace Locadora.Repositorio.Ef
         {
         }
 
+        public DbSet<Jogo> Jogo { get; set; }
+        public DbSet<Cliente> Cliente { get; set; }
+        public DbSet<Usuario> Usuario { get; set; }
+        public DbSet<Permissao> Permissao { get; set; }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Configurations.Add(new Mapeamentos.MapeamentoJogo());

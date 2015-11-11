@@ -16,7 +16,7 @@
         <h3 class="panel-title">@TempData["TipoManter"]</h3>
     </div>
     <div class="panel-body">
-        @using (Html.BeginForm("Salvar", "Jogo", FormMethod.Post, new { @class = "form-control form-horizontal" }))
+        @using (Html.BeginForm("Salvar", "Jogo", FormMethod.Post, new { @class = "form-horizontal" }))
         {
             @Html.AntiForgeryToken();
             @Html.ValidationSummary(false);

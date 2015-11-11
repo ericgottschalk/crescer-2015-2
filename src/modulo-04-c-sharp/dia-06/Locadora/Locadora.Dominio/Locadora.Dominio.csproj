@@ -49,7 +49,10 @@
     <Compile Include="Comum\EntidadeBase.cs" />
     <Compile Include="ModuloJogo\Jogo.cs" />
     <Compile Include="ModuloJogo\Queries\BuscarJogoPorNomeQuery.cs" />
+    <Compile Include="ModuloUsuario\IUsuarioRepositorio.cs" />
     <Compile Include="ModuloUsuario\Permissao.cs" />
+    <Compile Include="ModuloUsuario\Queries\BuscarUsuarioPorEmailQuery.cs" />
+    <Compile Include="ModuloUsuario\Queries\BuscarUsuarioPorNomeQuery.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Servicos\AutenticacaoServicoDominio.cs" />
     <Compile Include="Servicos\ICriptografia.cs" />

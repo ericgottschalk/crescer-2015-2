@@ -192,6 +192,10 @@
       <Project>{93d95d00-78c7-4b77-be44-686ab7a29c7c}</Project>
       <Name>Locadora.Dominio</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Locadora.Infraestrutura.Services\Locadora.Infraestrutura.Services.csproj">
+      <Project>{b959640e-bc2b-488b-bb35-7edeff56bb4e}</Project>
+      <Name>Locadora.Infraestrutura.Services</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Locadora.Repositorio.Ef\Locadora.Repositorio.Ef.csproj">
       <Project>{3dd70baa-56bd-45ca-8cac-7ab6ea449f7e}</Project>
       <Name>Locadora.Repositorio.Ef</Name>
