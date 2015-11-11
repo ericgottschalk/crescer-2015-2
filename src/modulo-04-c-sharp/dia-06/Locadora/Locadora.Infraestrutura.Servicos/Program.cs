@@ -4,10 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Locadora.Dominio.Repositorio
+namespace Locadora.Infraestrutura.Servicos
 {
-    public interface IClienteRepositorio
+    class Program
     {
-        IList<Cliente> BuscarPorNome(string nome);
+        static void Main(string[] args)
+        {
+        }
     }
 }

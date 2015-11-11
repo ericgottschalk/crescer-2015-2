@@ -6,66 +6,15 @@ using System.Text;
 using System.Threading.Tasks;
 using Locadora.Dominio;
 using System.Data.Entity;
+using Locadora.Dominio.ModuloJogo.Queries;
 
 namespace Locadora.Repositorio.Ef
 {
-    public class JogoRepositorio : IJogoRepositorio
+    public class JogoRepositorio : RepositorioBase<Jogo>, IJogoRepositorio
     {
-        public int Atualizar(Jogo jogo)
-        {
-            using (var dbContext = new BaseDbContext())
-            {
-                dbContext.Entry(jogo).State = EntityState.Modified;
-                return dbContext.SaveChanges();
-            }   
-        }
-
-        public Jogo BuscarPorId(int id)
-        {
-            using(var dbContext = new BaseDbContext())
-            {
-                return dbContext.DbSetJogo.Find(id);
-            }   
-        }
-
         public IList<Jogo> BuscarPorNome(string nome)
         {
-            using (var dbContext = new BaseDbContext())
-            {
-                IQueryable<Jogo> query = dbContext.DbSetJogo;
-
-                var jogos = query.Where(t => t.Nome.StartsWith(nome)).ToList();
-
-                return jogos;
-            }     
-        }
-
-        public IList<Jogo> BuscarTodos()
-        {
-            using (var dbContext = new BaseDbContext())
-            {
-                return dbContext.DbSetJogo.ToList();
-            }
-        }
-
-        public int Criar(Jogo jogo)
-        {
-            using (var dbContext = new BaseDbContext())
-            {
-                dbContext.DbSetJogo.Add(jogo);
-                return dbContext.SaveChanges();
-            }
-        }
-
-        public int Excluir(int id)
-        {
-            using (var dbContext = new BaseDbContext())
-            {
-                var jogo = this.BuscarPorId(id);
-                dbContext.DbSetJogo.Remove(jogo);
-
-                return dbContext.SaveChanges();
-            }
+            return this.Buscar(new BuscarJogoPorNomeQuery(nome));
         }
     }
 }

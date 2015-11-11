@@ -18,8 +18,7 @@ namespace Locadora.Web.MVC.Controllers
         {
             return View();
         }
-
-        [Autorizador(Roles = "DetalhesJogo")]
+        
         [HttpGet]
         public ActionResult DetalhesJogo(int id)
         {
@@ -36,6 +35,7 @@ namespace Locadora.Web.MVC.Controllers
             return View(jogoModel);
         }
 
+        [Autorizador(Roles = "ADMIN")]
         [HttpGet]
         public ActionResult ManterJogo(int? id)
         {
@@ -60,6 +60,7 @@ namespace Locadora.Web.MVC.Controllers
             return View();
         }
 
+        [Autorizador(Roles = "ADMIN")]
         [ValidateAntiForgeryToken]
         [HttpPost]
         public ActionResult Salvar(JogoModel model)

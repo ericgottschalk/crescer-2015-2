@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Locadora.Dominio", "Locadora.Dominio\Locadora.Dominio.csproj", "{93D95D00-78C7-4B77-BE44-686AB7A29C7C}"
 EndProject
@@ -22,6 +22,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Locadora.Helpers", "Locadora.Helpers\Locadora.Helpers.csproj", "{98CFBFA0-6792-41AA-9F4C-F69FFD0C3C5C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Locadora.Repositorio.Ef", "Locadora.Repositorio.Ef\Locadora.Repositorio.Ef.csproj", "{3DD70BAA-56BD-45CA-8CAC-7AB6EA449F7E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Servicos", "Servicos", "{8A374899-A0C1-4A52-8324-2942FA7FD4BA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Locadora.Infraestrutura.Services", "Locadora.Infraestrutura.Services\Locadora.Infraestrutura.Services.csproj", "{B959640E-BC2B-488B-BB35-7EDEFF56BB4E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +53,10 @@ Global
 		{3DD70BAA-56BD-45CA-8CAC-7AB6EA449F7E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3DD70BAA-56BD-45CA-8CAC-7AB6EA449F7E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3DD70BAA-56BD-45CA-8CAC-7AB6EA449F7E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B959640E-BC2B-488B-BB35-7EDEFF56BB4E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B959640E-BC2B-488B-BB35-7EDEFF56BB4E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B959640E-BC2B-488B-BB35-7EDEFF56BB4E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B959640E-BC2B-488B-BB35-7EDEFF56BB4E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -61,5 +69,7 @@ Global
 		{904D46BA-4984-4269-B153-D79D0AEFC0DD} = {B8852BF0-3657-4217-B96D-39339EDC6B84}
 		{98CFBFA0-6792-41AA-9F4C-F69FFD0C3C5C} = {904D46BA-4984-4269-B153-D79D0AEFC0DD}
 		{3DD70BAA-56BD-45CA-8CAC-7AB6EA449F7E} = {4C4BE62A-458D-4CF0-91DD-92DBB516982C}
+		{8A374899-A0C1-4A52-8324-2942FA7FD4BA} = {B8852BF0-3657-4217-B96D-39339EDC6B84}
+		{B959640E-BC2B-488B-BB35-7EDEFF56BB4E} = {8A374899-A0C1-4A52-8324-2942FA7FD4BA}
 	EndGlobalSection
 EndGlobal

@@ -20,7 +20,7 @@ namespace Locadora.Web.MVC.Controllers
         {
             if (usuario.Email == "test@email.com" && usuario.Senha == "test")
             {
-                var logado = new UsuarioLogado(usuario.Email, new string[] { "DetalhesJogo" });
+                var logado = new UsuarioLogado(usuario.Email, new string[] { "ADMIN" });
 
                 FormsAuthentication.SetAuthCookie(logado.Email, true);
 

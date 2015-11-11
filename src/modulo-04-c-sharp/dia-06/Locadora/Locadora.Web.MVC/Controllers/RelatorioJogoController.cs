@@ -26,7 +26,7 @@ namespace Locadora.Web.MVC.Controllers
             }
             else
             {
-                list = repositorio.BuscarTodos();
+                list = repositorio.Buscar();
             }
 
             if (list.Count == 0)

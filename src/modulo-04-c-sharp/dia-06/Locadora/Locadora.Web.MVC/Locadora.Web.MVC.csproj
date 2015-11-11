@@ -135,6 +135,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Views\Login\Index.cshtml" />
     <None Include="Views\Shared\LoginLayout.cshtml" />
     <Content Include="Web.config" />
     <Content Include="Views\RelatorioJogo\JogosDisponiveis.cshtml" />
@@ -175,7 +176,6 @@
     <Content Include="Views\Jogo\DetalhesJogo.cshtml" />
     <Content Include="Views\Shared\NenhumRegistroEncontrado.cshtml" />
     <Content Include="Views\Jogo\ManterJogo.cshtml" />
-    <Content Include="Views\Login\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

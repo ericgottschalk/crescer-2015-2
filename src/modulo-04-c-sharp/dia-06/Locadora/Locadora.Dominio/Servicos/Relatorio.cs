@@ -9,7 +9,7 @@ namespace Locadora.Dominio
     {
         public void Gerar(string caminhoPastaRelatorio, IJogoRepositorio jogoRepositorio)
         {
-            IList<Jogo> todosOsJogos = jogoRepositorio.BuscarTodos();
+            IList<Jogo> todosOsJogos = jogoRepositorio.Buscar();
 
             string caminhoRelatorio = Path.Combine(caminhoPastaRelatorio, "relatorio_jogos.txt");
 
