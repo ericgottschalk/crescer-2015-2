@@ -13,7 +13,10 @@ namespace Locadora.Repositorio.Ef.Repositorios
     {
         public Usuario BuscarPorEmail(string email)
         {
-            return this.Buscar(new BuscarUsuarioPorEmailQuery(email)).FirstOrDefault();
+            using (var dbContext = new BaseDbContext())
+            {
+                return dbContext.Usuario.Include("Permissoes").FirstOrDefault(t => t.Email.Equals(email));
+            }
         }
 
         public IList<Usuario> BuscarPorNome(string nome)

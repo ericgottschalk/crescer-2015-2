@@ -1,8 +1,9 @@
 namespace Locadora.Repositorio.Ef.Migrations
 {
+    using Locadora.Infraestrutura.Services;
     using System;
     using System.Data.Entity.Migrations;
-    
+
     public partial class UsuarioPermissao : DbMigration
     {
         public override void Up()
@@ -10,47 +11,49 @@ namespace Locadora.Repositorio.Ef.Migrations
             CreateTable(
                 "dbo.Permissao",
                 c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        Texto = c.String(nullable: false, maxLength: 250),
-                    })
+                {
+                    Id = c.Int(nullable: false, identity: true),
+                    Texto = c.String(nullable: false, maxLength: 250),
+                })
                 .PrimaryKey(t => t.Id);
 
             this.CriarPermissoes();
-            
+
             CreateTable(
-                "dbo.Usuarios",
+                "dbo.Usuario",
                 c => new
-                    {
-                        Id = c.Int(nullable: false, identity: true),
-                        NomeCompleto = c.String(),
-                        Email = c.String(nullable: false, maxLength: 250),
-                        Senha = c.String(nullable: false, maxLength: 256),
-                    })
+                {
+                    Id = c.Int(nullable: false, identity: true),
+                    NomeCompleto = c.String(nullable: false, maxLength: 250),
+                    Email = c.String(nullable: false, maxLength: 250),
+                    Senha = c.String(nullable: false, maxLength: 256),
+                })
                 .PrimaryKey(t => t.Id);
-            
+
             CreateTable(
                 "dbo.UsuarioPermissao",
                 c => new
-                    {
-                        IdUsuraio = c.Int(nullable: false),
-                        IdPermissao = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => new { t.IdUsuraio, t.IdPermissao })
-                .ForeignKey("dbo.Usuarios", t => t.IdUsuraio, cascadeDelete: true)
+                {
+                    IdUsuario = c.Int(nullable: false),
+                    IdPermissao = c.Int(nullable: false),
+                })
+                .PrimaryKey(t => new { t.IdUsuario, t.IdPermissao })
+                .ForeignKey("dbo.Usuario", t => t.IdUsuario, cascadeDelete: true)
                 .ForeignKey("dbo.Permissao", t => t.IdPermissao, cascadeDelete: true)
-                .Index(t => t.IdUsuraio)
+                .Index(t => t.IdUsuario)
                 .Index(t => t.IdPermissao);
+
+            this.CriarUsuarioAdmin();
         }
-        
+
         public override void Down()
         {
             DropForeignKey("dbo.UsuarioPermissao", "IdPermissao", "dbo.Permissao");
-            DropForeignKey("dbo.UsuarioPermissao", "IdUsuraio", "dbo.Usuarios");
+            DropForeignKey("dbo.UsuarioPermissao", "IdUsuario", "dbo.Usuario");
             DropIndex("dbo.UsuarioPermissao", new[] { "IdPermissao" });
-            DropIndex("dbo.UsuarioPermissao", new[] { "IdUsuraio" });
+            DropIndex("dbo.UsuarioPermissao", new[] { "IdUsuario" });
             DropTable("dbo.UsuarioPermissao");
-            DropTable("dbo.Usuarios");
+            DropTable("dbo.Usuario");
             DropTable("dbo.Permissao");
         }
 
@@ -58,6 +61,12 @@ namespace Locadora.Repositorio.Ef.Migrations
         {
             Sql("INSERT INTO Permissao (Texto) VALUES ('ADMIN')");
             Sql("INSERT INTO Permissao (Texto) VALUES ('ATENDENTE')");
+        }
+
+        private void CriarUsuarioAdmin()
+        {
+            Sql("INSERT INTO Usuario (NomeCompleto, Email, Senha) VALUES ('Administrador do Sistema', 'admin@email.com', '" + new Criptografia().Criptografar("admin") + "')");
+            Sql("INSERT INTO UsuarioPermissao (IdUsuario, IdPermissao) VALUES (1, 1)");
         }
     }
 }

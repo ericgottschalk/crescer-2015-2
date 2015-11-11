@@ -37,10 +37,10 @@ namespace Locadora.Web.MVC.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=ERIC\\SQLEXPRESS;Initial Catalog=Locadora;User ID=sa;Password=eric")]
-        public string LOCADORA1 {
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=ERIC\\SQLEXPRESS;Initial Catalog=LocadoraDb;User ID=sa;Password=eric")]
+        public string LOCADORACASA {
             get {
-                return ((string)(this["LOCADORA1"]));
+                return ((string)(this["LOCADORACASA"]));
             }
         }
     }

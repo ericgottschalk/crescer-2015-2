@@ -12,7 +12,11 @@ namespace Locadora.Repositorio.Ef.Mapeamentos
     {
         public MapeamentoUsuario()
         {
+            this.ToTable("Usuario");
+
             this.HasKey(t => t.Id);
+
+            this.Property(t => t.NomeCompleto).IsRequired().HasMaxLength(250);
 
             this.Property(t => t.Email).IsRequired().HasMaxLength(250);
 
@@ -21,7 +25,7 @@ namespace Locadora.Repositorio.Ef.Mapeamentos
             this.HasMany(t => t.Permissoes).WithMany(p => p.Usuarios)
                                            .Map(m => 
                                                 { m.ToTable("UsuarioPermissao");
-                                                  m.MapLeftKey("IdUsuraio");
+                                                  m.MapLeftKey("IdUsuario");
                                                   m.MapRightKey("IdPermissao");
                                                 });                                 
         }
