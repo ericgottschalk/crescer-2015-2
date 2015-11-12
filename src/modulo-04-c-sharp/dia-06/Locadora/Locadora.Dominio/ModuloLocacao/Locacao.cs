@@ -8,7 +8,11 @@ namespace Locadora.Dominio.ModuloLocacao
 {
     public class Locacao : EntidadeBase
     {
+        public int IdJogo { get; set; }
+
         public Jogo Jogo { get; set; }
+
+        public int IdCliente { get; set; }
 
         public Cliente Cliente { get; set; }
 
