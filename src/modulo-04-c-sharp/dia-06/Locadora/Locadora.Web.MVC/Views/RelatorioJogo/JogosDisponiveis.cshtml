@@ -28,7 +28,6 @@
                         <th>Nome</th>
                         <th>Categoria</th>
                         <th>Selo</th>
-                        <th>Preço</th>
                         <th>Detalhes</th>
                     </tr>
                 </thead>
@@ -41,7 +40,6 @@
                             <td>@jogo.Nome</td>
                             <td>@jogo.Categoria</td>
                             <td>@jogo.Selo</td>
-                            <td>R$@jogo.Preco</td>
                             <td>@Html.ActionLink("Details", "DetalhesJogo", "Jogo", jogo, new { @class = "btn btn-default" })</td>
                         </tr>
 
@@ -57,9 +55,6 @@
         </div>
         <div class="panel-body">
             <h3>Quantidade de jogos: @Model.QuantidadeJogos</h3>
-            <h3>Valor médio por jogo: R$@Model.MediaValor</h3>
-            <h3>Jogo mais caro: @Model.NomeJogoMaisCaro</h3>
-            <h3>Jogo mais barato: @Model.NomeJogoMaisBarato</h3>
         </div>
     </div>
 </body>

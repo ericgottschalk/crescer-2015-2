@@ -39,14 +39,6 @@
             </div>
 
             <div class="form-group">
-                @Html.LabelFor(m => Model.Preco, new { @class = "col-sm-2 control-label" })
-                <div class="col-sm-10">
-                    @Html.TextBoxFor(m => Model.Preco, new { @class = "form-control" })
-                    @Html.ValidationMessageFor(m => Model.Preco)
-                </div>
-            </div>
-
-            <div class="form-group">
                 @Html.LabelFor(m => Model.Categoria, new { @class = "col-sm-2 control-label" })
                 <div class="col-sm-10">
                     @Html.EnumDropDownListFor(m => Model.Categoria, new { @class = "form-control" })
