@@ -12,10 +12,10 @@ namespace Locadora.Infraestrutura.Services
     {
         public string Criptografar(string texto)
         {
-            var encode = new UTF8Encoding();
-            byte[] byteTexto = encode.GetBytes(texto);
-            SHA512Managed sha = new SHA512Managed();
-            byte[] hash = sha.ComputeHash(byteTexto);
+            MD5 md5 = MD5.Create();
+
+            byte[] inputBytes = Encoding.ASCII.GetBytes(texto + texto.Reverse());
+            byte[] hash = md5.ComputeHash(inputBytes);
             var criptografado = new StringBuilder();
 
             foreach (var b in hash)
