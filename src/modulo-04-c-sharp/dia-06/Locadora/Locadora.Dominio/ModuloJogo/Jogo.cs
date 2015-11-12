@@ -18,22 +18,22 @@ namespace Locadora.Dominio
 
         public string Video { get; set; }
 
-        public Cliente ClienteLocacao { get; private set; }
+        public bool Available { get; set; }
         
         public Jogo()
         {
 
         }
 
-        public Jogo(int id, Cliente ClienteLocacao = null)
+        public Jogo(int id, bool disponivel)
         {
             this.Id = id;
-            this.ClienteLocacao = ClienteLocacao;
+            this.Available = disponivel;
         }
 
-        public void LocarPara(Cliente cliente)
+        public void AlterarDisponibilidade(bool disponivel)
         {
-            this.ClienteLocacao = cliente;
+            this.Available = disponivel;
         }
 
         public override string ToString()
@@ -61,7 +61,7 @@ namespace Locadora.Dominio
                 return this.Id == jogoComp.Id
                     && this.Nome == jogoComp.Nome
                     && this.Categoria == jogoComp.Categoria
-                    && this.ClienteLocacao == jogoComp.ClienteLocacao
+                    && this.Available == jogoComp.Available
                     && this.Selo == jogoComp.Selo;
             }
 

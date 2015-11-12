@@ -12,12 +12,14 @@ namespace Locadora.Repositorio.Ef
 {
     public class JogoRepositorio : RepositorioBase<Jogo>, IJogoRepositorio
     {
-        public override Jogo BuscarPorId(int id)
+        public IList<Jogo> BuscarDisponiveis()
         {
-            using (var dbContext = new BaseDbContext())
-            {
-                return dbContext.Jogo.Include(t => t.ClienteLocacao).FirstOrDefault(t => t.Id == id);
-            }
+            return this.Buscar(new BuscarJogosDisponiveisQuery());
+        }
+
+        public IList<Jogo> BuscarIndisponiveis()
+        {
+            return this.Buscar(new BuscarJogosIndisponiveis());
         }
 
         public IList<Jogo> BuscarPorNome(string nome)

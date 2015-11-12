@@ -71,7 +71,7 @@ namespace Locadora.Web.MVC.Controllers
                 {
                     var repositorio = new JogoRepositorio();
 
-                    var jogo = new Jogo(id: model.Id.Value)
+                    var jogo = new Jogo(id: model.Id.Value, disponivel: model.Disponivel)
                     {
                         Nome = model.Nome,
                         Descricao = model.Descricao,
@@ -96,7 +96,8 @@ namespace Locadora.Web.MVC.Controllers
                         Categoria = model.Categoria,
                         Selo = model.Selo,
                         Imagem = model.Imagem,
-                        Video = model.Video
+                        Video = model.Video,
+                        Available = true
                     };
 
                     repositorio.Criar(jogo);

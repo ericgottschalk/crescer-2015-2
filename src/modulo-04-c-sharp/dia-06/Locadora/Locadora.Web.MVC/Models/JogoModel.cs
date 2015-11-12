@@ -23,6 +23,8 @@ namespace Locadora.Web.MVC.Models
         [Required]
         public Categoria Categoria { get; set; }
 
+        public bool Disponivel { get; set; }
+
         public string Imagem { get; set; }
 
         public string Video { get; set; }    
@@ -40,6 +42,7 @@ namespace Locadora.Web.MVC.Models
             this.Descricao = jogo.Descricao;
             this.Imagem = jogo.Imagem;
             this.Video = jogo.Video;
+            this.Disponivel = jogo.Available;
         }
     }
 }

@@ -22,21 +22,9 @@ namespace Locadora.Dominio.ModuloLocacao
             this.repositorio = repositorio;
         }
 
-        public void LocarJogo(Jogo jogo, Cliente cliente)
+        public void LocarJogo()
         {
-            jogo.LocarPara(cliente);
-
-            var locacao = new Locacao()
-            {
-                jogo = jogo,
-                cliente = cliente,
-                DataLocacao = DateTime.Now,
-                DataParaDevolucao = DateTime.Now.AddDays(this.GetDiasDevolucao(jogo)),
-                Status = StatusLocacao.PRAZO,
-                Valor = this.GetValorLocacao(jogo)
-            };
-
-            this.repositorio.Criar(locacao);
+       
         }
 
         private decimal GetValorLocacao(Jogo jogo)

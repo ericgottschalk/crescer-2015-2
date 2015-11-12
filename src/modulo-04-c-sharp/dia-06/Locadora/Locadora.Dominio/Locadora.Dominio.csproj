@@ -49,6 +49,10 @@
     <Compile Include="Comum\EntidadeBase.cs" />
     <Compile Include="ModuloJogo\Jogo.cs" />
     <Compile Include="ModuloJogo\Queries\BuscarJogoPorNomeQuery.cs" />
+    <Compile Include="ModuloJogo\Queries\BuscarJogosDisponiveisQuery.cs" />
+    <Compile Include="ModuloJogo\Queries\BuscarJogosIndisponiveis.cs" />
+    <Compile Include="ModuloLocacao\BuscarLocacaoPendentePorNomeDoJogoQuery.cs" />
+    <Compile Include="ModuloLocacao\BuscarLocacaoPendenteQuery.cs" />
     <Compile Include="ModuloLocacao\ILocacaoRepositorio.cs" />
     <Compile Include="ModuloLocacao\Locacao.cs" />
     <Compile Include="ModuloLocacao\LocacaoServicoDominio.cs" />

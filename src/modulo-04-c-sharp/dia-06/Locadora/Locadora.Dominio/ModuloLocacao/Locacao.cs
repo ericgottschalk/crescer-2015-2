@@ -8,9 +8,9 @@ namespace Locadora.Dominio.ModuloLocacao
 {
     public class Locacao : EntidadeBase
     {
-        public Jogo jogo { get; set; }
+        public Jogo Jogo { get; set; }
 
-        public Cliente cliente { get; set; }
+        public Cliente Cliente { get; set; }
 
         public decimal Valor { get; set; }
 

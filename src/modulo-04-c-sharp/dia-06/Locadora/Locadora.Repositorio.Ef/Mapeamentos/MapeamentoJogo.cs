@@ -23,11 +23,11 @@ namespace Locadora.Repositorio.Ef.Mapeamentos
 
             this.Property(t => t.Video).IsOptional().HasMaxLength(500);
 
+            this.Property(t => t.Available).IsRequired();
+
             this.Property(t => t.Categoria).IsRequired().HasColumnName("IdCategoria");
 
             this.Property(t => t.Selo).IsRequired().HasColumnName("IdSelo");
-
-            this.HasOptional(t => t.ClienteLocacao).WithOptionalDependent().Map(m => m.MapKey("IdClienteLocacao"));
         }
     }
 }

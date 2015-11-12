@@ -38,7 +38,7 @@ namespace Locadora.Repositorio.Ef
             }
         }
 
-        public virtual TEntity BuscarPorId(int id)
+        public TEntity BuscarPorId(int id)
         {
             using (var dbContext = new BaseDbContext())
             {

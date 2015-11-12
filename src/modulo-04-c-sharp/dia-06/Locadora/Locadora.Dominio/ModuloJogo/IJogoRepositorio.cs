@@ -9,6 +9,10 @@ namespace Locadora.Dominio.Repositorio
 {
     public interface IJogoRepositorio : IRepositorio<Jogo>
     {
+        IList<Jogo> BuscarDisponiveis();
+
+        IList<Jogo> BuscarIndisponiveis();
+
         IList<Jogo> BuscarPorNome(string nome);
     }
 }

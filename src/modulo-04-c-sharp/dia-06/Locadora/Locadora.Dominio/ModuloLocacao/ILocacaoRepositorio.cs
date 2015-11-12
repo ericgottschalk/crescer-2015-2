@@ -9,5 +9,8 @@ namespace Locadora.Dominio.ModuloLocacao
 {
     public interface ILocacaoRepositorio : IRepositorio<Locacao>
     {
+        IList<Locacao> BuscarPendentes();
+
+        IList<Locacao> BuscarPendentePorNomeDoJogo(string nomeJogo);
     }
 }
