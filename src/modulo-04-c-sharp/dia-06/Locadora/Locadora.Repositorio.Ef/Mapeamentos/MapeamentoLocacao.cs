@@ -24,9 +24,9 @@ namespace Locadora.Repositorio.Ef.Mapeamentos
 
             this.Property(t => t.Status).IsOptional();
 
-            this.HasRequired(t => t.jogo).WithRequiredDependent().Map(m => m.MapKey("IdJogo"));
+            this.HasRequired(t => t.jogo).WithOptional().Map(m => m.MapKey("IdJogo"));
 
-            this.HasRequired(t => t.cliente).WithRequiredDependent().Map(m => m.MapKey("IdCliente"));
+            this.HasRequired(t => t.cliente).WithOptional().Map(m => m.MapKey("IdCliente"));
         }
     }
 }

@@ -16,7 +16,7 @@ namespace Locadora.Repositorio.Ef
         {
             using (var dbContext = new BaseDbContext())
             {
-                return dbContext.Jogo.Include("Cliente").FirstOrDefault(t => t.Id == id);
+                return dbContext.Jogo.Include(t => t.ClienteLocacao).FirstOrDefault(t => t.Id == id);
             }
         }
 
