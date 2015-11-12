@@ -21,9 +21,6 @@ namespace Locadora.Web.MVC.Models
         public Selo Selo { get; set; }
 
         [Required]
-        public decimal Preco { get; set; }
-
-        [Required]
         public Categoria Categoria { get; set; }
 
         public string Imagem { get; set; }
@@ -39,7 +36,6 @@ namespace Locadora.Web.MVC.Models
             this.Id = jogo.Id;
             this.Nome = jogo.Nome;
             this.Categoria = jogo.Categoria;
-            this.Preco = jogo.Preco;
             this.Selo = jogo.Selo;
             this.Descricao = jogo.Descricao;
             this.Imagem = jogo.Imagem;

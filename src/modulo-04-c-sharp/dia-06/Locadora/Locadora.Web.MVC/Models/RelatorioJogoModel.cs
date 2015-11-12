@@ -9,12 +9,6 @@ namespace Locadora.Web.MVC.Models
     {
         public int QuantidadeJogos { get; set; }
 
-        public decimal MediaValor { get; set; }
-
-        public string NomeJogoMaisCaro { get; set; }
-
-        public string NomeJogoMaisBarato { get; set; }
-
         public List<JogoDisponivelModdel> ListaJogos { get; set; }
 
         public RelatorioJogoModel()
@@ -32,8 +26,6 @@ namespace Locadora.Web.MVC.Models
         public string Descricao { get; set; }
 
         public string Selo { get; set; }
-
-        public decimal Preco { get; set; }
 
         public string Categoria { get; set; }
     }

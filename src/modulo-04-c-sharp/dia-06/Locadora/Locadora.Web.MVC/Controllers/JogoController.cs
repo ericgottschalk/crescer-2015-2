@@ -77,7 +77,6 @@ namespace Locadora.Web.MVC.Controllers
                         Descricao = model.Descricao,
                         Categoria = model.Categoria,
                         Selo = model.Selo,
-                        Preco = model.Preco,
                         Imagem = model.Imagem,
                         Video = model.Video
                     };
@@ -96,7 +95,6 @@ namespace Locadora.Web.MVC.Controllers
                         Descricao = model.Descricao,
                         Categoria = model.Categoria,
                         Selo = model.Selo,
-                        Preco = model.Preco,
                         Imagem = model.Imagem,
                         Video = model.Video
                     };
