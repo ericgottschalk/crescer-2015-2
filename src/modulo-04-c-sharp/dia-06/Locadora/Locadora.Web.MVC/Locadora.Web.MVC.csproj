@@ -171,6 +171,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Views\Login\Index.cshtml" />
+    <Content Include="Views\Locar\Index.cshtml" />
     <None Include="Views\Shared\LoginLayout.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -183,6 +184,7 @@
     <Compile Include="Authentictions\Autorizador.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\JogoController.cs" />
+    <Compile Include="Controllers\LocarController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\RelatorioJogoController.cs" />
     <Compile Include="Global.asax.cs">
@@ -190,6 +192,7 @@
     </Compile>
     <Compile Include="Models\DetalheJogoModel.cs" />
     <Compile Include="Models\JogoModel.cs" />
+    <Compile Include="Models\LocacaoModel.cs" />
     <Compile Include="Models\RelatorioJogoModel.cs" />
     <Compile Include="Authentictions\UsuarioLogado.cs" />
     <Compile Include="Models\UsuarioModel.cs" />

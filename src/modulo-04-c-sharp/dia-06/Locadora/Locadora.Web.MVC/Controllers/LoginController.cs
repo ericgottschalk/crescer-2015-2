@@ -27,10 +27,18 @@ namespace Locadora.Web.MVC.Controllers
                 var criptografia = new Criptografia();
                 var servico = new AutenticacaoServicoDominio(repositorio, criptografia);
 
-                var logado = servico.AutenticacarUsuario(usuario.Email, usuario.Senha);
+                var usuarioAutentiado = servico.AutenticacarUsuario(usuario.Email, usuario.Senha);
 
-                if (logado != null)
+                if (usuarioAutentiado != null)
                 {
+                    String[] permicoes = new String[2];
+
+                    foreach (var permissao in usuarioAutentiado.Permissoes)
+                    {
+                        permicoes[permicoes.Count(t => t != null)] = permissao.Texto;
+                    }
+
+                    var logado = new UsuarioLogado(usuarioAutentiado.Email, permicoes);
                     FormsAuthentication.SetAuthCookie(logado.Email, true);
                     Session["USUARIO_LOGADO"] = logado;
                     return RedirectToAction("Index", "Home");

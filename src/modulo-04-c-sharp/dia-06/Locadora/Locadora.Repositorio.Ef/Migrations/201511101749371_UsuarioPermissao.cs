@@ -60,7 +60,7 @@ namespace Locadora.Repositorio.Ef.Migrations
         private void CriarPermissoes()
         {
             Sql("INSERT INTO Permissao (Texto) VALUES ('ADMIN')");
-            Sql("INSERT INTO Permissao (Texto) VALUES ('ATENDENTE')");
+            Sql("INSERT INTO Permissao (Texto) VALUES ('OPERADOR')");
         }
 
         private void CriarUsuarioAdmin()

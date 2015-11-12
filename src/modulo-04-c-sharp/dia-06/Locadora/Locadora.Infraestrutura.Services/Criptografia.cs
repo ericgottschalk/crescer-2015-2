@@ -14,13 +14,13 @@ namespace Locadora.Infraestrutura.Services
         {
             MD5 md5 = MD5.Create();
 
-            byte[] inputBytes = Encoding.ASCII.GetBytes(texto + texto.Reverse());
+            byte[] inputBytes = Encoding.ASCII.GetBytes(texto + "%$LOCADORA_CWI_CRESCER$%");
             byte[] hash = md5.ComputeHash(inputBytes);
             var criptografado = new StringBuilder();
 
             foreach (var b in hash)
             {
-                criptografado.Append((Char)b);
+                criptografado.Append(b.ToString("X2"));
             }
 
             return criptografado.ToString();

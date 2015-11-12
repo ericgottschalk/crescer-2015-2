@@ -22,7 +22,7 @@ namespace Locadora.Repositorio.Ef.Migrations
                         IdClienteLocacao = c.Int(),
                     })
                 .PrimaryKey(t => t.Id)
-                .ForeignKey("dbo.Clientes", t => t.IdClienteLocacao)
+                .ForeignKey("dbo.Cliente", t => t.IdClienteLocacao)
                 .ForeignKey("dbo.Categoria", t => t.IdCategoria)
                 .ForeignKey("dbo.Selo", t => t.IdSelo)
                 .Index(t => t.IdClienteLocacao)
@@ -30,7 +30,7 @@ namespace Locadora.Repositorio.Ef.Migrations
                 .Index(t => t.IdSelo);
             
             CreateTable(
-                "dbo.Clientes",
+                "dbo.Cliente",
                 c => new
                     {
                         Id = c.Int(nullable: false, identity: true),
@@ -63,13 +63,13 @@ namespace Locadora.Repositorio.Ef.Migrations
         
         public override void Down()
         {
-            DropForeignKey("dbo.Jogo", "IdClienteLocacao", "dbo.Clientes");
+            DropForeignKey("dbo.Jogo", "IdClienteLocacao", "dbo.Cliente");
             DropForeignKey("dbo.Jogo", "IdCategoria", "dbo.Categoria");
             DropForeignKey("dbo.Jogo", "IdSelo", "dbo.Selo");
             DropIndex("dbo.Jogo", new[] { "IdClienteLocacao" });
             DropIndex("dbo.Jogo", new[] { "IdCategoria" });
             DropIndex("dbo.Jogo", new[] { "IdSelo" });
-            DropTable("dbo.Clientes");
+            DropTable("dbo.Cliente");
             DropTable("dbo.Selo");
             DropTable("dbo.Categoria");
             DropTable("dbo.Jogo");

@@ -1,4 +1,5 @@
 ﻿using Locadora.Dominio;
+using Locadora.Dominio.ModuloLocacao;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -19,6 +20,7 @@ namespace Locadora.Repositorio.Ef
         public DbSet<Cliente> Cliente { get; set; }
         public DbSet<Usuario> Usuario { get; set; }
         public DbSet<Permissao> Permissao { get; set; }
+        public DbSet<Locacao> Locacao { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -26,6 +28,7 @@ namespace Locadora.Repositorio.Ef
             modelBuilder.Configurations.Add(new Mapeamentos.MapeamentoCliente());
             modelBuilder.Configurations.Add(new Mapeamentos.MapeamentoUsuario());
             modelBuilder.Configurations.Add(new Mapeamentos.MapeamentoPermissao());
+            modelBuilder.Configurations.Add(new Mapeamentos.MapeamentoLocacao());
             base.OnModelCreating(modelBuilder);
         }
     }

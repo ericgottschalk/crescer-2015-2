@@ -50,6 +50,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Mapeamentos\MapeamentoLocacao.cs" />
     <Compile Include="Migrations\201511111912551_FIX.cs" />
     <Compile Include="Migrations\201511111912551_FIX.Designer.cs">
       <DependentUpon>201511111912551_FIX.cs</DependentUpon>
@@ -57,6 +58,10 @@
     <Compile Include="Migrations\201511120141230_RemoverPrecoJogo.cs" />
     <Compile Include="Migrations\201511120141230_RemoverPrecoJogo.Designer.cs">
       <DependentUpon>201511120141230_RemoverPrecoJogo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201511120350251_Locacao.cs" />
+    <Compile Include="Migrations\201511120350251_Locacao.Designer.cs">
+      <DependentUpon>201511120350251_Locacao.cs</DependentUpon>
     </Compile>
     <Compile Include="Repositorios\ClienteRepositorio.cs" />
     <Compile Include="BaseDbContext.cs" />
@@ -104,6 +109,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201511120141230_RemoverPrecoJogo.resx">
       <DependentUpon>201511120141230_RemoverPrecoJogo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511120350251_Locacao.resx">
+      <DependentUpon>201511120350251_Locacao.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
