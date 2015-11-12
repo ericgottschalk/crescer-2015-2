@@ -115,6 +115,9 @@
     <Content Include="Content\Index.css" />
     <Content Include="Content\ManterJogo.css" />
     <Content Include="Content\JogosDisponiveis.css" />
+    <Content Include="Content\selobronze.png" />
+    <Content Include="Content\seloouro.png" />
+    <Content Include="Content\seloprata.png" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\DetalhesJogo.css" />
     <Content Include="Content\StyleSheet.css" />
@@ -172,6 +175,8 @@
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Locar\Index.cshtml" />
+    <Content Include="Views\Locar\LocarJogo.cshtml" />
+    <Content Include="Views\Locar\_PreviewLocacao.cshtml" />
     <None Include="Views\Shared\LoginLayout.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -190,6 +195,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\ModuleBuilder.cs" />
     <Compile Include="Models\DetalheJogoModel.cs" />
     <Compile Include="Models\JogoModel.cs" />
     <Compile Include="Models\LocacaoModel.cs" />

@@ -1,0 +1,48 @@
+﻿@model LocacaoModel
+@{
+    ViewBag.Title = "LocarJogo";
+}
+
+<style>
+    .jumbotron {
+        background-color: #444;
+        text-align: center;
+    }
+</style>
+@Html.Partial("_PreviewLocacao", @Model);
+
+<div class="jumbotron">
+    @using (Html.BeginForm("Salvar", "Locar", Model, FormMethod.Post, new { @class = "form-horizontal" }))
+    {
+        @Html.ValidationSummary(true, "");
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.TextBoxFor(m => m.NomeCliente, new { @type = "text", @class = "fomr-control", @id = "field", @name = "nome", @value = "" })
+                    @Html.ValidationMessageFor(m => m.NomeCliente, "* Obrigatorio")
+                </div>
+            </div>
+            <div class="col-md-6">
+                <input class="btn btn-default btn-lg" type="submit" name="enviar" value="Finalizar" />
+            </div>
+        </div>
+    }
+
+    <h3>@TempData["ClienteNull"]</h3>
+</div>
+
+@section Scripts {
+    <script src="~/Scripts/jquery.validate.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.js"></script>
+    <script>
+        $("document").ready(function () {
+            $("#field").autocomplete({
+                source: '@Url.Action("ClienteAutocomplete", "Locar")',
+                select: function () { $("#save").click(); }
+            });
+        });
+    </script>
+}
+
+

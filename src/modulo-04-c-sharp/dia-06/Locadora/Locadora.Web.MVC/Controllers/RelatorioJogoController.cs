@@ -26,7 +26,7 @@ namespace Locadora.Web.MVC.Controllers
             }
             else
             {
-                list = repositorio.Buscar();
+                list = repositorio.BuscarDisponiveis();
             }
 
             if (list.Count == 0)
@@ -41,7 +41,8 @@ namespace Locadora.Web.MVC.Controllers
                     Id = jogo.Id,
                     Nome = jogo.Nome,
                     Categoria = jogo.Categoria.ToString(),
-                    Selo = jogo.Selo.ToString()
+                    Selo = jogo.Selo.ToString(),
+                    Disponivel = jogo.Available
                 };
 
                 model.ListaJogos.Add(jogoDisponivel);

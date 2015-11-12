@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Locadora.Dominio.Repositorio;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -15,16 +16,44 @@ namespace Locadora.Dominio.ModuloLocacao
         private const int PRATA_DIAS = 2;
         private const int BRONZE_DIAS = 3;
 
-        private ILocacaoRepositorio repositorio;
+        private ILocacaoRepositorio locacaoRepositorio;
+        private IClienteRepositorio clienteRepositorio;
+        private IJogoRepositorio jogoRepositrio;
 
-        public LocacaoServicoDominio(ILocacaoRepositorio repositorio)
+        public LocacaoServicoDominio(ILocacaoRepositorio locacaoRepositorio, IClienteRepositorio clienteRepositorio, IJogoRepositorio jogoRepositrio)
         {
-            this.repositorio = repositorio;
+            this.locacaoRepositorio = locacaoRepositorio;
+            this.clienteRepositorio = clienteRepositorio;
+            this.jogoRepositrio = jogoRepositrio;
         }
 
-        public void LocarJogo()
+        public void LocarJogo(int idJogo, Cliente cliente)
         {
-       
+            var jogo = this.jogoRepositrio.BuscarPorId(idJogo);
+    
+            if (jogo == null)
+            {
+                throw new ArgumentNullException("Jogo da locação não pode ser nulo");
+            }
+
+            if (cliente == null)
+            {
+                throw new ArgumentNullException("Cliente da locação não pode ser nulo");
+            }
+
+            var locacao = new Locacao()
+            {
+                Jogo = jogo,
+                Cliente = cliente,
+                Valor = this.GetValorLocacao(jogo),
+                DataLocacao = DateTime.Now,
+                DataParaDevolucao = DateTime.Now.AddDays(this.GetDiasDevolucao(jogo)),
+                Status = StatusLocacao.PRAZO
+            };
+
+            locacao.Jogo.AlterarDisponibilidade(false);
+
+            this.locacaoRepositorio.Criar(locacao);
         }
 
         private decimal GetValorLocacao(Jogo jogo)

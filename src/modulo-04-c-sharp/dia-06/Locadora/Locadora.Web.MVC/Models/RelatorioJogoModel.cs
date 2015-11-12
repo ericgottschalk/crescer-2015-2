@@ -28,5 +28,7 @@ namespace Locadora.Web.MVC.Models
         public string Selo { get; set; }
 
         public string Categoria { get; set; }
+
+        public bool Disponivel { get; set; }
     }
 }
