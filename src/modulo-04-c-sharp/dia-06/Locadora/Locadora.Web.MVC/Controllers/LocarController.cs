@@ -44,11 +44,17 @@ namespace Locadora.Web.MVC.Controllers
         }
 
         [HttpGet]
-        public ActionResult LocarJogo(int id)
+        public ActionResult LocarJogo(int? id)
         {
             var jogoRepositorio = ModuleBuilder.CriarJogoRepositorio();
 
-            var jogo = jogoRepositorio.BuscarPorId(id);
+            if(!id.HasValue)
+            {
+                TempData["Mensagem"] = "Ocorreu um erro!";
+                return RedirectToAction("JogosDisponiveis", "RelatorioJogo");
+            }
+
+            var jogo = jogoRepositorio.BuscarPorId(id.Value);
 
             if (jogo == null)
             {
@@ -58,7 +64,7 @@ namespace Locadora.Web.MVC.Controllers
 
             var model = new LocacaoModel()
             {
-                IdJogo = id,
+                IdJogo = id.Value,
                 ImagemJogo = jogo.Imagem,
                 Selo = jogo.Selo.ToString(),
                 NomeJogo = jogo.Nome,
