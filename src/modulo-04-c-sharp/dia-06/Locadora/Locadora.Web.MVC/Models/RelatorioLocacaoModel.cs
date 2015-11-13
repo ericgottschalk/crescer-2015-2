@@ -8,29 +8,21 @@ namespace Locadora.Web.MVC.Models
 {
     public class RelatorioLocacaoModel
     {
-        public IList<LocacaoModel> locacoesPendentes { get; set; }
+        public IList<LocacaoModel> Locacoes { get; set; }
 
-        public IList<LocacaoModel> locacoesEntregues { get; set; }
-
-        public RelatorioLocacaoModel(IList<Locacao> pendentes, IList<Locacao> entregues)
+        public RelatorioLocacaoModel(IList<Locacao> lista)
         {
-            this.locacoesEntregues = new List<LocacaoModel>();
-            this.locacoesPendentes = new List<LocacaoModel>();
+            this.Locacoes = new List<LocacaoModel>();
 
-            if (pendentes.Count > 0)
+            if (lista.Count > 0)
             {
-                this.CriarListaLocacaoModelPendentes(pendentes);
-            }
-
-            if (entregues.Count > 0)
-            {
-                this.CriarListaLocacaoModelEntregues(entregues);
-            }      
+                this.CriarListaLocacaoModel(lista);
+            }    
         }
 
-        private void CriarListaLocacaoModelEntregues(IList<Locacao> entregues)
+        private void CriarListaLocacaoModel(IList<Locacao> lista)
         {
-            foreach (var locacao in entregues)
+            foreach (var locacao in lista)
             {
                 var model = new LocacaoModel()
                 {
@@ -43,25 +35,7 @@ namespace Locadora.Web.MVC.Models
                     Status = locacao.Status.ToString()
                 };
 
-                this.locacoesEntregues.Add(model);
-            }
-        }
-
-        private void CriarListaLocacaoModelPendentes(IList<Locacao> pendentes)
-        {
-            foreach (var locacao in pendentes)
-            {
-                var model = new LocacaoModel()
-                {
-                    IdLocacao = locacao.Id,
-                    Valor = locacao.Valor,
-                    NomeJogo = locacao.Jogo.Nome,
-                    NomeCliente = locacao.Cliente.Nome,
-                    DataPrevista = locacao.DataParaDevolucao,
-                    Status = locacao.Status.ToString()
-                };
-
-                this.locacoesPendentes.Add(model);
+                this.Locacoes.Add(model);
             }
         }
     }

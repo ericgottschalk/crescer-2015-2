@@ -1,0 +1,42 @@
+﻿@model RelatorioLocacaoModel
+@{
+    ViewBag.Title = "MostrarEntregues";
+}
+
+@Styles.Render("~/bundles/jogosdisponiveis")
+@Scripts.Render("~/bundles/modernizr")
+@if (TempData["Mensagem"] != null)
+{
+    <h2>@TempData["Mensagem"]</h2>
+}
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Locações</h3>
+    </div>
+    <div class="panel-body">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Nome jogo</th>
+                    <th>Nome cliente</th>
+                    <th>Valor</th>
+                    <th>Data entrega</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var locacao in @Model.Locacoes)
+                {
+                    <tr>
+                        <th scope="row">@locacao.NomeJogo</th>
+                        <td>@locacao.NomeCliente</td>
+                        <td>@locacao.Valor.ToString("C")</td>
+                        <td>@locacao.DataEntrega</td>
+                        <td>@locacao.Status.ToString()</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+

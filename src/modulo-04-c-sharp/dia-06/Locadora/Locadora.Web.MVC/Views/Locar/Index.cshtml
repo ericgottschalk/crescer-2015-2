@@ -9,9 +9,13 @@
 {
     <h2>@TempData["Mensagem"]</h2>
 }
+<form style="margin-top: 20px" action='@Url.Action("Index", "Locar")' method="get">
+    <input id="field" class="from-control" type="text" placeholder="Nome" name="nome" />
+    <input class="btn btn-default btn-md" type="submit" value="Buscar" />
+</form>
 <div class="panel panel-default">
     <div class="panel-heading">
-        <h3 class="panel-title">Locações</h3>
+        <h3 style="color: black" class="panel-title">@Html.ActionLink("Mostrar Entregues", "MostrarEntregues", "Locar", new { area = "" }, new { @class = "btn btn-default btn-md" })</h3>
     </div>
     <div class="panel-body">
         <table class="table table-hover">
@@ -25,7 +29,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var locacao in @Model.locacoesPendentes)
+                @foreach (var locacao in @Model.Locacoes)
                 {
                     <tr>
                         <th scope="row">@locacao.NomeJogo</th>
@@ -40,5 +44,13 @@
     </div>
 </div>
 
-
-
+@section Scripts {
+    <script>
+        $("document").ready(function () {
+            $("#field").autocomplete({
+                source: '@Url.Action("JogoAutocomplete", "Locar")',
+                select: function () { $("#save").click(); }
+            });
+        });
+    </script>
+}

@@ -63,7 +63,7 @@ namespace Locadora.Web.MVC.Controllers
 
             foreach (var jogo in list)
             {
-                var jogoDisponivel = new JogoDisponivelModdel()
+                var jogoDisponivel = new JogoDisponivelModel()
                 {
                     Id = jogo.Id,
                     Nome = jogo.Nome,

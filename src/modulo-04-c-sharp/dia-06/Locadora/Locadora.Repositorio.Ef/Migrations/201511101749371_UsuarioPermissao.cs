@@ -44,6 +44,7 @@ namespace Locadora.Repositorio.Ef.Migrations
                 .Index(t => t.IdPermissao);
 
             this.CriarUsuarioAdmin();
+            this.CriarUsuarioOperador();
         }
 
         public override void Down()
@@ -65,8 +66,14 @@ namespace Locadora.Repositorio.Ef.Migrations
 
         private void CriarUsuarioAdmin()
         {
-            Sql("INSERT INTO Usuario (NomeCompleto, Email, Senha) VALUES ('Administrador do Sistema', 'admin@email.com', '" + new Criptografia().Criptografar("admin") + "')");
+            Sql("INSERT INTO Usuario (NomeCompleto, Email, Senha) VALUES ('Administrador do Sistema', 'admin@worldgames.com', '" + new Criptografia().Criptografar("admin") + "')");
             Sql("INSERT INTO UsuarioPermissao (IdUsuario, IdPermissao) VALUES (1, 1)");
+        }
+
+        private void CriarUsuarioOperador()
+        {
+            Sql("INSERT INTO Usuario (NomeCompleto, Email, Senha) VALUES ('Operador do Sistema', 'operador@worldgames.com', '" + new Criptografia().Criptografar("operador") + "')");
+            Sql("INSERT INTO UsuarioPermissao (IdUsuario, IdPermissao) VALUES (1, 2)");
         }
     }
 }

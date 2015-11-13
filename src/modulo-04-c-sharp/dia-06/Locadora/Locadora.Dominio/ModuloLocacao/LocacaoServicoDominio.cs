@@ -50,7 +50,7 @@ namespace Locadora.Dominio.ModuloLocacao
                 Valor = this.GetValorLocacao(jogo),
                 DataLocacao = DateTime.Now,
                 DataParaDevolucao = DateTime.Now.AddDays(this.GetDiasDevolucao(jogo)),
-                Status = StatusLocacao.PRAZO
+                Status = StatusLocacao.PENDENTE
             };
 
             jogo.AlterarDisponibilidade(false);

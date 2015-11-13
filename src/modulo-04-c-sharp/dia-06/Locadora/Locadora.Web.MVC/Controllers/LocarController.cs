@@ -15,13 +15,31 @@ namespace Locadora.Web.MVC.Controllers
     public class LocarController : Controller
     {
         [HttpGet]
-        public ActionResult Index()
+        public ActionResult Index(string nome)
         {
             var locacaoRepositorio = ModuleBuilder.CriarLocacaoRepositorio();
-            var pendentes = locacaoRepositorio.BuscarPendentes();
-            var entregues = locacaoRepositorio.BuscarEntregues();
+            IList<Locacao> lista;
 
-            var model = new RelatorioLocacaoModel(pendentes, entregues);
+            if (!string.IsNullOrWhiteSpace(nome))
+            {
+                lista = locacaoRepositorio.BuscarPendentesPorNomeJogo(nome);
+            }
+            else
+            {
+                lista = locacaoRepositorio.BuscarPendentes();
+            }
+
+            var model = new RelatorioLocacaoModel(lista);
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult MostrarEntregues()
+        {
+            var locacaoRepositorio = ModuleBuilder.CriarLocacaoRepositorio();
+            IList<Locacao> lista = locacaoRepositorio.BuscarEntregues();
+
+            var model = new RelatorioLocacaoModel(lista);
             return View(model);
         }
 
@@ -34,6 +52,7 @@ namespace Locadora.Web.MVC.Controllers
 
             if (jogo == null)
             {
+                TempData["Mensagem"] = "Ocorreu um erro!";
                 return RedirectToAction("JogosDisponiveis", "RelatorioJogo");
             }
 
@@ -71,15 +90,23 @@ namespace Locadora.Web.MVC.Controllers
             if (ModelState.IsValid)
             {
                 var clienteRepositorio = ModuleBuilder.CriarClienteRepositorio();
+                var locacaoRepositorio = ModuleBuilder.CriarLocacaoRepositorio();
                 var cliente = clienteRepositorio.BuscarPorIdPorNome(model.NomeCliente);
+                var servico = ModuleBuilder.CriarServicoLocacao();
+                
 
                 if (cliente == null)
                 {
                     TempData["ClienteNull"] = "Cliente não encontrado!";
-                    return RedirectToAction("LocarJogo", "Locar", model.IdJogo);
+                    return RedirectToAction("JogosDisponiveis", "RelatorioJogo");
                 }
 
-                var servico = ModuleBuilder.CriarServicoLocacao();
+                var numeroDeJogosCliente = locacaoRepositorio.GetCountJogosDoCliente(cliente.Id);
+                if (numeroDeJogosCliente >= 3)
+                {
+                    TempData["ClienteNull"] = "Cliente possui o limite de locações!";
+                    return RedirectToAction("JogosDisponiveis", "RelatorioJogo");
+                }
 
                 servico.LocarJogo(model.IdJogo, cliente.Id);
 
@@ -93,11 +120,17 @@ namespace Locadora.Web.MVC.Controllers
 
         public ActionResult ServicoDevolucao(LocacaoModel model)
         {
-            var servico = ModuleBuilder.CriarServicoLocacao();
+            if (model.IdLocacao.HasValue)
+            {
+                var servico = ModuleBuilder.CriarServicoLocacao();
 
-            servico.DevolverJogo(model.IdLocacao.Value);
+                servico.DevolverJogo(model.IdLocacao.Value);
 
-            TempData["Mensagem"] = "Jogo devolvido com sucesso";
+                TempData["Mensagem"] = "Jogo devolvido com sucesso";
+                return RedirectToAction("Index", "Locar");
+            }
+
+            TempData["Mensagem"] = "Ocorreu um erro!";
             return RedirectToAction("Index", "Locar");
         }
 
@@ -107,6 +140,16 @@ namespace Locadora.Web.MVC.Controllers
             IList<Cliente> clientes = string.IsNullOrWhiteSpace(term) ? clienteRepositorio.Buscar() : clienteRepositorio.BuscarPorNome(term);
 
             var json = clientes.Select(x => new { label = x.Nome });
+
+            return Json(json, JsonRequestBehavior.AllowGet);
+        }
+
+        public JsonResult JogoAutocomplete(string term)
+        {
+            var jogoRepositorio = ModuleBuilder.CriarJogoRepositorio();
+            IList<Jogo> jogos = string.IsNullOrWhiteSpace(term) ? jogoRepositorio.Buscar() : jogoRepositorio.BuscarPorNome(term);
+
+            var json = jogos.Select(x => new { label = x.Nome });
 
             return Json(json, JsonRequestBehavior.AllowGet);
         }

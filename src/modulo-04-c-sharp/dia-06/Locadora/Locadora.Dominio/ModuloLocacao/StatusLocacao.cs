@@ -8,7 +8,7 @@ namespace Locadora.Dominio.ModuloLocacao
 {
     public enum StatusLocacao
     {
-        PRAZO = 1,
+        PENDENTE = 1,
         ENTREGUE = 2,
         ATRASADO = 3
     }

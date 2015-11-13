@@ -39,5 +39,19 @@ namespace Locadora.Repositorio.Ef.Repositorios
                 return dbContext.Locacao.Include("Cliente").Include("Jogo").Where(t => t.Status != StatusLocacao.ENTREGUE).ToList();
             }
         }
+
+        public IList<Locacao> BuscarPendentesPorNomeJogo(string nome)
+        {
+            using (var dbContext = new BaseDbContext())
+            {
+                return dbContext.Locacao.Include("Cliente").Include("Jogo")
+                    .Where(t => t.Status != StatusLocacao.ENTREGUE && t.Jogo.Nome.StartsWith(nome)).ToList();
+            }
+        }
+
+        public int GetCountJogosDoCliente(int id)
+        {
+            return this.BuscarPendentes().Count(t => t.Cliente.Id == id);
+        }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Locadora.Dominio;
 using Locadora.Repositorio.Ef;
 using Locadora.Web.MVC.Authentictions;
+using Locadora.Web.MVC.Helpers;
 using Locadora.Web.MVC.Models;
 using System;
 using System.Collections.Generic;
@@ -69,7 +70,7 @@ namespace Locadora.Web.MVC.Controllers
             {
                 if (model.Id.HasValue)
                 {
-                    var repositorio = new JogoRepositorio();
+                    var repositorio = ModuleBuilder.CriarJogoRepositorio();
 
                     var jogo = new Jogo(id: model.Id.Value, disponivel: model.Disponivel)
                     {
@@ -87,7 +88,7 @@ namespace Locadora.Web.MVC.Controllers
                 }
                 else
                 {
-                    var repositorio = new JogoRepositorio();
+                    var repositorio = ModuleBuilder.CriarJogoRepositorio();
 
                     var jogo = new Jogo()
                     {

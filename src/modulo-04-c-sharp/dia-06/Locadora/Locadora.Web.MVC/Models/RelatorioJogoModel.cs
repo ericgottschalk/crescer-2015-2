@@ -9,15 +9,15 @@ namespace Locadora.Web.MVC.Models
     {
         public int QuantidadeJogos { get; set; }
 
-        public List<JogoDisponivelModdel> ListaJogos { get; set; }
+        public List<JogoDisponivelModel> ListaJogos { get; set; }
 
         public RelatorioJogoModel()
         {
-            this.ListaJogos = new List<JogoDisponivelModdel>();
+            this.ListaJogos = new List<JogoDisponivelModel>();
         }
     }
 
-    public class JogoDisponivelModdel
+    public class JogoDisponivelModel
     {
         public int Id { get; set; }
 

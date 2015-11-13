@@ -3,34 +3,43 @@
     ViewBag.Title = "World Games";
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8" />
-    <title></title>
-    @Styles.Render("~/bundles/index")
-    @Scripts.Render("~/bundles/modernizr")
-</head>
-<body>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <h3 class="panel-title">Locadora World Games</h3>
+@Styles.Render("~/bundles/index")
+@Scripts.Render("~/bundles/modernizr")
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Locadora World Games</h3>
+    </div>
+    <div class="panel-body">
+        <img src="~/Content/banner.jpg" />
+    </div>
+</div>
+
+<div class="jumbotron">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <form action='@Url.Action("JogosDisponiveis", "RelatorioJogo")' method="get">
+                    <input id="field" class="from-control" type="text" placeholder="Nome" name="nome" />
+                    <input class="btn btn-default btn-lg" type="submit" value="Buscar" />
+                </form>
+            </div>
         </div>
-        <div class="panel-body">
-            <img src="~/Content/banner.jpg" />
+        <div class="col-md-6">
+            @Html.ActionLink("Mostrar Disponiveis", "JogosDisponiveis", "RelatorioJogo", new { area = "" }, new { @class = "btn btn-default btn-lg" })
         </div>
     </div>
+</div>
 
-    <div class="jumbotron">
-        <form action="~/Relatorio/JogosDisponiveis">
-            <input class="from-control" type="text" name="busca" placeholder="Nome">
-            <input class="btn btn-default btn-lg" type="submit" value="Pesquisar">
-        </form>
-
-        @Html.ActionLink("Mostrar Disponiveis", "JogosDisponiveis", "RelatorioJogo", new { area = "" }, new { @class = "btn btn-default btn-lg" })
-        @Html.ActionLink("Mostrar Todos", "Jogos", "RelatorioJogo", new { area = "" }, new { @class = "btn btn-default btn-lg" })
-    </div>
-</body>
-</html>
+@section Scripts {
+    <script>
+        $("document").ready(function () {
+            $("#field").autocomplete({
+                source: '@Url.Action("JogoAutocomplete", "Home")',
+                select: function () { $("#save").click(); }
+            });
+        });
+    </script>
+}
 
 

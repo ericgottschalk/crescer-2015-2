@@ -12,7 +12,11 @@
                 @if (!string.IsNullOrWhiteSpace(Model.ImagemJogo))
                 {
                     <img class="img-thumbnail" src=@Model.ImagemJogo />
-                }     
+                }
+                else
+                {
+                    <img class="img-thumbnail" src="~/Content/sem-foto.png" />
+                }    
             </div>
             <div class="col-md-6">
                 <h4>Nome: @Model.NomeJogo</h4>
