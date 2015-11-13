@@ -1,0 +1,23 @@
+﻿
+@model LocacaoModel
+
+<style> 
+    .img-circle{
+        text-align: right;
+        height: 50px;
+        width: 50px;   
+    }
+</style>
+
+@if(Model.Selo == Locadora.Dominio.Selo.OURO.ToString())
+{
+    <div style="position: absolute; right: 15%; top: 5%"><img src="~/Content/seloouro.png" class="img-circle" /></div>
+}
+else if (Model.Selo == Locadora.Dominio.Selo.PRATA.ToString())
+{
+    <div style="position: absolute; right: 15%; top: 5%"><img src="~/Content/seloprata.png" class="img-circle" /></div>
+}
+else
+{
+    <div style="position: absolute; right: 15%; top: 5%"><img src="~/Content/selobronze.png" class="img-circle" /></div>
+}

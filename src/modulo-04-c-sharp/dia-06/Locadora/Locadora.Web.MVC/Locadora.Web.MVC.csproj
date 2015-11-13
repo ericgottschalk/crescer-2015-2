@@ -180,6 +180,7 @@
     <Content Include="Views\Locar\_PreviewLocacao.cshtml" />
     <Content Include="Views\Locar\DevolverJogo.cshtml" />
     <Content Include="Views\Locar\MostrarEntregues.cshtml" />
+    <Content Include="Views\Locar\_SeloJogo.cshtml" />
     <None Include="Views\Shared\LoginLayout.cshtml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
