@@ -5,40 +5,39 @@
 
 @Styles.Render("~/bundles/jogosdisponiveis")
 @Scripts.Render("~/bundles/modernizr")
-<style>
-    .jumbotron{
-        margin-top: 20px;
-        background-color: #444;
-    }
-</style>
 @if (TempData["Mensagem"] != null)
 {
     <h2>@TempData["Mensagem"]</h2>
 }
-<div class="jumbotron">
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th>Nome jogo</th>
-                <th>Nome cliente</th>
-                <th>Valor</th>
-                <th>Data prevista</th>
-                <th>Devolver</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var locacao in @Model.locacoesPendentes)
-            {
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <h3 class="panel-title">Locações</h3>
+    </div>
+    <div class="panel-body">
+        <table class="table table-hover">
+            <thead>
                 <tr>
-                    <th scope="row">@locacao.NomeJogo</th>
-                    <td>@locacao.NomeCliente</td>
-                    <td>@locacao.Valor.ToString("C")</td>
-                    <td>@locacao.DataPrevista</td>
-                    <td>@Html.ActionLink("Devolver", "DevolverJogo", "Locar", locacao, new { @class = "btn btn-default brn-lg" })</td>
+                    <th>Nome jogo</th>
+                    <th>Nome cliente</th>
+                    <th>Valor</th>
+                    <th>Data prevista</th>
+                    <th>Devolver</th>
                 </tr>
-            }
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach (var locacao in @Model.locacoesPendentes)
+                {
+                    <tr>
+                        <th scope="row">@locacao.NomeJogo</th>
+                        <td>@locacao.NomeCliente</td>
+                        <td>@locacao.Valor.ToString("C")</td>
+                        <td>@locacao.DataPrevista</td>
+                        <td>@Html.ActionLink("Devolver", "DevolverJogo", "Locar", locacao, new { @class = "btn btn-default brn-lg" })</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
 
 

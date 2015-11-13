@@ -70,7 +70,7 @@ namespace Locadora.Dominio.ModuloLocacao
             jogo.AlterarDisponibilidade(true);
 
             this.jogoRepositrio.Atualizar(jogo);
-            this.locacaoRepositorio.Criar(locacao);
+            this.locacaoRepositorio.Atualizar(locacao);
         }
 
         private decimal GetValorLocacao(Jogo jogo)
