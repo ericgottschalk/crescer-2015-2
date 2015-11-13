@@ -103,14 +103,14 @@ namespace Locadora.Web.MVC.Controllers
 
                 if (cliente == null)
                 {
-                    TempData["ClienteNull"] = "Cliente não encontrado!";
+                    TempData["Mensagem"] = "Cliente não encontrado!";
                     return RedirectToAction("JogosDisponiveis", "RelatorioJogo");
                 }
 
                 var numeroDeJogosCliente = locacaoRepositorio.GetCountJogosDoCliente(cliente.Id);
                 if (numeroDeJogosCliente >= 3)
                 {
-                    TempData["ClienteNull"] = "Cliente possui o limite de locações!";
+                    TempData["Mensagem"] = "Cliente possui o limite de locações!";
                     return RedirectToAction("JogosDisponiveis", "RelatorioJogo");
                 }
 
