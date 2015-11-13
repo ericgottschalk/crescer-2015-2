@@ -69,6 +69,13 @@
             </div>
 
             <div class="form-group">
+                @Html.LabelFor(m => Model.Disponivel, new { @class = "col-sm-2 control-label" })
+                <div class="col-sm-10">
+                    @Html.CheckBoxFor(m => Model.Disponivel, new { @class = "form-control" })
+                </div>
+            </div>
+
+            <div class="form-group">
                 <div class="col-sm-offset-2 col-sm-10">
                     <button type="submit" class="btn btn-default btn-lg">Salvar</button>
                 </div>
