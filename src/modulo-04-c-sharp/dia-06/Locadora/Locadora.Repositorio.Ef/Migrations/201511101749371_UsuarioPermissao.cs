@@ -73,7 +73,7 @@ namespace Locadora.Repositorio.Ef.Migrations
         private void CriarUsuarioOperador()
         {
             Sql("INSERT INTO Usuario (NomeCompleto, Email, Senha) VALUES ('Operador do Sistema', 'operador@worldgames.com', '" + new Criptografia().Criptografar("operador") + "')");
-            Sql("INSERT INTO UsuarioPermissao (IdUsuario, IdPermissao) VALUES (1, 2)");
+            Sql("INSERT INTO UsuarioPermissao (IdUsuario, IdPermissao) VALUES (2, 2)");
         }
     }
 }
