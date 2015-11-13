@@ -44,6 +44,7 @@
     <Compile Include="Comum\IQuery.cs" />
     <Compile Include="Comum\IRepositorio.cs" />
     <Compile Include="ModuloCliente\Queries\BuscarClientePorNomeQuery.cs" />
+    <Compile Include="ModuloCliente\Queries\BuscarClientesPorNomeQuery.cs" />
     <Compile Include="ModuloJogo\Categoria.cs" />
     <Compile Include="ModuloCliente\Cliente.cs" />
     <Compile Include="Comum\EntidadeBase.cs" />
@@ -51,7 +52,7 @@
     <Compile Include="ModuloJogo\Queries\BuscarJogoPorNomeQuery.cs" />
     <Compile Include="ModuloJogo\Queries\BuscarJogosDisponiveisQuery.cs" />
     <Compile Include="ModuloJogo\Queries\BuscarJogosIndisponiveis.cs" />
-    <Compile Include="ModuloLocacao\BuscarLocacaoPendentePorNomeDoJogoQuery.cs" />
+    <Compile Include="ModuloLocacao\BuscarLocacaoEntregueQuery.cs" />
     <Compile Include="ModuloLocacao\BuscarLocacaoPendenteQuery.cs" />
     <Compile Include="ModuloLocacao\ILocacaoRepositorio.cs" />
     <Compile Include="ModuloLocacao\Locacao.cs" />

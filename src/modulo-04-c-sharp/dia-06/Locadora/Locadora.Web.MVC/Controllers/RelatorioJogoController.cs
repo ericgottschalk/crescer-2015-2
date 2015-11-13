@@ -1,6 +1,7 @@
 ﻿using Locadora.Dominio;
 using Locadora.Repositorio.Ef;
 using Locadora.Web.MVC.Authentictions;
+using Locadora.Web.MVC.Helpers;
 using Locadora.Web.MVC.Models;
 using System;
 using System.Collections.Generic;
@@ -16,8 +17,8 @@ namespace Locadora.Web.MVC.Controllers
         [HttpGet]
         public ActionResult JogosDisponiveis(string nome)
         {
-            var repositorio = new JogoRepositorio();
-            var model = new RelatorioJogoModel();
+            var repositorio = ModuleBuilder.CriarJogoRepositorio();
+            
             IList<Jogo> list;
 
             if (!String.IsNullOrWhiteSpace(nome))
@@ -33,6 +34,32 @@ namespace Locadora.Web.MVC.Controllers
             {
                 return View("NenhumRegistroEncontrado");
             }
+
+            var model = this.GerarModel(list);           
+
+            return View(model);
+        }
+
+        [HttpGet]
+        public ActionResult Jogos()
+        {
+            var repositorio = ModuleBuilder.CriarJogoRepositorio();
+
+            IList<Jogo> list = repositorio.Buscar();
+
+            if (list.Count == 0)
+            {
+                return View("NenhumRegistroEncontrado");
+            }
+
+            var model = this.GerarModel(list);
+
+            return View("JogosDisponiveis", model);
+        }
+
+        private RelatorioJogoModel GerarModel(IList<Jogo> list)
+        {
+            var model = new RelatorioJogoModel();
 
             foreach (var jogo in list)
             {
@@ -52,7 +79,7 @@ namespace Locadora.Web.MVC.Controllers
             var lista = model.ListaJogos;
             model.QuantidadeJogos = lista.Count;
 
-            return View(model);
+            return model;
         }
     }
 }

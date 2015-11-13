@@ -11,6 +11,6 @@ namespace Locadora.Dominio.ModuloLocacao
     {
         IList<Locacao> BuscarPendentes();
 
-        IList<Locacao> BuscarPendentePorNomeDoJogo(string nomeJogo);
+        IList<Locacao> BuscarEntregues();
     }
 }

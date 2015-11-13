@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Locadora.Dominio;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -8,6 +9,8 @@ namespace Locadora.Web.MVC.Models
 {
     public class LocacaoModel
     {
+        public int? IdLocacao { get; set; }
+
         public int IdJogo { get; set; }
 
         public int IdCliente { get; set; }
@@ -23,7 +26,11 @@ namespace Locadora.Web.MVC.Models
 
         public DateTime DataPrevista { get; set; }
 
+        public DateTime? DataEntrega { get; set; }
+
         public decimal Valor { get; set; }
+
+        public string Status { get; set; }
 
         public decimal GetValor()
         {

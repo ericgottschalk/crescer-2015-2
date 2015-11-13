@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 
 namespace Locadora.Dominio.ModuloCliente.Queries
 {
-    public class BuscarClientePorNomeQuery : IQuery<Cliente>
+    public class BuscarClientesPorNomeQuery : IQuery<Cliente>
     {
         private readonly string nome;
 
-        public BuscarClientePorNomeQuery(string nome)
+        public BuscarClientesPorNomeQuery(string nome)
         {
             this.nome = nome;
         }
 
         public IQueryable<Cliente> CriarQuery(IQueryable<Cliente> src)
         {
-            return src.Where(t => t.Nome == this.nome);
+            return src.Where(t => t.Nome.StartsWith(nome));
         }
     }
 }

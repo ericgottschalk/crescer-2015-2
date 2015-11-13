@@ -14,7 +14,12 @@ namespace Locadora.Repositorio.Ef
     {
         public IList<Cliente> BuscarPorNome(string nome)
         {
-            return this.Buscar(new BuscarClientePorNomeQuery(nome));
+            return this.Buscar(new BuscarClientesPorNomeQuery(nome));
+        }
+
+        public Cliente BuscarPorIdPorNome(string nome)
+        {
+            return this.Buscar(new BuscarClientePorNomeQuery(nome)).FirstOrDefault();
         }
     }
 }

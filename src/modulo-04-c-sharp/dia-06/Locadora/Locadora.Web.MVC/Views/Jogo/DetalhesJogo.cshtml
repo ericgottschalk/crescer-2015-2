@@ -15,10 +15,20 @@
     <div class="panel panel-default">
         <div class="panel-heading">
             <h3 class="panel-title"></h3>
-            @Html.ActionLink("Editar", "ManterJogo", "Jogo", Model, new { @class = "btn btn-default btn-lg" })
+            @if (User.IsInRole("ADMIN"))
+            {
+                @Html.ActionLink("Editar", "ManterJogo", "Jogo", Model, new { @class = "btn btn-default btn-lg" })
+            }
         </div>
         <div class="panel-body">
-            <img src="@Model.Imagem" class="img-thumbnail">
+            @if (!string.IsNullOrWhiteSpace(Model.Imagem))
+            {
+                <img src="@Model.Imagem" class="img-thumbnail">
+            }
+            else
+            {
+                <img src="~/Content/sem-foto.png" />
+            }
             <h3>Categoria: @Model.Categoria</h3>
             <h3>Selo: @Model.Selo</h3>
             <h3>Descrição: @Model.Descricao</h3>

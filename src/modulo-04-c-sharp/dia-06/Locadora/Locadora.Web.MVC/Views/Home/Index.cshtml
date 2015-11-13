@@ -22,15 +22,13 @@
     </div>
 
     <div class="jumbotron">
-        @using (Html.BeginForm("JogosDisponiveis", "RelatorioJogo", FormMethod.Post, new { @class = "form-horizontal" }))
-        {
-            <div class="form-group">
-                <input type="text" class="form-control" name="nome" value="" />
-            </div>
+        <form action="~/Relatorio/JogosDisponiveis">
+            <input class="from-control" type="text" name="busca" placeholder="Nome">
+            <input class="btn btn-default btn-lg" type="submit" value="Pesquisar">
+        </form>
 
-            <input class="btn btn-default btn-lg" type="submit" name="enviar" value="Buscar" />
-            @Html.ActionLink("Mostrar Todos", "JogosDisponiveis", "RelatorioJogo", new { area = "" }, new { @class = "btn btn-default btn-lg" })
-        }
+        @Html.ActionLink("Mostrar Disponiveis", "JogosDisponiveis", "RelatorioJogo", new { area = "" }, new { @class = "btn btn-default btn-lg" })
+        @Html.ActionLink("Mostrar Todos", "Jogos", "RelatorioJogo", new { area = "" }, new { @class = "btn btn-default btn-lg" })
     </div>
 </body>
 </html>

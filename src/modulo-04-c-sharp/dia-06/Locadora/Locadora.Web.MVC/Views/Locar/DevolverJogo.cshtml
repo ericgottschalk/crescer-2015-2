@@ -1,0 +1,23 @@
+﻿@model LocacaoModel
+@{
+    ViewBag.Title = "DevolverJogo";
+}
+
+<style> 
+    .jumbotron{
+        margin-top: 20px;
+        text-align: center;
+        background-color: #444;
+    }
+
+    .btn{
+        background-color: orange;
+        color: black;
+    }
+</style>
+@Html.Partial("_PreviewLocacao", Model);
+
+<div class="jumbotron">
+    @Html.ActionLink("Devolver", "ServicoDevolucao", "Locar", Model, new { @class = "btn btn-default btn-lg" })
+</div>
+

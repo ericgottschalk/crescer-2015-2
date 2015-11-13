@@ -67,6 +67,10 @@
     <Compile Include="Migrations\201511121648207_AlteracoesLocacaoJogo.Designer.cs">
       <DependentUpon>201511121648207_AlteracoesLocacaoJogo.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201511130139492_Ajustes.cs" />
+    <Compile Include="Migrations\201511130139492_Ajustes.Designer.cs">
+      <DependentUpon>201511130139492_Ajustes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Repositorios\ClienteRepositorio.cs" />
     <Compile Include="BaseDbContext.cs" />
     <Compile Include="Repositorios\JogoRepositorio.cs" />
@@ -120,6 +124,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201511121648207_AlteracoesLocacaoJogo.resx">
       <DependentUpon>201511121648207_AlteracoesLocacaoJogo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201511130139492_Ajustes.resx">
+      <DependentUpon>201511130139492_Ajustes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

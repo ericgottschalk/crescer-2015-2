@@ -9,6 +9,7 @@ namespace Locadora.Dominio.ModuloLocacao
 {
     public class LocacaoServicoDominio
     {
+        private const decimal JUROS = 5;
         private const decimal OURO_VALOR = 15;
         private const decimal PRATA_VALOR = 10;
         private const decimal BRONZE_VALOR = 5;
@@ -27,9 +28,10 @@ namespace Locadora.Dominio.ModuloLocacao
             this.jogoRepositrio = jogoRepositrio;
         }
 
-        public void LocarJogo(int idJogo, Cliente cliente)
+        public void LocarJogo(int idJogo, int idCliente)
         {
             var jogo = this.jogoRepositrio.BuscarPorId(idJogo);
+            var cliente = this.clienteRepositorio.BuscarPorId(idCliente);
     
             if (jogo == null)
             {
@@ -43,16 +45,31 @@ namespace Locadora.Dominio.ModuloLocacao
 
             var locacao = new Locacao()
             {
-                Jogo = jogo,
-                Cliente = cliente,
+                IdJogo = jogo.Id,
+                IdCliente = cliente.Id,
                 Valor = this.GetValorLocacao(jogo),
                 DataLocacao = DateTime.Now,
                 DataParaDevolucao = DateTime.Now.AddDays(this.GetDiasDevolucao(jogo)),
                 Status = StatusLocacao.PRAZO
             };
 
-            locacao.Jogo.AlterarDisponibilidade(false);
+            jogo.AlterarDisponibilidade(false);
 
+            this.jogoRepositrio.Atualizar(jogo);
+            this.locacaoRepositorio.Criar(locacao);
+        }
+
+        public void DevolverJogo(int idLocacao)
+        {
+            var locacao = this.locacaoRepositorio.BuscarPorId(idLocacao);
+            var jogo = this.jogoRepositrio.BuscarPorId(locacao.IdJogo);
+
+            locacao.DataDevolucao = DateTime.Now;
+            locacao.Valor = this.GetValorFinal(locacao);
+            locacao.Status = StatusLocacao.ENTREGUE;
+            jogo.AlterarDisponibilidade(true);
+
+            this.jogoRepositrio.Atualizar(jogo);
             this.locacaoRepositorio.Criar(locacao);
         }
 
@@ -76,6 +93,19 @@ namespace Locadora.Dominio.ModuloLocacao
                 return PRATA_DIAS;
 
             return BRONZE_DIAS;
+        }
+
+        private decimal GetValorFinal(Locacao locacao)
+        {
+            var diasAtraso = locacao.DataDevolucao.Value.Day - locacao.DataParaDevolucao.Day;
+            decimal juros = diasAtraso * JUROS;
+
+            if (diasAtraso > 0)
+            {
+                return locacao.Valor + juros;
+            }
+
+            return locacao.Valor;
         }
     }
 }

@@ -9,14 +9,35 @@ namespace Locadora.Repositorio.Ef.Repositorios
 {
     public class LocacaoRepositorio : RepositorioBase<Locacao>, ILocacaoRepositorio
     {
-        public IList<Locacao> BuscarPendentePorNomeDoJogo(string nomeJogo)
+        public override int Atualizar(Locacao item)
         {
-            return this.Buscar(new BuscarLocacaoPendentePorNomeDoJogoQuery(nomeJogo));
+            using (var dbContext = new BaseDbContext())
+            {
+                var locacao = this.BuscarPorId(item.Id);
+
+                locacao.Status = item.Status;
+                locacao.DataDevolucao = item.DataDevolucao;
+                locacao.Valor = item.Valor;
+
+                dbContext.Entry(locacao).State = System.Data.Entity.EntityState.Modified;
+                return dbContext.SaveChanges();
+            }
+        }
+
+        public IList<Locacao> BuscarEntregues()
+        {
+            using (var dbContext = new BaseDbContext())
+            {
+                return dbContext.Locacao.Include("Cliente").Include("Jogo").Where(t => t.Status == StatusLocacao.ENTREGUE).ToList();
+            }
         }
 
         public IList<Locacao> BuscarPendentes()
         {
-            return this.Buscar(new BuscarLocacaoPendenteQuery());
+            using (var dbContext = new BaseDbContext())
+            {
+                return dbContext.Locacao.Include("Cliente").Include("Jogo").Where(t => t.Status != StatusLocacao.ENTREGUE).ToList();
+            }
         }
     }
 }

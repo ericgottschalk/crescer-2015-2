@@ -1,4 +1,5 @@
 ﻿using Locadora.Dominio;
+using Locadora.Dominio.ModuloLocacao;
 using Locadora.Web.MVC.Models;
 using Locadora.Web.MVC.Authentictions;
 using Locadora.Web.MVC.Helpers;
@@ -16,7 +17,12 @@ namespace Locadora.Web.MVC.Controllers
         [HttpGet]
         public ActionResult Index()
         {
-            return View();
+            var locacaoRepositorio = ModuleBuilder.CriarLocacaoRepositorio();
+            var pendentes = locacaoRepositorio.BuscarPendentes();
+            var entregues = locacaoRepositorio.BuscarEntregues();
+
+            var model = new RelatorioLocacaoModel(pendentes, entregues);
+            return View(model);
         }
 
         [HttpGet]
@@ -45,12 +51,27 @@ namespace Locadora.Web.MVC.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public ActionResult DevolverJogo(LocacaoModel locacao)
+        {
+            var diasAtraso = DateTime.Now.Day - locacao.DataPrevista.Day;
+            var juros = diasAtraso * 5;
+
+            if (diasAtraso > 0)
+            {
+                locacao.Valor += diasAtraso;
+            }
+
+            return View(locacao);
+        }
+
+        [HttpPost]
         public ActionResult Salvar(LocacaoModel model)
         {
             if (ModelState.IsValid)
             {
                 var clienteRepositorio = ModuleBuilder.CriarClienteRepositorio();
-                var cliente = clienteRepositorio.BuscarPorNome(model.NomeCliente).FirstOrDefault();
+                var cliente = clienteRepositorio.BuscarPorIdPorNome(model.NomeCliente);
 
                 if (cliente == null)
                 {
@@ -60,14 +81,24 @@ namespace Locadora.Web.MVC.Controllers
 
                 var servico = ModuleBuilder.CriarServicoLocacao();
 
-                servico.LocarJogo(model.IdJogo, cliente);
+                servico.LocarJogo(model.IdJogo, cliente.Id);
 
                 TempData["Mensagem"] = "Jogo locado com sucesso!";
                 return RedirectToAction("JogosDisponiveis", "RelatorioJogo");
             }
 
             ModelState.AddModelError("", "Ocorreu um erro!");
-            return RedirectToAction("LocarJogo", "Locar");
+            return RedirectToAction("LocarJogo", "Locar", model.IdJogo);
+        }
+
+        public ActionResult ServicoDevolucao(LocacaoModel model)
+        {
+            var servico = ModuleBuilder.CriarServicoLocacao();
+
+            servico.DevolverJogo(model.IdLocacao.Value);
+
+            TempData["Mensagem"] = "Jogo devolvido com sucesso";
+            return RedirectToAction("Index", "Locar");
         }
 
         public JsonResult ClienteAutocomplete(string term)

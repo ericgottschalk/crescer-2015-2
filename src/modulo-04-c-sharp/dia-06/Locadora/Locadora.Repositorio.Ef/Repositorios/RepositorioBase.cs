@@ -19,7 +19,7 @@ namespace Locadora.Repositorio.Ef
             }
         }
 
-        public int Atualizar(TEntity item)
+        public virtual int Atualizar(TEntity item)
         {
             using (var dbContext = new BaseDbContext())
             {
