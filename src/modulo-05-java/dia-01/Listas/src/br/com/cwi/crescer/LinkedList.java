@@ -1,23 +1,31 @@
 package br.com.cwi.crescer;
 
+import java.io.FileWriter;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
 import br.com.cwi.exception.ListException;
 
-
 public class LinkedList<T> implements MyList<T> {
 
     protected Node<T> last, first;
 
+    @Override
     public void add(int index, T value) {
-    	Node<T> novo = new Node<T>(value);
+        if (index == 0) {
+            this.addFirst(value);
+            return;
+        }
+
+        Node<T> novo = new Node<T>(value);
         Node<T> nodo = getNode(index - 1);
         Node<T> proximo = nodo.getNext();
         novo.setNext(proximo);
         nodo.setNext(novo);
     }
-    
+
+    @Override
     public void addFirst(T value) {
         Node<T> node = new Node<>(value, first);
 
@@ -26,7 +34,8 @@ public class LinkedList<T> implements MyList<T> {
         }
         this.first = node;
     }
-    
+
+    @Override
     public void addLast(T value) {
         Node<T> node = new Node<>(value);
 
@@ -37,10 +46,11 @@ public class LinkedList<T> implements MyList<T> {
         }
         this.last = node;
     }
-    
+
+    @Override
     public void remove(int index) {
         if (index == 0 || isEmpty()) {
-            removeFirst();
+            this.removeFirst();
         } else {
             Node<T> actualNode = getNode(index);
 
@@ -49,32 +59,37 @@ public class LinkedList<T> implements MyList<T> {
             }
         }
     }
-    
+
+    @Override
     public void removeFirst() {
         if (!isEmpty()) {
             first = first.getNext();
         }
     }
-    
-    public void removeLast(){
-    	
+
+    @Override
+    public void removeLast() {
+
     }
-    
+
+    @Override
     public boolean isEmpty() {
         return this.first == null;
     }
-    
-    public boolean contains(T value){
-    	Node<T> node = this.first;
-    	while(node != null){
-    		if (node.value == value){
-    			return true;
-    		}
-    	}
-    	
-    	return false;
+
+    @Override
+    public boolean contains(T value) {
+        Node<T> node = this.first;
+        while (node != null) {
+            if (node.value == value) {
+                return true;
+            }
+        }
+
+        return false;
     }
-    
+
+    @Override
     public List<T> listAll() {
         ArrayList<T> list = new ArrayList<>();
         Node<T> node = first;
@@ -98,6 +113,18 @@ public class LinkedList<T> implements MyList<T> {
             throw new ListException("A lista esta vazia");
         }
         return this.last.getValue();
+    }
+
+    public void printTxt() throws Exception {
+        String newLine = "\r\n";
+        try (Writer writer = new FileWriter(
+                "C:\\Users\\eric.gottschalk\\Documents\\crescer15-2\\src\\modulo-05-java\\dia-01\\Listas\\src\\br\\com\\cwi\\crescer\\linked.txt")) {
+            for (T element : this.listAll()) {
+                writer.write(element.toString() + newLine);
+            }
+        } catch (Exception e) {
+            throw new Exception(e.getMessage());
+        }
     }
 
     private Node<T> getNode(int index) {
