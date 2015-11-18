@@ -14,7 +14,7 @@ public class ServicoDao {
 
     public void add(Servico servico) throws SQLException {
         try (Connection con = new ConnectionFactory().getConnection()) {
-            PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO Servico (idServico) VALUES (?)");
+            PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO Servico (idServico, dsServico) VALUES (servico_seq.nextval, ?)");
             preparedStatement.setString(1, servico.dsServico);
             preparedStatement.executeQuery();
         } catch (SQLException e) {

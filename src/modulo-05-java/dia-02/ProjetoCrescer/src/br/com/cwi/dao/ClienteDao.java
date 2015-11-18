@@ -14,10 +14,9 @@ public class ClienteDao {
 
     public void add(Cliente cliente) throws SQLException {
         try (Connection con = new ConnectionFactory().getConnection()) {
-            PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO Cliente (idCliente, nmCliente, nrCpf) VALUES (?, ?, ?)");
-            preparedStatement.setLong(1, cliente.idCliente);
-            preparedStatement.setString(2, cliente.nmCliente);
-            preparedStatement.setString(3, cliente.nrCpf);
+            PreparedStatement preparedStatement = con.prepareStatement("INSERT INTO Cliente (idCliente, nmCliente, nrCpf) VALUES (cliente_seq.nextval, ?, ?)");
+            preparedStatement.setString(1, cliente.nmCliente);
+            preparedStatement.setString(2, cliente.nrCpf);
             preparedStatement.executeQuery();
         } catch (SQLException e) {
             throw e;
