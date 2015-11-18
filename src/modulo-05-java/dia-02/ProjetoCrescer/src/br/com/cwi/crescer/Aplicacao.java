@@ -10,9 +10,11 @@ public class Aplicacao {
     public static void main(String[] args) {
         try {
             ClienteDao dao = new ClienteDao();
-            for (Cliente cliente : dao.find()) {
-                System.out.println(cliente.toString());
-            }
+            Cliente cliente = new Cliente();
+            // cliente.idCliente = 1;
+            // cliente.nmCliente = "Eric";
+            cliente.nrCpf = "12312312312";
+            System.out.println(dao.find(cliente));
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
