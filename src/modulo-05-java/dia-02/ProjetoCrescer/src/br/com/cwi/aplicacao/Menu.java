@@ -1,5 +1,8 @@
 package br.com.cwi.aplicacao;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Scanner;
 
 public class Menu {
@@ -34,11 +37,17 @@ public class Menu {
 
     public void pause() {
         System.out.println("Press any key to continue...");
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            br.readLine();
+        } catch (IOException e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
 
     public boolean select(Operacoes operacoes) {
         Scanner scn = new Scanner(System.in);
-        System.out.println("Digite sua opção :>");
+        System.out.println("Digite sua opï¿½ï¿½o :>");
         String enter = scn.next();
 
 
