@@ -38,8 +38,9 @@ public class Menu {
 
     public boolean select(Operacoes operacoes) {
         Scanner scn = new Scanner(System.in);
+        System.out.println("Digite sua opção :>");
         String enter = scn.next();
-        scn.close();
+
 
         switch (enter) {
             case CADASTRAR_CLIENTE:
