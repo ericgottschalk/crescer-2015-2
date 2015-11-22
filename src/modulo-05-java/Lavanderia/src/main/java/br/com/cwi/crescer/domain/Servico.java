@@ -20,7 +20,7 @@ public class Servico extends Base{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQUENCE)
-	@Column(name = "IdServico")
+	@Column(name = "IDServico")
 	private Long idServico;
 
 	@Column(name = "Descricao", length = 30)

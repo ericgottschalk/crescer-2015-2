@@ -22,10 +22,10 @@ public class Pedido extends Base{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQUENCE)
-	@Column(name = "IdPedido")
+	@Column(name = "IDPedido")
 	private Long idPedido;
 	
-	@Column(name = "IdCliente")
+	@Column(name = "IDCliente")
 	@Basic(optional = false)
 	private Long idCliente;
 	

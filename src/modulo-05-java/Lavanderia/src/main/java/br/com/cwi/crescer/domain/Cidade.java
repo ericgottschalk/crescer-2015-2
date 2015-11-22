@@ -20,7 +20,7 @@ public class Cidade extends Base{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQUENCE)
-	@Column(name = "IdCidade")
+	@Column(name = "IDCidade")
 	private Long idCidade;
 	
 	@Column(name = "Nome", length = 50)

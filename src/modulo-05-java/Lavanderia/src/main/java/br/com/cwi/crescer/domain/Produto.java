@@ -20,14 +20,14 @@ public class Produto extends Base{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQUENCE)
-	@Column(name = "IdProduto")
+	@Column(name = "IDProduto")
 	private Long idProduto;
 
-	@Column(name = "IdServico")
+	@Column(name = "IDServico")
 	@Basic(optional = false)
 	private Long idServico;
 	
-	@Column(name = "IdMaterial")
+	@Column(name = "IDMaterial")
 	@Basic(optional = false)
 	private Long idMaterial;
 	

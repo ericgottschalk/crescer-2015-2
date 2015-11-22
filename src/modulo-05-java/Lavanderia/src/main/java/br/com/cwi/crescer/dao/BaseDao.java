@@ -16,6 +16,9 @@ public class BaseDao<T extends Base> implements IBaseDao<T>{
 	
 	private Class<T> classs;
 	
+	protected BaseDao(){
+	}
+	
 	public BaseDao(Class<T> classs){
 		this.classs = classs;
 	}
