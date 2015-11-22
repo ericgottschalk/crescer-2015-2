@@ -1,10 +1,13 @@
 package br.com.cwi.crescer.dao;
 
+import org.springframework.stereotype.Repository;
+
 import br.com.cwi.crescer.domain.Pedido;
 
+@Repository
 public class PedidoDao extends BaseDao<Pedido>{
 
-	public PedidoDao(Class<Pedido> classs) {
-		super(classs);
+	public PedidoDao() {
+		super(Pedido.class);
 	}
 }
