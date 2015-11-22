@@ -1,19 +1,22 @@
 @CHARSET "UTF-8";
 
 body{
-	background-color: red;
+	background-color: #444;
 }
-
+		
 h3{
 	text-align: center;
 	color: lime;
 }
-
+		
 .navbar{
 	background-color: black;
 }
-
+		
 .jumbotron{
-	margin-top: 20px;
 	text-align: center;
+	background-color: #444;
+	margin-top: 20px;
+	width: 400px;
+	heigth: 400px;
 }
