@@ -11,6 +11,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -30,17 +32,18 @@ public class Pedido extends Base{
     @Column(name = "IDPedido")
     private Long idPedido;
 
-    @Column(name = "IDCliente")
+    @ManyToOne
+    @JoinColumn(name = "IDCliente")
     @Basic(optional = false)
-    private Long idCliente;
+    private Cliente cliente;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "DataInclusao")
+    @Column(name = "DATAInclusao")
     @Basic(optional = false)
     private Date dataInclusao;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "DataEntrega")
+    @Column(name = "DATAEntrega")
     private Date dataEntrega;
 
     @Column(name = "Valor", precision = 12, scale = 2)
@@ -59,12 +62,12 @@ public class Pedido extends Base{
         return this.idPedido;
     }
 
-    public Long getIdCliente() {
-        return this.idCliente;
+    public Cliente getCliente() {
+        return this.cliente;
     }
 
-    public void setIdCliente(Long idCliente) {
-        this.idCliente = idCliente;
+    public void setCliente(Cliente cliente) {
+        this.cliente = cliente;
     }
 
     public Date getDataInclusao() {

@@ -1,5 +1,7 @@
 package br.com.cwi.crescer.domain;
 
+import java.util.List;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,6 +10,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -42,8 +47,12 @@ public class Cliente extends Base{
     @Column(name = "Bairro", length = 50)
     private String bairro;
 
-    @Column(name = "IDCidade")
-    private Long idCidade;
+    @ManyToOne
+    @JoinColumn(name = "IDCidade")
+    private Cidade cidade;
+
+    @OneToMany(mappedBy = "cliente")
+    private List<Pedido> pedidos;
 
     @Column(name = "CEP", length = 8)
     private int cep;
@@ -65,6 +74,10 @@ public class Cliente extends Base{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public List<Pedido> getPedidos() {
+        return pedidos;
     }
 
     public String getCpf() {
@@ -99,12 +112,12 @@ public class Cliente extends Base{
         this.bairro = bairro;
     }
 
-    public Long getIdCidade() {
-        return this.idCidade;
+    public Cidade getCidade() {
+        return this.cidade;
     }
 
-    public void setIdCidade(Long idCidade) {
-        this.idCidade = idCidade;
+    public void setCidade(Cidade cidade) {
+        this.cidade = cidade;
     }
 
     public int getCep() {
