@@ -11,37 +11,41 @@ import br.com.cwi.crescer.common.IBaseDao;
 @Repository
 public class BaseDao<T extends Base> implements IBaseDao<T>{
 
-	@PersistenceContext
-	private EntityManager manager;
-	
-	private Class<T> classs;
-	
-	protected BaseDao(){
-	}
-	
-	public BaseDao(Class<T> classs){
-		this.classs = classs;
-	}
-	
-	public void add(T item){
-		this.manager.getTransaction().begin();
-		this.manager.persist(item);
-		this.manager.getTransaction().commit();
-	}
-	
-	public void remove(T item){
-		this.manager.getTransaction().begin();
-		this.manager.remove(item);
-		this.manager.getTransaction().commit();
-	}
-	
-	public void update(T item){
-		this.manager.getTransaction().begin();
-		this.manager.merge(item);
-		this.manager.getTransaction().commit();
-	}
+    @PersistenceContext
+    private EntityManager manager;
 
-	public T findById(long id) {
-		return this.manager.find(this.classs, id);
-	}
+    private Class<T> classs;
+
+    protected BaseDao(){
+    }
+
+    public BaseDao(Class<T> classs){
+        this.classs = classs;
+    }
+
+    @Override
+    public void add(T item){
+        this.manager.getTransaction().begin();
+        this.manager.persist(item);
+        this.manager.getTransaction().commit();
+    }
+
+    @Override
+    public void remove(T item){
+        this.manager.getTransaction().begin();
+        this.manager.remove(item);
+        this.manager.getTransaction().commit();
+    }
+
+    @Override
+    public void update(T item){
+        this.manager.getTransaction().begin();
+        this.manager.merge(item);
+        this.manager.getTransaction().commit();
+    }
+
+    @Override
+    public T findById(Long id) {
+        return this.manager.find(this.classs, id);
+    }
 }

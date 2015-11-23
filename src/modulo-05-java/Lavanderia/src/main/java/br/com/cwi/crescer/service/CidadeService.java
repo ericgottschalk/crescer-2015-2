@@ -9,15 +9,15 @@ import br.com.cwi.crescer.domain.Cidade;
 @Service
 public class CidadeService {
 
-	private CidadeDao dao;
-	
-	@Autowired
-	public CidadeService(CidadeDao cidadeDao){
-		super();
-		this.dao = cidadeDao;
-	}
-	
-	public Cidade findById(long id){		
-		return this.dao.findById(id);
-	}
+    private CidadeDao dao;
+
+    @Autowired
+    public CidadeService(CidadeDao cidadeDao){
+        super();
+        this.dao = cidadeDao;
+    }
+
+    public Cidade findById(Long id) {
+        return this.dao.findById(id);
+    }
 }

@@ -12,21 +12,22 @@ import br.com.cwi.crescer.service.CidadeService;
 @Controller
 public class IndexController {
 
-	private CidadeService service;
-	
-	@Autowired
-	public IndexController(CidadeService service) {
-		super();
-		this.service = service;
-	}
-	
+    private CidadeService service;
+
+    @Autowired
+    public IndexController(CidadeService service) {
+        super();
+        this.service = service;
+    }
+
     @RequestMapping(name = "/", method = RequestMethod.GET)
     public ModelAndView index() {
 
         ModelAndView mv = new ModelAndView("index");
         String mensagem = "Bem Vindo, Locadora Crescer";
-        
-        Cidade cidade = this.service.findById(1);
+
+        Cidade cidade = this.service.findById(1L);
+
         mv.addObject("mensagem", cidade.getName() + " - " + cidade.getUf());
 
         return mv;
