@@ -1,5 +1,7 @@
 package br.com.cwi.crescer.domain;
 
+import java.math.BigDecimal;
+
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,50 +18,50 @@ import br.com.cwi.crescer.common.Base;
 @SequenceGenerator(name = Produto.SEQUENCE, sequenceName = Produto.SEQUENCE)
 public class Produto extends Base{
 
-	public static final String SEQUENCE = "SEQ_Produto";
+    public static final String SEQUENCE = "SEQ_Produto";
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQUENCE)
-	@Column(name = "IDProduto")
-	private Long idProduto;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQUENCE)
+    @Column(name = "IDProduto")
+    private Long idProduto;
 
-	@Column(name = "IDServico")
-	@Basic(optional = false)
-	private Long idServico;
-	
-	@Column(name = "IDMaterial")
-	@Basic(optional = false)
-	private Long idMaterial;
-	
-	@Column(name = "Valor", precision = 12, scale = 2)
-	@Basic(optional = false)
-	private Double valor;
+    @Column(name = "IDServico")
+    @Basic(optional = false)
+    private Long idServico;
 
-	public Long getIdProduto() {
-		return this.idProduto;
-	}
+    @Column(name = "IDMaterial")
+    @Basic(optional = false)
+    private Long idMaterial;
 
-	public Long getIdServico() {
-		return this.idServico;
-	}
+    @Column(name = "Valor", precision = 12, scale = 2)
+    @Basic(optional = false)
+    private BigDecimal valor;
 
-	public void setIdServico(Long idServico) {
-		this.idServico = idServico;
-	}
+    public Long getIdProduto() {
+        return this.idProduto;
+    }
 
-	public Long getIdMaterial() {
-		return this.idMaterial;
-	}
+    public Long getIdServico() {
+        return this.idServico;
+    }
 
-	public void setIdMaterial(Long idMaterial) {
-		this.idMaterial = idMaterial;
-	}
+    public void setIdServico(Long idServico) {
+        this.idServico = idServico;
+    }
 
-	public Double getValor() {
-		return this.valor;
-	}
+    public Long getIdMaterial() {
+        return this.idMaterial;
+    }
 
-	public void setValor(Double valor) {
-		this.valor = valor;
-	}
+    public void setIdMaterial(Long idMaterial) {
+        this.idMaterial = idMaterial;
+    }
+
+    public BigDecimal getValor() {
+        return this.valor;
+    }
+
+    public void setValor(BigDecimal valor) {
+        this.valor = valor;
+    }
 }

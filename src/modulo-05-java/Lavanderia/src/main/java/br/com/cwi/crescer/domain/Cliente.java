@@ -3,6 +3,8 @@ package br.com.cwi.crescer.domain;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -16,104 +18,108 @@ import br.com.cwi.crescer.common.Base;
 @SequenceGenerator(name = Cliente.SEQUENCE, sequenceName = Cliente.SEQUENCE)
 public class Cliente extends Base{
 
-	public static final String SEQUENCE = "SEQ_Cliente";
+    public static final String SEQUENCE = "SEQ_Cliente";
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQUENCE)
-	@Column(name = "IDCliente")
-	private Long idCliente;
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQUENCE)
+    @Column(name = "IDCliente")
+    private Long idCliente;
 
-	@Column(name = "Nome", length = 70)
-	@Basic(optional = false)
-	private String name;
-	
-	@Column(name = "CPF", length = 11)
-	@Basic(optional = false)
-	private String cpf;
-	
-	@Column(name = "Email", length = 100)
-	private String email;
+    @Column(name = "Nome", length = 70)
+    @Basic(optional = false)
+    private String name;
 
-	@Column(name = "Endereco", length = 50)
-	private String endereco;
-	
-	@Column(name = "Bairro", length = 50)
-	private String bairro;
-	
-	@Column(name = "IDCidade")
-	private Long idCidade;
-	
-	@Column(name = "CEP", length = 8)
-	private int cep;
-	
-	@Column(name = "Situacao")
-	private Character situacao;
+    @Column(name = "CPF", length = 11)
+    @Basic(optional = false)
+    private String cpf;
 
-	public Long getIdCliente() {
-		return this.idCliente;
-	}
+    @Column(name = "Email", length = 100)
+    private String email;
 
-	public String getName() {
-		return this.name;
-	}
+    @Column(name = "Endereco", length = 50)
+    private String endereco;
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    @Column(name = "Bairro", length = 50)
+    private String bairro;
 
-	public String getCpf() {
-		return this.cpf;
-	}
+    @Column(name = "IDCidade")
+    private Long idCidade;
 
-	public void setCpf(String cpf) {
-		this.cpf = cpf;
-	}
+    @Column(name = "CEP", length = 8)
+    private int cep;
 
-	public String getEmail() {
-		return this.email;
-	}
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "Situacao")
+    private SituacaoCliente situacao;
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public enum SituacaoCliente {
+        ATIVO, INATIVO
+    }
+    public Long getIdCliente() {
+        return this.idCliente;
+    }
 
-	public String getEndereco() {
-		return this.endereco;
-	}
+    public String getName() {
+        return this.name;
+    }
 
-	public void setEndereco(String endereco) {
-		this.endereco = endereco;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getBairro() {
-		return this.bairro;
-	}
+    public String getCpf() {
+        return this.cpf;
+    }
 
-	public void setBairro(String bairro) {
-		this.bairro = bairro;
-	}
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
 
-	public Long getIdCidade() {
-		return this.idCidade;
-	}
+    public String getEmail() {
+        return this.email;
+    }
 
-	public void setIdCidade(Long idCidade) {
-		this.idCidade = idCidade;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public int getCep() {
-		return this.cep;
-	}
+    public String getEndereco() {
+        return this.endereco;
+    }
 
-	public void setCep(Integer cep) {
-		this.cep = cep;
-	}
+    public void setEndereco(String endereco) {
+        this.endereco = endereco;
+    }
 
-	public Character getSituacao() {
-		return this.situacao;
-	}
+    public String getBairro() {
+        return this.bairro;
+    }
 
-	public void setSituacao(Character situacao) {
-		this.situacao = situacao;
-	}
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public Long getIdCidade() {
+        return this.idCidade;
+    }
+
+    public void setIdCidade(Long idCidade) {
+        this.idCidade = idCidade;
+    }
+
+    public int getCep() {
+        return this.cep;
+    }
+
+    public void setCep(Integer cep) {
+        this.cep = cep;
+    }
+
+    public SituacaoCliente getSituacao() {
+        return this.situacao;
+    }
+
+    public void setSituacao(SituacaoCliente situacao) {
+        this.situacao = situacao;
+    }
 }
