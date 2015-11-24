@@ -4,18 +4,34 @@
 	<meta charset="utf-8"/>
 	<title>Index</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
-	<link rel="stylesheet" type="text/css"
-			href="../static/css/style.css"
-			th:href="@{/css/style.css}" />
-	
+	<style>
+		body{
+			background-color: #444;
+		}
+				
+		h3{
+			text-align: center;
+			color: lime;
+		}
+				
+		.jumbotron{
+			text-align: center;
+			background-color: #444;
+			margin-top: 20px;
+			width: 400px;
+			heigth: 400px;
+		}
+	</style>
 </head>
 <body>
-	<nav class="navbar navbar-default">
+	<nav class="navbar navbar-inverse">
 	  <div class="container-fluid">
 	    <div class="navbar-header">
 	      <a class="navbar-brand" href="#">
-	        <img src="../static/img/iconLg.png"
-	        	 th:src="@{/img/iconLg.png}"/>
+	        <img th:src="@{/img/iconLg.png}"/>
+	      </a>
+	      <a class="navbar-text" href="/clientes">
+	      	Clientes
 	      </a>
 	    </div>
 	  </div>

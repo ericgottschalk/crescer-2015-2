@@ -2,6 +2,7 @@ package br.com.cwi.crescer.dao;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.transaction.Transactional;
 
 import org.springframework.stereotype.Repository;
 
@@ -12,9 +13,9 @@ import br.com.cwi.crescer.common.IBaseDao;
 public class BaseDao<T extends Base> implements IBaseDao<T>{
 
     @PersistenceContext
-    private EntityManager manager;
+    protected EntityManager manager;
 
-    private Class<T> classs;
+    protected Class<T> classs;
 
     protected BaseDao(){
     }
@@ -24,24 +25,21 @@ public class BaseDao<T extends Base> implements IBaseDao<T>{
     }
 
     @Override
+    @Transactional
     public void add(T item){
-        this.manager.getTransaction().begin();
         this.manager.persist(item);
-        this.manager.getTransaction().commit();
     }
 
     @Override
+    @Transactional
     public void remove(T item){
-        this.manager.getTransaction().begin();
         this.manager.remove(item);
-        this.manager.getTransaction().commit();
     }
 
     @Override
+    @Transactional
     public void update(T item){
-        this.manager.getTransaction().begin();
         this.manager.merge(item);
-        this.manager.getTransaction().commit();
     }
 
     @Override

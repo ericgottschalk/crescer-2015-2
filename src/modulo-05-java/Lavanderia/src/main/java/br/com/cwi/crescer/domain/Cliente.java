@@ -55,7 +55,7 @@ public class Cliente extends Base{
     private List<Pedido> pedidos;
 
     @Column(name = "CEP", length = 8)
-    private int cep;
+    private String cep;
 
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "Situacao")
@@ -120,11 +120,11 @@ public class Cliente extends Base{
         this.cidade = cidade;
     }
 
-    public int getCep() {
+    public String getCep() {
         return this.cep;
     }
 
-    public void setCep(Integer cep) {
+    public void setCep(String cep) {
         this.cep = cep;
     }
 
