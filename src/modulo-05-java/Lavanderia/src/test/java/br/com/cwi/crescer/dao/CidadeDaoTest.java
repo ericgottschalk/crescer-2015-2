@@ -18,10 +18,4 @@ public class CidadeDaoTest extends AbstractInfraTest {
         Cidade cidade = this.dao.findById(1L);
         assertNotNull(cidade);
     }
-
-    @Test
-    public void buscarPorIdDois() {
-        Cidade cidade = this.dao.findById(2L);
-        assertNotNull(cidade);
-    }
 }

@@ -10,6 +10,8 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -27,27 +29,29 @@ public class Item extends Base{
     @Column(name = "IDItem")
     private Long idItem;
 
-    @Column(name = "IDPedido")
-    @Basic(optional = false)
-    private Long idPedido;
-
-    @Column(name = "IDProduto")
-    @Basic(optional = false)
-    private Long idProduto;
+    @ManyToOne
+	@JoinColumn(name = "IDPedido")
+	@Basic(optional = false)
+	private Pedido pedido;
+	
+	@ManyToOne
+	@JoinColumn(name = "IDProduto")
+	@Basic(optional = false)
+	private Produto produto;
 
     @Column(name = "Peso", precision = 12, scale = 2)
     @Basic(optional = false)
     private Double peso;
 
-    @Column(name = "ValorUnitario", precision = 12, scale = 2)
+    @Column(name = "VALORUnitario", precision = 12, scale = 2)
     @Basic(optional = false)
     private BigDecimal valor;
 
-    @Column(name = "ValorDeconto", precision = 12, scale = 2)
+    @Column(name = "VALORDesconto", precision = 12, scale = 2)
     @Basic(optional = false)
     private BigDecimal valorDesconto;
 
-    @Column(name = "ValorTotal", precision = 12, scale = 2)
+    @Column(name = "VALORTotal", precision = 12, scale = 2)
     @Basic(optional = false)
     private BigDecimal valorTotal;
 
@@ -63,20 +67,20 @@ public class Item extends Base{
         return this.idItem;
     }
 
-    public Long getIdPedido() {
-        return this.idPedido;
+    public Pedido getPedido() {
+        return this.pedido;
     }
 
-    public void setIdPedido(Long idPedido) {
-        this.idPedido = idPedido;
+    public void setPedido(Pedido pedido) {
+        this.pedido = pedido;
     }
 
-    public Long getIdProduto() {
-        return this.idProduto;
+    public Produto getProduto() {
+        return this.produto;
     }
 
-    public void setIdProduto(Long idProduto) {
-        this.idProduto = idProduto;
+    public void setProduto(Produto produto) {
+        this.produto = produto;
     }
 
     public Double getPeso() {

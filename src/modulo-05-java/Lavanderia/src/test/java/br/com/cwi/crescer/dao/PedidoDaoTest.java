@@ -18,5 +18,6 @@ public class PedidoDaoTest extends AbstractInfraTest {
         Pedido pedido = this.dao.findById(1L);
         assertNotNull(pedido);
         assertNotNull(pedido.getCliente());
+        assertNotNull(pedido.getItens());
     }
 }

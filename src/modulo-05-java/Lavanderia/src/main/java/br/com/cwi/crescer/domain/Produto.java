@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
@@ -25,13 +27,15 @@ public class Produto extends Base{
     @Column(name = "IDProduto")
     private Long idProduto;
 
-    @Column(name = "IDServico")
-    @Basic(optional = false)
-    private Long idServico;
-
-    @Column(name = "IDMaterial")
-    @Basic(optional = false)
-    private Long idMaterial;
+    @ManyToOne
+	@JoinColumn(name = "IDServico")
+	@Basic(optional = false)
+	public Servico servico;
+	
+	@ManyToOne
+	@JoinColumn(name = "IDMaterial")
+	@Basic(optional = false)
+	public Material material;
 
     @Column(name = "Valor", precision = 12, scale = 2)
     @Basic(optional = false)
@@ -41,20 +45,20 @@ public class Produto extends Base{
         return this.idProduto;
     }
 
-    public Long getIdServico() {
-        return this.idServico;
+    public Servico getServico() {
+        return this.servico;
     }
 
-    public void setIdServico(Long idServico) {
-        this.idServico = idServico;
+    public void setServico(Servico servico) {
+        this.servico = servico;
     }
 
-    public Long getIdMaterial() {
-        return this.idMaterial;
+    public Material getMaterial() {
+        return this.material;
     }
 
-    public void setIdMaterial(Long idMaterial) {
-        this.idMaterial = idMaterial;
+    public void setMaterial(Material material) {
+        this.material = material;
     }
 
     public BigDecimal getValor() {
