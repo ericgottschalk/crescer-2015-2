@@ -59,12 +59,13 @@ public class ClienteControler {
 	
 	@RequestMapping(path = "/editar", method = RequestMethod.POST)
     public ModelAndView editar(ClienteDto dto) {
-        clienteService.update(dto);
+		this.clienteService.update(dto);
         return new ModelAndView("redirect:/clientes");
     }
 	
 	@RequestMapping(path = "/remover/{id}", method = RequestMethod.GET)
     public ModelAndView remover(@PathVariable("id") Long id) {
+		this.clienteService.remove(id);
 		return new ModelAndView("redirect:/clientes");
     }
     
