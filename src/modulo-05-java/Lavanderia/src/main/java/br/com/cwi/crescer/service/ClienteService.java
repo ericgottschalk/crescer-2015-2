@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import br.com.cwi.crescer.dao.CidadeDao;
 import br.com.cwi.crescer.dao.ClienteDao;
 import br.com.cwi.crescer.domain.Cliente;
+import br.com.cwi.crescer.domain.Cliente.SituacaoCliente;
 import br.com.cwi.crescer.dto.ClienteDto;
 import br.com.cwi.crescer.mapper.ClienteMapper;
 
@@ -28,6 +29,7 @@ public class ClienteService {
     public void add(ClienteDto dto){
     	Cliente entity = ClienteMapper.getNewEntity(dto);
     	entity.setCidade(this.cidadeDao.findById(dto.idCidade));
+    	entity.setSituacao(SituacaoCliente.ATIVO);
     	this.dao.add(entity);
     }
     
