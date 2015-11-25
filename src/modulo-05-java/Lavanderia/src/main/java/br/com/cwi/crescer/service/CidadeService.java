@@ -24,7 +24,6 @@ public class CidadeService {
     }
 
 	public List<Cidade> find() {
-		// TODO Auto-generated method stub
-		return null;
+		return this.dao.find();
 	}
 }

@@ -65,7 +65,7 @@ public class ClienteControler {
 	
 	@RequestMapping(path = "/remover/{id}", method = RequestMethod.GET)
     public ModelAndView remover(@PathVariable("id") Long id) {
-        return new ModelAndView("clientes/remove", "cliente", this.clienteService.findById(id));
+		return new ModelAndView("redirect:/clientes");
     }
     
     @ModelAttribute("cidades")

@@ -41,41 +41,41 @@
 	            Detalhes 
 	            
 	            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
-					  Remover
-			    </button>
+				  Remover
+				</button>
 		    </h3>
         </div>
         <div class="panel-body">
-            <h3 th:text="${cliente.name}">Nome: </h3>
-            <h3 th:text="${cliente.cpf}">CPF: </h3>
-            <h3 th:text="${cliente.email}">E-mail: </h3>
-            <h3 th:text="${cliente.endereco}">Endereço: </h3>
-            <h3 th:text="${cliente.bairro}">Bairro: </h3>
-            <h3 th:text="${cliente.cep}">CEP: </h3>
-            <h3 th:text="${cliente.cidade}">Cidade: </h3>
-            <h3 th:text="${cliente.uf}">Uf: </h3>
-            <h3 th:text="${cliente.situacao}">Situação: </h3>
+            <h3 th:text="|Nome: ${cliente.name}|"></h3>
+            <h3 th:text="|CPF: ${cliente.cpf}|"> </h3>
+            <h3 th:text="|E-mail: ${cliente.email}|"> </h3>
+            <h3 th:text="|Endereço: ${cliente.endereco}|"> </h3>
+            <h3 th:text="|Bairro: ${cliente.bairro}|"> </h3>
+            <h3 th:text="|CEP: ${cliente.cep}|"></h3>
+            <h3 th:text="|Cidade: ${cliente.cidade}|"></h3>
+            <h3 th:text="|UF: ${cliente.uf}|"></h3>
+            <h3 th:text="|Situação: ${cliente.situacao}|"></h3>
         </div>
     </div>
-    
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+   	
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 	  <div class="modal-dialog" role="document">
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-	        <h4 class="modal-title">Deseja remover?</h4>
+	        <h4 class="modal-title" id="myModalLabel">Deseja remover?</h4>
 	      </div>
 	      <div class="modal-body">
-	        <p>One fine body&hellip;</p>
+	        ...
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 	        <a class="btn btn-primary" th:href="@{|/clientes/remover/${cliente.id}|}">Sim</a>
 	      </div>
 	    </div>
 	  </div>
 	</div>
-	
+	<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </body>
 </html>
