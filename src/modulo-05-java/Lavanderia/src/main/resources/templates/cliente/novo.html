@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="utf-8"/>
+	<title>Index</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+	<style>
+		body{
+			background-color: #444;
+		}
+		h3 {
+		    font: bold 25px arial;
+		    color: orange;
+		}
+		
+		h4 {
+		    color: orange;
+		    text-align: center;
+		}
+		
+		th {
+		    font: bold 20px arial;
+		    color: orange;
+		}
+		
+		td {
+		    font: bold 20px arial;
+		}
+		
+		.panel {
+		    margin-top: 20px;
+		    background-color: black;
+		}
+		
+		.jumbotrom{
+		    margin-top: 20px;
+		    background-color: black;
+		}
+	</style>
+</head>
+<body>
+	<nav class="navbar navbar-inverse">
+	  <div class="container-fluid">
+	    <div class="navbar-header">
+	      <a class="navbar-brand" href="#">
+	        <img th:src="@{/img/iconLg.png}"/>
+	      </a>
+	      <a class="navbar-text" href="/clientes">
+	      	Clientes
+	      </a>
+	    </div>
+	  </div>
+    </nav>
+    
+	<div class="jumbotron">
+		<form th:action="@{/clientes/novo}" th:object="${cliente}" method="post"  class="form-horizontal">
+			<label class="control-label">Nome: </label> 
+			<input class="form-control" th:field="*{nome}" type="text" />
+
+			<label class="control-label ">CPF: </label> 
+			<input class="form-control" th:field="*{cpf}" type="text" />
+
+			<label class="control-label">Email: </label> 
+			<input class="form-control" th:field="*{email}" type="text" />
+		
+			<label class="control-label ">Endereco: </label> 
+			<input class="form-control" th:field="*{endereco}" type="text" />
+
+			<label class="control-label">Bairro: </label> 
+			<input class="form-control" th:field="*{bairro}" type="text" />
+
+			<label class="control-label">Cep: </label> 
+			<input class=" form-control" th:field="*{cep}" type="text" />
+	
+			<label class="control-label ">Cidade: </label> 
+			<select class="form-control " th:field="*{idCidade}">
+				<option th:each="c : ${cidades}" th:text="${c.nome}" th:value="${c.idCidade}">[option]</option>
+			</select>
+
+			<button class="btn btn-default btn-lg" type="submit">Salvar</button>
+		</form>
+	</div>
+</body>
+</html>
+
+

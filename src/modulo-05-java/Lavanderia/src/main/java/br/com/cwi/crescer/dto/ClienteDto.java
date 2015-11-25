@@ -5,7 +5,7 @@ import br.com.cwi.crescer.domain.Cliente.SituacaoCliente;
 
 public class ClienteDto {
 
-    private Long id;
+    public Long id;
     public String name;
     public String cpf;
     public String email;
@@ -15,6 +15,7 @@ public class ClienteDto {
     public String uf;
     public String cep;
     public SituacaoCliente situacao;
+    public Long idCidade;
 
     public ClienteDto() {
     }

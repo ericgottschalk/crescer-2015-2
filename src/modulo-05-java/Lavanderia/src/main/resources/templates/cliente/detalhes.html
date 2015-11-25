@@ -37,7 +37,13 @@
     
 	<div class="panel panel-default">
         <div class="panel-heading">
-            <h3 class="panel-title">Detalhes</h3>
+            <h3 class="panel-title">
+	            Detalhes 
+	            
+	            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+					  Remover
+			    </button>
+		    </h3>
         </div>
         <div class="panel-body">
             <h3 th:text="${cliente.nome}">Nome: </h3>
@@ -51,5 +57,25 @@
             <h3 th:text="${cliente.situacao}">Situação: </h3>
         </div>
     </div>
+    
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+	  <div class="modal-dialog" role="document">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	        <h4 class="modal-title">Deseja remover?</h4>
+	      </div>
+	      <div class="modal-body">
+	        <p>One fine body&hellip;</p>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Não</button>
+	        <a class="btn btn-primary" th:href="@{|/clientes/remover/${cliente.id}|}">Sim</a>
+	      </div>
+	    </div>
+	  </div>
+	</div>
+	
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </body>
 </html>

@@ -64,7 +64,6 @@
 	                <th>Situacao</th>
 	                <th>Visualizar</th>
 	                <th>Editar</th>
-	                <th>Remover</th>
 	            </tr>
 	            <tr th:each="cliente : ${clientes}">
 	                <td th:text="${cliente.id}"><a th:href="@{|/clientes/${cliente.id}|}"></a></td>
@@ -72,9 +71,8 @@
 	                <td th:text="${cliente.cpf}"></td>
 	                <td th:text="${cliente.email}"></td>
 	                <td th:text="${cliente.situacao}"></td>
-	                <td><a class = "btn btn-default" th:href="${ '/clientes/detalhes' + cliente.id}">Detalhes</a></td>
-	                <td><a class = "btn btn-default" th:href="${'/clientes/manter/' + cliente.id}">Editar</a></td>
-	                <td><a class = "btn btn-default" th:href="${'/clientes/remover/' + cliente.id}">Remover</a></td>
+	                <td><a class = "btn btn-default" th:href="${'/clientes/detalhes' + cliente.id}">Detalhes</a></td>
+	                <td><a class = "btn btn-default" th:href="${'/clientes/editar/' + cliente.id}">Editar</a></td>
 	            </tr>
 	        </table>
     	</div>

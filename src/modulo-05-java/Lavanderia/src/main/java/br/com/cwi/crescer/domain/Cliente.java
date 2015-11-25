@@ -34,7 +34,7 @@ public class Cliente extends Base{
     @Basic(optional = false)
     private String name;
 
-    @Column(name = "CPF", length = 11)
+	@Column(name = "CPF", length = 11)
     @Basic(optional = false)
     private String cpf;
 
@@ -64,6 +64,20 @@ public class Cliente extends Base{
     public enum SituacaoCliente {
         ATIVO, INATIVO
     }
+    
+    public Cliente(){
+    }
+    
+    public Cliente(String name, String cpf, String email, String endereco, String bairro, String cep) {
+		super();
+		this.name = name;
+		this.cpf = cpf;
+		this.email = email;
+		this.endereco = endereco;
+		this.bairro = bairro;
+		this.cep = cep;
+	}
+    
     public Long getIdCliente() {
         return this.idCliente;
     }
