@@ -17,32 +17,34 @@ import br.com.cwi.crescer.mapper.ClienteMapper;
 public class ClienteService {
 
     private ClienteDao dao;
-	private CidadeDao cidadeDao;
+    private CidadeDao cidadeDao;
 
     @Autowired
     public ClienteService(ClienteDao clienteDao, CidadeDao cidadeDao){
         super();
         this.dao = clienteDao;
-		this.cidadeDao = cidadeDao;
+        this.cidadeDao = cidadeDao;
     }
-    
+
     public void add(ClienteDto dto){
-    	Cliente entity = ClienteMapper.getNewEntity(dto);
-    	entity.setCidade(this.cidadeDao.findById(dto.idCidade));
-    	entity.setSituacao(SituacaoCliente.ATIVO);
-    	this.dao.add(entity);
+        Cliente entity = ClienteMapper.getNewEntity(dto);
+        entity.setCidade(this.cidadeDao.findById(dto.idCidade));
+        entity.setSituacao(SituacaoCliente.ATIVO);
+        this.dao.add(entity);
     }
-    
-    public void update(ClienteDto dto){
-    	Cliente entity = this.dao.findById(dto.id); 
+
+    public void update(Long id) {
+        ClienteDto dto = this.findById(id);
+        Cliente entity = this.dao.findById(dto.id);
         ClienteMapper.merge(dto, entity);
         entity.setCidade(this.cidadeDao.findById(dto.idCidade));
-    	this.dao.update(entity);
+        this.dao.update(entity);
     }
-    
+
     public void remove(Long id){
-    	Cliente cliente = this.dao.findById(id);
-    	this.dao.remove(cliente);
+        Cliente cliente = this.dao.findById(id);
+        cliente.setSituacao(SituacaoCliente.INATIVO);
+        this.dao.update(cliente);
     }
 
     public ClienteDto findById(long id) {

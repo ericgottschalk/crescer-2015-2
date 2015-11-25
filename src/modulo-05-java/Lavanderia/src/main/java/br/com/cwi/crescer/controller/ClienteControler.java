@@ -20,12 +20,12 @@ import br.com.cwi.crescer.service.ClienteService;
 public class ClienteControler {
 
     private ClienteService clienteService;
-	private CidadeService cidadeService;
+    private CidadeService cidadeService;
 
     @Autowired
     public ClienteControler(ClienteService clienteService, CidadeService cidadeService) {
-       this.clienteService = clienteService;
-       this.cidadeService = cidadeService;
+        this.clienteService = clienteService;
+        this.cidadeService = cidadeService;
     }
 
     @RequestMapping(method = RequestMethod.GET)
@@ -40,37 +40,37 @@ public class ClienteControler {
     public ModelAndView viewExibe(@PathVariable("id") Long id) {
         return new ModelAndView("clientes/detalhes", "cliente", this.clienteService.findById(id));
     }
-    
-	@RequestMapping(path = "/novo", method = RequestMethod.GET)
+
+    @RequestMapping(path = "/novo", method = RequestMethod.GET)
     public ModelAndView novo() {
         return new ModelAndView("clientes/novo", "cliente", new ClienteDto());
     }
-	
-	@RequestMapping(path = "/novo", method = RequestMethod.POST)
+
+    @RequestMapping(path = "/novo", method = RequestMethod.POST)
     public ModelAndView novo(ClienteDto dto) {
         this.clienteService.add(dto);
         return new ModelAndView("redirect:/clientes");
     }
-	
-	@RequestMapping(path = "/editar/{id}", method = RequestMethod.GET)
+
+    @RequestMapping(path = "/editar/{id}", method = RequestMethod.GET)
     public ModelAndView editar(@PathVariable("id") Long id) {
         return new ModelAndView("clientes/editar", "cliente", this.clienteService.findById(id));
     }
-	
-	@RequestMapping(path = "/editar", method = RequestMethod.POST)
+
+    @RequestMapping(path = "/editar", method = RequestMethod.POST)
     public ModelAndView editar(ClienteDto dto) {
-		this.clienteService.update(dto);
+        this.clienteService.update(dto.id);
         return new ModelAndView("redirect:/clientes");
     }
-	
-	@RequestMapping(path = "/remover/{id}", method = RequestMethod.GET)
+
+    @RequestMapping(path = "/remover/{id}", method = RequestMethod.GET)
     public ModelAndView remover(@PathVariable("id") Long id) {
-		this.clienteService.remove(id);
-		return new ModelAndView("redirect:/clientes");
+        this.clienteService.remove(id);
+        return new ModelAndView("redirect:/clientes");
     }
-    
+
     @ModelAttribute("cidades")
     public List<Cidade> comboCidades() {
         return this.cidadeService.find();
-    }	
+    }
 }

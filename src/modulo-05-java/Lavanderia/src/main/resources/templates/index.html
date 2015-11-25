@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" 
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	  layout:decorator="layout">
 <head>
-	<meta charset="utf-8"/>
 	<title>Index</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
 	<style>
 		body{
 			background-color: #444;
@@ -24,21 +24,10 @@
 	</style>
 </head>
 <body>
-	<nav class="navbar navbar-inverse">
-	  <div class="container-fluid">
-	    <div class="navbar-header">
-	      <a class="navbar-brand" href="#">
-	        <img th:src="@{/img/iconLg.png}"/>
-	      </a>
-	      <a class="navbar-text" href="/clientes">
-	      	Clientes
-	      </a>
-	    </div>
-	  </div>
-    </nav>
-    
-	<div class="jumbotron">
-		<h3 th:text="${mensagem}"></h3>
-	</div>
+	<section layout:fragment="content">
+		<div class="jumbotron">
+			<h3 th:text="${mensagem}"></h3>
+		</div>
+	</section>
 </body>
 </html>

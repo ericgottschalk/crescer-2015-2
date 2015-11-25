@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+  <head>
+    <title>Layout page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+    <style>
+    	body{
+			padding-top: 50px;
+    		padding-bottom: 20px;
+			background-color: #444;
+		}
+    </style>
+  </head>
+  <body>  
+	  <div class="navbar navbar-inverse navbar-fixed-top">
+	  	<div class="container">
+	       <div class="navbar-header">
+	          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	 	         <span class="icon-bar"></span>
+	             <span class="icon-bar"></span>
+	             <span class="icon-bar"></span>
+	           </button>
+	           <a class="navbar-brand" href="#">
+			    <img src="../static/img/iconLg.png" th:src="@{/img/iconLg.png}"/>
+			   </a> 
+	           <a class="navbar-brand" th:href="@{/clientes}">Clientes</a> 
+	       </div>
+	       <div class="navbar-collapse collapse">
+	          <ul class="nav navbar-nav">
+	          </ul>
+	       </div>
+	    </div>
+	  </div>
+	 
+	 <section layout:fragment="content"></section>
+  </body>
+</html>

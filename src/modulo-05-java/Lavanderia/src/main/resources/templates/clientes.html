@@ -1,23 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	  layout:decorator="layout">
 <head>
-	<meta charset="utf-8"/>
-	<title>Index</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+	<title>Lista</title>
 	<style>
-		body{
-			background-color: #444;
-		}
-		h3 {
-		    font: bold 25px arial;
-		    color: orange;
-		}
-		
-		h4 {
-		    color: orange;
-		    text-align: center;
-		}
-		
 		th {
 		    font: bold 20px arial;
 		    color: orange;
@@ -27,54 +14,40 @@
 		    font: bold 20px arial;
 		}
 		
-		.panel {
-		    margin-top: 20px;
-		    background-color: black;
-		}
-		
 		.jumbotrom{
 		    margin-top: 20px;
+		    margin-left: 50px;
+		    margin-right: 50px;
 		    background-color: #444;
 		}
 	</style>
 </head>
 <body>
-	<nav class="navbar navbar-inverse">
-	  <div class="container-fluid">
-	    <div class="navbar-header">
-	      <a class="navbar-brand" href="#">
-	        <img th:src="@{/img/iconLg.png}"/>
-	      </a>
-	      <a class="navbar-text" href="/clientes">
-	      	Clientes
-	      </a>
-	    </div>
-	  </div>
-    </nav>
-    
-	<div class="jumbotron">
-		<div th:if="${not #lists.isEmpty(clientes)}">
-	        <table class="table table-hover">        
-	            <tr>
-	                <th>Id</th>
-	                <th>Nome</th>
-	                <th>CPF</th>
-	                <th>Email</th>
-	                <th>Situacao</th>
-	                <th>Visualizar</th>
-	                <th>Editar</th>
-	            </tr>
-	            <tr th:each="cliente : ${clientes}">
-	                <td th:text="${cliente.id}"><a th:href="@{|/clientes/${cliente.id}|}"></a></td>
-	                <td th:text="${cliente.name}"></td>
-	                <td th:text="${cliente.cpf}"></td>
-	                <td th:text="${cliente.email}"></td>
-	                <td th:text="${cliente.situacao}"></td>
-	                <td><a class = "btn btn-default" th:href="${'/clientes/detalhes/' + cliente.id}">Detalhes</a></td>
-	                <td><a class = "btn btn-default" th:href="${'/clientes/editar/' + cliente.id}">Editar</a></td>
-	            </tr>
-	        </table>
-    	</div>
-	</div>
+    <section layout:fragment="content">
+		<div class="jumbotron">
+			<div th:if="${not #lists.isEmpty(clientes)}">
+		        <table class="table table-hover">        
+		            <tr>
+		                <th>Id</th>
+		                <th>Nome</th>
+		                <th>CPF</th>
+		                <th>Email</th>
+		                <th>Situacao</th>
+		                <th>Visualizar</th>
+		                <th>Editar</th>
+		            </tr>
+		            <tr th:each="cliente : ${clientes}">
+		                <td th:text="${cliente.id}"><a th:href="@{|/clientes/${cliente.id}|}"></a></td>
+		                <td th:text="${cliente.name}"></td>
+		                <td th:text="${cliente.cpf}"></td>
+		                <td th:text="${cliente.email}"></td>
+		                <td th:text="${cliente.situacao}"></td>
+		                <td><a class = "btn btn-default" th:href="${'/clientes/detalhes/' + cliente.id}">Detalhes</a></td>
+		                <td><a class = "btn btn-default" th:href="${'/clientes/editar/' + cliente.id}">Editar</a></td>
+		            </tr>
+		        </table>
+	    	</div>
+		</div>
+	</section>
 </body>
 </html>
