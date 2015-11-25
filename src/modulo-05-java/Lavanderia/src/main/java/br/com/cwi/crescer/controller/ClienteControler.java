@@ -43,7 +43,7 @@ public class ClienteControler {
     
 	@RequestMapping(path = "/novo", method = RequestMethod.GET)
     public ModelAndView novo() {
-        return new ModelAndView("cliente/novo", "cliente", new ClienteDto());
+        return new ModelAndView("clientes/novo", "cliente", new ClienteDto());
     }
 	
 	@RequestMapping(path = "/novo", method = RequestMethod.POST)
@@ -54,7 +54,7 @@ public class ClienteControler {
 	
 	@RequestMapping(path = "/editar/{id}", method = RequestMethod.GET)
     public ModelAndView editar(@PathVariable("id") Long id) {
-        return new ModelAndView("cliente/edita", "cliente", this.clienteService.findById(id));
+        return new ModelAndView("clientes/editar", "cliente", this.clienteService.findById(id));
     }
 	
 	@RequestMapping(path = "/editar", method = RequestMethod.POST)
@@ -65,7 +65,7 @@ public class ClienteControler {
 	
 	@RequestMapping(path = "/remover/{id}", method = RequestMethod.GET)
     public ModelAndView remover(@PathVariable("id") Long id) {
-        return new ModelAndView("cliente/remove", "cliente", this.clienteService.findById(id));
+        return new ModelAndView("clientes/remove", "cliente", this.clienteService.findById(id));
     }
     
     @ModelAttribute("cidades")

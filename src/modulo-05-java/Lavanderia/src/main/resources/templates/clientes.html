@@ -67,11 +67,11 @@
 	            </tr>
 	            <tr th:each="cliente : ${clientes}">
 	                <td th:text="${cliente.id}"><a th:href="@{|/clientes/${cliente.id}|}"></a></td>
-	                <td th:text="${cliente.nome}"></td>
+	                <td th:text="${cliente.name}"></td>
 	                <td th:text="${cliente.cpf}"></td>
 	                <td th:text="${cliente.email}"></td>
 	                <td th:text="${cliente.situacao}"></td>
-	                <td><a class = "btn btn-default" th:href="${'/clientes/detalhes' + cliente.id}">Detalhes</a></td>
+	                <td><a class = "btn btn-default" th:href="${'/clientes/detalhes/' + cliente.id}">Detalhes</a></td>
 	                <td><a class = "btn btn-default" th:href="${'/clientes/editar/' + cliente.id}">Editar</a></td>
 	            </tr>
 	        </table>

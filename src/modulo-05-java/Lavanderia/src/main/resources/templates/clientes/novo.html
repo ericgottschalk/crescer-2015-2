@@ -53,11 +53,9 @@
     </nav>
     
 	<div class="jumbotron">
-		<form th:action="@{/clientes/editar}" th:object="${cliente}" method="post"  class="form-horizontal">
-			<input th:field="*{id}" type="hidden" />
-			 
+		<form th:action="@{/clientes/novo}" th:object="${cliente}" method="post"  class="form-horizontal">
 			<label class="control-label">Nome: </label> 
-			<input class="form-control" th:field="*{nome}" type="text" />
+			<input class="form-control" th:field="*{name}" type="text" />
 
 			<label class="control-label ">CPF: </label> 
 			<input class="form-control" th:field="*{cpf}" type="text" />
