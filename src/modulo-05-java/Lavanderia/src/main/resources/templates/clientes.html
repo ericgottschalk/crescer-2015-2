@@ -7,6 +7,12 @@
 </head>
 <body>
     <section layout:fragment="content">
+	    <div th:if="${(mensagem) != null}" class="alert alert-success fade in alert-dismisable alert-position">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		   <h4 th:text="${(mensagem)}"></h4>
+		</div>
 		<div class="panel panel-default">
 	        <div class="panel-heading">
 	            <h3 class="panel-title">

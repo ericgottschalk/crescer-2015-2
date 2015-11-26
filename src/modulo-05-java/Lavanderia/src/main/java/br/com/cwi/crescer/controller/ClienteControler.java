@@ -56,9 +56,11 @@ public class ClienteControler {
 			   			     final RedirectAttributes redirectAttributes) {
 
 		if (result.hasErrors()) {
-			return new ModelAndView("clientes/editar", "cliente", dto);
+			return new ModelAndView("clientes/novo", "cliente", dto);
 		}
+		
         this.clienteService.add(dto);
+        redirectAttributes.addFlashAttribute("mensagem", "Cliente cadastrado com sucesso!");
         return new ModelAndView("redirect:/clientes");
     }
 
@@ -75,13 +77,17 @@ public class ClienteControler {
 		if (result.hasErrors()) {
 			return new ModelAndView("clientes/editar", "cliente", dto);
 		}
+		
         this.clienteService.update(dto.id);
+        redirectAttributes.addFlashAttribute("mensagem", "Ciente editado com sucesso!");
         return new ModelAndView("redirect:/clientes");
     }
 
     @RequestMapping(path = "/remover/{id}", method = RequestMethod.GET)
-    public ModelAndView remover(@PathVariable("id") Long id) {
+    public ModelAndView remover(@PathVariable("id") Long id, 
+    							final RedirectAttributes redirectAttributes) {
         this.clienteService.remove(id);
+        redirectAttributes.addFlashAttribute("mensagem", "Cliente inativado com sucesso!");
         return new ModelAndView("redirect:/clientes");
     }
 

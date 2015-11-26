@@ -12,7 +12,7 @@ public class IndexController {
     public ModelAndView index() {
 
         ModelAndView mv = new ModelAndView("index");
-        String mensagem = "Bem Vindo, Locadora Crescer";
+        String mensagem = "Bem Vindo, Lavanderia Crescer";
 
         mv.addObject("mensagem", mensagem);
 
