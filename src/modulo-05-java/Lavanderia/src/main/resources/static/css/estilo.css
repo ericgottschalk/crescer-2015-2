@@ -1,0 +1,41 @@
+@CHARSET "UTF-8";
+
+body{
+	padding-top: 50px;
+    padding-bottom: 20px;
+    background-color: #444;
+}
+
+th {
+	font: bold 20px arial;
+	color: orange;
+}
+		
+td {
+	font: bold 20px arial;
+}
+
+h3{
+	color: orange;
+}
+
+label {
+	color: orange;
+}
+		
+.panel {
+	margin-top: 20px;
+    margin-left:50px;
+    margin-right: 50px;
+    text-align: center;
+    background-color: black;
+    color: orange;
+}
+
+.jumbotron{
+	text-align: center;
+	background-color: #444;
+	margin-top: 20px;
+	width: 400px;
+	heigth: 400px;
+}

@@ -1,20 +1,39 @@
 package br.com.cwi.crescer.dto;
 
+import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.Length;
+import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.br.CPF;
+
 import br.com.cwi.crescer.domain.Cliente;
 import br.com.cwi.crescer.domain.Cliente.SituacaoCliente;
 
 public class ClienteDto {
 
     public Long id;
+    
+    @NotBlank
     public String name;
+    
+    @NotBlank
+    @Length(min = 11, max = 11)
+    @CPF
     public String cpf;
+    
+    @NotBlank
+    @Email
     public String email;
+    
     public String endereco;
     public String bairro;
     public String cidade;
     public String uf;
     public String cep;
     public SituacaoCliente situacao;
+    
+    @NotNull
     public Long idCidade;
 
     public ClienteDto() {

@@ -4,40 +4,26 @@
 	  layout:decorator="layout">
 <head>
 	<title>Lista</title>
-	<style>
-		th {
-		    font: bold 20px arial;
-		    color: orange;
-		}
-		
-		td {
-		    font: bold 20px arial;
-		}
-		
-		.jumbotrom{
-		    margin-top: 20px;
-		    margin-left: 50px;
-		    margin-right: 50px;
-		    background-color: #444;
-		}
-	</style>
 </head>
 <body>
     <section layout:fragment="content">
-		<div class="jumbotron">
-			<div th:if="${not #lists.isEmpty(clientes)}">
-		        <table class="table table-hover">        
-		            <tr>
-		                <th>Id</th>
-		                <th>Nome</th>
-		                <th>CPF</th>
+		<div class="panel panel-default">
+	        <div class="panel-heading">
+	            <h3 class="panel-title">
+		            <a class = "btn btn-primary btn-lg" th:href="${'/clientes/novo'}">Novo</a>
+			    </h3>
+	        </div>
+	        <div class="panel-body" th:if="${not #lists.isEmpty(clientes)}">
+		    	<table class="table table-hover">        
+			    	<tr>
+			            <th>Nome</th>
+	                    <th>CPF</th>
 		                <th>Email</th>
 		                <th>Situacao</th>
 		                <th>Visualizar</th>
 		                <th>Editar</th>
 		            </tr>
 		            <tr th:each="cliente : ${clientes}">
-		                <td th:text="${cliente.id}"><a th:href="@{|/clientes/${cliente.id}|}"></a></td>
 		                <td th:text="${cliente.name}"></td>
 		                <td th:text="${cliente.cpf}"></td>
 		                <td th:text="${cliente.email}"></td>
@@ -45,8 +31,8 @@
 		                <td><a class = "btn btn-default" th:href="${'/clientes/detalhes/' + cliente.id}">Detalhes</a></td>
 		                <td><a class = "btn btn-default" th:href="${'/clientes/editar/' + cliente.id}">Editar</a></td>
 		            </tr>
-		        </table>
-	    	</div>
+			     </table>
+		    </div>
 		</div>
 	</section>
 </body>
