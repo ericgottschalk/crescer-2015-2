@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -52,40 +53,42 @@ public class ClienteControler {
 
     @RequestMapping(path = "/novo", method = RequestMethod.POST)
     public ModelAndView novo(@Valid @ModelAttribute("cliente") ClienteDto dto,
-			   			     BindingResult result,
-			   			     final RedirectAttributes redirectAttributes) {
+            BindingResult result,
+            final RedirectAttributes redirectAttributes) {
 
-		if (result.hasErrors()) {
-			return new ModelAndView("clientes/novo", "cliente", dto);
-		}
-		
+        if (result.hasErrors()) {
+            return new ModelAndView("clientes/novo", "cliente", dto);
+        }
+
         this.clienteService.add(dto);
         redirectAttributes.addFlashAttribute("mensagem", "Cliente cadastrado com sucesso!");
         return new ModelAndView("redirect:/clientes");
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(path = "/editar/{id}", method = RequestMethod.GET)
     public ModelAndView editar(@PathVariable("id") Long id) {
         return new ModelAndView("clientes/editar", "cliente", this.clienteService.findById(id));
     }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(path = "/editar", method = RequestMethod.POST)
     public ModelAndView editar(@Valid @ModelAttribute("cliente") ClienteDto dto,
-							   BindingResult result,
-							   final RedirectAttributes redirectAttributes) {
+            BindingResult result,
+            final RedirectAttributes redirectAttributes) {
 
-		if (result.hasErrors()) {
-			return new ModelAndView("clientes/editar", "cliente", dto);
-		}
-		
-        this.clienteService.update(dto.id);
+        if (result.hasErrors()) {
+            return new ModelAndView("clientes/editar", "cliente", dto);
+        }
+
+        this.clienteService.update(dto);
         redirectAttributes.addFlashAttribute("mensagem", "Ciente editado com sucesso!");
         return new ModelAndView("redirect:/clientes");
     }
 
     @RequestMapping(path = "/remover/{id}", method = RequestMethod.GET)
-    public ModelAndView remover(@PathVariable("id") Long id, 
-    							final RedirectAttributes redirectAttributes) {
+    public ModelAndView remover(@PathVariable("id") Long id,
+            final RedirectAttributes redirectAttributes) {
         this.clienteService.remove(id);
         redirectAttributes.addFlashAttribute("mensagem", "Cliente inativado com sucesso!");
         return new ModelAndView("redirect:/clientes");

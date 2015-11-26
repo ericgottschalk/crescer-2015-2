@@ -8,6 +8,12 @@
 <body>
 	<section layout:fragment="content">
 		<div class="jumbotron">
+			<h3 th:if="${#authorization.expression('hasRole(''ROLE_USER'')')}">
+				Olá User <span sec:authentication="name"></span>
+			</h3>
+			<h3 th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+				Olá Admin <span sec:authentication="name"></span>
+			</h3>
 			<h3 th:text="${mensagem}"></h3>
 		</div>
 	</section>

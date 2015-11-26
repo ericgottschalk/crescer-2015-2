@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
   <head>
+  	<meta charset="utf-8"/>
     <title>Layout page</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
-	<link rel="stylesheet" type="text/css" th:href="@{/css/estilo.css}" href="../static/css/estilo.css"/>
+	<link rel="stylesheet" href="/css/estilo.css" th:href="${'/css/estilo.css'}" />
   </head>
   <body>  
 	  <div class="navbar navbar-inverse navbar-fixed-top">
@@ -15,10 +16,13 @@
 	             <span class="icon-bar"></span>
 	           </button>
 	           <a class="navbar-brand" th:href="@{/}">
-			     <img th:src="@{/img/iconLg.png}" src="../static/img/iconLg.png" />
+			     <img th:src="@{'/img/iconLg.png'}" src="../static/img/iconLg.png" />
 			   </a> 
 			   <a class="navbar-brand" th:href="@{/}">Home</a>
-	           <a class="navbar-brand" th:href="@{/clientes}">Clientes</a> 
+			   <div sec:authorize="isAuthenticated()">
+	           	 <a class="navbar-brand" th:href="@{/clientes}">Clientes</a>
+	             <a class="navbar-brand" th:href="@{/logout}" method="post">Logout</a>
+	           </div>
 	       </div>
 	       <div class="navbar-collapse collapse">
 	          <ul class="nav navbar-nav">
