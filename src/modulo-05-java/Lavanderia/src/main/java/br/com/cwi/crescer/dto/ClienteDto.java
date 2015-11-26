@@ -56,87 +56,91 @@ public class ClienteDto {
         return this.id != null;
     }
 
-    public Long getId() {
-        return id;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public String getName() {
-        return name;
-    }
+	public void setId(Long id) {
+		this.id = id;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getCpf() {
-        return cpf;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
+	public String getCpf() {
+		return cpf;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public String getEndereco() {
-        return endereco;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
+	public String getEndereco() {
+		return endereco;
+	}
 
-    public String getBairro() {
-        return bairro;
-    }
+	public void setEndereco(String endereco) {
+		this.endereco = endereco;
+	}
 
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
-    }
+	public String getBairro() {
+		return bairro;
+	}
 
-    public String getCidade() {
-        return cidade;
-    }
+	public void setBairro(String bairro) {
+		this.bairro = bairro;
+	}
 
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    }
+	public String getCidade() {
+		return cidade;
+	}
 
-    public String getUf() {
-        return uf;
-    }
+	public void setCidade(String cidade) {
+		this.cidade = cidade;
+	}
 
-    public void setUf(String uf) {
-        this.uf = uf;
-    }
+	public String getUf() {
+		return uf;
+	}
 
-    public String getCep() {
-        return cep;
-    }
+	public void setUf(String uf) {
+		this.uf = uf;
+	}
 
-    public void setCep(String cep) {
-        this.cep = cep;
-    }
+	public String getCep() {
+		return cep;
+	}
 
-    public SituacaoCliente getSituacao() {
-        return situacao;
-    }
+	public void setCep(String cep) {
+		this.cep = cep;
+	}
 
-    public void setSituacao(SituacaoCliente situacao) {
-        this.situacao = situacao;
-    }
+	public SituacaoCliente getSituacao() {
+		return situacao;
+	}
 
-    public Long getIdCidade() {
-        return idCidade;
-    }
+	public void setSituacao(SituacaoCliente situacao) {
+		this.situacao = situacao;
+	}
 
-    public void setIdCidade(Long idCidade) {
-        this.idCidade = idCidade;
-    }
+	public Long getIdCidade() {
+		return idCidade;
+	}
+
+	public void setIdCidade(Long idCidade) {
+		this.idCidade = idCidade;
+	}
 }

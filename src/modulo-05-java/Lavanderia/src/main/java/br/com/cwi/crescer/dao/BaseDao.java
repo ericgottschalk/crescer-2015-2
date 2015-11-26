@@ -7,7 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import br.com.cwi.crescer.common.Base;
-import br.com.cwi.crescer.common.IBaseDao;
+
 
 @Repository
 public class BaseDao<T extends Base>{
