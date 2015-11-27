@@ -19,10 +19,9 @@
 			     <img th:src="@{'/img/iconLg.png'}" src="../static/img/iconLg.png" />
 			   </a> 
 			   <a class="navbar-brand" th:href="@{/}">Home</a>
-			   <div sec:authorize="isAuthenticated()">
-	           	 <a class="navbar-brand" th:href="@{/clientes}">Clientes</a>
-	             <a class="navbar-brand" th:href="@{/logout}" method="post">Logout</a>
-	           </div>
+	           <a sec:authorize="isAuthenticated()" class="navbar-brand" th:href="@{/clientes}">Clientes</a>    	 
+	           <a th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" class="navbar-brand" th:href="@{/users}">Users</a>
+	           <a sec:authorize="isAuthenticated()" class="navbar-brand" th:href="@{/logout}" method="post">Logout</a>
 	       </div>
 	       <div class="navbar-collapse collapse">
 	          <ul class="nav navbar-nav">

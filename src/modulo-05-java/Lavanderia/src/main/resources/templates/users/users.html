@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	  layout:decorator="layout">
+<head>
+	<title>Lista</title>
+</head>
+<body>
+    <section layout:fragment="content">
+	    <div th:if="${(mensagem) != null}" class="alert alert-success fade in alert-dismisable alert-position">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		   <h4 th:text="${(mensagem)}"></h4>
+		</div>
+		<div class="panel panel-default">
+	        <div class="panel-heading">
+	            <h3 class="panel-title">
+		            <a class = "btn btn-primary btn-lg" th:href="${'/users/novo'}">Novo</a>
+			    </h3>
+	        </div>
+	        <div class="panel-body" th:if="${not #lists.isEmpty(users)}">
+		    	<table class="table table-hover">        
+			    	<tr>
+			            <th>Username</th>
+		                <th>Auth</th>
+		                <th th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">Editar</th>
+		                <th th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">Remover</th>
+		            </tr>
+		            <tr th:each="user : ${users}">
+		                <td th:text="${user.username}"></td>
+		                <td th:text="${cliente.situacao}"></td>
+		                <td th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+		                	<a class = "btn btn-default" th:href="${'/users/editar/' + user.username}">Editar</a>
+		                </td>
+		                <td th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
+		                	<a class = "btn btn-default" th:href="${'/users/remover/' + user.username}">Remover</a>
+		                </td>
+		            </tr>
+			     </table>
+		    </div>
+		</div>
+	</section>
+</body>
+</html>

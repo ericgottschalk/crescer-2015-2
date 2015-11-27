@@ -11,7 +11,7 @@ public class IndexController {
     @RequestMapping(name = "/", method = RequestMethod.GET)
     public ModelAndView index() {
 
-        ModelAndView mv = new ModelAndView("index");
+        ModelAndView mv = new ModelAndView("login");
         String mensagem = "Bem Vindo, Lavanderia Crescer";
 
         mv.addObject("mensagem", mensagem);

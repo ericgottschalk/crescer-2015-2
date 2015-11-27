@@ -6,8 +6,8 @@ import br.com.cwi.crescer.domain.Servico;
 
 @Repository
 public class ServicoDao extends BaseDao<Servico>{
-
-	public ServicoDao() {
-		super(Servico.class);
-	}
+	
+	public Servico findById(Long id){
+    	return this.manager.find(Servico.class, id);
+    }
 }

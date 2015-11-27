@@ -7,7 +7,7 @@ import br.com.cwi.crescer.domain.Produto;
 @Repository
 public class ProdutoDao extends BaseDao<Produto>{
 
-	public ProdutoDao() {
-		super(Produto.class);
-	}
+	public Produto findById(Long id){
+    	return this.manager.find(Produto.class, id);
+    }
 }

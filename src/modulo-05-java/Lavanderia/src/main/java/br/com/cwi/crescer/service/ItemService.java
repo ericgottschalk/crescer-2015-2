@@ -16,8 +16,4 @@ public class ItemService {
 		super();
 		this.dao = itemDao;
 	}
-	
-	public Item findById(long id){
-		return this.dao.findById(id);
-	}
 }

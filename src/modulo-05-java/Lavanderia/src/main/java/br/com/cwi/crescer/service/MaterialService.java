@@ -15,8 +15,4 @@ public class MaterialService {
 		super();
 		this.dao = materialDao;
 	}
-	
-	public Material findById(long id){
-		return this.dao.findById(id);
-	}
 }

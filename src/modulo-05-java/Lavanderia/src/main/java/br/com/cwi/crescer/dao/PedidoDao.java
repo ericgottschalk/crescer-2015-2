@@ -7,7 +7,7 @@ import br.com.cwi.crescer.domain.Pedido;
 @Repository
 public class PedidoDao extends BaseDao<Pedido>{
 
-	public PedidoDao() {
-		super(Pedido.class);
-	}
+	public Pedido findById(Long id){
+    	return this.manager.find(Pedido.class, id);
+    }
 }

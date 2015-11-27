@@ -6,8 +6,8 @@ import br.com.cwi.crescer.domain.Material;
 
 @Repository
 public class MaterialDao extends BaseDao<Material>{
-
-	public MaterialDao() {
-		super(Material.class);
-	}
+	
+	public Material findById(Long id){
+    	return this.manager.find(Material.class, id);
+    }
 }

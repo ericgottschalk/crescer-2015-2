@@ -16,8 +16,4 @@ public class ServicoService {
 		super();
 		this.dao = servicoDao;
 	}
-	
-	public Servico findById(long id){
-		return this.dao.findById(id);
-	}
 }

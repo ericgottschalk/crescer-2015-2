@@ -16,8 +16,4 @@ public class ProdutoService {
 		super();
 		this.dao = produtoDao;
 	}
-	
-	public Produto findById(long id){
-		return this.dao.findById(id);
-	}
 }

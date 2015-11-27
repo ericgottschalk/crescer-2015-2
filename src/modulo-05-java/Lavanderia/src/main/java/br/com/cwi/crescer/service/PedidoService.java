@@ -16,8 +16,4 @@ public class PedidoService {
 		super();
 		this.dao = pedidoDao;
 	}
-	
-	public Pedido findById(long id){
-		return this.dao.findById(id);
-	}
 }

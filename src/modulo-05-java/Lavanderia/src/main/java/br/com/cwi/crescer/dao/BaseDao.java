@@ -15,15 +15,6 @@ public class BaseDao<T extends Base>{
     @PersistenceContext
     protected EntityManager manager;
 
-    protected Class<T> classs;
-
-    protected BaseDao(){
-    }
-
-    public BaseDao(Class<T> classs){
-        this.classs = classs;
-    }
-
     @Transactional
     public void add(T item){
         this.manager.persist(item);
@@ -37,9 +28,5 @@ public class BaseDao<T extends Base>{
     @Transactional
     public void update(T item){
         this.manager.merge(item);
-    }
-
-    public T findById(Long id) {
-        return this.manager.find(this.classs, id);
     }
 }

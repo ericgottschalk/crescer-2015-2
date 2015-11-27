@@ -8,11 +8,11 @@ import br.com.cwi.crescer.domain.Cidade;
 @Repository
 public class CidadeDao extends BaseDao<Cidade>{
 
-	public CidadeDao() {
-		super(Cidade.class);
+	public Cidade findById(Long id){
+		return this.manager.find(Cidade.class, id);
 	}
-
+	
 	public List<Cidade> find() {
-		return this.manager.createQuery("FROM Cidade", this.classs).getResultList();
+		return this.manager.createQuery("FROM Cidade", Cidade.class).getResultList();
 	}
 }
