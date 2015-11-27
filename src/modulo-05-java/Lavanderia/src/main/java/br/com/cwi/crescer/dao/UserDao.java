@@ -17,7 +17,7 @@ public class UserDao extends BaseDao<Users>{
 		return null;
 	}
 
-	public Users findByUserame(String id) {
+	public Users findByUsername(String id) {
 		return this.manager.find(Users.class, id);
 	}
 }

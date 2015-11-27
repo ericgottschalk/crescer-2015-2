@@ -3,20 +3,16 @@
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
 	  layout:decorator="layout">
 <head>
-	<title>Novo</title>
+	<title>Editar</title>
 </head>
 <body>
 	<section layout:fragment="content">
 		<div class="panel panel-default">
 	        <div class="panel-heading">
-	        	<h3>Novo</h3>
+	        	<h3>Editar</h3>
 	        </div>
 	        <div class="panel-body">
 				<form th:action="@{/users/editar}" th:object="${user}" method="post"  class="form-horizontal">
-					<div class="form-group">				
-							<input class="form-control" th:field="*{username}" type="hidden" />
-		            </div>
-		            
 		            <div class="form-group" th:classappend="${#fields.hasErrors('password')} ? 'has-error'">
 						<label class="col-sm-2 control-label ">Password: </label> 
 						<div class="col-sm-10">
@@ -24,12 +20,20 @@
 							<span class="help-inline" th:errors="*{password}"></span>
 						</div>
 		            </div>
+		            
+		            <div class="form-group">				
+							<input class="form-control" th:field="*{username}" type="hidden" />
+		            </div>
+		            
+		            <div class="form-group">				
+							<input class="form-control" th:field="*{auth}" type="hidden" />
+		            </div>
 					
 					<div class="form-group">
 						<label class="col-sm-2 control-label ">Role: </label> 
 						<div class="col-sm-10">
 							<select class="form-control " th:field="*{role}">
-								<option >[option]</option>
+								<option th:each="elem : ${permissoes}" th:text="${elem.name()}" th:value="${elem.name()}">[option]</option>
 							</select>
 						</div>
 		            </div>

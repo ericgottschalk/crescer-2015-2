@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.cwi.crescer.dto.UserDto;
+import br.com.cwi.crescer.dto.UserDto.Role;
 import br.com.cwi.crescer.service.UserService;
 
 @Controller
@@ -82,4 +83,9 @@ public class UserController {
         redirectAttributes.addFlashAttribute("mensagem", "User atualizado com sucesso!");
         return new ModelAndView("redirect:/users");
 	}
+	
+	@ModelAttribute("permissoes")
+    public Role[] comboPermissao() {
+        return Role.values();
+    }
 }

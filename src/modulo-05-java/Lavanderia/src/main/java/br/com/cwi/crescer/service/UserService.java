@@ -6,21 +6,21 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.cwi.crescer.dao.AutorizacaoDao;
+import br.com.cwi.crescer.dao.AuthoritiesDao;
 import br.com.cwi.crescer.dao.UserDao;
 import br.com.cwi.crescer.domain.Authorities;
+import br.com.cwi.crescer.domain.AuthoritiesId;
 import br.com.cwi.crescer.domain.Users;
-import br.com.cwi.crescer.domain.Users.SituacaoUser;
 import br.com.cwi.crescer.dto.UserDto;
 
 @Service
 public class UserService {
 
 	private UserDao userDao;
-	private AutorizacaoDao authDao;
+	private AuthoritiesDao authDao;
 
 	@Autowired
-	public UserService(UserDao userDao, AutorizacaoDao authDao){
+	public UserService(UserDao userDao, AuthoritiesDao authDao){
 		this.userDao = userDao;
 		this.authDao = authDao;	
 	}
@@ -28,11 +28,10 @@ public class UserService {
 	public void inserir(UserDto dto){
 		Users user = new Users();
 		user.setUsername(dto.getUsername());
-		user.setPassword(dto.getPassword());
-		user.setSituacao(SituacaoUser.ATIVO);	
+		user.setPassword(Criptografia.criptografar(dto.getPassword()));
+		user.setEnabled(true);
 		Authorities auth = new Authorities();
-		auth.setUser(user);
-		auth.setAuthority(dto.getRole().toString());
+		auth.setAuthoritiesId(new AuthoritiesId(dto.getUsername(), dto.getAuth()));
 		this.userDao.add(user);
 		this.authDao.add(auth);
 	}
@@ -44,7 +43,7 @@ public class UserService {
 			UserDto dto = new UserDto();
 			dto.setUsername(user.getUsername());
 			Authorities auth = this.authDao.findByUsername(user.getUsername());
-			dto.setAuth(auth.getAuthority());
+			dto.setAuth(auth.getAuthoritiesId().getAuthority());
 			list.add(dto);
 		}
 		
@@ -58,7 +57,7 @@ public class UserService {
 			UserDto dto = new UserDto();
 			dto.setUsername(user.getUsername());		
 			Authorities auth = this.authDao.findByUsername(user.getUsername());
-			dto.setAuth(auth.getAuthority());
+			dto.setAuth(auth.getAuthoritiesId().getAuthority());
 			list.add(dto);
 		}
 		
@@ -66,19 +65,29 @@ public class UserService {
 	}
 
 	public UserDto findByUsername(String id) {
-		Users user = this.userDao.findByUserame(id);
+		Users user = this.userDao.findByUsername(id);
 		UserDto dto = new UserDto();
 		dto.setUsername(user.getUsername());
 		return dto;
 	}
 
 	public void update(UserDto dto) {
-		Users user = this.userDao.findByUserame(dto.getUsername());
+		Users user = this.userDao.findByUsername(dto.getUsername());
 		Authorities auth = this.authDao.findByUsername(dto.getUsername());
-		user.setPassword(dto.getPassword());
-		auth.setAuthority(dto.getRole().toString());
+		user.setPassword(Criptografia.criptografar(dto.getPassword()));
 
 		this.userDao.update(user);
-		this.authDao.update(auth);
+		this.authUpdate(auth, dto);
+	}
+	
+	public void remove(UserDto dto){
+		Users user = this.userDao.findByUsername(dto.getUsername());
+		user.setEnabled(false);
+		this.userDao.update(user);
+	}
+	
+	private void authUpdate(Authorities authority, UserDto dto){
+		authority.setAuthoritiesId(new AuthoritiesId(dto.getUsername(), dto.getAuth()));
+		this.authDao.update(authority);
 	}
 }

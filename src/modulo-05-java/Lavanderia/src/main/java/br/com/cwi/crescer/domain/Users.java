@@ -3,8 +3,6 @@ package br.com.cwi.crescer.domain;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -19,17 +17,12 @@ public class Users extends Base{
 	private String username;
 	
 	@Column(name = "password", length = 32)
-	@Basic(optional = false)
+	@Basic(optional=false)
 	private String password;
 	
-	@Enumerated(EnumType.ORDINAL)
 	@Column(name = "enabled")
-	@Basic(optional = false)
-	private SituacaoUser enabled;
-
-	public enum SituacaoUser{
-		INATIVO, ATIVO
-	}
+	@Basic(optional=false)
+	private Boolean enabled;;
 
 	public String getUsername() {
 		return this.username;
@@ -47,11 +40,11 @@ public class Users extends Base{
 		this.password = password;
 	}
 
-	public SituacaoUser getSituacao() {
-		return this.enabled;
+	public Boolean getEnabled() {
+		return enabled;
 	}
 
-	public void setSituacao(SituacaoUser situacao) {
-		this.enabled = situacao;
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
 	}
 }

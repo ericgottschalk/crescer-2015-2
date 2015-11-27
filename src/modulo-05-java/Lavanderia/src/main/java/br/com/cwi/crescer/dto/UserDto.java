@@ -1,7 +1,5 @@
 package br.com.cwi.crescer.dto;
 
-import java.util.List;
-
 import org.hibernate.validator.constraints.NotBlank;
 
 public class UserDto {
@@ -12,7 +10,6 @@ public class UserDto {
 	@NotBlank
 	public String password;
 	
-	@NotBlank 
 	public Role role;
 	
 	public String auth;
