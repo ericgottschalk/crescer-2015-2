@@ -87,7 +87,7 @@ public class UserService {
 	}
 	
 	private void authUpdate(Authorities authority, UserDto dto){
-		authority.setAuthoritiesId(new AuthoritiesId(dto.getUsername(), dto.getAuth()));
+		authority.setAuthoritiesId(new AuthoritiesId(dto.getUsername(), dto.getRole().toString()));
 		this.authDao.update(authority);
 	}
 }
