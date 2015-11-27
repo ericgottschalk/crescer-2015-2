@@ -24,18 +24,20 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/", "/css/**", "/img/**").permitAll()
-                .anyRequest().fullyAuthenticated()
-                .and()
-                .formLogin()
-                .loginPage("/login").failureUrl("/login?error").permitAll()
-                .and()
-                .logout().permitAll();
+        .anyRequest().fullyAuthenticated()
+        .and()
+        .formLogin()
+        .loginPage("/login").failureUrl("/login?error").permitAll()
+        .and()
+        .logout().permitAll();
     }
 
     @Override
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication()
-                .dataSource(dataSource)
-                .passwordEncoder(new Md5PasswordEncoder());
+        .dataSource(dataSource)
+        .passwordEncoder(new Md5PasswordEncoder());
     }
+
+
 }

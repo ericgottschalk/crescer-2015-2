@@ -8,10 +8,10 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class IndexController {
 
-    @RequestMapping(name = "/", method = RequestMethod.GET)
+    @RequestMapping(path = "/", method = RequestMethod.GET)
     public ModelAndView index() {
 
-        ModelAndView mv = new ModelAndView("login");
+        ModelAndView mv = new ModelAndView("home");
         String mensagem = "Bem Vindo, Lavanderia Crescer";
 
         mv.addObject("mensagem", mensagem);
