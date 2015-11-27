@@ -31,7 +31,7 @@ public class UserService {
 		user.setPassword(Criptografia.criptografar(dto.getPassword()));
 		user.setEnabled(true);
 		Authorities auth = new Authorities();
-		auth.setAuthoritiesId(new AuthoritiesId(dto.getUsername(), dto.getAuth()));
+		auth.setAuthoritiesId(new AuthoritiesId(dto.getUsername(), dto.getRole().toString()));
 		this.userDao.add(user);
 		this.authDao.add(auth);
 	}
@@ -44,6 +44,7 @@ public class UserService {
 			dto.setUsername(user.getUsername());
 			Authorities auth = this.authDao.findByUsername(user.getUsername());
 			dto.setAuth(auth.getAuthoritiesId().getAuthority());
+			dto.setEnabled(user.getEnabled());
 			list.add(dto);
 		}
 		
@@ -58,6 +59,7 @@ public class UserService {
 			dto.setUsername(user.getUsername());		
 			Authorities auth = this.authDao.findByUsername(user.getUsername());
 			dto.setAuth(auth.getAuthoritiesId().getAuthority());
+			dto.setEnabled(user.getEnabled());
 			list.add(dto);
 		}
 		
@@ -68,6 +70,7 @@ public class UserService {
 		Users user = this.userDao.findByUsername(id);
 		UserDto dto = new UserDto();
 		dto.setUsername(user.getUsername());
+		dto.setEnabled(user.getEnabled());
 		return dto;
 	}
 

@@ -14,6 +14,16 @@ public class UserDto {
 	
 	public String auth;
 	
+	public Boolean enabled;
+	
+	public Boolean getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(Boolean enabled) {
+		this.enabled = enabled;
+	}
+
 	public String getAuth() {
 		return auth;
 	}
