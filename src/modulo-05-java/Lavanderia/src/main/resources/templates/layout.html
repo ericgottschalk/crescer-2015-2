@@ -18,12 +18,29 @@
 	             <span class="icon-bar"></span>
 	           </button>
 	           <a class="navbar-brand" th:href="@{/}">
-			     <img th:src="@{'/img/icon.png'}" src="../static/img/icon.png" />
+			     <img alt="Brand" th:src="@{'/img/icon.png'}" src="../static/img/icon.png" />
 			   </a> 
 			   <a class="navbar-brand" th:href="@{/}">Home</a>
 		       <a sec:authorize="isAuthenticated()" class="navbar-brand" th:href="@{/clientes}">Clientes</a>    	 
-		       <a sec:authorize="isAuthenticated()" class="navbar-brand" th:href="@{/users}">Users</a>
-		       <a sec:authorize="isAuthenticated()" class="navbar-brand" th:href="@{/logout}" method="post">Logout</a>
+		       <a sec:authorize="isAuthenticated()" class="navbar-brand" th:href="@{/users}">Novo User</a>
+		       <a sec:authorize="isAuthenticated()" class="navbar-brand" th:href="@{/produtos}">Produtos</a>
+			   <div sec:authorize="isAuthenticated()" class="navbar-right dropdown">
+			       <a href="#" class="navbar-brand dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+						Usuário<span class="caret"></span>
+			       </a>
+			       <ul class="dropdown-menu">
+			         <li>
+			        	<form th:action="@{/logout}" action="/logout" method="post" class="form-inline">
+			        		<div class="from-group">
+			        			<h3>
+				        			<span sec:authentication="name"></span>
+	                            	<button class="btn btn-primary" type="submit">Logout</button>
+                            	</h3>
+                            </div>
+                        </form>
+                     </li>
+			       </ul>
+		       </div>
 	       </div>
 	       <div class="navbar-collapse collapse">
 	          <ul class="nav navbar-nav">
@@ -31,7 +48,22 @@
 	       </div>
 	    </div>
 	  </div>
+	  
+	  <div th:if="${(mensagem) != null}" class="alert alert-success fade in alert-dismisable alert-position">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		   <h4 th:text="${(mensagem)}"></h4>
+		</div>
+		<div th:if="${(erro) != null}" class="alert alert-danger fade in alert-dismisable alert-position">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		   <h4 th:text="${(erro)}"></h4>
+		</div>
 	 
+	 <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	 <section layout:fragment="content"></section>
   </body>
 </html>

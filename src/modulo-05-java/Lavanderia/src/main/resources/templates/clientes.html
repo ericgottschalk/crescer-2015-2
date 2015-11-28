@@ -3,22 +3,17 @@
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
 	  layout:decorator="layout">
 <head>
+	<meta charset="utf-8"/>
 	<title>Lista</title>
 	<link rel="stylesheet" href="../static/css/clientes.css" th:href="${'/css/clientes.css'}" />
 </head>
 <body>
     <section layout:fragment="content">
-	    <div th:if="${(mensagem) != null}" class="alert alert-success fade in alert-dismisable alert-position">
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-				<span aria-hidden="true">&times;</span>
-			</button>
-		   <h4 th:text="${(mensagem)}"></h4>
-		</div>
 		<div class="jumbotron">
-	    	<form th:action="@{/clientes/{name}}" th:object="${cliente}" method="get"  class="form-horizontal">
+	    	<form th:action="@{/clientes/*{name}}" th:object="${cliente}" method="get"  class="form-inline">
 	    		<div class="form-group" th:classappend="${#fields.hasErrors('name')} ? 'has-error'">
 					<div class="col-sm-10">
-						<input class="form-control" th:field="*{name}" type="text" />
+						<input class="form-control" th:field="*{name}" type="text" placeholder="Nome"/>
 						<span class="help-inline" th:errors="*{name}"></span>
 					</div>
 		        </div>
@@ -50,8 +45,8 @@
 		                <td th:text="${cliente.cpf}"></td>
 		                <td th:text="${cliente.email}"></td>
 		                <td th:text="${cliente.situacao}"></td>
-		                <td><a class = "btn btn-default" th:href="${'/clientes/detalhes/' + cliente.id}">Detalhes</a></td>
-		                <td><a class = "btn btn-default" th:href="${'/clientes/editar/' + cliente.id}">Editar</a></td>
+		                <td><a class = "btn btn-primary" th:href="${'/clientes/detalhes/' + cliente.id}">Detalhes</a></td>
+		                <td><a class = "btn btn-primary" th:href="${'/clientes/editar/' + cliente.id}">Editar</a></td>
 		            </tr>
 			     </table>
 		    </div>

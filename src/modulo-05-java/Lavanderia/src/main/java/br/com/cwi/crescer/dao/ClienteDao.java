@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import br.com.cwi.crescer.domain.Cidade;
 import br.com.cwi.crescer.domain.Cliente;
 
 @Repository

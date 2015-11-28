@@ -52,6 +52,7 @@ public class EditarClienteController {
 	         final RedirectAttributes redirectAttributes) {
 
 	     if (result.hasErrors()) {
+	    	 redirectAttributes.addFlashAttribute("erro", "Ocorreu um erro! Tente novamente.");
 	         return new ModelAndView("clientes/editar", "cliente", dto);
 	     }
 

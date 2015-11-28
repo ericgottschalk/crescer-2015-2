@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	  layout:decorator="layout">
+<head>
+	<meta charset="utf-8"/>
+	<title>Lista</title>
+	<link rel="stylesheet" href="../static/css/produtos.css" th:href="${'/css/produtos.css'}" />
+</head>
+<body>
+    <section layout:fragment="content">
+    	<div class="jumbotron">
+	    	<form th:action="@{/produtos/produtos/pesquisa}" th:object="${pesquisa}" method="get"  class="form-inline">
+	    		<div class="form-group">
+					<label class="control-label ">Material: </label> 
+					<select class="form-control " th:field="*{idMaterial}">
+						<option th:each="m : ${materiais}" th:text="${m.getDescricao()}" th:value="${m.idMaterial}">[option]</option>
+					</select>
+		        </div>
+		            
+		        <div class="form-group">
+					<label class="control-label ">Serviço: </label> 
+					<select class="form-control " th:field="*{idServico}">
+						<option th:each="s : ${servicos}" th:text="${s.getDescricao()}" th:value="${s.idServico}">[option]</option>
+					</select>
+		         </div>
+		        
+		        <div class="form-group">
+	                <div class="col-sm-offset-2 col-sm-10">
+						<button class="btn btn-primary btn-lg" type="submit">Pesquisar</button>
+				  	</div>
+		        </div>
+	    	</form>
+		</div>
+		<div class="panel panel-default">
+	        <div class="panel-heading">
+	            <h3 class="panel-title">
+		            <a class = "btn btn-primary btn-lg" th:href="${'/produtos/produtos/novo'}">Novo</a>
+			    </h3>
+	        </div>
+	        <div class="panel-body" th:if="${not #lists.isEmpty(produtos)}">
+		    	<table class="table table-hover">        
+			    	<tr>
+			            <th>Material</th>
+	                    <th>Serviço</th>
+		                <th>Valor</th>
+		                <th>Prazo</th>
+		                <th>Situação</th>
+		                <th>Editar</th>
+		            </tr>
+		            <tr th:each="produto : ${produtos}">
+		                <td th:text="${produto.material.getDescricao()}"></td>
+		                <td th:text="${produto.servico.getDescricao()}"></td>
+		                <td th:text="${produto.valor}"></td>
+		                <td th:text="${produto.prazo}"></td>
+		                <td th:text="${produto.situacao}"></td>
+		                <td><a class = "btn btn-primary" th:href="${'/produtos/editar/' + produto.idProduto}">Editar</a></td>
+		            </tr>
+			     </table>
+		    </div>
+		</div>
+	</section>
+</body>
+</html>

@@ -1,4 +1,6 @@
 package br.com.cwi.crescer.service;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,5 +16,9 @@ public class MaterialService {
 	public MaterialService(MaterialDao materialDao){
 		super();
 		this.dao = materialDao;
+	}
+
+	public List<Material> find() {
+		return this.dao.find();
 	}
 }
