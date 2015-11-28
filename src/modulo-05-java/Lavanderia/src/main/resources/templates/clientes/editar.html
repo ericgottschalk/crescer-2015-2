@@ -70,6 +70,15 @@
 							</select>
 						</div>
 		            </div>
+		            
+		            <div class="form-group">
+						<label class="col-sm-2 control-label ">Situação: </label> 
+						<div class="col-sm-10">
+							<select class="form-control " th:field="*{situacao}">
+								<option th:each="elem : ${situacoes}" th:text="${elem.name()}" th:value="${elem.name()}">[option]</option>
+							</select>
+						</div>
+		            </div>
 		
 					<div class="form-group">
 		                <div class="col-sm-offset-2 col-sm-10">

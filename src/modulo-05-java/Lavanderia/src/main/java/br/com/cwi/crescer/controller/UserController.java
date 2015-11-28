@@ -25,66 +25,66 @@ import br.com.cwi.crescer.service.UserService;
 @PreAuthorize("hasRole('ADMIN')")
 public class UserController {
 
-	private UserService service;
+    private UserService service;
 
-	@Autowired
-	public UserController(UserService service){
-		this.service = service;
-	}
-	
-	@RequestMapping(method = RequestMethod.GET)
-	public ModelAndView users(String name) {
-	
-	    List<UserDto> users = new ArrayList<UserDto>();
-	    if (name == null){
-	    	users = this.service.find();
-	    }else{
-	    	users = this.service.findByName(name);
-	    }
-	    
-	    ModelAndView mv = new ModelAndView("users", "users", users);
-	    return mv;
-	}
-	
-	@RequestMapping(path = "/novo", method = RequestMethod.GET)
-	public ModelAndView novo(){
-		return new ModelAndView("users/novo", "user", new UserDto());
-	}
-	
-	@RequestMapping(path = "/novo", method = RequestMethod.POST)
-	public ModelAndView novo(@Valid @ModelAttribute("user") UserDto dto,
-            				 BindingResult result,
-            				 final RedirectAttributes redirectAttributes){
-		
-		if (result.hasErrors()) {
+    @Autowired
+    public UserController(UserService service){
+        this.service = service;
+    }
+
+    @RequestMapping(method = RequestMethod.GET)
+    public ModelAndView users(String name) {
+
+        List<UserDto> users = new ArrayList<UserDto>();
+        if (name == null){
+            users = this.service.find();
+        }else{
+            users = this.service.findByName(name);
+        }
+
+        ModelAndView mv = new ModelAndView("users/users", "users", users);
+        return mv;
+    }
+
+    @RequestMapping(path = "/novo", method = RequestMethod.GET)
+    public ModelAndView novo(){
+        return new ModelAndView("users/novo", "user", new UserDto());
+    }
+
+    @RequestMapping(path = "/novo", method = RequestMethod.POST)
+    public ModelAndView novo(@Valid @ModelAttribute("user") UserDto dto,
+            BindingResult result,
+            final RedirectAttributes redirectAttributes){
+
+        if (result.hasErrors()) {
             return new ModelAndView("users/novo", "user", dto);
         }
 
         this.service.inserir(dto);
         redirectAttributes.addFlashAttribute("mensagem", "User cadastrado com sucesso!");
         return new ModelAndView("redirect:/users");
-	}
-	
-	@RequestMapping(path = "/editar/{id}", method = RequestMethod.GET)
-	public ModelAndView editar(@PathVariable("id") String id){
-		return new ModelAndView("users/editar", "user", this.service.findByUsername(id));
-	}
-	
-	@RequestMapping(path = "/editar", method = RequestMethod.POST)
-	public ModelAndView editar(@Valid @ModelAttribute("user") UserDto dto,
-            				 BindingResult result,
-            				 final RedirectAttributes redirectAttributes){
-		
-		if (result.hasErrors()) {
+    }
+
+    @RequestMapping(path = "/editar/{id}", method = RequestMethod.GET)
+    public ModelAndView editar(@PathVariable("id") String id){
+        return new ModelAndView("users/editar", "user", this.service.findByUsername(id));
+    }
+
+    @RequestMapping(path = "/editar", method = RequestMethod.POST)
+    public ModelAndView editar(@Valid @ModelAttribute("user") UserDto dto,
+            BindingResult result,
+            final RedirectAttributes redirectAttributes){
+
+        if (result.hasErrors()) {
             return new ModelAndView("users/editar", "user", dto);
         }
 
         this.service.update(dto);
         redirectAttributes.addFlashAttribute("mensagem", "User atualizado com sucesso!");
         return new ModelAndView("redirect:/users");
-	}
-	
-	@ModelAttribute("permissoes")
+    }
+
+    @ModelAttribute("permissoes")
     public Role[] comboPermissao() {
         return Role.values();
     }

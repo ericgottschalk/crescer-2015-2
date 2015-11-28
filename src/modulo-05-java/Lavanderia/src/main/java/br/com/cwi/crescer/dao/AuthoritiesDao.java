@@ -7,7 +7,10 @@ import br.com.cwi.crescer.domain.Authorities;
 @Repository
 public class AuthoritiesDao extends BaseDao<Authorities>{
 
-	public Authorities findByUsername(String username) {
-		return this.manager.find(Authorities.class, username);
-	}
+    public Authorities findByUsername(String username) {
+        return manager
+                .createQuery("SELECT a FROM Authorities a WHERE a.authoritiesId.username = :username", Authorities.class)
+                .setParameter("username", username)
+                .getSingleResult();
+    }
 }

@@ -29,7 +29,7 @@
 		            </tr>
 		            <tr th:each="user : ${users}">
 		                <td th:text="${user.username}"></td>
-		                <td th:text="${cliente.situacao}"></td>
+		                <td th:text="${cliente.auth}"></td>
 		                <td th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}">
 		                	<a class = "btn btn-default" th:href="${'/users/editar/' + user.username}">Editar</a>
 		                </td>

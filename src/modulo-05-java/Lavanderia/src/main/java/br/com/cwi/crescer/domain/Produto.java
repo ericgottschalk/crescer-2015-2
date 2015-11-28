@@ -5,6 +5,8 @@ import java.math.BigDecimal;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -28,18 +30,39 @@ public class Produto extends Base{
     private Long idProduto;
 
     @ManyToOne
-	@JoinColumn(name = "IDServico")
-	@Basic(optional = false)
-	public Servico servico;
-	
-	@ManyToOne
-	@JoinColumn(name = "IDMaterial")
-	@Basic(optional = false)
-	public Material material;
+    @JoinColumn(name = "IDServico")
+    @Basic(optional = false)
+    public Servico servico;
+
+    @ManyToOne
+    @JoinColumn(name = "IDMaterial")
+    @Basic(optional = false)
+    public Material material;
 
     @Column(name = "Valor", precision = 12, scale = 2)
     @Basic(optional = false)
     private BigDecimal valor;
+
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "Situacao")
+    @Basic(optional = false)
+    private SituacaoProduto situacao;
+
+    @Column(name = "prazo")
+    @Basic(optional = false)
+    private int prazo;
+
+    public int getPrazo() {
+        return prazo;
+    }
+
+    public void setPrazo(int prazo) {
+        this.prazo = prazo;
+    }
+
+    public enum SituacaoProduto {
+        ATIVO, INATIVO
+    }
 
     public Long getIdProduto() {
         return this.idProduto;
@@ -67,5 +90,13 @@ public class Produto extends Base{
 
     public void setValor(BigDecimal valor) {
         this.valor = valor;
+    }
+
+    public SituacaoProduto getSituacao() {
+        return situacao;
+    }
+
+    public void setSituacao(SituacaoProduto situacao) {
+        this.situacao = situacao;
     }
 }
