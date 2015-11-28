@@ -1,20 +1,21 @@
 body{
 	padding-top: 50px;
     padding-bottom: 20px;
-    background-color: #444;
+    background-color: #0099CC;
 }
 
 th {
 	font: bold 20px arial;
-	color: orange;
+	color: blue;
 }
 		
 td {
 	font: bold 20px arial;
+	color: black;
 }
 
 h3{
-	color: orange;
+	color: black;
 }
 
 h4{
@@ -23,7 +24,7 @@ h4{
 }
 
 label {
-	color: orange;
+	color: black;
 }
 		
 .panel {
@@ -31,14 +32,14 @@ label {
     margin-left:50px;
     margin-right: 50px;
     text-align: center;
-    background-color: black;
-    color: orange;
+    background-color: #888;
+    color: black;
 }
 
 .jumbotron{
-	text-align: center;
-	background-color: #444;
 	margin-top: 20px;
+	text-align: center;
+	background-color: #0099CC;
 	width: 400px;
 	height: 400px;
 }

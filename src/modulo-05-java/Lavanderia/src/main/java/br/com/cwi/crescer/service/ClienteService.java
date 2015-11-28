@@ -58,4 +58,13 @@ public class ClienteService {
 
         return list;
     }
+
+	public List<ClienteDto> findByName(String name) {
+		List<ClienteDto> list = new ArrayList<ClienteDto>();
+        for (Cliente cliente : this.dao.findByName(name)) {
+            list.add(new ClienteDto(cliente));
+        }
+
+        return list;
+	}
 }

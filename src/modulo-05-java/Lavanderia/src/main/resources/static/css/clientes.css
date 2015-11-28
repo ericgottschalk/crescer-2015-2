@@ -1,0 +1,10 @@
+form-horizontal{
+	text-align: center;
+}
+.jumbotron{
+	text-align: center;
+	background-color: #0099CC;
+	margin-top: 20px;
+	width: 400px;
+	height: 150px;
+}

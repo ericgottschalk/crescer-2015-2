@@ -3,34 +3,37 @@
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
 	  layout:decorator="layout">
 <head>
-	<title>Editar</title>
+	<title>Novo</title>
+	<link rel="stylesheet" href="../static/css/manter.css" th:href="${'/css/manter.css'}" />
 </head>
 <body>
 	<section layout:fragment="content">
+		<div th:if="${(mensagem) != null}" class="alert alert-success fade in alert-dismisable alert-position">
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		   <h4 th:text="${(mensagem)}"></h4>
+		</div>
 		<div class="panel panel-default">
 	        <div class="panel-heading">
-	        	<h3>Editar</h3>
+	        	<h3>Novo</h3>
 	        </div>
 	        <div class="panel-body">
-				<form th:action="@{/users/editar}" th:object="${user}" method="post"  class="form-horizontal">
-		            <div class="form-group" th:classappend="${#fields.hasErrors('password')} ? 'has-error'">
-						<label class="col-sm-2 control-label ">Password: </label> 
+				<form th:action="@{/users}" th:object="${user}" method="post"  class="form-horizontal">
+					<div class="form-group" th:classappend="${#fields.hasErrors('username')} ? 'has-error'">
+						<label class="col-sm-2 control-label">Username: </label> 
 						<div class="col-sm-10">
-							<input class="form-control" th:field="*{password}" type="password"  />
-							<span class="help-inline" th:errors="*{password}"></span>
+							<input class="form-control" th:field="*{username}" type="text" />
+							<span class="help-inline" th:errors="*{username}"></span>
 						</div>
 		            </div>
 		            
-		            <div class="form-group">				
-							<input class="form-control" th:field="*{username}" type="hidden" />
-		            </div>
-		            
-		            <div class="form-group">				
-							<input class="form-control" th:field="*{auth}" type="hidden" />
-		            </div>
-		            
-		            <div class="form-group">				
-							<input class="form-control" th:field="*{enabled}" type="hidden" />
+		            <div class="form-group" th:classappend="${#fields.hasErrors('password')} ? 'has-error'">
+						<label class="col-sm-2 control-label ">Password: </label> 
+						<div class="col-sm-10">
+							<input class="form-control" th:field="*{password}" type="password" />
+							<span class="help-inline" th:errors="*{password}"></span>
+						</div>
 		            </div>
 					
 					<div class="form-group">
@@ -44,7 +47,7 @@
 		            
 					<div class="form-group">
 		                <div class="col-sm-offset-2 col-sm-10">
-							<button class="btn btn-warning btn-lg" type="submit">Salvar</button>
+							<button class="btn btn-primary btn-lg" type="submit">Salvar</button>
 						</div>
 		            </div>
 				</form>

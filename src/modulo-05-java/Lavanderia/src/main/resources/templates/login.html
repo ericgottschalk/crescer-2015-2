@@ -1,31 +1,54 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
-	  layout:decorator="layout">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
+	<meta charset="utf-8"/>
 	<title>Login</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+	<link rel="stylesheet" href="../static/css/estilo.css" th:href="${'/css/estilo.css'}" />
+	<link rel="stylesheet" href="../static/css/login.css" th:href="${'/css/login.css'}" />
 </head>
 <body>
-	<section layout:fragment="content">  
+	<div class="navbar navbar-inverse navbar-fixed-top">
+	  	<div class="container">
+	       <div class="navbar-header">
+	          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+	 	         <span class="icon-bar"></span>
+	             <span class="icon-bar"></span>
+	             <span class="icon-bar"></span>
+	           </button>
+	           <a class="navbar-brand" th:href="@{/}">
+			     <img th:src="@{'/img/icon.png'}" src="../static/img/icon.png" />
+			   </a> 
+			   <a class="navbar-brand" th:href="@{/}">Home</a>
+	       </div>
+	       <div class="navbar-collapse collapse">
+	          <ul class="nav navbar-nav">
+	          </ul>
+	       </div>
+	    </div>
+	</div>
+	<section>  
 		<p th:if="${param.logout}" class="alert">Logout feito com sucesso</p>
 		<p th:if="${param.error}" class="alert alert-error">Login incorreto. Tente novamente !</p>
 		
-		<div class="panel panel-default">
-		    <div class="panel-heading">
-		        	<h3>Login</h3>
-		    </div>
-		    <div class="panel-body">	
-				<form name="form" th:action="@{/login}" action="/login" method="POST">
-					<div class="form-group">
-						<input class="form-control" type="text" name="username" placeholder="Username" />
-					</div>
-					<div class="form-group">
-						<input class="form-control" type="password" name="password" placeholder="Password" />
-					</div>
-					<div class="form-group">
-						<input type="submit" id="login" value="Login" class="btn btn-warning btn-lg" />
-					</div>
-				</form>
+		<div>
+			<div class="panel panel-default">
+			    <div class="panel-heading">
+			        	<h3>Login</h3>
+			    </div>
+			    <div class="panel-body">	
+					<form name="form" th:action="@{/login}" action="/login" method="POST">
+						<div class="form-group">
+							<input class="form-control" type="text" name="username" placeholder="Username" />
+						</div>
+						<div class="form-group">
+							<input class="form-control" type="password" name="password" placeholder="Password" />
+						</div>
+						<div class="form-group">
+							<input type="submit" id="login" value="Login" class="btn btn-primary btn-lg" />
+						</div>
+					</form>
+				</div>
 			</div>
 		</div>
 	</section>

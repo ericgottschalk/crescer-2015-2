@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
-xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
   <head>
   	<meta charset="utf-8"/>
     <title>Layout page</title>
@@ -18,14 +18,12 @@ xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
 	             <span class="icon-bar"></span>
 	           </button>
 	           <a class="navbar-brand" th:href="@{/}">
-			     <img th:src="@{'/img/iconLg.png'}" src="../static/img/iconLg.png" />
+			     <img th:src="@{'/img/icon.png'}" src="../static/img/icon.png" />
 			   </a> 
 			   <a class="navbar-brand" th:href="@{/}">Home</a>
-	           <a sec:authorize="isAuthenticated()" class="navbar-brand" th:href="@{/clientes}">Clientes</a>    	 
-	           <!--  
-	           <a th:if="${#authorization.expression('hasRole(''ROLE_ADMIN'')')}" class="navbar-brand" th:href="@{/users}">Users</a>
-	           <a sec:authorize="isAuthenticated()" class="navbar-brand" th:href="@{/logout}" method="post">Logout</a>
-	           -->
+		       <a sec:authorize="isAuthenticated()" class="navbar-brand" th:href="@{/clientes}">Clientes</a>    	 
+		       <a sec:authorize="isAuthenticated()" class="navbar-brand" th:href="@{/users}">Users</a>
+		       <a sec:authorize="isAuthenticated()" class="navbar-brand" th:href="@{/logout}" method="post">Logout</a>
 	       </div>
 	       <div class="navbar-collapse collapse">
 	          <ul class="nav navbar-nav">
