@@ -47,10 +47,6 @@ public class Item extends Base{
     @Basic(optional = false)
     private BigDecimal valor;
 
-    @Column(name = "VALORDesconto", precision = 12, scale = 2)
-    @Basic(optional = false)
-    private BigDecimal valorDesconto;
-
     @Column(name = "VALORTotal", precision = 12, scale = 2)
     @Basic(optional = false)
     private BigDecimal valorTotal;
@@ -97,14 +93,6 @@ public class Item extends Base{
 
     public void setValor(BigDecimal valor) {
         this.valor = valor;
-    }
-
-    public BigDecimal getValorDesconto() {
-        return this.valorDesconto;
-    }
-
-    public void setValorDesconto(BigDecimal valorDesconto) {
-        this.valorDesconto = valorDesconto;
     }
 
     public BigDecimal getValorTotal() {

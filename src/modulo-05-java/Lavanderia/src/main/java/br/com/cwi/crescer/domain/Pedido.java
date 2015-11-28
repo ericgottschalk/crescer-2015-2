@@ -47,9 +47,17 @@ public class Pedido extends Base{
     @Column(name = "DATAEntrega")
     private Date dataEntrega;
 
-    @Column(name = "Valor", precision = 12, scale = 2)
+    @Column(name = "VALORBruto", precision = 12, scale = 2)
     @Basic(optional = false)
-    private BigDecimal valor;
+    private BigDecimal valorBruto;
+
+	@Column(name = "VALORTotal", precision = 12, scale = 2)
+    @Basic(optional = false)
+    private BigDecimal valorTotal;
+    
+    @Column(name = "VALORDesconto", precision = 12, scale = 2)
+    @Basic(optional = false)
+    private BigDecimal valorDesconto;
 
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "Situacao")
@@ -90,13 +98,29 @@ public class Pedido extends Base{
         this.dataEntrega = dataEntrega;
     }
 
-    public BigDecimal getValor() {
-        return this.valor;
-    }
+    public BigDecimal getValorBruto() {
+		return valorBruto;
+	}
 
-    public void setValor(BigDecimal valor) {
-        this.valor = valor;
-    }
+	public void setValorBruto(BigDecimal valorBruto) {
+		this.valorBruto = valorBruto;
+	}
+
+	public BigDecimal getValorTotal() {
+		return valorTotal;
+	}
+
+	public void setValorTotal(BigDecimal valorTotal) {
+		this.valorTotal = valorTotal;
+	}
+
+	public BigDecimal getValorDesconto() {
+		return valorDesconto;
+	}
+
+	public void setValorDesconto(BigDecimal valorDesconto) {
+		this.valorDesconto = valorDesconto;
+	}
 
     public SituacaoPedido getSituacao() {
         return this.situacao;
