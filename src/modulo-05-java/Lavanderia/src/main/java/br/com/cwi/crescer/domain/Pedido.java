@@ -30,32 +30,32 @@ public class Pedido extends Base{
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQUENCE)
-    @Column(name = "IDPedido")
+    @Column(name = "IDPEDIDO")
     private Long idPedido;
 
     @ManyToOne
-    @JoinColumn(name = "IDCliente")
+    @JoinColumn(name = "IDCLIENTE")
     @Basic(optional = false)
     private Cliente cliente;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "DATAInclusao")
+    @Column(name = "DATAINCLUSAO")
     @Basic(optional = false)
     private Date dataInclusao;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "DATAEntrega")
+    @Column(name = "DATAENTREGA")
     private Date dataEntrega;
 
-    @Column(name = "VALORBruto", precision = 12, scale = 2)
+    @Column(name = "VALORBRUTO", precision = 12, scale = 2)
     @Basic(optional = false)
     private BigDecimal valorBruto;
 
-	@Column(name = "VALORTotal", precision = 12, scale = 2)
+	@Column(name = "VALORFINAL", precision = 12, scale = 2)
     @Basic(optional = false)
     private BigDecimal valorTotal;
     
-    @Column(name = "VALORDesconto", precision = 12, scale = 2)
+    @Column(name = "VALORDESCONTO", precision = 12, scale = 2)
     @Basic(optional = false)
     private BigDecimal valorDesconto;
 

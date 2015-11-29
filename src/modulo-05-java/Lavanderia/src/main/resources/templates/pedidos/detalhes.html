@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" 
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	  layout:decorator="layout">
+<head>
+	<meta charset="utf-8"/>
+	<title>Detalhes</title>
+</head>
+<body>
+	<section layout:fragment="content">
+		<div class="panel panel-default">
+	        <div class="panel-heading">
+	            <h3 class="panel-title">
+	            	<h3 th:text="|Cliente: ${pedido.cliente.name}|"></h3>
+			    </h3>
+	        </div>
+	        <div class="panel-body">
+	            <h3 th:text="|CPF: ${pedido.cliente.cpf}|"> </h3>
+	            <h3 th:text="|E-mail: ${pedido.cliente.email}|"> </h3>
+	            <h3 th:text="|Data Inclusão: ${pedido.dataInclusao}|"></h3>
+	            <h3 th:if="${pedido.dataEntrega != null}" th:text="|Data Entrega: ${pedido.dataEntrega}|"></h3>
+	            <h3 th:text="|Valor Bruto: ${pedido.valorBruto}|"></h3>
+	            <h3 th:text="|Valor Desconto: ${pedido.valorDesconto}|"></h3>
+	            <h3 th:text="|Valor Final: ${pedido.valorTotal}|"></h3>
+	            <h3 th:text="|Situação: ${pedido.situacao}|"></h3>
+	        </div>
+	    </div>
+	    <div class="panel panel-default">
+	        <div class="panel-heading">
+	            <h3 class="panel-title">
+	            	<h3 th:text="Itens"></h3>
+	            	<button class="btn btn-primary btn-lg">Novo</button>
+			    </h3>
+	        </div>
+	        <div class="panel-body">
+	            <table class="table table-hover" th:if="${not #lists.isEmpty(pedido.itens)}">        
+			    	<tr>
+			            <th>Produto</th>
+	                    <th>Peso</th>
+		                <th>Valor</th>
+		                <th>Valor Total</th>
+		                <th>Situacao</th>
+						<th>Situacao</th>
+		            </tr>
+		            <tr th:each="item : ${pedido.itens}">
+		                <td th:text="|${item.produto.material.descricao} - ${item.produto.servico.descricao}|"></td>
+		                <td th:text="${item.peso}"></td>
+		                <td th:text="${item.valor}"></td>
+		                <td th:text="${item.valorTotal}"></td>
+		                <td th:text="${item.situacao}"></td>
+		            </tr>
+			     </table>
+	        </div>
+	    </div>
+		<div class="jumbotron">
+			<form th:action="@{/pedidos/finalizar}" th:object="${pedido}" method="post"  class="form-horizontal">
+				<div class="form-group"> 
+					<button type="submit" class="btn btn-primary btn-lg">Finalizar Pedido</button>
+		        </div>
+			</form>
+		</div>    
+	</section>
+</body>
+</html>

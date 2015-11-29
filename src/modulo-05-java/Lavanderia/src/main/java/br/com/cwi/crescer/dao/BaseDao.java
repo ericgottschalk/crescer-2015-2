@@ -16,8 +16,9 @@ public class BaseDao<T extends Base>{
     protected EntityManager manager;
 
     @Transactional
-    public void add(T item){
+    public Long add(T item){
         this.manager.persist(item);
+        return null;
     }
 
     @Transactional
