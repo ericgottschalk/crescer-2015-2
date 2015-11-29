@@ -46,16 +46,18 @@ public class ClienteController {
 
     	List<ClienteDto> clientes = new ArrayList<ClienteDto>();
     	if (dto.getName() == null || dto.getName() == ""){
-    		redirectAttributes.addFlashAttribute("erro", "Ocorreu um erro! Tente novamente.");
     		clientes = this.clienteService.find();
-    		return new ModelAndView("clientes", "clientes", clientes);
+    		ModelAndView mv = new ModelAndView("clientes", "clientes", clientes);
+        	mv.addObject("aviso", "Filtro em braco! Digite um nome para pesquisar.");
+        	return mv;
     	}
     	
         clientes = this.clienteService.findByName(dto.getName());
         
         if (clientes.size() == 0){
-        	redirectAttributes.addFlashAttribute("erro", "Nenhum cliente encontrado!");
-        	return new ModelAndView("clientes", "clientes", clientes);
+        	ModelAndView mv = new ModelAndView("clientes", "clientes", clientes);
+        	mv.addObject("erro", "Nenhum cliente encontrado!");
+        	return mv;
         }
         
         return new ModelAndView("clientes", "clientes", clientes);
@@ -72,8 +74,9 @@ public class ClienteController {
             final RedirectAttributes redirectAttributes) {
 
         if (result.hasErrors()) {
-        	redirectAttributes.addFlashAttribute("erro", "Ocorreu um erro! Tente novamente.");
-            return new ModelAndView("clientes/novo", "cliente", dto);
+            ModelAndView mv = new ModelAndView("clientes/novo", "cliente", dto);
+            mv.addObject("erro", "Ocorreu um erro! Tente novamente.");
+            return mv;
         }
 
         this.clienteService.add(dto);

@@ -55,8 +55,9 @@ public class ProdutoController {
     	List<ProdutoDto> produtos = this.produtoService.findFilter(dto);
         
         if (produtos.size() == 0){
-        	redirectAttributes.addFlashAttribute("erro", "Nenhum produto encontrado!");
-        	return new ModelAndView("produtos", "produtos", produtos);
+        	ModelAndView mv = new ModelAndView("produtos/novo", "produto", dto);
+            mv.addObject("erro", "nenhum produto encontrado!");
+            return mv;
         }
         
         return new ModelAndView("produtos", "produtos", produtos);
@@ -75,11 +76,19 @@ public class ProdutoController {
             final RedirectAttributes redirectAttributes) {
 
         if (result.hasErrors()) {
-        	redirectAttributes.addFlashAttribute("erro", "Ocorreu um erro! Tente novamente.");
-            return new ModelAndView("produtos/novo", "produto", dto);
+            ModelAndView mv = new ModelAndView("produtos/novo", "produto", dto);
+            mv.addObject("erro", "Ocorreu um erro! Tente novamente.");
+            return mv;
         }
 
-        this.produtoService.add(dto);
+        try {
+			this.produtoService.add(dto);
+		} catch (Exception e) {
+			ModelAndView mv = new ModelAndView("produtos/novo", "produto", dto);
+            mv.addObject("erro", e.getMessage());
+            return mv;
+		}
+        
         redirectAttributes.addFlashAttribute("mensagem", "Produto cadastrado com sucesso!");
         return new ModelAndView("redirect:/produtos");
     }

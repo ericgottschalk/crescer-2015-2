@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import br.com.cwi.crescer.exception.ProdutoExistenteException;
 import br.com.cwi.crescer.dao.MaterialDao;
 import br.com.cwi.crescer.dao.ProdutoDao;
 import br.com.cwi.crescer.dao.ServicoDao;
@@ -43,10 +44,18 @@ public class ProdutoService {
     	return list;
     }
 
-    public void add(ProdutoDto dto) {
+    public void add(ProdutoDto dto) throws Exception{
         Produto produto = this.dtoToProduto(dto);
         produto.setSituacao(SituacaoProduto.ATIVO);
-        this.produtoDao.add(produto);
+        Boolean podeInserir = this.produtoDao.podeInserir(produto.getMaterial().getIdMaterial(),
+        												  produto.getServico().getIdServico());
+        
+        if (podeInserir){
+        	this.produtoDao.add(produto);
+        	return;
+        }
+        
+        throw new ProdutoExistenteException();
     }
     
     public void update(ProdutoDto dto) {
@@ -119,14 +128,14 @@ public class ProdutoService {
 	}
 	
 	private List<Produto> findByMaterial(Material material){
-		return this.produtoDao.findMaterialFilter(material);
+		return this.produtoDao.findMaterialFilter(material.getIdMaterial());
 	}
 	
 	private List<Produto> findByServico(Servico servico){
-		return this.produtoDao.findServicoFilter(servico);
+		return this.produtoDao.findServicoFilter(servico.getIdServico());
 	}
 	
 	private List<Produto> findByMaterialServico(Material material, Servico servico){
-		return this.produtoDao.findMaterialServicoFilter(material, servico);
+		return this.produtoDao.findMaterialServicoFilter(material.getIdMaterial(), servico.getIdServico());
 	}
 }

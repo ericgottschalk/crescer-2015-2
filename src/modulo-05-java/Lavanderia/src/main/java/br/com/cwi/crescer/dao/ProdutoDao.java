@@ -3,10 +3,7 @@ package br.com.cwi.crescer.dao;
 import java.util.List;
 
 import org.springframework.stereotype.Repository;
-
-import br.com.cwi.crescer.domain.Material;
 import br.com.cwi.crescer.domain.Produto;
-import br.com.cwi.crescer.domain.Servico;
 
 @Repository
 public class ProdutoDao extends BaseDao<Produto>{
@@ -19,33 +16,37 @@ public class ProdutoDao extends BaseDao<Produto>{
 		return this.manager.createQuery("FROM Produto", Produto.class).getResultList();
 	}
 
-	public List<Produto> findMaterialServicoFilter(Material material, Servico servico) {
+	public List<Produto> findMaterialServicoFilter(Long idMaterial, Long idServico) {
 		StringBuilder str = new StringBuilder();
 		str.append("SELECT p FROM Produto p WHERE 1=1 ");
-	    str.append("AND p.material.idMaterial = :material ");
-	    str.append("AND p.servico.idServico = :servico");
+	    str.append("AND p.material.idMaterial = :idMaterial ");
+	    str.append("AND p.servico.idServico = :idServico");
 		
 		return this.manager.createQuery(str.toString(), Produto.class)
-				.setParameter("material", material.getIdMaterial())
-				.setParameter("servico", servico.getIdServico())
+				.setParameter("idMaterial", idMaterial)
+				.setParameter("idServico", idServico)
 				.getResultList();
 	}
 	
-	public List<Produto> findMaterialFilter(Material material){
+	public List<Produto> findMaterialFilter(Long idMaterial){
 		StringBuilder str = new StringBuilder();
-		str.append("SELECT p FROM Produto p WHERE p.material.idMaterial = :material");
+		str.append("SELECT p FROM Produto p WHERE p.material.idMaterial = :idMaterial");
 		
 		return this.manager.createQuery(str.toString(), Produto.class)
-				.setParameter("material", material.getIdMaterial())
+				.setParameter("idMaterial", idMaterial)
 				.getResultList();
 	}
 	
-	public List<Produto> findServicoFilter(Servico servico){
+	public List<Produto> findServicoFilter(Long idServico){
 		StringBuilder str = new StringBuilder();
-		str.append("SELECT p FROM Produto p WHERE p.servivo.idServico = :servico");
+		str.append("SELECT p FROM Produto p WHERE p.servivo.idServico = :idServico");
 		
 		return this.manager.createQuery(str.toString(), Produto.class)
-				.setParameter("servico", servico.getIdServico())
+				.setParameter("idServico", idServico)
 				.getResultList();
+	}
+
+	public Boolean podeInserir(Long idMaterial, Long idServico) {
+		return !(this.findMaterialServicoFilter(idMaterial, idServico).size() > 0);
 	}
 }
