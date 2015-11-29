@@ -15,13 +15,6 @@ public class PedidoDao extends BaseDao<Pedido>{
 	public Pedido findById(Long id){
     	return this.manager.find(Pedido.class, id);
     }
-	
-	@Override
-	@Transactional
-	public Long add(Pedido item){
-		super.add(item);
-		return item.getIdPedido();
-	}
 
 	public List<Pedido> find() {
 		return this.manager.createQuery("FROM Pedido", Pedido.class).getResultList();

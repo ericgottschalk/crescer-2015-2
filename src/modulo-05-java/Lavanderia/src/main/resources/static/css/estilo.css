@@ -4,6 +4,10 @@ body{
     background-color: #0099CC;
 }
 
+table{
+	text-align: left;
+}
+
 th {
 	font: bold 20px arial;
 	color: blue;

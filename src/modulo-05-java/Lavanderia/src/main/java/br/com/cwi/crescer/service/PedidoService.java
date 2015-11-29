@@ -33,7 +33,14 @@ public class PedidoService {
 		pedido.setDataInclusao(new Date());
 		pedido.setValorBruto(new BigDecimal(0));
 		pedido.setSituacao(SituacaoPedido.PENDENTE);
-		return this.pedidoDao.add(pedido);
+		this.pedidoDao.add(pedido);
+		return pedido.getIdPedido();
+	}
+	
+	public void cancel(PedidoDto dto) {
+		Pedido pedido = this.pedidoDao.findById(dto.getIdPedido());
+		pedido.setSituacao(SituacaoPedido.CANCELADO);
+		this.pedidoDao.update(pedido);
 	}
 	
 	public PedidoDto findById(Long id){

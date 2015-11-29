@@ -5,9 +5,17 @@
 <head>
 	<meta charset="utf-8"/>
 	<title>Detalhes</title>
+	<link rel="stylesheet" href="../static/css/pedidos.css" th:href="${'/css/pedidos.css'}" />
 </head>
 <body>
 	<section layout:fragment="content">
+		<div class="jumbotron" th:if="${pedido.situacao} != ${T(br.com.cwi.crescer.domain.Pedido.SituacaoPedido).CANCELADO}">
+			<form th:action="${'/pedidos/cancelar/' + pedido.idPedido}" th:object="${pedido}" method="post"  class="form-horizontal">
+				<div class="form-group"> 
+					<button type="submit" class="btn btn-danger btn-lg">Cancelar Pedido</button>
+		        </div>
+			</form>
+		</div>   
 		<div class="panel panel-default">
 	        <div class="panel-heading">
 	            <h3 class="panel-title">
@@ -27,38 +35,49 @@
 	    </div>
 	    <div class="panel panel-default">
 	        <div class="panel-heading">
-	            <h3 class="panel-title">
+	            <div class="panel-title">
 	            	<h3 th:text="Itens"></h3>
-	            	<button class="btn btn-primary btn-lg">Novo</button>
-			    </h3>
+	            	<button th:if="${pedido.situacao} == ${T(br.com.cwi.crescer.domain.Pedido.SituacaoPedido).PENDENTE}"
+	            	        class="btn btn-primary btn-lg">
+	            		Novo
+	            	</button>
+			        <button class="btn btn-primary btn-lg" th:if="${not #lists.isEmpty(pedido.itens)}"> 
+			            Processar Itens
+			        </button>
+			    </div>
 	        </div>
 	        <div class="panel-body">
-	            <table class="table table-hover" th:if="${not #lists.isEmpty(pedido.itens)}">        
-			    	<tr>
-			            <th>Produto</th>
-	                    <th>Peso</th>
-		                <th>Valor</th>
-		                <th>Valor Total</th>
-		                <th>Situacao</th>
-						<th>Situacao</th>
-		            </tr>
-		            <tr th:each="item : ${pedido.itens}">
-		                <td th:text="|${item.produto.material.descricao} - ${item.produto.servico.descricao}|"></td>
-		                <td th:text="${item.peso}"></td>
-		                <td th:text="${item.valor}"></td>
-		                <td th:text="${item.valorTotal}"></td>
-		                <td th:text="${item.situacao}"></td>
-		            </tr>
+	            <table class="table table-hover" th:if="${not #lists.isEmpty(pedido.itens)}">   
+	            	<thead>     
+				    	<tr>
+				    		<th>Item</th>
+				            <th>Produto</th>
+		                    <th>Peso</th>
+			                <th>Valor</th>
+			                <th>Valor Total</th>
+			                <th>Situacao</th>
+			            </tr>
+		            </thead>
+		            <tbody>
+			            <tr th:each="item : ${pedido.itens}">
+			            	<td scope="row">*</td>
+			                <td th:text="|${item.produto.material.descricao} - ${item.produto.servico.descricao}|"></td>
+			                <td th:text="${item.peso}"></td>
+			                <td th:text="${item.valor}"></td>
+			                <td th:text="${item.valorTotal}"></td>
+			                <td th:text="${item.situacao}"></td>
+			            </tr>
+		            </tbody>
 			     </table>
 	        </div>
 	    </div>
-		<div class="jumbotron">
+		<div th:if="${pedido.situacao} == ${T(br.com.cwi.crescer.domain.Pedido.SituacaoPedido).PROCESSADO}" class="jumbotron">
 			<form th:action="@{/pedidos/finalizar}" th:object="${pedido}" method="post"  class="form-horizontal">
 				<div class="form-group"> 
 					<button type="submit" class="btn btn-primary btn-lg">Finalizar Pedido</button>
 		        </div>
 			</form>
-		</div>    
+		</div>   
 	</section>
 </body>
 </html>

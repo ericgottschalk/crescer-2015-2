@@ -67,8 +67,9 @@ public class PedidoController {
 		
 		Long id = this.pedidoService.add(dto);	
 		PedidoDto pedido = this.pedidoService.findById(id);
-		redirectAttributes.addAttribute("mensagem", "Pedido criado com sucesso!");
-		return new ModelAndView("pedidos/detalhes", "pedido", pedido);
+		ModelAndView mv = new ModelAndView("pedidos/detalhes", "pedido", pedido);
+		mv.addObject("mensagem", "Pedido criado com sucesso!");
+		return mv;
 	}
 	
 	@RequestMapping(path = "pedidos/detalhes/{id}", method = RequestMethod.GET)
