@@ -1,9 +1,13 @@
 package br.com.cwi.crescer.controller;
 
 import java.util.List;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -52,7 +56,7 @@ public class ProdutoController {
         
         if (produtos.size() == 0){
         	ModelAndView mv = new ModelAndView("produtos/novo", "produto", dto);
-            mv.addObject("erro", "nenhum produto encontrado!");
+            mv.addObject("erro", "Nenhum produto encontrado!");
             return mv;
         }
         
@@ -61,9 +65,16 @@ public class ProdutoController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(path = "/produtos/novo", method = RequestMethod.POST)
-    public ModelAndView novo(@ModelAttribute("produto") ProdutoDto dto,
+    public ModelAndView novo(@Valid @ModelAttribute("produto") ProdutoDto dto,
+    						 BindingResult result,
                              final RedirectAttributes redirectAttributes) {
 
+    	if (result.hasErrors()){
+            ModelAndView mv = new ModelAndView("/produtos", "modal", true);
+            mv.addObject("erro", "Ocorreu um erro! Preencha os campos obrigatórios.");
+            return mv;
+    	}
+    	
         try {
 			this.produtoService.add(dto);
 		} catch (Exception e) {
