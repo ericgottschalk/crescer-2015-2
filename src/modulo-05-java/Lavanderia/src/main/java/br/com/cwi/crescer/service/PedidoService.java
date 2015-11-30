@@ -150,8 +150,12 @@ public class PedidoService {
 		this.itemService.processarItens(dto.getItens());
 	}
 	
-	public void processarItem(Long idItem){
-		this.itemService.processarItem(idItem);
+	public Long processarItem(Long id) throws Exception{
+		try {
+			return this.itemService.processarItem(id);
+		} catch (Exception e) {
+			throw e;
+		}
 	}
 
 	public void finalizar(Long id) throws EncerrarPedidoException {

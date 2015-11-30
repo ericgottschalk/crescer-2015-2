@@ -33,16 +33,13 @@ public class ItensPedidoController {
 		
 		if(dto.getPeso() == null){
 			redirectAttributes.addFlashAttribute("erro", "Ocorreu um erro! Preencha os campos obrigatórios.");
-			ModelAndView mv = new ModelAndView("redirect:/pedidos/pedidos/detalhes/" + id);
-			mv.addObject("erro", "Ocorreu um erro! Preencha os campos obrigatórios.");
-			return mv;
+			return new ModelAndView("redirect:/pedidos/pedidos/detalhes/" + id);
 		}
 		
 		dto.setIdPedido(id);
 		this.pedidoService.addItem(dto);
 		redirectAttributes.addFlashAttribute("mensagem", "Item adicionado com sucesso!");
-		ModelAndView mv = new ModelAndView("redirect:/pedidos/pedidos/detalhes/" + id);
-		return mv;
+		return new ModelAndView("redirect:/pedidos/pedidos/detalhes/" + id);
 	}
 	
 	@RequestMapping(path = "/processarItens/{id}", method = RequestMethod.POST)
@@ -52,17 +49,20 @@ public class ItensPedidoController {
 		PedidoDto dto = this.pedidoService.findById(id, true);
 		this.pedidoService.processarItens(dto);
 		redirectAttributes.addFlashAttribute("mensagem", "Itens processados com sucesso!");
-		ModelAndView mv = new ModelAndView("redirect:/pedidos/pedidos/detalhes/" + dto.getIdPedido());
-		return mv;
+		return new ModelAndView("redirect:/pedidos/pedidos/detalhes/" + dto.getIdPedido());
 	}
 	
-	@RequestMapping(path = "/processarItem/{id}", method = RequestMethod.POST)
-	public ModelAndView processarIten(@PathVariable("id") Long id,
+	@RequestMapping(path = "/processarItem/{id}", method = RequestMethod.GET)
+	public ModelAndView processarItem(@PathVariable("id") Long id,
 									   RedirectAttributes redirectAttributes){
-		
-		this.pedidoService.processarItem(id);
+		Long idPedido = null;
+		try {
+			idPedido = this.pedidoService.processarItem(id);
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("erro", e.getMessage());
+			return new ModelAndView("redirect:/pedidos");
+		}
 		redirectAttributes.addFlashAttribute("mensagem", "Item processado com sucesso!");
-		ModelAndView mv = new ModelAndView("redirect:/pedidos/pedidos/detalhes/" + id);
-		return mv;
+		return new ModelAndView("redirect:/pedidos/pedidos/detalhes/" + idPedido);
 	}
 }

@@ -60,9 +60,14 @@ public class ItemService {
 		}
 	}
 	
-	public void processarItem(Long idItem){
+	public Long processarItem(Long idItem) throws Exception{
 		Item item = this.dao.findById(idItem);
+		if (item == null || item.getSituacao() == SituacaoItem.PROCESSADO){
+			throw new Exception("Este item não existe ou já foi processado!");
+		}
+		
 		item.setSituacao(SituacaoItem.PROCESSADO);
 		this.dao.update(item);
+		return item.getPedido().getIdPedido();
 	}
 }

@@ -74,7 +74,20 @@
 			                <td th:text="${item.valorTotal}"></td>
 			                <td th:text="${item.situacao}"></td>
 			                <td th:if="${pedido.situacao} == ${T(br.com.cwi.crescer.domain.Pedido.SituacaoPedido).PROCESSANDO}">
-			                	<a class="btn btn-primary" th:href="${'pedidos/processarItem/' + item.idItem}">Processar</a>
+			                	<div th:switch="${item.situacao}">
+			                	<a  th:case="${T(br.com.cwi.crescer.domain.Item.SituacaoItem).PENDENTE}"
+			                		class="btn btn-primary" th:href="${'/pedidos/processarItem/' + item.idItem}">
+			                		Processar
+			                	</a>
+			                	<a  th:case="${T(br.com.cwi.crescer.domain.Item.SituacaoItem).PROCESSANDO}"
+			                		class="btn btn-primary" th:href="${'/pedidos/processarItem/' + item.idItem}">
+			                		Processar
+			                	</a>
+			                	<p  th:case="${T(br.com.cwi.crescer.domain.Item.SituacaoItem).PROCESSADO}"
+			                		th:text="PROCESSADO">
+			                	</p>
+			                	</div>
+			                	
 			                </td>
 			            </tr>
 		            </tbody>
