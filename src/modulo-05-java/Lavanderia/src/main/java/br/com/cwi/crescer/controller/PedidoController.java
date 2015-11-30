@@ -51,9 +51,8 @@ public class PedidoController {
 		List<PedidoDto> list = new ArrayList<PedidoDto>();
 		if (dto.getCliente().getCpf() == null && dto.getSituacao() == null){
 			list = this.pedidoService.find();
-			ModelAndView mv = new ModelAndView("pedidos", "pedidos", list);
-			mv.addObject("aviso", "Filtro em branco! Preencha os campos para pesquisar.");
-			return mv;
+			redirectAttributes.addFlashAttribute("aviso", "Filtro em branco! Preencha os campos para pesquisar.");
+			return new ModelAndView("pedidos", "pedidos", list);
 		}
 		
 		list = this.pedidoService.findFilter(dto);

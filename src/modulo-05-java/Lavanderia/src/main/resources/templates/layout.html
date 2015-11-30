@@ -33,10 +33,10 @@
 			         <li>
 			        	<form th:action="@{/logout}" action="/logout" method="post" class="form-inline">
 			        		<div class="from-group">
-			        			<h3>
-				        			<span sec:authentication="name"></span>
+			        			<div>
+				        			<h3 sec:authentication="name"></h3>
 	                            	<button class="btn btn-primary" type="submit">Logout</button>
-                            	</h3>
+                            	</div>
                             </div>
                         </form>
                      </li>

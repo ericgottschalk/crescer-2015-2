@@ -42,11 +42,11 @@ public class EditarProdutoController {
 	 @PreAuthorize("hasRole('ADMIN')")
 	 @RequestMapping(path = "/editar", method = RequestMethod.POST)
 	 public ModelAndView editar(@Valid @ModelAttribute("produto") ProdutoDto dto,
-	         BindingResult result,
-	         final RedirectAttributes redirectAttributes) {
+	         					BindingResult result,
+	         					final RedirectAttributes redirectAttributes) {
 
 	     if (result.hasErrors()) {
-	    	 redirectAttributes.addFlashAttribute("erro", "Ocorreu um erro! Tente novamente.");
+	    	 redirectAttributes.addAttribute("erro", "Ocorreu um erro! Tente novamente.");
 	         return new ModelAndView("produtos/editar", "produto", dto);
 	     }
 

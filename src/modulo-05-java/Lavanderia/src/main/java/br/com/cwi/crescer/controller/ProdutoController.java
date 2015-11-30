@@ -52,12 +52,16 @@ public class ProdutoController {
     public ModelAndView produtosFIltro(@ModelAttribute("pesquisa") ProdutoDto dto,
     									final RedirectAttributes redirectAttributes) {
 
+    	if(dto.idMaterial == null && dto.idProduto == null){
+    		redirectAttributes.addFlashAttribute("aviso", "Filtos em branco! Preencha os campos para pesquisar.");
+    		return new ModelAndView("redirect:/produtos");
+    	}
+    	
     	List<ProdutoDto> produtos = this.produtoService.findFilter(dto);
         
         if (produtos.size() == 0){
-        	ModelAndView mv = new ModelAndView("produtos/novo", "produto", dto);
-            mv.addObject("erro", "Nenhum produto encontrado!");
-            return mv;
+        	redirectAttributes.addFlashAttribute("erro", "Nenhum produto encontrado!");
+        	return new ModelAndView("redirect:/produtos");
         }
         
         return new ModelAndView("produtos", "produtos", produtos);

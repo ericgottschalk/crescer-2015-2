@@ -18,6 +18,7 @@
 		        <div class="form-group">
 						<label class="control-label ">Situação: </label> 
 							<select class="form-control " th:field="*{situacao}">
+							    <option th:value="${null}"></option>
 								<option th:each="elem : ${situacoes}" th:text="${elem.name()}" th:value="${elem.name()}">[option]</option>
 							</select>
 		            </div>

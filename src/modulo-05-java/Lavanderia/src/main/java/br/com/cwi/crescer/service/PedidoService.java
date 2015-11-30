@@ -2,6 +2,7 @@ package br.com.cwi.crescer.service;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -48,6 +49,27 @@ public class PedidoService {
 		Item item = this.itemService.add(dto);
 		item.getPedido().setValorBruto(this.getValorBrutoPedido(item.getPedido()));
 		this.pedidoDao.update(item.getPedido());
+	}
+	
+	public void finalizar(Long id) throws EncerrarPedidoException {
+		Pedido pedido = this.pedidoDao.findById(id);
+		if (pedido.getSituacao() != SituacaoPedido.PENDENTE){
+			throw new EncerrarPedidoException("Pedido não está pendente para ser finalizado!");
+		}
+		pedido.setDataEntrega(this.getDataEntrega(pedido));
+		pedido.setValorDesconto(this.getValorDesconto(pedido));
+		pedido.setValorTotal(this.getValorFinal(pedido));
+		pedido.setSituacao(SituacaoPedido.PROCESSANDO);
+		this.pedidoDao.update(pedido);
+	}
+	
+	public void encerrar(Long id) throws EncerrarPedidoException{
+		Pedido pedido = this.pedidoDao.findById(id);
+		if (pedido.getSituacao() != SituacaoPedido.PROCESSADO){
+			throw new EncerrarPedidoException("Pedido não está processado para ser encerrado!");
+		}
+		pedido.setSituacao(SituacaoPedido.ENCERRADO);
+		this.pedidoDao.update(pedido);
 	}
 	
 	public void cancel(Long id) throws EncerrarPedidoException {
@@ -122,21 +144,6 @@ public class PedidoService {
 		return list;
 	}
 	
-	private PedidoDto peditoToDto(Pedido pedido){
-		PedidoDto dto = new PedidoDto();
-		dto.setIdPedido(pedido.getIdPedido());
-		dto.setCliente(pedido.getCliente());
-		dto.setDataEntrega(pedido.getDataEntrega());
-		dto.setDataInclusao(pedido.getDataInclusao());
-		dto.setIdCliente(pedido.getCliente().getIdCliente());
-		dto.setItens(pedido.getItens());
-		dto.setValorBruto(pedido.getValorBruto());
-		dto.setValorTotal(pedido.getValorTotal());
-		dto.setValorDesconto(pedido.getValorDesconto());
-		dto.setSituacao(pedido.getSituacao());
-		return dto;
-	}
-	
 	private BigDecimal getValorBrutoPedido(Pedido pedido){
 		Double valor = 0D;
 		for (Item item : pedido.getItens()){
@@ -144,6 +151,66 @@ public class PedidoService {
 		}
 		
 		return new BigDecimal(valor);
+	}
+	
+	private BigDecimal getValorDesconto(Pedido pedido){
+		List<Double> list = new ArrayList<Double>();
+		Double desconto = 0D;
+		Double pesoTotal = 0D;
+		for (Item item : pedido.getItens()){
+			pesoTotal += item.getPeso();
+		}
+		
+		Calendar date =  Calendar.getInstance();
+		date.setTime(pedido.getDataInclusao());
+		switch(date.get(Calendar.DAY_OF_WEEK)){
+			case 1:
+			case 2:
+			case 3:
+				list.add(8D);
+				break;
+			case 4:
+			case 5:
+				list.add(4D);
+				break;
+				
+			default:
+				break;
+		}
+		
+		if (pedido.getValorBruto().intValue() > 90 || pesoTotal > 15){
+			list.add(4.87);
+		}
+		
+		for (Double value : list){
+			if (desconto < value){
+				desconto = value;
+			}
+		}
+		
+		Double valor = (pedido.getValorBruto().doubleValue() * desconto) / 100;
+		return new BigDecimal(valor);
+	}
+	
+	private BigDecimal getValorFinal(Pedido pedido){
+		BigDecimal desconto = pedido.getValorDesconto();
+		Double valor = pedido.getValorBruto().doubleValue();
+		Double valorFinal = valor - desconto.doubleValue();
+		return new BigDecimal(valorFinal);
+	}
+	
+	private Date getDataEntrega(Pedido pedido){
+		int prazo = 0;
+		for (Item item : pedido.getItens()){
+			if (prazo < item.getProduto().getPrazo()){
+				prazo = item.getProduto().getPrazo();
+			}
+		}
+		
+		Calendar calendar = Calendar.getInstance();
+		calendar.setTime(pedido.getDataInclusao()); 
+		calendar.add(Calendar.DAY_OF_MONTH, prazo);
+		return calendar.getTime();
 	}
 
 	public void processarItens(PedidoDto dto) {
@@ -157,13 +224,19 @@ public class PedidoService {
 			throw e;
 		}
 	}
-
-	public void finalizar(Long id) throws EncerrarPedidoException {
-		Pedido pedido = this.pedidoDao.findById(id);
-		if (pedido.getSituacao() != SituacaoPedido.PENDENTE){
-			throw new EncerrarPedidoException("Pedido não está pendente para ser finalizado!");
-		}
-		pedido.setSituacao(SituacaoPedido.PROCESSANDO);
-		this.pedidoDao.update(pedido);
+	
+	private PedidoDto peditoToDto(Pedido pedido){
+		PedidoDto dto = new PedidoDto();
+		dto.setIdPedido(pedido.getIdPedido());
+		dto.setCliente(pedido.getCliente());
+		dto.setDataEntrega(pedido.getDataEntrega());
+		dto.setDataInclusao(pedido.getDataInclusao());
+		dto.setIdCliente(pedido.getCliente().getIdCliente());
+		dto.setItens(pedido.getItens());
+		dto.setValorBruto(pedido.getValorBruto());
+		dto.setValorTotal(pedido.getValorTotal());
+		dto.setValorDesconto(pedido.getValorDesconto());
+		dto.setSituacao(pedido.getSituacao());
+		return dto;
 	}
 }

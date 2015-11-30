@@ -14,6 +14,7 @@
 	    		<div class="form-group">
 					<label class="control-label ">Material: </label> 
 					<select class="form-control " th:field="*{idMaterial}">
+						<option th:value="${null}"></option>
 						<option th:each="m : ${materiais}" th:text="${m.getDescricao()}" th:value="${m.idMaterial}">[option]</option>
 					</select>
 		        </div>
@@ -21,6 +22,7 @@
 		        <div class="form-group">
 					<label class="control-label ">Serviço: </label> 
 					<select class="form-control " th:field="*{idServico}">
+						<option th:value="${null}"></option>
 						<option th:each="s : ${servicos}" th:text="${s.getDescricao()}" th:value="${s.idServico}">[option]</option>
 					</select>
 		         </div>

@@ -11,10 +11,8 @@ public class ProdutoDto {
 
 	public Long idProduto;
 	
-	@NotNull
     public Long idMaterial;
     
-	@NotNull
 	public Material material;
 
     public Long idServico;

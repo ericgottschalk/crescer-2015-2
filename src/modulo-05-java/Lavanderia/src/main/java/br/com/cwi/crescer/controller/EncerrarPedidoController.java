@@ -37,6 +37,22 @@ public class EncerrarPedidoController {
 		return new ModelAndView("redirect:/pedidos/pedidos/detalhes/" + id);
 	}
 	
+	@RequestMapping(path = "/encerrar/{id}", method = RequestMethod.POST)
+	public ModelAndView encerrar(@PathVariable("id") Long id,
+								 final RedirectAttributes redirectAttributes){
+		
+		try {
+			this.pedidoService.encerrar(id);
+		} catch (EncerrarPedidoException e) {
+			redirectAttributes.addFlashAttribute("erro", e.getMessage());
+			return new ModelAndView("redirect:/pedidos/pedidos/detalhes/" + id);
+		}
+		
+		redirectAttributes.addFlashAttribute("mensagem", "Pedido encerrado com sucesso!");
+		return new ModelAndView("redirect:/pedidos/pedidos/detalhes/" + id);
+		
+	}
+	
 	@RequestMapping(path = "/cancelar/{id}", method = RequestMethod.POST)
 	public ModelAndView cancelarPedido(@PathVariable("id") Long id,
 									   final RedirectAttributes redirectAttributes){
