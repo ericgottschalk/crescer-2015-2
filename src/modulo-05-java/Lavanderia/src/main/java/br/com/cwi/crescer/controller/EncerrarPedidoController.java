@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import br.com.cwi.crescer.dto.PedidoDto;
+import br.com.cwi.crescer.exception.EncerrarPedidoException;
 import br.com.cwi.crescer.service.PedidoService;
 
 @Controller
@@ -22,14 +22,32 @@ public class EncerrarPedidoController {
 		this.pedidoService = pedidoService;		
 	}
 	
+	@RequestMapping(path = "/finalizar/{id}", method = RequestMethod.POST)
+	public ModelAndView finalizarPedido(@PathVariable("id") Long id,
+			   							final RedirectAttributes redirectAttributes){
+		
+		try {
+			this.pedidoService.finalizar(id);
+		} catch (EncerrarPedidoException e) {
+			redirectAttributes.addFlashAttribute("erro", e.getMessage());
+			return new ModelAndView("redirect:/pedidos/pedidos/detalhes/" + id);
+		}
+		
+		redirectAttributes.addFlashAttribute("mensagem", "Pedido finalizado com sucesso!");
+		return new ModelAndView("redirect:/pedidos/pedidos/detalhes/" + id);
+	}
+	
 	@RequestMapping(path = "/cancelar/{id}", method = RequestMethod.POST)
 	public ModelAndView cancelarPedido(@PathVariable("id") Long id,
 									   final RedirectAttributes redirectAttributes){
 		
-		PedidoDto pedido = this.pedidoService.findById(id);
-		this.pedidoService.cancel(pedido);
-		ModelAndView mv = new ModelAndView("redirect:/pedidos");
-		redirectAttributes.addAttribute("aviso", "Pedido cancelado com sucesso!");
-		return mv;
+		try {
+			this.pedidoService.cancel(id);
+		} catch (EncerrarPedidoException e) {
+			redirectAttributes.addFlashAttribute("erro", e.getMessage());
+			return new ModelAndView("redirect:/pedidos");
+		}
+		redirectAttributes.addFlashAttribute("aviso", "Pedido cancelado com sucesso!");
+		return new ModelAndView("redirect:/pedidos");
 	}
 }

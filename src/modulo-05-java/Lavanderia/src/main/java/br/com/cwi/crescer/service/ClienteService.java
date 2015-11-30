@@ -67,4 +67,13 @@ public class ClienteService {
 
         return list;
 	}
+
+	public List<ClienteDto> findAtivos() {
+		List<ClienteDto> list = new ArrayList<ClienteDto>();
+        for (Cliente cliente : this.dao.findAtivos()) {
+            list.add(new ClienteDto(cliente));
+        }
+
+        return list;
+	}
 }

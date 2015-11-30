@@ -63,19 +63,14 @@ public class ClienteController {
         return new ModelAndView("clientes", "clientes", clientes);
     }
 
-    @RequestMapping(path = "/clientes/novo", method = RequestMethod.GET)
-    public ModelAndView novo() {
-        return new ModelAndView("clientes/novo", "cliente", new ClienteDto());
-    }
-
     @RequestMapping(path = "/clientes/novo", method = RequestMethod.POST)
     public ModelAndView novo(@Valid @ModelAttribute("cliente") ClienteDto dto,
             BindingResult result,
             final RedirectAttributes redirectAttributes) {
 
         if (result.hasErrors()) {
-            ModelAndView mv = new ModelAndView("clientes/novo", "cliente", dto);
-            mv.addObject("erro", "Ocorreu um erro! Tente novamente.");
+            ModelAndView mv = new ModelAndView("/clientes", "modal", true);
+            mv.addObject("erro", "Ocorreu um erro! Preencha os campos obrigatórios.");
             return mv;
         }
 

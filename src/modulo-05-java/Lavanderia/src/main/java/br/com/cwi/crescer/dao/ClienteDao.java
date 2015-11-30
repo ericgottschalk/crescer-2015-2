@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Repository;
 
 import br.com.cwi.crescer.domain.Cliente;
+import br.com.cwi.crescer.domain.Cliente.SituacaoCliente;
 
 @Repository
 public class ClienteDao extends BaseDao<Cliente>{
@@ -22,4 +23,10 @@ public class ClienteDao extends BaseDao<Cliente>{
     public Cliente findById(Long id){
     	return this.manager.find(Cliente.class, id);
     }
+
+	public List<Cliente> findAtivos() {
+		return this.manager.createQuery("SELECT c FROM Cliente c WHERE c.situacao = :situacao", Cliente.class)
+        		.setParameter("situacao", SituacaoCliente.ATIVO)
+        		.getResultList();
+	}
 }

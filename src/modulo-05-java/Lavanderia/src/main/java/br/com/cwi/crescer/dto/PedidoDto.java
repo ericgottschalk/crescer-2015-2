@@ -33,6 +33,16 @@ public class PedidoDto {
 	
 	public List<Item> itens;
 	
+	public Boolean processado;
+	
+	public Boolean getProcessado() {
+		return processado;
+	}
+
+	public void setProcessado(Boolean processado) {
+		this.processado = processado;
+	}
+
 	public Long getIdPedido() {
 		return idPedido;
 	}

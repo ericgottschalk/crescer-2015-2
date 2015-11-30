@@ -65,6 +65,7 @@
 		      </div>
 		      <form th:action="@{/pedidos/pedidos/novo}" th:object="${pedido}" method="post"  class="form-horizontal">
 			      <div class="modal-body">
+			      	<h4 th:if="${#lists.isEmpty(clientes)}">Nenhum cliente cadastrado!</h4>
 			        <div class="form-group">
 						<label class="col-sm-2 control-label ">Cliente: </label> 
 						<div class="col-sm-10">
@@ -76,7 +77,7 @@
 			      </div>
 			      <div class="modal-footer">
 			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>     
-			       	<button type="submit" class="btn btn-primary">Save changes</button>			        
+			       	<button th:if="${not #lists.isEmpty(clientes)}" type="submit" class="btn btn-primary">Save changes</button>			        
 			      </div>
 		      </form>
 		    </div>

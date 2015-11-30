@@ -14,9 +14,12 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.cwi.crescer.domain.Pedido.SituacaoPedido;
 import br.com.cwi.crescer.dto.ClienteDto;
+import br.com.cwi.crescer.dto.ItemDto;
 import br.com.cwi.crescer.dto.PedidoDto;
+import br.com.cwi.crescer.dto.ProdutoDto;
 import br.com.cwi.crescer.service.ClienteService;
 import br.com.cwi.crescer.service.PedidoService;
+import br.com.cwi.crescer.service.ProdutoService;
 
 @Controller
 @RequestMapping("/pedidos")
@@ -24,11 +27,14 @@ public class PedidoController {
 
 	private PedidoService pedidoService;
 	private ClienteService clienteService;
+	private ProdutoService produtoService;
 
 	@Autowired
-	public PedidoController(PedidoService pedidoService, ClienteService clienteService){
+	public PedidoController(PedidoService pedidoService, ClienteService clienteService,
+							ProdutoService produtoService){
 		this.pedidoService = pedidoService;
-		this.clienteService = clienteService;		
+		this.clienteService = clienteService;
+		this.produtoService = produtoService;		
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
@@ -66,15 +72,24 @@ public class PedidoController {
 							 final RedirectAttributes redirectAttributes){
 		
 		Long id = this.pedidoService.add(dto);	
-		PedidoDto pedido = this.pedidoService.findById(id);
-		ModelAndView mv = new ModelAndView("pedidos/detalhes", "pedido", pedido);
-		mv.addObject("mensagem", "Pedido criado com sucesso!");
-		return mv;
+		PedidoDto pedido = this.pedidoService.findById(id, false);
+		redirectAttributes.addFlashAttribute("mensagem", "Pedido criado com sucesso!");
+		return new ModelAndView("pedidos/detalhes", "pedido", pedido);
 	}
 	
 	@RequestMapping(path = "pedidos/detalhes/{id}", method = RequestMethod.GET)
 	public ModelAndView detalhes(@PathVariable("id") Long id){
-		return new ModelAndView("pedidos/detalhes", "pedido", this.pedidoService.findById(id));
+		return new ModelAndView("pedidos/detalhes", "pedido", this.pedidoService.findById(id, true));
+	}
+	
+	@ModelAttribute("produtos")
+	public List<ProdutoDto> produtos(){
+		return this.produtoService.find();
+	}
+	
+	@ModelAttribute("item")
+	public ItemDto item(){
+		return new ItemDto();
 	}
 	
 	@ModelAttribute("pedido")
@@ -84,7 +99,7 @@ public class PedidoController {
 	
 	@ModelAttribute("clientes")
 	public List<ClienteDto> clientesAttr(){
-		return this.clienteService.find();
+		return this.clienteService.findAtivos();
 	}
 	
 	@ModelAttribute("situacoes")

@@ -1,13 +1,9 @@
 package br.com.cwi.crescer.controller;
 
 import java.util.List;
-
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -62,29 +58,16 @@ public class ProdutoController {
         
         return new ModelAndView("produtos", "produtos", produtos);
     }
-    
-    @PreAuthorize("hasRole('ADMIN')")
-    @RequestMapping(path = "/produtos/novo", method = RequestMethod.GET)
-    public ModelAndView novo() {
-        return new ModelAndView("produtos/novo", "produto", new ProdutoDto());
-    }
 
     @PreAuthorize("hasRole('ADMIN')")
     @RequestMapping(path = "/produtos/novo", method = RequestMethod.POST)
-    public ModelAndView novo(@Valid @ModelAttribute("produto") ProdutoDto dto,
-            BindingResult result,
-            final RedirectAttributes redirectAttributes) {
-
-        if (result.hasErrors()) {
-            ModelAndView mv = new ModelAndView("produtos/novo", "produto", dto);
-            mv.addObject("erro", "Ocorreu um erro! Tente novamente.");
-            return mv;
-        }
+    public ModelAndView novo(@ModelAttribute("produto") ProdutoDto dto,
+                             final RedirectAttributes redirectAttributes) {
 
         try {
 			this.produtoService.add(dto);
 		} catch (Exception e) {
-			ModelAndView mv = new ModelAndView("produtos/novo", "produto", dto);
+			ModelAndView mv = new ModelAndView("/produtos");
             mv.addObject("erro", e.getMessage());
             return mv;
 		}
@@ -93,7 +76,7 @@ public class ProdutoController {
         return new ModelAndView("redirect:/produtos");
     }
     
-    @ModelAttribute("pesquisa")
+    @ModelAttribute("produto")
     public ProdutoDto modelPesquisa(){
     	return new ProdutoDto();
     }

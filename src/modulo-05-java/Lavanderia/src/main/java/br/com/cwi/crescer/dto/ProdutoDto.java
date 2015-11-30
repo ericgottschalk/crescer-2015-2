@@ -3,7 +3,6 @@ package br.com.cwi.crescer.dto;
 import java.math.BigDecimal;
 
 import javax.validation.constraints.NotNull;
-
 import br.com.cwi.crescer.domain.Material;
 import br.com.cwi.crescer.domain.Produto.SituacaoProduto;
 import br.com.cwi.crescer.domain.Servico;
@@ -12,8 +11,10 @@ public class ProdutoDto {
 
 	public Long idProduto;
 	
+	@NotNull
     public Long idMaterial;
     
+	@NotNull
 	public Material material;
 
     public Long idServico;

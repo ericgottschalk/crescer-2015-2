@@ -10,7 +10,8 @@
 <body>
 	<section layout:fragment="content">
 		<div class="jumbotron" th:if="${pedido.situacao} != ${T(br.com.cwi.crescer.domain.Pedido.SituacaoPedido).CANCELADO}">
-			<form th:action="${'/pedidos/cancelar/' + pedido.idPedido}" th:object="${pedido}" method="post"  class="form-horizontal">
+			<form th:action="${'/pedidos/cancelar/' + pedido.idPedido}" th:object="${pedido}" method="post" 
+			      th:if="${pedido.situacao} != ${T(br.com.cwi.crescer.domain.Pedido.SituacaoPedido).ENCERRADO}" class="form-horizontal">
 				<div class="form-group"> 
 					<button type="submit" class="btn btn-danger btn-lg">Cancelar Pedido</button>
 		        </div>
@@ -18,9 +19,9 @@
 		</div>   
 		<div class="panel panel-default">
 	        <div class="panel-heading">
-	            <h3 class="panel-title">
+	            <div class="panel-title">
 	            	<h3 th:text="|Cliente: ${pedido.cliente.name}|"></h3>
-			    </h3>
+			    </div>
 	        </div>
 	        <div class="panel-body">
 	            <h3 th:text="|CPF: ${pedido.cliente.cpf}|"> </h3>
@@ -38,12 +39,15 @@
 	            <div class="panel-title">
 	            	<h3 th:text="Itens"></h3>
 	            	<button th:if="${pedido.situacao} == ${T(br.com.cwi.crescer.domain.Pedido.SituacaoPedido).PENDENTE}"
-	            	        class="btn btn-primary btn-lg">
+	            	        type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
 	            		Novo
 	            	</button>
-			        <button class="btn btn-primary btn-lg" th:if="${not #lists.isEmpty(pedido.itens)}"> 
-			            Processar Itens
-			        </button>
+	            	<form th:if="${pedido.situacao} == ${T(br.com.cwi.crescer.domain.Pedido.SituacaoPedido).PROCESSANDO}" 
+	            		  th:action="${'/pedidos/processarItens/' + pedido.idPedido}" th:object="${pedido}" method="post">
+				        <button class="btn btn-primary btn-lg" type="submit">
+				            Processar Itens
+				        </button>
+			        </form>
 			    </div>
 	        </div>
 	        <div class="panel-body">
@@ -56,6 +60,9 @@
 			                <th>Valor</th>
 			                <th>Valor Total</th>
 			                <th>Situacao</th>
+			                <th th:if="${pedido.situacao} == ${T(br.com.cwi.crescer.domain.Pedido.SituacaoPedido).PROCESSANDO}">
+			                	Processar
+			                </th>
 			            </tr>
 		            </thead>
 		            <tbody>
@@ -66,18 +73,63 @@
 			                <td th:text="${item.valor}"></td>
 			                <td th:text="${item.valorTotal}"></td>
 			                <td th:text="${item.situacao}"></td>
+			                <td th:if="${pedido.situacao} == ${T(br.com.cwi.crescer.domain.Pedido.SituacaoPedido).PROCESSANDO}">
+			                	<a class="btn btn-primary" th:href="${'pedidos/processarItem/' + item.idItem}">Processar</a>
+			                </td>
 			            </tr>
 		            </tbody>
 			     </table>
 	        </div>
 	    </div>
-		<div th:if="${pedido.situacao} == ${T(br.com.cwi.crescer.domain.Pedido.SituacaoPedido).PROCESSADO}" class="jumbotron">
-			<form th:action="@{/pedidos/finalizar}" th:object="${pedido}" method="post"  class="form-horizontal">
+		<div th:if="${pedido.situacao} == ${T(br.com.cwi.crescer.domain.Pedido.SituacaoPedido).PENDENTE}" class="jumbotron">
+			<form th:if="${not #lists.isEmpty(pedido.itens)}" th:action="${'/pedidos/finalizar/' + pedido.idPedido}" th:object="${pedido}" method="post"  class="form-horizontal">
 				<div class="form-group"> 
 					<button type="submit" class="btn btn-primary btn-lg">Finalizar Pedido</button>
 		        </div>
 			</form>
-		</div>   
+		</div> 
+		<div th:if="${pedido.situacao} == ${T(br.com.cwi.crescer.domain.Pedido.SituacaoPedido).PROCESSADO}" class="jumbotron">
+			<form th:action="${'/pedidos/encerrar/' + pedido.idPedido}" th:object="${pedido}" method="post"  class="form-horizontal">
+				<div class="form-group"> 
+					<button type="submit" class="btn btn-primary btn-lg">Encerrar Pedido</button>
+		        </div>
+			</form>
+		</div>     
+		
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  <div class="modal-dialog" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        <h3 class="modal-title" id="myModalLabel">Adicionar item</h3>
+		      </div>
+		      <form th:action="@{'/pedidos/addItem/' + ${pedido.idPedido}}" th:object="${item}" method="post" class="form-horizontal">
+			      <div class="modal-body"> 
+			      		<h4 th:if="${#lists.isEmpty(produtos)}">Nenhum produto cadastrado!</h4>
+			    		<div class="form-group">
+			    		    <label class="col-sm-2 control-label">Produto: </label> 
+							<div class="col-sm-10">
+								<select class="form-control " th:field="*{idProduto}">
+									<option th:each="p : ${produtos}" th:text="|${p.material.descricao} - ${p.servico.descricao}|" th:value="${p.idProduto}">[option]</option>
+								</select>
+							</div>
+				        </div>
+				        <div class="form-group" th:classappend="${#fields.hasErrors('peso')} ? 'has-error'">
+				        	<label class="col-sm-2 control-label">Peso: </label> 
+							<div class="col-sm-10">
+								<input class="form-control" th:field="*{peso}" type="text"/>
+								<span class="help-inline" th:errors="*{peso}"></span>
+							</div>
+				        </div>
+			      </div>
+			      <div class="modal-footer">
+			        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+			        <button th:if="${not #lists.isEmpty(produtos)}" type="submit" class="btn btn-primary">Save changes</button>
+			      </div>
+		      </form>
+		    </div>
+		  </div>
+		</div>
 	</section>
 </body>
 </html>

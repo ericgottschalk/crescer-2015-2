@@ -1,11 +1,7 @@
 package br.com.cwi.crescer.dao;
 
 import java.util.List;
-
-import javax.transaction.Transactional;
-
 import org.springframework.stereotype.Repository;
-
 import br.com.cwi.crescer.domain.Pedido;
 import br.com.cwi.crescer.domain.Pedido.SituacaoPedido;
 
