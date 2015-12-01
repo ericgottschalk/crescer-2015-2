@@ -8,10 +8,7 @@
 	<link rel="stylesheet" href="../static/css/login.css" th:href="${'/css/login.css'}" />
 </head>
 <body>
-	<section layout:fragment="content">  
-		<p th:if="${param.logout}" class="alert">Logout feito com sucesso</p>
-		<p th:if="${param.error}" class="alert alert-error">Login incorreto. Tente novamente !</p>
-		
+	<section layout:fragment="content">  	
 		<div>
 			<div class="panel panel-default">
 			    <div class="panel-heading">
@@ -19,6 +16,8 @@
 			    </div>
 			    <div class="panel-body">	
 					<form name="form" th:action="@{/login}" action="/login" method="POST">
+						<p th:if="${param.logout}" class="alert logout">Logout feito com sucesso</p>
+				    	<p th:if="${param.error}" class="alert alert-error fail">Login incorreto. Tente novamente !</p>
 						<div class="form-group">
 							<input class="form-control" type="text" name="username" placeholder="Username" />
 						</div>

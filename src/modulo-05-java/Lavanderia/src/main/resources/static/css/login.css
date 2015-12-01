@@ -6,3 +6,11 @@
     background-color: #888;
     color: #888;
 }
+
+.fail{
+	color: red;
+}
+
+.logout{
+	color: lime;
+}
