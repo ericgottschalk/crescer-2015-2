@@ -159,7 +159,7 @@ public class PedidoService {
 		return list;
 	}
 	
-	private BigDecimal getValorBrutoPedido(Pedido pedido){
+	public BigDecimal getValorBrutoPedido(Pedido pedido){
 		Double valor = 0D;
 		for (Item item : pedido.getItens()){
 			valor += item.getValorTotal().doubleValue();
@@ -168,7 +168,7 @@ public class PedidoService {
 		return new BigDecimal(valor);
 	}
 	
-	private BigDecimal getValorDesconto(Pedido pedido){
+	public BigDecimal getValorDesconto(Pedido pedido){
 		List<Double> list = new ArrayList<Double>();
 		Double desconto = 0D;
 		Double pesoTotal = 0D;
@@ -178,7 +178,8 @@ public class PedidoService {
 		
 		Calendar date =  Calendar.getInstance();
 		date.setTime(pedido.getDataInclusao());
-		switch(date.get(Calendar.DAY_OF_WEEK)){
+		int dia = date.get(Calendar.DAY_OF_WEEK);
+		switch(dia){
 			case 1:
 			case 2:
 			case 3:
@@ -207,14 +208,14 @@ public class PedidoService {
 		return new BigDecimal(valor);
 	}
 	
-	private BigDecimal getValorFinal(Pedido pedido){
+	public BigDecimal getValorFinal(Pedido pedido){
 		BigDecimal desconto = pedido.getValorDesconto();
 		Double valor = pedido.getValorBruto().doubleValue();
 		Double valorFinal = valor - desconto.doubleValue();
 		return new BigDecimal(valorFinal);
 	}
 	
-	private Date getDataEntrega(Pedido pedido){
+	public Date getDataEntrega(Pedido pedido){
 		int prazo = 0;
 		for (Item item : pedido.getItens()){
 			if (prazo < item.getProduto().getPrazo()){
