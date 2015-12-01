@@ -52,7 +52,7 @@ public class ProdutoController {
     public ModelAndView produtosFIltro(@ModelAttribute("pesquisa") ProdutoDto dto,
     									final RedirectAttributes redirectAttributes) {
 
-    	if(dto.idMaterial == null && dto.idProduto == null){
+    	if(dto.idMaterial == null && dto.idServico == null){
     		redirectAttributes.addFlashAttribute("aviso", "Filtos em branco! Preencha os campos para pesquisar.");
     		return new ModelAndView("redirect:/produtos");
     	}

@@ -68,6 +68,7 @@ public class PedidoService {
 		if (pedido.getSituacao() != SituacaoPedido.PROCESSADO){
 			throw new EncerrarPedidoException("Pedido não está processado para ser encerrado!");
 		}
+		pedido.setDataEntrega(new Date());
 		pedido.setSituacao(SituacaoPedido.ENCERRADO);
 		this.pedidoDao.update(pedido);
 	}
@@ -83,8 +84,9 @@ public class PedidoService {
 	
 	public PedidoDto findById(Long id, Boolean verificar){
 		Pedido pedido = this.pedidoDao.findById(id);
-		if (verificar){
-			this.verificar(pedido);
+		if (pedido.getSituacao() != SituacaoPedido.ENCERRADO && pedido.getSituacao() != SituacaoPedido.CANCELADO){
+			if (verificar)
+				this.verificar(pedido);
 		}
 		return this.peditoToDto(pedido);
 	}
@@ -113,7 +115,6 @@ public class PedidoService {
 	public List<PedidoDto> find() {
 		List<PedidoDto> list = new ArrayList<PedidoDto>();
 		for (Pedido pedido : this.pedidoDao.find()){
-			this.verificar(pedido);
 			list.add(this.peditoToDto(pedido));
 		}
 		
@@ -122,16 +123,30 @@ public class PedidoService {
 	
 	public List<PedidoDto> findFilter(PedidoDto dto) {
 		List<PedidoDto> list = new ArrayList<PedidoDto>();
-		if (dto.getCliente().getCpf() != null){
+		if ((dto.getCliente().getCpf() != null && !dto.getCliente().getCpf().isEmpty()) && dto.getSituacao() != null){
 			for (Pedido pedido : this.pedidoDao.findByCpfSituacao(dto.getCliente().getCpf(), dto.getSituacao())){
 				list.add(this.peditoToDto(pedido));
 			}
-		} else{
+			
+			return list;
+		} 
+		
+		if (dto.getSituacao() != null){
 			for (Pedido pedido : this.pedidoDao.findBySituacao(dto.getSituacao())){
 				list.add(this.peditoToDto(pedido));
 			}
-		}
 			
+			return list;
+		}
+	
+		if (dto.getCliente().getCpf() != null){
+			for (Pedido pedido : this.pedidoDao.findByCpf(dto.getCliente().getCpf())){
+				list.add(this.peditoToDto(pedido));
+			}
+			
+			return list;
+		}
+		
 		return list;
 	}
 	

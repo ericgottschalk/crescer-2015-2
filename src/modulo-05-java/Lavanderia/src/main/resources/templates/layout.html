@@ -21,20 +21,20 @@
 			     <img alt="Brand" th:src="@{'/img/icon.png'}" src="../static/img/icon.png" />
 			   </a> 
 			   <a class="navbar-brand" th:href="@{/}">Home</a>
+			   <a sec:authorize="isAnonymous()" class="navbar-brand" th:href="@{/login}">Login</a>
 		       <a sec:authorize="isAuthenticated()" class="navbar-brand" th:href="@{/clientes}">Clientes</a>    	 
-		       <a sec:authorize="isAuthenticated()" class="navbar-brand" th:href="@{/users}">Novo User</a>
 		       <a sec:authorize="isAuthenticated()" class="navbar-brand" th:href="@{/produtos}">Produtos</a>
 		       <a sec:authorize="isAuthenticated()" class="navbar-brand" th:href="@{/pedidos}">Pedidos</a>
-			   <div sec:authorize="isAuthenticated()" class="navbar-right dropdown">
+		       <a sec:authorize="hasRole('ROLE_ADMIN')" class="navbar-brand" th:href="@{/users}">Novo Usuário</a>
+			   <div class="navbar-right dropdown" sec:authorize="isAuthenticated()">
 			       <a href="#" class="navbar-brand dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-						Usuário<span class="caret"></span>
+						<span sec:authentication="name"></span><span class="caret"></span>
 			       </a>
-			       <ul class="dropdown-menu">
+			       <ul class="dropdown-menu" style="background-color: #666666;">
 			         <li>
 			        	<form th:action="@{/logout}" action="/logout" method="post" class="form-inline">
 			        		<div class="from-group">
-			        			<div>
-				        			<h3 sec:authentication="name"></h3>
+			        			<div style="text-align: center;">
 	                            	<button class="btn btn-primary" type="submit">Logout</button>
                             	</div>
                             </div>

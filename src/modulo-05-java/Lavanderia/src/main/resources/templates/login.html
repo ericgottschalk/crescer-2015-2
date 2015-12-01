@@ -1,33 +1,14 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	  layout:decorator="layout">
 <head>
 	<meta charset="utf-8"/>
 	<title>Login</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
-	<link rel="stylesheet" href="../static/css/estilo.css" th:href="${'/css/estilo.css'}" />
 	<link rel="stylesheet" href="../static/css/login.css" th:href="${'/css/login.css'}" />
 </head>
 <body>
-	<div class="navbar navbar-inverse navbar-fixed-top">
-	  	<div class="container">
-	       <div class="navbar-header">
-	          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-	 	         <span class="icon-bar"></span>
-	             <span class="icon-bar"></span>
-	             <span class="icon-bar"></span>
-	           </button>
-	           <a class="navbar-brand" th:href="@{/}">
-			     <img th:src="@{'/img/icon.png'}" src="../static/img/icon.png" />
-			   </a> 
-			   <a class="navbar-brand" th:href="@{/}">Home</a>
-	       </div>
-	       <div class="navbar-collapse collapse">
-	          <ul class="nav navbar-nav">
-	          </ul>
-	       </div>
-	    </div>
-	</div>
-	<section>  
+	<section layout:fragment="content">  
 		<p th:if="${param.logout}" class="alert">Logout feito com sucesso</p>
 		<p th:if="${param.error}" class="alert alert-error">Login incorreto. Tente novamente !</p>
 		

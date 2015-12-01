@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" 
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4" 
 	  layout:decorator="layout">
 <head>
 	<meta charset="utf-8"/>
 	<title>Detalhes</title>
 	<link rel="stylesheet" href="../static/css/pedidos.css" th:href="${'/css/pedidos.css'}" />
 </head>
-<body>
+<body>th:if=""
 	<section layout:fragment="content">
-		<div class="jumbotron" th:if="${pedido.situacao} != ${T(br.com.cwi.crescer.domain.Pedido.SituacaoPedido).CANCELADO}">
-			<form th:action="${'/pedidos/cancelar/' + pedido.idPedido}" th:object="${pedido}" method="post" 
-			      th:if="${pedido.situacao} != ${T(br.com.cwi.crescer.domain.Pedido.SituacaoPedido).ENCERRADO}" class="form-horizontal">
+		<div sec:authorize="hasRole('ROLE_ADMIN')" class="jumbotron" th:if="${pedido.situacao != T(br.com.cwi.crescer.domain.Pedido.SituacaoPedido).CANCELADO and pedido.situacao != T(br.com.cwi.crescer.domain.Pedido.SituacaoPedido).ENCERRADO}">
+			<form sec:authorize="hasRole('ROLE_ADMIN')" th:action="${'/pedidos/cancelar/' + pedido.idPedido}" th:object="${pedido}" method="post" class="form-horizontal">
 				<div class="form-group"> 
 					<button type="submit" class="btn btn-danger btn-lg">Cancelar Pedido</button>
 		        </div>
@@ -76,10 +76,6 @@
 			                <td th:if="${pedido.situacao} == ${T(br.com.cwi.crescer.domain.Pedido.SituacaoPedido).PROCESSANDO}">
 			                	<div th:switch="${item.situacao}">
 			                	<a  th:case="${T(br.com.cwi.crescer.domain.Item.SituacaoItem).PENDENTE}"
-			                		class="btn btn-primary" th:href="${'/pedidos/processarItem/' + item.idItem}">
-			                		Processar
-			                	</a>
-			                	<a  th:case="${T(br.com.cwi.crescer.domain.Item.SituacaoItem).PROCESSANDO}"
 			                		class="btn btn-primary" th:href="${'/pedidos/processarItem/' + item.idItem}">
 			                		Processar
 			                	</a>

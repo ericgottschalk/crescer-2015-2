@@ -74,7 +74,13 @@ public class ClienteController {
             return mv;
         }
 
-        this.clienteService.add(dto);
+        try{
+        	this.clienteService.add(dto);
+        } catch(Exception e){
+        	redirectAttributes.addFlashAttribute("erro", "E-mail ou CPF já cadastrados!");
+        	return new ModelAndView("redirect:/clientes");
+        }
+        
         redirectAttributes.addFlashAttribute("mensagem", "Cliente cadastrado com sucesso!");
         return new ModelAndView("redirect:/clientes");
     }

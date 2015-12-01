@@ -39,7 +39,7 @@ public class ProdutoDao extends BaseDao<Produto>{
 	
 	public List<Produto> findServicoFilter(Long idServico){
 		StringBuilder str = new StringBuilder();
-		str.append("SELECT p FROM Produto p WHERE p.servivo.idServico = :idServico");
+		str.append("SELECT p FROM Produto p WHERE p.servico.idServico = :idServico");
 		
 		return this.manager.createQuery(str.toString(), Produto.class)
 				.setParameter("idServico", idServico)

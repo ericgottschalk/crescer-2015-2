@@ -31,4 +31,10 @@ public class PedidoDao extends BaseDao<Pedido>{
 				.setParameter("situacao", situacao)
 				.getResultList();
 	}
+	
+	public List<Pedido> findByCpf(String cpf) {
+		return this.manager.createQuery("SELECT p FROM Pedido p where p.cliente.cpf = :cpf", Pedido.class)
+				.setParameter("cpf", cpf)
+				.getResultList();
+	}
 }

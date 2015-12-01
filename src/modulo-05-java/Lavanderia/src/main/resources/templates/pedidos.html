@@ -13,7 +13,7 @@
 	    	<form th:action="@{/pedidos/*{name}}" th:object="${pedido}" method="get"  class="form-inline">
 	    		<div class="form-group">
 	    		    <label class="control-label">CPF: </label> 
-					<input class="form-control" th:field="*{cliente.cpf}" type="text" placeholder="Cpf"/>
+					<input class="form-control" th:field="*{cliente.cpf}" th:value="${null}" type="text" placeholder="Cpf"/>
 		        </div>
 		        <div class="form-group">
 						<label class="control-label ">Situação: </label> 

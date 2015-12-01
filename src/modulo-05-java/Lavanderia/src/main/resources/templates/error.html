@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorator="layout"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+<meta charset="UTF-8" />
+<title>Erro</title>
+</head>
+<body>
+	<div class="text-center" layout:fragment="content">
+		<div class="page-content page-ajuste error">
+		<p th:if="${url}">
+			<b>Page:</b> <span th:text="${url}">Page URL</span>
+		</p>
+		<h1>SORRY :(</h1>
+		<p>
+			<b>Uma equipe de macacos altamente treinados estão correndo para corrigir o erro!</b>
+		</p>​
+		<p th:if="${timestamp}" id='created'>
+			<b>Quando:</b> <span th:text="${timestamp}">Timestamp</span>
+		</p>
+		​
+		<p th:if="${status}">
+			<b>Status:</b> <span th:text="${status}">status-code</span> <span
+				th:if="${error}" th:text="'('+${error}+')'">error ...</span>
+		</p>
+		​
+		<div
+			th:if="${ex} or ${exception} or (${message} and ${message.length() != 0})">
+			<blockquote>
+				<i th:text="${message}">message ...</i>
+			</blockquote>
+		</div>
+		</div>
+	</div>
+</body>
+</html>
