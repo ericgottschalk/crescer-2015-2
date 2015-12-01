@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
 	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
 	  layout:decorator="layout">
 <head>
 	<meta charset="utf-8"/>
@@ -37,7 +38,7 @@
 		<div class="panel panel-default">
 	        <div class="panel-heading">
 	            <div class="panel-title">
-		            <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+		            <button sec:authorize="hasRole('ROLE_ADMIN')" type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
 					   Novo
 					</button>
 			    </div>
@@ -50,7 +51,7 @@
 		                <th>Valor</th>
 		                <th>Prazo</th>
 		                <th>Situação</th>
-		                <th>Editar</th>
+		                <th sec:authorize="hasRole('ROLE_ADMIN')">Editar</th>
 		            </tr>
 		            <tr th:each="produto : ${produtos}">
 		                <td th:text="${produto.material.getDescricao()}"></td>
@@ -58,7 +59,7 @@
 		                <td th:text="${produto.valor}"></td>
 		                <td th:text="${produto.prazo}"></td>
 		                <td th:text="${produto.situacao}"></td>
-		                <td><a class = "btn btn-primary" th:href="${'/produtos/editar/' + produto.idProduto}">Editar</a></td>
+		                <td sec:authorize="hasRole('ROLE_ADMIN')"><a class="btn btn-primary" th:href="${'/produtos/editar/' + produto.idProduto}">Editar</a></td>
 		            </tr>
 			     </table>
 		    </div>
